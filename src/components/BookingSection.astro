@@ -1,0 +1,58 @@
+---
+import Waveform from './Waveform.astro';
+import Eyebrow from './Eyebrow.astro';
+import Button from './Button.astro';
+---
+
+<section class="booking booking-section section-pad theme-ink">
+  <Waveform opacity={0.04} />
+  <div class="container stagger-group">
+    <div class="booking-content stagger-item">
+      <Eyebrow>BOOK TIFFANY</Eyebrow>
+      <h2 class="section-title">Bring her to your next <span class="italic-accent">conversation.</span></h2>
+      <p class="booking-sub">Tell us about your event and your audience. She reviews every enquiry personally and responds within two business days.</p>
+    </div>
+    
+    <div class="booking-cta stagger-item">
+      <Button href="/book" variant="primary">SUBMIT SPEAKING REQUEST &rarr;</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .booking-section {
+    position: relative;
+    z-index: 2;
+    background: var(--glow-gradient);
+    text-align: center;
+  }
+  
+  .section-pad {
+    padding: var(--sp-24) 0;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--sp-6);
+  }
+
+  .booking-header {
+    margin-bottom: var(--sp-8);
+  }
+
+  .booking-title {
+    margin-bottom: var(--sp-4);
+  }
+
+  .booking-prose {
+    font-size: 1.25rem;
+    color: var(--section-text-muted);
+  }
+
+  .booking-cta {
+    display: flex;
+    justify-content: center;
+  }
+</style>

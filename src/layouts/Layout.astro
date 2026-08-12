@@ -1,0 +1,263 @@
+---
+import '../styles/global.css';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  theme?: 'light' | 'dark';
+}
+
+const { 
+  title, 
+  description = "Tiffany Webb is a public-health educator and Community Impact Strategist who helps organizations prevent gambling harm and build healthier communities.",
+  theme = 'light'
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Google Fonts: Fraunces, Inter, Space Mono -->
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=Space+Mono:ital,wght@0,400;0,700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP & Lenis via CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js" defer></script>
+    <script src="https://unpkg.com/lenis@1.1.2/dist/lenis.min.js" defer></script>
+  </head>
+  <body class={theme === 'dark' ? 'theme-dark' : 'theme-light'}>
+    <!-- Global Ambient Glows -->
+    <div class="global-ambient-glows">
+      <div class="glow-orb glow-green"></div>
+      <div class="glow-orb glow-gold"></div>
+    </div>
+
+    <Nav />
+    <div class="page-wrapper">
+      <div class="page-card">
+        <main id="smooth-wrapper">
+          <div id="smooth-content">
+            <slot />
+            <Footer />
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Physics Cursor -->
+    <div class="cursor-dot js-cursor-dot"></div>
+    <div class="cursor-ring js-cursor-ring"></div>
+
+    <!-- Global Morph Overlay -->
+    <div class="morph-overlay">
+      <div class="morph-backdrop"></div>
+      <button class="morph-close-btn" aria-label="Close">
+        <svg class="close-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path class="close-line-1" d="M6 18L18 6" />
+          <path class="close-line-2" d="M6 6l12 12" />
+        </svg>
+      </button>
+      <div class="morph-container"></div>
+    </div>
+
+    <script is:inline>
+      document.addEventListener("DOMContentLoaded", (event) => {
+        // Initialize GSAP ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
+        // 1. Stagger Groups
+        const staggerGroups = document.querySelectorAll('.stagger-group');
+        staggerGroups.forEach((group) => {
+          const items = group.querySelectorAll('.stagger-item');
+          if (items.length > 0) {
+            ScrollTrigger.create({
+              trigger: group,
+              start: "top 85%",
+              onEnter: () => {
+                items.forEach((item, i) => {
+                  setTimeout(() => item.classList.add('is-revealed'), i * 150);
+                });
+              },
+              once: true
+            });
+          }
+        });
+
+        // 2. Individual Elements (reveal-up, reveal-in, scale-reveal)
+        const individualElements = document.querySelectorAll('.reveal-up, .reveal-in, .scale-reveal');
+        individualElements.forEach((el) => {
+          ScrollTrigger.create({
+            trigger: el,
+            start: "top 85%",
+            toggleClass: "is-revealed",
+            once: true
+          });
+        });
+
+        // 3. Physics Cursor (Desktop only)
+        const cursorDot = document.querySelector('.js-cursor-dot');
+        const cursorRing = document.querySelector('.js-cursor-ring');
+        
+        if (window.matchMedia("(pointer: fine)").matches && cursorDot && cursorRing) {
+          gsap.set(cursorDot, {xPercent: -50, yPercent: -50});
+          gsap.set(cursorRing, {xPercent: -50, yPercent: -50});
+
+          const xToDot = gsap.quickTo(cursorDot, "x", {duration: 0.1, ease: "power3"});
+          const yToDot = gsap.quickTo(cursorDot, "y", {duration: 0.1, ease: "power3"});
+          
+          const xToRing = gsap.quickTo(cursorRing, "x", {duration: 0.5, ease: "power3.out"});
+          const yToRing = gsap.quickTo(cursorRing, "y", {duration: 0.5, ease: "power3.out"});
+
+          window.addEventListener("mousemove", e => {
+            xToDot(e.clientX);
+            yToDot(e.clientY);
+            xToRing(e.clientX);
+            yToRing(e.clientY);
+          });
+
+          // Hover effects for clickable elements
+          // Using event delegation so dynamically added elements work too
+          document.addEventListener('mouseover', (e) => {
+            const target = e.target.closest('a, button, .magnetic-btn, .morph-card');
+            if (target) {
+              gsap.to(cursorRing, {scale: 1.5, borderColor: 'rgba(200, 162, 76, 1)', backgroundColor: 'rgba(200, 162, 76, 0.1)', duration: 0.3});
+            }
+          });
+          document.addEventListener('mouseout', (e) => {
+            const target = e.target.closest('a, button, .magnetic-btn, .morph-card');
+            if (target) {
+              gsap.to(cursorRing, {scale: 1, borderColor: 'rgba(200, 162, 76, 0.5)', backgroundColor: 'transparent', duration: 0.3});
+            }
+          });
+        }
+
+        // 4. GSAP FLIP Morphing Modal Logic
+        gsap.registerPlugin(Flip);
+
+        const morphOverlay = document.querySelector('.morph-overlay');
+        const morphContainer = document.querySelector('.morph-container');
+        const morphBackdrop = document.querySelector('.morph-backdrop');
+        const closeBtn = document.querySelector('.morph-close-btn');
+        const closeIcon = document.querySelector('.close-icon');
+        
+        let activeCard = null;
+        let originalWrap = null;
+        let isAnimating = false;
+
+        document.querySelectorAll('.morph-card').forEach(card => {
+          card.addEventListener('click', () => {
+            if (isAnimating || activeCard) return;
+            isAnimating = true;
+            activeCard = card;
+            originalWrap = card.parentElement;
+
+            // Prepare expanded content before FLIP so it calculates final height correctly
+            const expandedContent = card.querySelector('.card-expanded-content');
+            if(expandedContent) {
+              expandedContent.style.display = 'block';
+              expandedContent.style.opacity = '1';
+            }
+            card.classList.add('is-expanded');
+            
+            // Record initial state
+            const state = Flip.getState(card);
+            
+            // Move to global container
+            morphContainer.appendChild(card);
+            morphOverlay.classList.add('is-active');
+            
+            // Fade in backdrop
+            gsap.to(morphBackdrop, { opacity: 1, duration: 0.4 });
+            // Show close btn
+            gsap.fromTo(closeBtn, { scale: 0, opacity: 0, rotate: -90 }, { scale: 1, opacity: 1, rotate: 0, duration: 0.5, ease: "back.out(1.5)", delay: 0.3 });
+
+            // FLIP Animation
+            Flip.from(state, {
+              duration: 0.7,
+              ease: "power4.inOut",
+              absolute: true,
+              onComplete: () => {
+                if(expandedContent) {
+                  gsap.fromTo(expandedContent.children, 
+                    { opacity: 0, y: 20 }, 
+                    { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 }
+                  );
+                }
+                isAnimating = false;
+              }
+            });
+          });
+        });
+
+        closeBtn.addEventListener('click', () => {
+          if (isAnimating || !activeCard) return;
+          isAnimating = true;
+
+          // Unique Close Animation for the 'X' button
+          gsap.to(closeIcon, { 
+            rotate: 180, 
+            scale: 0.5, 
+            opacity: 0, 
+            duration: 0.3, 
+            ease: "power2.in",
+            onComplete: executeCloseFlip
+          });
+        });
+
+        function executeCloseFlip() {
+          const expandedContent = activeCard.querySelector('.card-expanded-content');
+          
+          // Fade out inner content fast
+          if (expandedContent) {
+            gsap.to(expandedContent, { opacity: 0, duration: 0.2, onComplete: () => performFlipBack() });
+          } else {
+            performFlipBack();
+          }
+        }
+
+        function performFlipBack() {
+          const state = Flip.getState(activeCard);
+          
+          // Reset DOM
+          originalWrap.appendChild(activeCard);
+          morphOverlay.classList.remove('is-active');
+          activeCard.classList.remove('is-expanded');
+          const expandedContent = activeCard.querySelector('.card-expanded-content');
+          if(expandedContent) {
+            expandedContent.style.display = 'none';
+            expandedContent.style.opacity = '1'; // reset for next time
+          }
+          
+          // Fade out backdrop
+          gsap.to(morphBackdrop, { opacity: 0, duration: 0.4 });
+          // Reset close btn
+          gsap.set(closeBtn, { scale: 0, opacity: 0 });
+          gsap.set(closeIcon, { rotate: 0, scale: 1, opacity: 1 });
+
+          Flip.from(state, {
+            duration: 0.7,
+            ease: "power4.inOut",
+            absolute: true,
+            onComplete: () => {
+              activeCard = null;
+              originalWrap = null;
+              isAnimating = false;
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

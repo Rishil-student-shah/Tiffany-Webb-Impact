@@ -1,0 +1,83 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import Button from './Button.astro';
+import Waveform from './Waveform.astro';
+---
+
+<section class="gfg-teaser section-pad theme-ink">
+  <Waveform opacity={0.06} />
+  <div class="container stagger-group">
+    <div class="gfg-content stagger-item">
+      <Eyebrow>GambleFreeGear &mdash; By Tiffany Webb</Eyebrow>
+      <h2 class="section-title">Break the silence &mdash; <span class="italic-accent">literally.</span></h2>
+      <p class="gfg-desc">Awareness starts with visibility. Shop the lifestyle brand designed to spark conversations, reduce stigma, and support prevention efforts in your community.</p>
+      
+      <div class="gfg-cta">
+        <Button href="https://inpowerimports.com" target="_blank" variant="secondary">Explore GambleFreeGear &rarr;</Button>
+      </div>
+    </div>
+  </div>
+  
+  <div class="gfg-bg reveal-in">
+    <!-- Optional: a background image or subtle graphic treatment could go here based on design direction -->
+    <div class="gfg-pattern"></div>
+  </div>
+</section>
+
+<style>
+  .gfg-teaser {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    background: var(--glow-gradient);
+  }
+  
+  .section-pad {
+    padding: var(--sp-24) 0;
+  }
+  
+  .container {
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--sp-6);
+    text-align: center;
+  }
+
+  .section-title {
+    margin-bottom: var(--sp-6);
+    color: var(--color-ivory);
+  }
+
+  .gfg-prose {
+    font-size: 1.25rem;
+    color: rgba(253, 252, 248, 0.85);
+    margin-bottom: var(--sp-8);
+  }
+
+  .gfg-cta {
+    display: flex;
+    justify-content: center;
+  }
+
+  .gfg-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    opacity: 0.1;
+  }
+  
+  .gfg-pattern {
+    width: 100%;
+    height: 100%;
+    /* Simple CSS pattern for texture, optional */
+    background-image: radial-gradient(var(--color-ivory) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+</style>

@@ -1,0 +1,118 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Eyebrow from '../components/Eyebrow.astro';
+---
+
+<Layout title="Privacy Policy | Tiffany Webb" theme="secondary">
+  <main class="page-content">
+    
+    <section class="utility-hero">
+      <div class="container reveal-up">
+        <Eyebrow>Legal</Eyebrow>
+        <h1 class="utility-title">Privacy Policy</h1>
+        <p class="utility-sub text-micro">Last updated: August 2026</p>
+      </div>
+    </section>
+
+    <section class="utility-content section-pad bg-cream">
+      <div class="container prose-column stagger-group">
+        
+        <div class="stagger-item">
+          <p class="intro">This policy explains what information this website collects, how it is used, and the choices you have.</p>
+        </div>
+
+        <div class="stagger-item mt-8">
+          <h3>Information we collect</h3>
+          <p>When you submit a booking enquiry, we collect the name, organization, email address, and any other details you choose to provide. When you subscribe to the newsletter, we collect your email address. The site also collects standard analytics data about how pages are used.</p>
+        </div>
+        
+        <div class="stagger-item mt-8">
+          <h3>How we use it</h3>
+          <p>Booking enquiry information is used solely to respond to your enquiry and arrange speaking engagements. Newsletter information is used to send occasional emails, which you can unsubscribe from at any time. Analytics data is used to understand which pages are useful and improve the site.</p>
+        </div>
+        
+        <div class="stagger-item mt-8">
+          <h3>Sharing</h3>
+          <p>We do not sell personal information. Information may be processed by service providers who help operate this site — including email delivery, customer relationship management, messaging services, and website analytics — solely to provide those services.</p>
+        </div>
+        
+        <div class="stagger-item mt-8">
+          <h3>Messaging</h3>
+          <p>If you contact Tiffany Webb via WhatsApp or another messaging service, message content and contact details are processed to respond to your enquiry.</p>
+        </div>
+        
+        <div class="stagger-item mt-8">
+          <h3>Your rights</h3>
+          <p>You may request access to, correction of, or deletion of your personal information at any time by emailing booking@tiffanywebb.com.</p>
+        </div>
+        
+        <div class="stagger-item mt-8">
+          <h3>Cookies</h3>
+          <p>This site uses cookies to understand site usage. You can control cookies through your browser settings.</p>
+        </div>
+        
+        <div class="stagger-item mt-8 mb-12">
+          <h3>Contact</h3>
+          <p>Questions about this policy: <a href="mailto:booking@tiffanywebb.com" style="text-decoration: underline;">booking@tiffanywebb.com</a></p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<style>
+  .page-content {
+    padding-top: 0;
+  }
+
+  .utility-hero {
+    background-color: var(--color-ink);
+    color: var(--color-ivory);
+    padding: var(--sp-16) 0 var(--sp-12);
+    text-align: center;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 var(--sp-6);
+  }
+
+  .utility-title {
+    margin-bottom: var(--sp-4);
+  }
+
+  .utility-sub {
+    color: var(--color-muted-grey);
+  }
+
+  .section-pad { padding: var(--sp-16) 0; }
+  .bg-cream { background-color: var(--color-cream); }
+  .mt-8 { margin-top: var(--sp-8); }
+  .mb-12 { margin-bottom: var(--sp-12); }
+
+  .prose-column {
+    font-size: 1.125rem;
+    color: var(--color-charcoal);
+  }
+  
+  .intro {
+    font-size: 1.25rem;
+    color: var(--color-ink);
+    border-left: 4px solid var(--color-gold);
+    padding-left: var(--sp-4);
+  }
+
+  .prose-column h3 {
+    font-size: 1.5rem;
+    color: var(--color-emerald);
+    margin-bottom: var(--sp-2);
+  }
+
+  .prose-column p {
+    line-height: 1.6;
+  }
+</style>

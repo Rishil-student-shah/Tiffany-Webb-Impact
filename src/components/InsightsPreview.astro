@@ -1,0 +1,191 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import Waveform from './Waveform.astro';
+---
+
+<section class="insights-preview section-pad theme-ink">
+  <Waveform opacity={0.06} flipY={true} />
+  <div class="container stagger-group">
+    <div class="insights-header stagger-item">
+      <Eyebrow>Insights</Eyebrow>
+      <h2 class="section-title">Ideas worth the <span class="italic-accent">conversation.</span></h2>
+      <a href="/media" class="view-all-link desktop-only">Read the Insights →</a>
+    </div>
+    
+    <div class="insights-grid">
+      <a href="/about" class="insight-card stagger-item">
+        <div class="insight-meta text-micro">Public Health &middot; 5 min read</div>
+        <h3 class="insight-card-title">Why we can't treat sports betting like the lottery.</h3>
+        <p class="insight-excerpt">The velocity of modern gambling requires a completely different prevention strategy than we used a decade ago.</p>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+      
+      <a href="/about" class="insight-card stagger-item">
+        <div class="insight-meta text-micro">Campus Prevention &middot; 4 min read</div>
+        <h3 class="insight-card-title">The invisible crisis in college athletics.</h3>
+        <p class="insight-excerpt">What happens when student-athletes are surrounded by the very industry that threatens their eligibility and mental health.</p>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+      
+      <a href="/about" class="insight-card stagger-item">
+        <div class="insight-meta text-micro">Clinical Practice &middot; 6 min read</div>
+        <h3 class="insight-card-title">Moving from crisis response to early intervention.</h3>
+        <p class="insight-excerpt">How organizations can catch gambling harm before it becomes a level-four emergency.</p>
+        <span class="card-arrow">&rarr;</span>
+      </a>
+    </div>
+    
+    <div class="insights-footer stagger-item">
+      <a href="/insights" class="text-link" style="color: var(--accent-main);">Read all insights &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .insights-preview {
+    position: relative;
+    z-index: 2;
+    background: var(--glow-gradient);
+  }
+  
+  .section-pad {
+    padding: var(--sp-24) 0;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--sp-6);
+  }
+
+  .insights-header {
+    margin-bottom: var(--sp-12);
+  }
+
+  .insights-title {
+    margin-bottom: var(--sp-4);
+  }
+
+  .insights-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+  }
+
+  @media (min-width: 768px) {
+    .insights-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-12);
+    }
+  }
+
+  .insight-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    background: var(--card-glass-bg);
+    color: var(--card-text);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    padding: var(--sp-8);
+    border: var(--card-glass-border);
+    box-shadow: var(--card-glass-shadow);
+    border-radius: var(--card-radius);
+    position: relative;
+    transition: var(--transition-bounce);
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .insight-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(135deg, var(--accent-soft) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: -1;
+  }
+  
+  .insight-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: var(--card-glass-shadow), 0 0 0 1px var(--section-glow);
+  }
+  
+  .insight-card:hover::before {
+    opacity: 1;
+  }
+
+  .card-arrow {
+    position: absolute;
+    bottom: var(--sp-8);
+    right: var(--sp-8);
+    font-size: 1.5rem;
+    color: var(--accent-main);
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: var(--transition-bounce);
+  }
+
+  .insight-card:hover .card-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .insight-card:hover .insight-card-title {
+    color: var(--accent-main);
+  }
+
+  .insight-meta {
+    margin-bottom: var(--sp-4);
+    color: var(--section-text-muted);
+  }
+
+  .insight-card-title {
+    font-size: 1.5rem;
+    margin-bottom: var(--sp-2);
+    transition: color 0.3s ease;
+  }
+
+  .insight-excerpt {
+    color: var(--section-text-muted);
+    margin-bottom: var(--sp-6);
+  }
+
+  .insights-footer {
+    margin-top: var(--sp-16);
+    display: flex;
+    justify-content: center;
+  }
+
+  .text-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: var(--text-button);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--section-text);
+    position: relative;
+    text-decoration: none;
+  }
+
+  .text-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .text-link:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+</style>

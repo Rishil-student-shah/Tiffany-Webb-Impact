@@ -1,0 +1,93 @@
+---
+interface Props {
+  className?: string;
+  opacity?: number;
+  flipX?: boolean;
+  flipY?: boolean;
+  variant?: 'A' | 'B' | 'C' | 'D' | 'random';
+}
+
+const { className = '', opacity = 0.06, flipX = false, flipY = false, variant = 'random' } = Astro.props;
+// Multiply by 8 to drastically boost visibility on charcoal backgrounds, capping at 0.45
+const finalOpacity = Math.min(opacity * 8, 0.45);
+// Generate a random offset (0-60 seconds) so adjacent waveforms don't perfectly align
+const randomOffset = Math.floor(Math.random() * 60);
+
+const variants = ['A', 'B', 'C', 'D'];
+// Randomly select a variant if 'random' is passed (default)
+const selectedVariant = variant === 'random' ? variants[Math.floor(Math.random() * variants.length)] : variant;
+
+const paths = {
+  A: {
+    main: "M0,10 C15,10 25,0 40,0 C55,0 65,20 80,20 C90,20 95,10 100,10",
+    accent: "M0,10 C10,10 20,22 35,22 C50,22 60,-2 75,-2 C85,-2 90,10 100,10"
+  },
+  B: {
+    main: "M0,10 C15,10 20,20 40,20 C60,20 70,-2 85,-2 C92,-2 95,10 100,10",
+    accent: "M0,10 C10,10 20,-2 40,-2 C60,-2 70,20 85,20 C92,20 95,10 100,10"
+  },
+  C: {
+    main: "M0,10 C10,10 15,22 25,22 C35,22 40,-2 50,-2 C60,-2 65,22 75,22 C85,22 90,10 100,10",
+    accent: "M0,10 C10,10 15,-2 25,-2 C35,-2 40,22 50,22 C60,22 65,-2 75,-2 C85,-2 90,10 100,10"
+  },
+  D: {
+    main: "M0,10 C20,10 30,-2 50,-2 C60,-2 65,22 75,22 C85,22 90,10 100,10",
+    accent: "M0,10 C20,10 30,22 50,22 C60,22 65,-2 75,-2 C85,-2 90,10 100,10"
+  }
+};
+
+const activePath = paths[selectedVariant as keyof typeof paths];
+---
+
+<div class={`waveform-container ${className}`} style={`opacity: ${finalOpacity}; transform: scale(${flipX ? -1 : 1}, ${flipY ? -1 : 1});`}>
+  <div class="waveform-scroller" style={`animation-delay: -${randomOffset}s;`}>
+    <!-- SVG 1 -->
+    <svg class="waveform-svg" viewBox="0 -2 100 22" preserveAspectRatio="none" overflow="visible">
+      <path d={activePath.main} fill="none" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"/>
+      <path d={activePath.accent} fill="none" stroke="currentColor" stroke-width="0.6" stroke-linecap="round" opacity="0.6"/>
+    </svg>
+    <!-- SVG 2 (identical, for seamless looping) -->
+    <svg class="waveform-svg" viewBox="0 -2 100 22" preserveAspectRatio="none" overflow="visible">
+      <path d={activePath.main} fill="none" stroke="currentColor" stroke-width="1.0" stroke-linecap="round"/>
+      <path d={activePath.accent} fill="none" stroke="currentColor" stroke-width="0.6" stroke-linecap="round" opacity="0.6"/>
+    </svg>
+  </div>
+</div>
+
+<style>
+  .waveform-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    z-index: 0;
+  }
+  
+  .waveform-scroller {
+    display: flex;
+    width: 300vw;
+    height: 100%;
+    animation: drift 60s linear infinite;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform;
+  }
+  
+  .waveform-svg {
+    width: 150vw;
+    height: 100%;
+    flex-shrink: 0;
+    color: var(--color-gold);
+  }
+  
+  @keyframes drift {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+</style>

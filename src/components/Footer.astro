@@ -1,0 +1,199 @@
+---
+import Waveform from './Waveform.astro';
+import Button from './Button.astro';
+const year = new Date().getFullYear();
+---
+
+<footer class="footer theme-ink">
+  <Waveform opacity={0.06} />
+  <div class="footer-container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <h2 class="footer-logo">Tiffany Webb</h2>
+        <p class="text-micro footer-tagline">Community Impact Strategist</p>
+      </div>
+      
+      <div class="footer-navs">
+        <div class="footer-col">
+          <h3 class="text-micro footer-heading">Explore</h3>
+          <ul class="footer-links">
+            <li><a href="/about">About</a></li>
+            <li><a href="/speaking">Speaking</a></li>
+            <li><a href="/impact">Impact</a></li>
+            <li><a href="/media">Media</a></li>
+            <li><a href="/insights">Insights</a></li>
+            <li><a href="/gamblefreegear">GambleFreeGear</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-col">
+          <h3 class="text-micro footer-heading">Connect</h3>
+          <ul class="footer-links">
+            <li><a href="https://linkedin.com/in/tiffanywebb" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+            <li><a href="https://instagram.com/tiffanywebb" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+            <li><a href="https://youtube.com/@tiffanywebb" target="_blank" rel="noopener noreferrer">YouTube</a></li>
+            <li><a href="https://tiktok.com/@tiffanywebb" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h3 class="text-micro footer-heading">Contact</h3>
+          <ul class="footer-links">
+            <li>Booking enquiries</li>
+            <li><a href="mailto:booking@tiffanywebb.com">booking@tiffanywebb.com</a></li>
+            <li>Media enquiries welcome.</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-cta">
+        <p class="footer-cta-text">Ready to break the silence?</p>
+        <Button href="/book" variant="primary">Book Tiffany</Button>
+      </div>
+    </div>
+    
+    <div class="footer-middle">
+      <p class="footer-quote">"Every conversation is an opportunity to plant a seed of hope, strengthen a community, and inspire meaningful change."</p>
+      <p class="footer-mission">Faith. Family. Community. Purpose. Impact. &nbsp;&middot;&nbsp; Break the Silence.</p>
+    </div>
+
+    <div class="footer-bottom">
+      <p class="text-micro">&copy; {year} Tiffany Webb. All rights reserved.</p>
+      <div class="footer-legal">
+        <a href="/privacy" class="text-micro">Privacy Policy</a>
+        <a href="/terms" class="text-micro">Terms of Use</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    color: var(--color-ivory);
+    padding: var(--sp-24) 0 var(--sp-8);
+    position: relative;
+    border-top: 1px solid rgba(200, 162, 76, 0.2);
+  }
+
+  .footer-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--sp-6);
+  }
+
+  .footer-top {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-12);
+    padding-bottom: var(--sp-16);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  @media (min-width: 768px) {
+    .footer-top {
+      grid-template-columns: 1fr 2fr 1fr;
+    }
+  }
+
+  .footer-logo {
+    font-size: 2rem;
+    margin-bottom: var(--sp-2);
+    color: var(--color-ivory);
+  }
+
+  .footer-tagline {
+    color: var(--color-gold);
+    letter-spacing: 0.1em;
+  }
+
+  .footer-navs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-16);
+  }
+
+  .footer-heading {
+    color: #c7c0aa;
+    margin-bottom: var(--sp-6);
+    letter-spacing: 0.15em;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+  }
+
+  .footer-links a {
+    color: var(--color-ivory);
+    transition: color 0.3s ease;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  .footer-links a:hover {
+    color: var(--color-gold);
+  }
+
+  .footer-cta-text {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    margin-bottom: var(--sp-6);
+    color: var(--color-ivory);
+  }
+
+  .footer-middle {
+    text-align: center;
+    padding: var(--sp-16) 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .footer-quote {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: var(--color-ivory);
+    max-width: 800px;
+    margin: 0 auto var(--sp-6);
+    line-height: 1.5;
+  }
+
+  .footer-mission {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-gold);
+  }
+
+  .footer-bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--sp-8);
+    gap: var(--sp-4);
+  }
+
+  @media (min-width: 768px) {
+    .footer-bottom {
+      flex-direction: row;
+    }
+  }
+
+  .footer-legal {
+    display: flex;
+    gap: var(--sp-6);
+  }
+
+  .footer-bottom p, .footer-legal a {
+    color: #888;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-legal a:hover {
+    color: var(--color-ivory);
+  }
+</style>
