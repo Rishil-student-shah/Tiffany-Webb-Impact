@@ -2,6 +2,8 @@
 import Button from './Button.astro';
 import Eyebrow from './Eyebrow.astro';
 import Waveform from './Waveform.astro';
+import { Image } from 'astro:assets';
+import heroImg from '../assets/tiffany_hero_new.jpg';
 ---
 
 <section class="hero theme-dark">
@@ -43,7 +45,7 @@ import Waveform from './Waveform.astro';
     <div class="hero-media">
       <div class="hero-glass-frame">
         <div class="hero-image-mask parallax-wrap">
-          <img src="/tiffany_hero_new.jpg" alt="Tiffany Webb speaking on stage" class="hero-image parallax-img" data-speed="0.1" />
+          <Image src={heroImg} alt="Tiffany Webb speaking on stage" class="hero-image parallax-img" data-speed="0.1" fetchpriority="high" loading="eager" />
         </div>
       </div>
     </div>

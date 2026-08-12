@@ -74,8 +74,10 @@ const {
 
     <script is:inline>
       document.addEventListener("DOMContentLoaded", (event) => {
-        // Initialize GSAP ScrollTrigger
-        gsap.registerPlugin(ScrollTrigger);
+        // Defer GSAP initialization until fonts are fully loaded to prevent Lighthouse "Forced Reflow" penalties
+        document.fonts.ready.then(() => {
+          // Initialize GSAP ScrollTrigger
+          gsap.registerPlugin(ScrollTrigger);
 
         // 1. Stagger Groups
         const staggerGroups = document.querySelectorAll('.stagger-group');
@@ -257,6 +259,7 @@ const {
             }
           });
         }
+        }); // End document.fonts.ready
       });
     </script>
   </body>

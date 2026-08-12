@@ -473,12 +473,14 @@ import Button from './Button.astro';
     justify-content: center;
     padding: var(--sp-6);
     opacity: 0;
+    visibility: hidden; /* Fixes ARIA focus issue */
     pointer-events: none;
-    transition: opacity 0.4s ease;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
   }
 
   .nav-mobile[aria-hidden="false"] {
     opacity: 1;
+    visibility: visible;
     pointer-events: auto;
   }
 

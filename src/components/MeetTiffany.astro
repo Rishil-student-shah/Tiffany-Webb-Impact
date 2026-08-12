@@ -2,6 +2,8 @@
 import Waveform from './Waveform.astro';
 import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
+import { Image } from 'astro:assets';
+import aboutImg from '../assets/tiffany_about_new.jpg';
 ---
 
 <section class="meet-tiffany theme-ink reveal-up">
@@ -26,7 +28,7 @@ import Button from './Button.astro';
       <div class="meet-image-col">
         <div class="meet-image-glass-offset"></div>
         <div class="meet-image-wrap">
-          <img src="/tiffany_about_new.jpg" alt="Tiffany Webb editorial portrait" class="meet-img" />
+          <Image src={aboutImg} alt="Tiffany Webb editorial portrait" class="meet-img" />
         </div>
       </div>
     </div>

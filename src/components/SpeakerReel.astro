@@ -2,6 +2,10 @@
 import Waveform from './Waveform.astro';
 import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
+import { Image } from 'astro:assets';
+import thumb1 from '../assets/thumb_1.jpg';
+import thumb2 from '../assets/thumb_2.jpg';
+import thumb3 from '../assets/thumb_3.jpg';
 ---
 
 <section class="speaker-reel section-pad theme-ink">
@@ -17,7 +21,7 @@ import Button from './Button.astro';
       <!-- Video 1 -->
       <div class="reel-video-card">
         <div class="reel-video-inner">
-          <img src="/thumb_1.jpg" alt="Speaking on stage" class="reel-thumb-img" />
+          <Image src={thumb1} alt="Speaking on stage" class="reel-thumb-img" />
           <div class="reel-play-overlay">
             <div class="reel-play-button">
               <svg viewBox="0 0 24 24" width="32" height="32" fill="var(--color-ivory)"><path d="M8 5v14l11-7z"/></svg>
@@ -33,7 +37,7 @@ import Button from './Button.astro';
       <!-- Video 2 -->
       <div class="reel-video-card">
         <div class="reel-video-inner">
-          <img src="/thumb_2.jpg" alt="Workshop Session" class="reel-thumb-img" />
+          <Image src={thumb2} alt="Workshop Session" class="reel-thumb-img" />
           <div class="reel-play-overlay">
             <div class="reel-play-button">
               <svg viewBox="0 0 24 24" width="32" height="32" fill="var(--color-ivory)"><path d="M8 5v14l11-7z"/></svg>
@@ -49,7 +53,7 @@ import Button from './Button.astro';
       <!-- Video 3 -->
       <div class="reel-video-card">
         <div class="reel-video-inner">
-          <img src="/thumb_3.jpg" alt="Podcast Interview" class="reel-thumb-img" />
+          <Image src={thumb3} alt="Podcast Interview" class="reel-thumb-img" />
           <div class="reel-play-overlay">
             <div class="reel-play-button">
               <svg viewBox="0 0 24 24" width="32" height="32" fill="var(--color-ivory)"><path d="M8 5v14l11-7z"/></svg>
