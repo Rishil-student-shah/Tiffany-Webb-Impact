@@ -25,33 +25,41 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
       </div>
     </section>
 
-    <!-- 2. Her Roots (Premium Story Layout) -->
+    <!-- 2. Her Roots (Bento Story Grid) -->
     <section class="roots section-pad theme-ink relative">
       <Waveform opacity={0.04} />
       <div class="container">
-        <div class="glass-card premium-story-card reveal-up">
-          <div class="story-grid">
-            <div class="story-left">
-              <h2 class="massive-quote">"When we rise,<br><span class="italic-accent">we rise together."</span></h2>
-              <div class="story-divider"></div>
-              <p class="story-meta">The roots of a Community Impact Strategist.</p>
-            </div>
-            
-            <div class="story-right prose-column stagger-group">
-              <p class="stagger-item drop-cap">Chicago-born and raised, with deep Louisiana family roots, Tiffany grew up between two places that shaped how she works. A city that taught her resilience and directness. A family culture that taught her hospitality — that you meet people where they are, and you feed them before you ask them anything.</p>
-              
-              <p class="stagger-item">Hers was a family that believed in literacy, healing, and empowerment. Books on the table. Doors open. Somebody always being helped through something. That inheritance is what she brought into public health, and it is still how she works: start where the person actually is, not where the pamphlet assumes they are.</p>
-              
-              <p class="stagger-item">She has spent more than fifteen years and over four thousand hours doing gambling-prevention outreach. Not from a conference room — in schools, clinics, community centres, and the rooms most prevention programs never reach. She came to it through behavioral health, and she stayed because she kept meeting families who had no language for what was happening to them.</p>
-              
-              <div class="highlight-box stagger-item">
-                <p>Gambling harm hides. It doesn't smell like alcohol or show up on a drug test. It shows up as a missing paycheck, a second job nobody understands, a marriage that quietly stops working. By the time most families name it, they have been carrying it alone for years.</p>
-              </div>
-              
-              <p class="stagger-item">That is the silence her work exists to break. Her approach blends behavioral-health expertise, community outreach, and an entrepreneurial streak that turned a personal mission into a brand people wear. Every part of it points the same direction: turning pain into power for the people other programs overlook.</p>
+        
+        <div class="bento-story-grid stagger-group">
+          
+          <!-- Cell 1: The Quote -->
+          <div class="bento-cell bento-quote stagger-item">
+            <h2 class="massive-quote">"When we rise,<br><span class="italic-accent">we rise together."</span></h2>
+            <div class="story-divider"></div>
+            <p class="story-meta">The roots of a Community Impact Strategist.</p>
+          </div>
+          
+          <!-- Cell 2: Origins -->
+          <div class="bento-cell bento-origins glass-card stagger-item">
+            <p class="drop-cap">Chicago-born and raised, with deep Louisiana family roots, Tiffany grew up between two places that shaped how she works. A city that taught her resilience and directness. A family culture that taught her hospitality — that you meet people where they are, and you feed them before you ask them anything.</p>
+            <p>Hers was a family that believed in literacy, healing, and empowerment. Books on the table. Doors open. Somebody always being helped through something. That inheritance is what she brought into public health, and it is still how she works: start where the person actually is, not where the pamphlet assumes they are.</p>
+          </div>
+          
+          <!-- Cell 3: The Problem -->
+          <div class="bento-cell bento-problem glass-card stagger-item">
+            <p>She has spent more than fifteen years and over four thousand hours doing gambling-prevention outreach. Not from a conference room — in schools, clinics, community centres, and the rooms most prevention programs never reach. She came to it through behavioral health, and she stayed because she kept meeting families who had no language for what was happening to them.</p>
+            <div class="highlight-box">
+              <p>Gambling harm hides. It doesn't smell like alcohol or show up on a drug test. It shows up as a missing paycheck, a second job nobody understands, a marriage that quietly stops working. By the time most families name it, they have been carrying it alone for years.</p>
             </div>
           </div>
+          
+          <!-- Cell 4: The Approach -->
+          <div class="bento-cell bento-approach glass-card stagger-item">
+            <p>That is the silence her work exists to break. Her approach blends behavioral-health expertise, community outreach, and an entrepreneurial streak that turned a personal mission into a brand people wear. Every part of it points the same direction: turning pain into power for the people other programs overlook.</p>
+          </div>
+          
         </div>
+        
       </div>
     </section>
 
@@ -317,32 +325,40 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     border-color: rgba(255,255,255,0.15);
   }
 
-  /* Premium Story Card (Roots) */
-  .premium-story-card {
-    padding: var(--sp-12) var(--sp-8);
+  /* Bento Story Grid (Roots) */
+  .bento-story-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
   }
 
   @media (min-width: 992px) {
-    .premium-story-card {
-      padding: var(--sp-20);
+    .bento-story-grid {
+      grid-template-columns: repeat(12, 1fr);
+      gap: var(--sp-8);
     }
-  }
-
-  .story-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-12);
-  }
-
-  @media (min-width: 1024px) {
-    .story-grid {
-      grid-template-columns: 1fr 1.5fr;
-      gap: var(--sp-20);
+    
+    .bento-quote {
+      grid-column: 1 / 6;
+      grid-row: 1 / 2;
+      align-self: center;
+      padding-right: var(--sp-8);
     }
-  }
-
-  .story-left {
-    position: relative;
+    
+    .bento-origins {
+      grid-column: 6 / 13;
+      grid-row: 1 / 2;
+    }
+    
+    .bento-problem {
+      grid-column: 1 / 8;
+      grid-row: 2 / 3;
+    }
+    
+    .bento-approach {
+      grid-column: 8 / 13;
+      grid-row: 2 / 3;
+    }
   }
 
   .massive-quote {
@@ -357,7 +373,7 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     width: 60px;
     height: 2px;
     background: var(--color-gold);
-    margin-bottom: var(--sp-8);
+    margin-bottom: var(--sp-6);
   }
 
   .story-meta {
@@ -368,33 +384,33 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     letter-spacing: 0.1em;
   }
 
-  .story-right {
-    position: relative;
-  }
-
   .drop-cap::first-letter {
     float: left;
     font-family: var(--font-serif);
-    font-size: 4.5rem;
+    font-size: 4rem;
     line-height: 0.8;
-    padding-top: 4px;
+    padding-top: 6px;
     padding-right: 12px;
-    padding-left: 3px;
+    padding-left: 0;
     color: var(--color-gold);
   }
 
-  .prose-column p {
-    font-size: 1.125rem;
-    line-height: 1.8;
+  .bento-cell p {
+    font-size: 1.1rem;
+    line-height: 1.7;
     color: rgba(231, 224, 207, 0.9);
     margin-bottom: var(--sp-6);
+  }
+  
+  .bento-cell p:last-child {
+    margin-bottom: 0;
   }
 
   .highlight-box {
     background: rgba(217, 162, 58, 0.05);
     border-left: 3px solid var(--color-gold);
-    padding: var(--sp-6) var(--sp-8);
-    margin: var(--sp-8) 0;
+    padding: var(--sp-6);
+    margin-top: var(--sp-6);
     border-radius: 0 16px 16px 0;
   }
 
@@ -402,7 +418,7 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     margin-bottom: 0;
     color: var(--color-ivory);
     font-family: var(--font-serif);
-    font-size: 1.25rem;
+    font-size: 1.15rem;
     font-style: italic;
   }
 
