@@ -19,7 +19,7 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
           <h1 class="inner-hero-title">Chicago soul, <br><span class="italic-accent">Louisiana heart.</span></h1>
           <p class="inner-hero-sub text-micro">Community Impact Strategist &middot; Public Health Educator</p>
         </div>
-        <div class="hero-image-wrap reveal-in" style="transition-delay: 0.3s;">
+        <div class="hero-image-wrap blob-shape reveal-in" style="transition-delay: 0.3s;">
            <Image src={aboutImg} alt="Tiffany Webb Portrait" class="about-hero-img" loading="eager" fetchpriority="high" />
         </div>
       </div>
@@ -61,42 +61,42 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
           <div class="timeline-center-line"></div>
           
           <div class="v-timeline-item left reveal-in">
-            <div class="v-timeline-content glass-card">
+            <div class="v-timeline-content glass-card glass-emerald">
               <span class="timeline-num">01</span>
               <h3>Behavioral Health</h3>
             </div>
           </div>
           
           <div class="v-timeline-item right reveal-in" style="transition-delay: 0.1s;">
-            <div class="v-timeline-content glass-card">
+            <div class="v-timeline-content glass-card glass-emerald">
               <span class="timeline-num">02</span>
               <h3>Community Outreach</h3>
             </div>
           </div>
           
           <div class="v-timeline-item left reveal-in">
-            <div class="v-timeline-content glass-card">
+            <div class="v-timeline-content glass-card glass-emerald">
               <span class="timeline-num">03</span>
               <h3>Gambling Prevention</h3>
             </div>
           </div>
           
           <div class="v-timeline-item right reveal-in" style="transition-delay: 0.1s;">
-            <div class="v-timeline-content glass-card">
+            <div class="v-timeline-content glass-card glass-emerald">
               <span class="timeline-num">04</span>
               <h3>Public Health Education</h3>
             </div>
           </div>
           
           <div class="v-timeline-item left reveal-in">
-            <div class="v-timeline-content glass-card">
+            <div class="v-timeline-content glass-card glass-emerald">
               <span class="timeline-num">05</span>
               <h3>Partnership Building</h3>
             </div>
           </div>
           
           <div class="v-timeline-item right reveal-in" style="transition-delay: 0.1s;">
-            <div class="v-timeline-content glass-card">
+            <div class="v-timeline-content glass-card glass-emerald">
               <span class="timeline-num">06</span>
               <h3>Community Impact Strategist</h3>
             </div>
@@ -111,13 +111,13 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
         <div class="masonry-grid stagger-group">
           
           <!-- Mission: Full Width Panoramic -->
-          <div class="masonry-item mission glass-card stagger-item">
+          <div class="masonry-item mission glass-card glass-gold stagger-item">
             <Eyebrow>Mission</Eyebrow>
             <p class="mission-statement">So that no individual, family, or community faces gambling harm in silence, shame, or isolation — because prevention begins with a <span class="italic-accent">conversation.</span></p>
           </div>
           
           <!-- Vision: Left Column -->
-          <div class="masonry-item vision glass-card stagger-item">
+          <div class="masonry-item vision glass-card glass-berry stagger-item">
             <Eyebrow>Vision</Eyebrow>
             <h2 class="mb-6 text-2xl font-serif text-ivory">Where this is going.</h2>
             <ul class="vision-list">
@@ -128,7 +128,7 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
           </div>
           
           <!-- Values: Right Column -->
-          <div class="masonry-item values glass-card stagger-item">
+          <div class="masonry-item values glass-card glass-berry stagger-item">
             <Eyebrow>Values</Eyebrow>
             <h2 class="mb-6 text-2xl font-serif text-ivory">What she works from.</h2>
             <ul class="values-list interactive-list">
@@ -271,6 +271,24 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     height: 100%;
     object-fit: cover;
   }
+  
+  /* Morphing Blob Animation for Hero Image */
+  .blob-shape {
+    animation: blob-morph 12s ease-in-out infinite alternate;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+  }
+  .blob-shape:hover {
+    transform: scale(1.03) rotate(-2deg);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.7);
+    animation-play-state: paused;
+  }
+
+  @keyframes blob-morph {
+    0% { border-radius: 200px 24px 200px 24px; }
+    33% { border-radius: 120px 200px 24px 180px; }
+    66% { border-radius: 24px 150px 200px 100px; }
+    100% { border-radius: 200px 100px 24px 200px; }
+  }
 
   /* Glass Cards Base */
   .glass-card {
@@ -282,13 +300,38 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     padding: var(--sp-10);
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     position: relative;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease, border-color 0.6s ease;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease, border-color 0.6s ease, background 0.6s ease;
   }
 
   .glass-card:hover {
-    transform: translateY(-4px);
+    transform: translateY(-8px) rotate(1deg);
     box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
     border-color: rgba(255,255,255,0.15);
+  }
+
+  /* Playful Glass Colors */
+  .glass-emerald {
+    background: rgba(25, 45, 35, 0.45);
+  }
+  .glass-emerald:hover {
+    border-color: rgba(62, 171, 113, 0.4);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(62, 171, 113, 0.2);
+  }
+
+  .glass-gold {
+    background: rgba(45, 38, 20, 0.45);
+  }
+  .glass-gold:hover {
+    border-color: rgba(217, 162, 58, 0.4);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(217, 162, 58, 0.2);
+  }
+
+  .glass-berry {
+    background: rgba(40, 25, 30, 0.45);
+  }
+  .glass-berry:hover {
+    border-color: rgba(183, 75, 103, 0.4);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(183, 75, 103, 0.2);
   }
 
   /* 2. Roots Split Layout */
