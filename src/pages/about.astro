@@ -25,41 +25,57 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
       </div>
     </section>
 
-    <!-- 2. Her Roots (Editorial Scroll Layout) -->
+    <!-- 2. The Story (Roots) -->
     <section class="roots section-pad theme-ink relative">
-      <Waveform opacity={0.06} variant="A" />
-      <div class="container">
+      <Waveform opacity={0.05} />
+      
+      <!-- Glowing Background Orb for effect -->
+      <div class="ambient-glow" style="top: 30%; left: 50%; transform: translate(-50%, -50%); width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(217, 162, 58, 0.08) 0%, transparent 70%);"></div>
+
+      <div class="container relative z-10">
         
-        <div class="editorial-layout">
+        <div class="text-center mb-20 reveal-up">
+          <Eyebrow>The Origin</Eyebrow>
+          <h2 class="massive-quote mx-auto">"When we rise,<br/><span class="italic-accent text-gold">we rise together.</span>"</h2>
+          <div class="story-divider mx-auto mt-8"></div>
+        </div>
+        
+        <!-- 3-Column Card Grid -->
+        <div class="story-grid stagger-group">
           
-          <!-- Sticky Left Column -->
-          <div class="editorial-left">
-            <div class="sticky-content stagger-group">
-              <h2 class="massive-quote stagger-item">"When we rise,<br><span class="italic-accent">we rise together."</span></h2>
-              <div class="story-divider stagger-item"></div>
-              <p class="story-meta stagger-item">The roots of a Community Impact Strategist.</p>
+          <div class="story-card ultra-glass-card stagger-item">
+            <div class="ultra-padding-wrapper">
+              <div class="card-icon">01</div>
+              <h3 class="card-title">The Foundation</h3>
+              <p class="card-text">Chicago-born with deep Louisiana roots. She learned resilience from the city and true hospitality from her family—always meet people exactly where they are.</p>
             </div>
           </div>
           
-          <!-- Scrolling Right Column -->
-          <div class="editorial-right prose-column stagger-group">
-            
-            <p class="stagger-item"><span class="drop-cap">C</span>hicago-born and raised, with deep Louisiana family roots, Tiffany grew up between two places that shaped how she works. A city that taught her resilience and directness. A family culture that taught her hospitality — that you meet people where they are, and you feed them before you ask them anything.</p>
-            
-            <p class="stagger-item">Hers was a family that believed in literacy, healing, and empowerment. Books on the table. Doors open. Somebody always being helped through something. That inheritance is what she brought into public health, and it is still how she works: start where the person actually is, not where the pamphlet assumes they are.</p>
-            
-            <p class="stagger-item">She has spent more than fifteen years and over four thousand hours doing gambling-prevention outreach. Not from a conference room — in schools, clinics, community centres, and the rooms most prevention programs never reach. She came to it through behavioral health, and she stayed because she kept meeting families who had no language for what was happening to them.</p>
-            
-            <blockquote class="editorial-pull-quote stagger-item">
-              "Gambling harm hides. It doesn't smell like alcohol or show up on a drug test. It shows up as a missing paycheck, a second job nobody understands, a marriage that quietly stops working. By the time most families name it, they have been carrying it alone for years."
-            </blockquote>
-            
-            <p class="stagger-item">That is the silence her work exists to break. Her approach blends behavioral-health expertise, community outreach, and an entrepreneurial streak that turned a personal mission into a brand people wear. Every part of it points the same direction: turning pain into power for the people other programs overlook.</p>
-            
+          <div class="story-card ultra-glass-card stagger-item" style="transition-delay: 0.1s;">
+            <div class="ultra-padding-wrapper">
+              <div class="card-icon">02</div>
+              <h3 class="card-title">The Work</h3>
+              <p class="card-text">Over 15 years and 4,000+ hours of outreach. She operates in clinics, schools, and community centers, reaching the rooms most prevention programs never find.</p>
+            </div>
+          </div>
+          
+          <div class="story-card ultra-glass-card stagger-item" style="transition-delay: 0.2s;">
+            <div class="ultra-padding-wrapper">
+              <div class="card-icon">03</div>
+              <h3 class="card-title">The Mission</h3>
+              <p class="card-text">Blending behavioral health expertise with grassroots outreach. She exists to give families language for their pain, turning that pain into power for the overlooked.</p>
+            </div>
           </div>
           
         </div>
-        
+
+        <!-- The heavy quote moved to a standalone cinematic banner below the cards -->
+        <div class="cinematic-quote ultra-glass-card reveal-up mt-16">
+           <div class="ultra-padding-wrapper text-center">
+             <h3 class="quote-text">"Gambling harm hides. It doesn't smell like alcohol or show up on a drug test. It shows up as a missing paycheck... By the time most families name it, they have been carrying it alone for years."</h3>
+           </div>
+        </div>
+
       </div>
     </section>
 
@@ -400,29 +416,80 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     line-height: 1.5;
     margin-bottom: var(--sp-6) !important;
   }
-  .editorial-layout {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-16);
-    padding-top: var(--sp-12);
+  .ambient-glow {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(40px);
   }
 
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+  }
+  
   @media (min-width: 1024px) {
-    .editorial-layout {
-      grid-template-columns: 4.5fr 7.5fr;
-      gap: var(--sp-24);
-      align-items: start; /* crucial for sticky to work correctly */
+    .story-grid {
+      grid-template-columns: repeat(3, 1fr);
     }
   }
 
-  .editorial-left {
-    position: relative;
+  .story-card {
     height: 100%;
+    /* Add a continuous floating animation */
+    animation: float-slow 6s ease-in-out infinite;
+  }
+  
+  /* Stagger the floating animations */
+  .story-card:nth-child(1) { animation-delay: 0s; }
+  .story-card:nth-child(2) { animation-delay: -2s; }
+  .story-card:nth-child(3) { animation-delay: -4s; }
+
+  @keyframes float-slow {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
   }
 
-  .sticky-content {
-    position: sticky;
-    top: 150px; /* Offset from top of viewport when scrolling */
+  /* Suspend float animation on hover and use standard glass hover */
+  .story-card:hover {
+    animation-play-state: paused;
+    transform: translateY(-15px) scale(1.02);
+  }
+
+  .card-icon {
+    font-family: var(--font-mono);
+    color: var(--color-gold);
+    font-size: 1.5rem;
+    margin-bottom: var(--sp-6);
+    opacity: 0.8;
+  }
+
+  .card-title {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    color: var(--color-ivory);
+    margin-bottom: var(--sp-4);
+  }
+
+  .card-text {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba(231, 224, 207, 0.85);
+  }
+
+  .cinematic-quote {
+    background: rgba(217, 162, 58, 0.03); /* slight gold tint */
+    border-color: rgba(217, 162, 58, 0.15);
+  }
+  
+  .quote-text {
+    font-family: var(--font-serif);
+    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
+    line-height: 1.4;
+    color: var(--color-gold);
+    font-style: italic;
   }
 
   .massive-quote {
@@ -438,64 +505,6 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     height: 2px;
     background: var(--color-gold);
     margin-bottom: var(--sp-6);
-  }
-
-  .story-meta {
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    font-size: 0.9rem;
-    color: rgba(217, 162, 58, 0.8);
-    letter-spacing: 0.15em;
-  }
-
-  .editorial-right {
-    position: relative;
-    padding-bottom: var(--sp-24); /* Give breathing room at bottom */
-  }
-
-  .drop-cap {
-    float: left;
-    font-family: var(--font-serif);
-    font-size: 5.5rem;
-    line-height: 0.8;
-    padding-top: 8px;
-    padding-right: 16px;
-    color: var(--color-gold);
-  }
-
-  .prose-column p {
-    font-size: 1.25rem;
-    line-height: 1.8;
-    color: rgba(231, 224, 207, 0.9);
-    margin-bottom: var(--sp-10);
-    font-weight: 300;
-  }
-  
-  .prose-column p:last-child {
-    margin-bottom: 0;
-  }
-
-  .editorial-pull-quote {
-    font-family: var(--font-serif);
-    font-size: clamp(1.5rem, 2.5vw, 2.2rem);
-    line-height: 1.4;
-    color: var(--color-ivory);
-    font-style: italic;
-    border-left: 2px solid rgba(217, 162, 58, 0.4);
-    padding-left: var(--sp-8);
-    margin: var(--sp-16) 0;
-    position: relative;
-  }
-  
-  .editorial-pull-quote::before {
-    content: '"';
-    position: absolute;
-    left: -20px;
-    top: -20px;
-    font-size: 6rem;
-    color: rgba(217, 162, 58, 0.1);
-    font-family: var(--font-serif);
-    line-height: 1;
   }
 
   /* 3. Vertical Timeline */
