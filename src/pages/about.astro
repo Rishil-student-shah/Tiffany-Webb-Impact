@@ -63,7 +63,7 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
       </div>
     </section>
 
-    <!-- 3. Professional Journey (Alternating Vertical Timeline) -->
+    <!-- 3. Professional Journey (Cardless Vertical Timeline) -->
     <section class="journey section-pad theme-ink relative">
       <Waveform opacity={0.03} />
       <div class="container reveal-up">
@@ -77,42 +77,42 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
           <div class="timeline-center-line"></div>
           
           <div class="v-timeline-item left reveal-in">
-            <div class="v-timeline-content glass-card">
+            <div class="v-timeline-content unboxed-timeline">
               <span class="timeline-num">01</span>
               <h3>Behavioral Health</h3>
             </div>
           </div>
           
           <div class="v-timeline-item right reveal-in" style="transition-delay: 0.1s;">
-            <div class="v-timeline-content glass-card">
+            <div class="v-timeline-content unboxed-timeline">
               <span class="timeline-num">02</span>
               <h3>Community Outreach</h3>
             </div>
           </div>
           
           <div class="v-timeline-item left reveal-in">
-            <div class="v-timeline-content glass-card">
+            <div class="v-timeline-content unboxed-timeline">
               <span class="timeline-num">03</span>
               <h3>Gambling Prevention</h3>
             </div>
           </div>
           
           <div class="v-timeline-item right reveal-in" style="transition-delay: 0.1s;">
-            <div class="v-timeline-content glass-card">
+            <div class="v-timeline-content unboxed-timeline">
               <span class="timeline-num">04</span>
               <h3>Public Health Education</h3>
             </div>
           </div>
           
           <div class="v-timeline-item left reveal-in">
-            <div class="v-timeline-content glass-card">
+            <div class="v-timeline-content unboxed-timeline">
               <span class="timeline-num">05</span>
               <h3>Partnership Building</h3>
             </div>
           </div>
           
           <div class="v-timeline-item right reveal-in" style="transition-delay: 0.1s;">
-            <div class="v-timeline-content glass-card">
+            <div class="v-timeline-content unboxed-timeline">
               <span class="timeline-num">06</span>
               <h3>Community Impact Strategist</h3>
             </div>
@@ -121,38 +121,65 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
       </div>
     </section>
 
-    <!-- 4. Core (Mission, Vision, Values - Masonry/Asymmetric Grid) -->
+    <!-- 4. Core (Mission, Vision, Values - Cardless Editorial) -->
     <section class="core section-pad theme-ink relative">
       <div class="container">
-        <div class="masonry-grid stagger-group">
-          
-          <!-- Mission: Full Width Panoramic -->
-          <div class="masonry-item mission glass-card stagger-item">
-            <Eyebrow>Mission</Eyebrow>
-            <p class="mission-statement">So that no individual, family, or community faces gambling harm in silence, shame, or isolation — because prevention begins with a <span class="italic-accent">conversation.</span></p>
-          </div>
+        
+        <!-- Mission: Floating Typographic Statement -->
+        <div class="editorial-mission reveal-up text-center mb-16">
+          <Eyebrow>Mission</Eyebrow>
+          <h2 class="mission-statement mx-auto">So that no individual, family, or community faces gambling harm in silence, shame, or isolation — because prevention begins with a <span class="italic-accent">conversation.</span></h2>
+        </div>
+        
+        <div class="editorial-vision-values stagger-group">
           
           <!-- Vision: Left Column -->
-          <div class="masonry-item vision glass-card stagger-item">
+          <div class="editorial-col stagger-item">
             <Eyebrow>Vision</Eyebrow>
-            <h2 class="mb-6 text-2xl font-serif text-ivory">Where this is going.</h2>
-            <ul class="vision-list">
-              <li><strong>National speaking:</strong> Bringing prevention conversations to stages, campuses, and conferences across the country.</li>
-              <li><strong>Training & education:</strong> Equipping clinicians, educators, and frontline teams with tools that survive contact with real life.</li>
-              <li><strong>Community:</strong> Building something people can join, wear, and carry into their own conversations.</li>
+            <h3 class="mb-6 text-2xl font-serif text-ivory">Where this is going.</h3>
+            <div class="unboxed-divider"></div>
+            <ul class="unboxed-list">
+              <li>
+                <strong>National speaking:</strong>
+                <span>Bringing prevention conversations to stages, campuses, and conferences across the country.</span>
+              </li>
+              <li>
+                <strong>Training & education:</strong>
+                <span>Equipping clinicians, educators, and frontline teams with tools that survive contact with real life.</span>
+              </li>
+              <li>
+                <strong>Community:</strong>
+                <span>Building something people can join, wear, and carry into their own conversations.</span>
+              </li>
             </ul>
           </div>
           
           <!-- Values: Right Column -->
-          <div class="masonry-item values glass-card stagger-item">
+          <div class="editorial-col stagger-item">
             <Eyebrow>Values</Eyebrow>
-            <h2 class="mb-6 text-2xl font-serif text-ivory">What she works from.</h2>
-            <ul class="values-list interactive-list">
-              <li><strong>Faith</strong> — the belief that people can change, including the ones everyone else gave up on.</li>
-              <li><strong>Family</strong> — where prevention starts, and where harm is felt first and longest.</li>
-              <li><strong>Community</strong> — nobody recovers alone, and nobody prevents alone either.</li>
-              <li><strong>Purpose</strong> — turning lived understanding into practical service.</li>
-              <li><strong>Impact</strong> — measured in conversations started, not talks delivered.</li>
+            <h3 class="mb-6 text-2xl font-serif text-ivory">What she works from.</h3>
+            <div class="unboxed-divider"></div>
+            <ul class="unboxed-list">
+              <li>
+                <strong>Faith</strong>
+                <span>The belief that people can change, including the ones everyone else gave up on.</span>
+              </li>
+              <li>
+                <strong>Family</strong>
+                <span>Where prevention starts, and where harm is felt first and longest.</span>
+              </li>
+              <li>
+                <strong>Community</strong>
+                <span>Nobody recovers alone, and nobody prevents alone either.</span>
+              </li>
+              <li>
+                <strong>Purpose</strong>
+                <span>Turning lived understanding into practical service.</span>
+              </li>
+              <li>
+                <strong>Impact</strong>
+                <span>Measured in conversations started, not talks delivered.</span>
+              </li>
             </ul>
           </div>
 
@@ -306,24 +333,7 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     100% { border-radius: 200px 100px 24px 200px; }
   }
 
-  /* Glass Cards Base */
-  .glass-card {
-    background: rgba(20, 18, 14, 0.45);
-    backdrop-filter: blur(16px) saturate(120%);
-    -webkit-backdrop-filter: blur(16px) saturate(120%);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 24px;
-    padding: var(--sp-10);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    position: relative;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease, border-color 0.6s ease, background 0.6s ease;
-  }
-
-  .glass-card:hover {
-    transform: translateY(-8px) rotate(1deg);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.1);
-    border-color: rgba(255,255,255,0.15);
-  }
+  /* Removed .glass-card entirely */
 
   /* Editorial Scroll Layout (Roots) */
   .editorial-layout {
@@ -510,97 +520,111 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
      5% of container = (5 / 45) * 100% of card width = 11.11% of card width. */
 
   .v-timeline-content {
-    padding: var(--sp-6) var(--sp-8);
+    /* Removed padding to embrace unboxed look */
+    padding: 0;
+  }
+
+  .unboxed-timeline {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  
+  .v-timeline-item.left .unboxed-timeline {
+    padding-right: var(--sp-8);
+  }
+  .v-timeline-item.right .unboxed-timeline {
+    padding-left: var(--sp-8);
+  }
+
+  .v-timeline-item:hover .unboxed-timeline {
+    transform: translateY(-4px);
   }
 
   .timeline-num {
     font-family: var(--font-mono);
     color: var(--color-gold);
-    font-size: 0.875rem;
+    font-size: 0.9rem;
     opacity: 0.8;
     display: block;
     margin-bottom: var(--sp-2);
+    letter-spacing: 0.05em;
   }
 
   .v-timeline-content h3 {
     font-family: var(--font-serif);
-    font-size: 1.35rem;
+    font-size: 1.5rem;
     color: var(--color-ivory);
   }
 
-  /* 4. Core Masonry Grid */
-  .masonry-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-8);
-  }
-
-  @media (min-width: 992px) {
-    .masonry-grid {
-      grid-template-columns: 1fr 1.2fr;
-    }
-    .mission {
-      grid-column: 1 / -1; /* Full width top */
-    }
-    .vision {
-      grid-column: 1 / 2;
-    }
-    .values {
-      grid-column: 2 / 3;
-    }
+  /* 4. Core Cardless Editorial */
+  .editorial-mission {
+    padding: var(--sp-12) 0;
   }
 
   .mission-statement {
     font-family: var(--font-serif);
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    line-height: 1.3;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    line-height: 1.2;
     color: var(--color-ivory);
     margin-top: var(--sp-4);
-    max-width: 900px;
+    max-width: 1000px;
   }
 
-  .vision-list, .values-list {
+  .editorial-vision-values {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-16);
+    padding-top: var(--sp-8);
+  }
+
+  @media (min-width: 992px) {
+    .editorial-vision-values {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-24);
+    }
+  }
+
+  .unboxed-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: var(--sp-6) 0;
+  }
+
+  .unboxed-list {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-6);
-    color: rgba(231, 224, 207, 0.85);
+    gap: 0;
   }
 
-  .vision-list li, .values-list li {
-    font-size: 1.05rem;
+  .unboxed-list li {
+    font-size: 1.125rem;
     line-height: 1.6;
-    padding-left: var(--sp-6);
-    position: relative;
+    padding: var(--sp-6) 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    color: rgba(231, 224, 207, 0.85);
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-2);
+    transition: transform 0.3s ease, color 0.3s ease;
   }
-
-  .vision-list li::before, .values-list li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 10px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--color-gold);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+  .unboxed-list li:last-child {
+    border-bottom: none;
   }
-
-  /* Interactive List Hover Effect */
-  .interactive-list li {
-    transition: color 0.3s ease, transform 0.3s ease;
-  }
-  .interactive-list li:hover {
+  
+  .unboxed-list li:hover {
+    transform: translateX(8px);
     color: var(--color-ivory);
-    transform: translateX(4px);
-  }
-  .interactive-list li:hover::before {
-    transform: scale(1.5);
-    box-shadow: 0 0 10px var(--color-gold);
   }
 
-  .vision-list strong, .values-list strong {
+  .unboxed-list strong {
     color: var(--color-ivory);
     font-family: var(--font-sans);
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-gold);
   }
 
   /* 5. Gamble Free Gear (Immersive Edge-to-Edge) */
