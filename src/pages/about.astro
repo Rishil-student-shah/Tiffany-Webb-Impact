@@ -186,20 +186,24 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
       </div>
     </section>
     
-    <!-- 5. GambleFreeGear (Edge-to-Edge Immersive) -->
-    <section class="gfg-immersive theme-ink relative" id="gamblefreegear">
-      <Waveform opacity={0.08} flipX={true} variant="C" />
-      <div class="gfg-bg-text">GFG</div>
-      <div class="gfg-overlay"></div>
-      
-      <div class="container relative z-10 gfg-content reveal-up">
-        <Eyebrow className="gfg-eyebrow">A Venture by Tiffany Webb</Eyebrow>
-        <h2 class="gfg-title">GambleFreeGear</h2>
-        <p class="gfg-subtitle">
-          Prevention you can wear. An apparel brand designed to break the silence on gambling addiction and start conversations in the communities that need them most.
-        </p>
-        <div class="mt-8">
-          <Button href="https://inpowerimports.com" variant="secondary" className="magnetic-btn gfg-btn" target="_blank">Visit GambleFreeGear &rarr;</Button>
+    <!-- 5. Gamble Free Gear (Exclusive Fashion Drop Layout) -->
+    <section class="gfg-immersive relative">
+      <Waveform opacity={0.04} />
+
+      <div class="container relative z-10">
+        <div class="gfg-exclusive-card reveal-up mx-auto">
+          <div class="gfg-glow-ring"></div>
+          <div class="gfg-inner-content">
+            <Eyebrow className="gfg-eyebrow text-center justify-center">Exclusive Apparel Venture</Eyebrow>
+            <h2 class="gfg-title text-center">GambleFreeGear</h2>
+            <div class="gfg-divider"></div>
+            <p class="gfg-subtitle text-center mb-10">Prevention you can wear. An apparel brand designed to break the silence on gambling addiction and start conversations in the communities that need them most.</p>
+            <div class="flex justify-center">
+              <a href="https://gamblefreegear.com" target="_blank" rel="noopener noreferrer" class="gfg-premium-btn">
+                <span>Explore the Collection</span> <span class="arrow">→</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -694,72 +698,148 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     font-family: var(--font-sans);
   }
 
-  /* 5. Gamble Free Gear (Immersive Edge-to-Edge) */
+  /* 5. Exclusive GFG Section */
   .gfg-immersive {
     padding: var(--sp-32) 0;
+    position: relative;
     overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    border-bottom: 1px solid rgba(255,255,255,0.05);
+    background: radial-gradient(ellipse at 50% 50%, rgba(30, 25, 20, 1) 0%, var(--color-ink) 100%);
+    border-top: 1px solid rgba(217, 162, 58, 0.1);
   }
 
-  .gfg-bg-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-family: var(--font-serif);
-    font-size: 35vw;
-    font-weight: 700;
-    color: rgba(217, 162, 58, 0.03); /* Extremely faint gold */
-    white-space: nowrap;
-    z-index: 1;
-    pointer-events: none;
-    user-select: none;
-    line-height: 1;
+  .gfg-exclusive-card {
+    position: relative;
+    max-width: 900px;
+    border-radius: 40px;
+    padding: 2px; /* For gradient border effect */
+    background: linear-gradient(135deg, rgba(217, 162, 58, 0.5), rgba(217, 162, 58, 0.05), transparent 60%);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 40px rgba(217, 162, 58, 0.1);
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .gfg-exclusive-card:hover {
+    transform: translateY(-10px) rotateX(2deg) rotateY(1deg);
   }
 
-  .gfg-overlay {
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(circle at center, transparent 0%, var(--color-ink) 80%);
+  .gfg-inner-content {
+    background: rgba(10, 8, 7, 0.95); /* Extremely dark inner */
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border-radius: 38px;
+    padding: 5rem 3rem;
+    position: relative;
+    overflow: hidden;
     z-index: 2;
+  }
+  
+  @media (min-width: 768px) {
+    .gfg-inner-content {
+      padding: 6rem 5rem;
+    }
+  }
+
+  .gfg-inner-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(217, 162, 58, 0.15), transparent 50%);
     pointer-events: none;
   }
 
-  .gfg-content {
-    text-align: center;
-    max-width: 800px;
-    background: rgba(14, 12, 9, 0.6);
-    backdrop-filter: blur(24px) saturate(150%);
-    -webkit-backdrop-filter: blur(24px) saturate(150%);
-    padding: var(--sp-12);
-    border-radius: 32px;
-    border: 1px solid rgba(255,255,255,0.1);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  .gfg-glow-ring {
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(217, 162, 58, 0.4) 0%, transparent 70%);
+    filter: blur(30px);
+    z-index: 1;
+    animation: pulse-ring 6s ease-in-out infinite;
+  }
+
+  @keyframes pulse-ring {
+    0%, 100% { transform: scale(1); opacity: 0.7; }
+    50% { transform: scale(1.2); opacity: 1; }
   }
 
   .gfg-title {
     font-family: var(--font-serif);
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    color: var(--color-ivory);
-    margin-bottom: var(--sp-4);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    background: linear-gradient(180deg, #FFFFFF 0%, rgba(255, 255, 255, 0.6) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--sp-6);
+    line-height: 1.1;
+  }
+
+  .gfg-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--color-gold);
+    margin: 0 auto var(--sp-8) auto;
   }
   
   .gfg-subtitle {
     font-size: 1.25rem;
-    color: rgba(231, 224, 207, 0.9);
-    line-height: 1.6;
+    color: rgba(231, 224, 207, 0.85);
+    line-height: 1.8;
+    max-width: 600px;
     margin: 0 auto;
+    font-weight: 300;
   }
 
   .gfg-eyebrow {
     color: var(--color-gold) !important;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
   }
 
-  .gfg-btn {
-    border-color: rgba(217, 162, 58, 0.5) !important;
+  .gfg-premium-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-4);
+    background: transparent;
+    color: var(--color-ivory);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.9rem;
+    padding: 1.25rem 2.5rem;
+    border: 1px solid rgba(217, 162, 58, 0.4);
+    border-radius: 100px;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+  }
+  
+  .gfg-premium-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-gold);
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    z-index: -1;
+  }
+
+  .gfg-premium-btn:hover {
+    color: var(--color-ink);
+    border-color: var(--color-gold);
+    box-shadow: 0 10px 30px rgba(217, 162, 58, 0.3);
+  }
+  
+  .gfg-premium-btn:hover::before {
+    transform: translateY(0);
   }
 </style>
