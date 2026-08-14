@@ -10,13 +10,13 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
 <Layout title="About | Tiffany Webb" description="Meet Tiffany Webb. Discover her journey from Chicago to frontline behavioral health prevention." theme="ink">
   <main class="page-content">
     
-    <!-- Hero Section -->
+    <!-- 1. Hero Section -->
     <section class="inner-hero theme-ink">
       <Waveform opacity={0.06} flipX={true} variant="B" />
       <div class="container hero-grid reveal-up">
         <div class="hero-content">
           <Eyebrow>About</Eyebrow>
-          <h1 class="inner-hero-title">Chicago soul, <span class="italic-accent">Louisiana heart.</span></h1>
+          <h1 class="inner-hero-title">Chicago soul, <br><span class="italic-accent">Louisiana heart.</span></h1>
           <p class="inner-hero-sub text-micro">Community Impact Strategist &middot; Public Health Educator</p>
         </div>
         <div class="hero-image-wrap reveal-in" style="transition-delay: 0.3s;">
@@ -25,116 +25,148 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
       </div>
     </section>
 
-    <!-- Her Roots -->
-    <section class="roots section-pad theme-ink">
-      <div class="container">
-        <div class="glass-card prose-column reveal-up">
-          <p>Chicago-born and raised, with deep Louisiana family roots, Tiffany grew up between two places that shaped how she works. A city that taught her resilience and directness. A family culture that taught her hospitality — that you meet people where they are, and you feed them before you ask them anything.</p>
+    <!-- 2. Her Roots (Asymmetric Split Layout) -->
+    <section class="roots section-pad theme-ink relative">
+      <div class="container split-layout">
+        <div class="split-left stagger-group">
+          <div class="sticky-quote">
+            <h2 class="massive-quote stagger-item">"When we rise,<br><span class="italic-accent">we rise together."</span></h2>
+          </div>
+        </div>
+        <div class="split-right prose-column stagger-group">
+          <p class="stagger-item">Chicago-born and raised, with deep Louisiana family roots, Tiffany grew up between two places that shaped how she works. A city that taught her resilience and directness. A family culture that taught her hospitality — that you meet people where they are, and you feed them before you ask them anything.</p>
           
-          <p>Hers was a family that believed in literacy, healing, and empowerment. Books on the table. Doors open. Somebody always being helped through something. That inheritance is what she brought into public health, and it is still how she works: start where the person actually is, not where the pamphlet assumes they are.</p>
+          <p class="stagger-item">Hers was a family that believed in literacy, healing, and empowerment. Books on the table. Doors open. Somebody always being helped through something. That inheritance is what she brought into public health, and it is still how she works: start where the person actually is, not where the pamphlet assumes they are.</p>
           
-          <p>She has spent more than fifteen years and over four thousand hours doing gambling-prevention outreach. Not from a conference room — in schools, clinics, community centres, and the rooms most prevention programs never reach. She came to it through behavioral health, and she stayed because she kept meeting families who had no language for what was happening to them.</p>
+          <p class="stagger-item">She has spent more than fifteen years and over four thousand hours doing gambling-prevention outreach. Not from a conference room — in schools, clinics, community centres, and the rooms most prevention programs never reach. She came to it through behavioral health, and she stayed because she kept meeting families who had no language for what was happening to them.</p>
           
-          <p>Gambling harm hides. It doesn't smell like alcohol or show up on a drug test. It shows up as a missing paycheck, a second job nobody understands, a marriage that quietly stops working. By the time most families name it, they have been carrying it alone for years.</p>
+          <p class="stagger-item">Gambling harm hides. It doesn't smell like alcohol or show up on a drug test. It shows up as a missing paycheck, a second job nobody understands, a marriage that quietly stops working. By the time most families name it, they have been carrying it alone for years.</p>
           
-          <p>That is the silence her work exists to break. Her approach blends behavioral-health expertise, community outreach, and an entrepreneurial streak that turned a personal mission into a brand people wear. Every part of it points the same direction: turning pain into power for the people other programs overlook.</p>
-          
-          <blockquote class="pull-quote">"When we rise, we rise together."</blockquote>
+          <p class="stagger-item">That is the silence her work exists to break. Her approach blends behavioral-health expertise, community outreach, and an entrepreneurial streak that turned a personal mission into a brand people wear. Every part of it points the same direction: turning pain into power for the people other programs overlook.</p>
         </div>
       </div>
     </section>
 
-    <!-- Professional Journey Timeline -->
-    <section class="journey section-pad theme-ink">
+    <!-- 3. Professional Journey (Alternating Vertical Timeline) -->
+    <section class="journey section-pad theme-ink relative">
+      <Waveform opacity={0.03} />
       <div class="container reveal-up">
-        <div class="text-center mb-12">
+        <div class="text-center mb-16">
           <Eyebrow>The Path Here</Eyebrow>
           <h2 class="section-title">Where all <span class="italic-accent">paths meet.</span></h2>
           <p class="subtitle mx-auto">Behavioral health taught her how harm works. Community outreach taught her how trust works. Public health education taught her how to scale a message. Prevention is where all three meet.</p>
         </div>
         
-        <div class="timeline-grid stagger-group">
-          <div class="timeline-item glass-card stagger-item">
-            <span class="timeline-num">01</span>
-            <h3>Behavioral Health</h3>
+        <div class="vertical-timeline">
+          <div class="timeline-center-line"></div>
+          
+          <div class="v-timeline-item left reveal-in">
+            <div class="v-timeline-content glass-card">
+              <span class="timeline-num">01</span>
+              <h3>Behavioral Health</h3>
+            </div>
           </div>
-          <div class="timeline-item glass-card stagger-item">
-            <span class="timeline-num">02</span>
-            <h3>Community Outreach</h3>
+          
+          <div class="v-timeline-item right reveal-in" style="transition-delay: 0.1s;">
+            <div class="v-timeline-content glass-card">
+              <span class="timeline-num">02</span>
+              <h3>Community Outreach</h3>
+            </div>
           </div>
-          <div class="timeline-item glass-card stagger-item">
-            <span class="timeline-num">03</span>
-            <h3>Gambling Prevention</h3>
+          
+          <div class="v-timeline-item left reveal-in">
+            <div class="v-timeline-content glass-card">
+              <span class="timeline-num">03</span>
+              <h3>Gambling Prevention</h3>
+            </div>
           </div>
-          <div class="timeline-item glass-card stagger-item">
-            <span class="timeline-num">04</span>
-            <h3>Public Health Education</h3>
+          
+          <div class="v-timeline-item right reveal-in" style="transition-delay: 0.1s;">
+            <div class="v-timeline-content glass-card">
+              <span class="timeline-num">04</span>
+              <h3>Public Health Education</h3>
+            </div>
           </div>
-          <div class="timeline-item glass-card stagger-item">
-            <span class="timeline-num">05</span>
-            <h3>Partnership Building</h3>
+          
+          <div class="v-timeline-item left reveal-in">
+            <div class="v-timeline-content glass-card">
+              <span class="timeline-num">05</span>
+              <h3>Partnership Building</h3>
+            </div>
           </div>
-          <div class="timeline-item glass-card stagger-item">
-            <span class="timeline-num">06</span>
-            <h3>Community Impact Strategist</h3>
+          
+          <div class="v-timeline-item right reveal-in" style="transition-delay: 0.1s;">
+            <div class="v-timeline-content glass-card">
+              <span class="timeline-num">06</span>
+              <h3>Community Impact Strategist</h3>
+            </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Mission & Vision -->
+    <!-- 4. Core (Mission, Vision, Values - Masonry/Asymmetric Grid) -->
     <section class="core section-pad theme-ink relative">
-      <Waveform opacity={0.03} />
-      <div class="container grid-2">
-        <div class="mission-vision glass-card reveal-up">
-          <Eyebrow>Mission</Eyebrow>
-          <p class="mission-statement">So that no individual, family, or community faces gambling harm in silence, shame, or isolation — because prevention begins with a conversation.</p>
+      <div class="container">
+        <div class="masonry-grid stagger-group">
           
-          <div class="mt-12">
+          <!-- Mission: Full Width Panoramic -->
+          <div class="masonry-item mission glass-card stagger-item">
+            <Eyebrow>Mission</Eyebrow>
+            <p class="mission-statement">So that no individual, family, or community faces gambling harm in silence, shame, or isolation — because prevention begins with a <span class="italic-accent">conversation.</span></p>
+          </div>
+          
+          <!-- Vision: Left Column -->
+          <div class="masonry-item vision glass-card stagger-item">
             <Eyebrow>Vision</Eyebrow>
-            <h2 class="mb-4">Where this is going.</h2>
+            <h2 class="mb-6 text-2xl font-serif text-ivory">Where this is going.</h2>
             <ul class="vision-list">
               <li><strong>National speaking:</strong> Bringing prevention conversations to stages, campuses, and conferences across the country.</li>
               <li><strong>Training & education:</strong> Equipping clinicians, educators, and frontline teams with tools that survive contact with real life.</li>
               <li><strong>Community:</strong> Building something people can join, wear, and carry into their own conversations.</li>
             </ul>
           </div>
-        </div>
-        
-        <div class="values glass-card reveal-in" style="transition-delay: 0.2s;">
-          <Eyebrow>Values</Eyebrow>
-          <h2 class="mb-4">What she works from.</h2>
-          <ul class="values-list">
-            <li><strong>Faith</strong> — the belief that people can change, including the ones everyone else gave up on.</li>
-            <li><strong>Family</strong> — where prevention starts, and where harm is felt first and longest.</li>
-            <li><strong>Community</strong> — nobody recovers alone, and nobody prevents alone either.</li>
-            <li><strong>Purpose</strong> — turning lived understanding into practical service.</li>
-            <li><strong>Impact</strong> — measured in conversations started, not talks delivered.</li>
-          </ul>
+          
+          <!-- Values: Right Column -->
+          <div class="masonry-item values glass-card stagger-item">
+            <Eyebrow>Values</Eyebrow>
+            <h2 class="mb-6 text-2xl font-serif text-ivory">What she works from.</h2>
+            <ul class="values-list interactive-list">
+              <li><strong>Faith</strong> — the belief that people can change, including the ones everyone else gave up on.</li>
+              <li><strong>Family</strong> — where prevention starts, and where harm is felt first and longest.</li>
+              <li><strong>Community</strong> — nobody recovers alone, and nobody prevents alone either.</li>
+              <li><strong>Purpose</strong> — turning lived understanding into practical service.</li>
+              <li><strong>Impact</strong> — measured in conversations started, not talks delivered.</li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </section>
     
-    <!-- GambleFreeGear -->
-    <section class="gfg-section section-pad theme-ink relative" id="gamblefreegear">
-      <Waveform opacity={0.05} flipX={true} variant="C" />
-      <div class="container text-center reveal-up">
-        <div class="glass-card gfg-card">
-          <Eyebrow>A Venture by Tiffany Webb</Eyebrow>
-          <h2 class="section-title">GambleFreeGear</h2>
-          <p class="subtitle mx-auto mt-4 mb-8">
-            Prevention you can wear. Tiffany Webb is the founder of GambleFreeGear, an apparel brand designed to break the silence on gambling addiction and start conversations in the communities that need them most.
-          </p>
-          <Button href="https://inpowerimports.com" variant="primary" className="magnetic-btn" target="_blank">Visit GambleFreeGear &rarr;</Button>
+    <!-- 5. GambleFreeGear (Edge-to-Edge Immersive) -->
+    <section class="gfg-immersive theme-ink relative" id="gamblefreegear">
+      <Waveform opacity={0.08} flipX={true} variant="C" />
+      <div class="gfg-bg-text">GFG</div>
+      <div class="gfg-overlay"></div>
+      
+      <div class="container relative z-10 gfg-content reveal-up">
+        <Eyebrow className="gfg-eyebrow">A Venture by Tiffany Webb</Eyebrow>
+        <h2 class="gfg-title">GambleFreeGear</h2>
+        <p class="gfg-subtitle">
+          Prevention you can wear. An apparel brand designed to break the silence on gambling addiction and start conversations in the communities that need them most.
+        </p>
+        <div class="mt-8">
+          <Button href="https://inpowerimports.com" variant="secondary" className="magnetic-btn gfg-btn" target="_blank">Visit GambleFreeGear &rarr;</Button>
         </div>
       </div>
     </section>
 
-    <!-- Closing CTA -->
+    <!-- 6. Closing CTA -->
     <section class="closing section-pad theme-ink text-center reveal-up">
       <div class="container">
         <h2>Let's start a conversation.</h2>
-        <p class="subtitle mx-auto mb-8">Whether you're planning a conference, building a prevention program, or trying to reach a community that hasn't responded to anything yet — that's the work.</p>
+        <p class="subtitle mx-auto mb-8 mt-4">Whether you're planning a conference, building a prevention program, or trying to reach a community that hasn't responded to anything yet — that's the work.</p>
         <Button href="/book" variant="primary" className="magnetic-btn">Invite Tiffany to Speak &rarr;</Button>
       </div>
     </section>
@@ -165,17 +197,30 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     max-width: 800px;
     line-height: 1.6;
   }
-
   .mx-auto { margin-left: auto; margin-right: auto; }
   .text-center { text-align: center; }
   .mb-4 { margin-bottom: var(--sp-4); }
+  .mb-6 { margin-bottom: var(--sp-6); }
   .mb-8 { margin-bottom: var(--sp-8); }
-  .mb-12 { margin-bottom: var(--sp-12); }
+  .mb-16 { margin-bottom: var(--sp-16); }
   .mt-4 { margin-top: var(--sp-4); }
-  .mt-12 { margin-top: var(--sp-12); }
+  .mt-8 { margin-top: var(--sp-8); }
   .relative { position: relative; }
+  .z-10 { z-index: 10; }
+  .text-2xl { font-size: 1.5rem; }
+  .font-serif { font-family: var(--font-serif); }
+  .text-ivory { color: var(--color-ivory); }
+  
+  .italic-accent {
+    font-style: italic;
+    font-weight: 400;
+    background: linear-gradient(92deg, var(--color-mustard), var(--color-coral), var(--color-berry));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
 
-  /* Hero */
+  /* 1. Hero */
   .inner-hero {
     position: relative;
     padding: calc(var(--sp-24) + 80px) 0 var(--sp-12);
@@ -193,12 +238,12 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
 
   @media (min-width: 992px) {
     .hero-grid {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.2fr 1fr;
     }
   }
 
   .inner-hero-title {
-    font-size: clamp(3rem, 6vw, 4.5rem);
+    font-size: clamp(3rem, 6vw, 5rem);
     line-height: 1.1;
     margin-bottom: var(--sp-6);
     color: var(--color-ivory);
@@ -213,8 +258,8 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     width: 100%;
     max-width: 500px;
     margin: 0 auto;
-    aspect-ratio: 4/5;
-    border-radius: 120px 16px 120px 16px;
+    aspect-ratio: 3/4;
+    border-radius: 200px 24px 200px 24px;
     overflow: hidden;
     border: 1px solid rgba(217, 162, 58, 0.4);
     box-shadow: 0 20px 50px rgba(0,0,0,0.5);
@@ -227,18 +272,17 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     object-fit: cover;
   }
 
-  /* Glass Cards */
+  /* Glass Cards Base */
   .glass-card {
     background: rgba(20, 18, 14, 0.45);
     backdrop-filter: blur(16px) saturate(120%);
     -webkit-backdrop-filter: blur(16px) saturate(120%);
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 24px;
-    padding: var(--sp-12);
+    padding: var(--sp-10);
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
     position: relative;
-    z-index: 2;
-    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease, border-color 0.6s ease;
   }
 
   .glass-card:hover {
@@ -247,54 +291,127 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     border-color: rgba(255,255,255,0.15);
   }
 
-  /* Roots Prose */
-  .prose-column {
-    max-width: 800px;
-    margin: 0 auto;
+  /* 2. Roots Split Layout */
+  .split-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-12);
+  }
+
+  @media (min-width: 1024px) {
+    .split-layout {
+      grid-template-columns: 5fr 7fr;
+      gap: var(--sp-16);
+      align-items: start;
+    }
+  }
+
+  .sticky-quote {
+    position: sticky;
+    top: 120px;
+  }
+
+  .massive-quote {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    line-height: 1.1;
+    color: var(--color-ivory);
   }
 
   .prose-column p {
     font-size: 1.125rem;
     line-height: 1.7;
-    color: #e7e0cf;
-    margin-bottom: var(--sp-6);
+    color: rgba(231, 224, 207, 0.85);
+    margin-bottom: var(--sp-8);
   }
 
-  .pull-quote {
-    font-family: var(--font-serif);
-    font-size: clamp(1.5rem, 3vw, 2.2rem);
-    color: var(--color-gold);
-    line-height: 1.4;
-    border-left: 2px solid var(--color-gold);
-    padding-left: var(--sp-8);
-    margin: var(--sp-12) 0;
-    font-style: italic;
+  /* 3. Vertical Timeline */
+  .vertical-timeline {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: var(--sp-8) 0;
   }
 
-  /* Timeline Grid */
-  .timeline-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-6);
+  .timeline-center-line {
+    position: absolute;
+    left: 24px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, rgba(217, 162, 58, 0.5), transparent);
   }
 
   @media (min-width: 768px) {
-    .timeline-grid {
-      grid-template-columns: repeat(2, 1fr);
+    .timeline-center-line {
+      left: 50%;
+      transform: translateX(-50%);
     }
   }
 
-  @media (min-width: 1024px) {
-    .timeline-grid {
-      grid-template-columns: repeat(3, 1fr);
+  .v-timeline-item {
+    position: relative;
+    width: calc(100% - 48px);
+    margin-left: 48px;
+    margin-bottom: var(--sp-8);
+  }
+
+  @media (min-width: 768px) {
+    .v-timeline-item {
+      width: 45%;
+      margin-bottom: var(--sp-4); /* Negative margin/overlap can be used if desired, keeping standard for now */
+    }
+    
+    .v-timeline-item.left {
+      margin-left: 0;
+      margin-right: auto;
+      text-align: right;
+    }
+    
+    .v-timeline-item.right {
+      margin-left: auto;
+      margin-right: 0;
+      text-align: left;
+    }
+    
+    /* Center Node Dots */
+    .v-timeline-item::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      width: 12px;
+      height: 12px;
+      background: var(--color-ink);
+      border: 2px solid var(--color-gold);
+      border-radius: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    .v-timeline-item.left::after {
+      right: -24px; /* Move past edge to center line (5% gap + half line width) */
+      /* Precise math is tricky with %, using fixed offset approach */
+      right: calc(-11.11% - 6px); /* Roughly centers on the 50% line */
+    }
+    .v-timeline-item.right::after {
+      left: calc(-11.11% - 6px);
+    }
+    
+    .v-timeline-item:hover::after {
+      background: var(--color-gold);
+      box-shadow: 0 0 15px rgba(217, 162, 58, 0.6);
     }
   }
 
-  .timeline-item {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-4);
-    padding: var(--sp-8);
+  /* Specific fix for dot placement based on 45% width:
+     100% - (45% * 2) = 10% gap in middle.
+     Center line is at 50%.
+     Left card ends at 45%. Distance from end of left card to center is 5% of container.
+     5% of container = (5 / 45) * 100% of card width = 11.11% of card width. */
+
+  .v-timeline-content {
+    padding: var(--sp-6) var(--sp-8);
   }
 
   .timeline-num {
@@ -302,43 +419,52 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     color: var(--color-gold);
     font-size: 0.875rem;
     opacity: 0.8;
+    display: block;
+    margin-bottom: var(--sp-2);
   }
 
-  .timeline-item h3 {
+  .v-timeline-content h3 {
     font-family: var(--font-serif);
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     color: var(--color-ivory);
   }
 
-  /* Core Layout */
-  .grid-2 {
+  /* 4. Core Masonry Grid */
+  .masonry-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--sp-8);
-    position: relative;
-    z-index: 2;
   }
 
   @media (min-width: 992px) {
-    .grid-2 {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--sp-12);
+    .masonry-grid {
+      grid-template-columns: 1fr 1.2fr;
+    }
+    .mission {
+      grid-column: 1 / -1; /* Full width top */
+    }
+    .vision {
+      grid-column: 1 / 2;
+    }
+    .values {
+      grid-column: 2 / 3;
     }
   }
 
   .mission-statement {
     font-family: var(--font-serif);
-    font-size: 1.5rem;
-    line-height: 1.4;
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    line-height: 1.3;
     color: var(--color-ivory);
     margin-top: var(--sp-4);
+    max-width: 900px;
   }
 
   .vision-list, .values-list {
     display: flex;
     flex-direction: column;
     gap: var(--sp-6);
-    color: rgba(231, 224, 207, 0.9);
+    color: rgba(231, 224, 207, 0.85);
   }
 
   .vision-list li, .values-list li {
@@ -357,6 +483,20 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     height: 6px;
     border-radius: 50%;
     background: var(--color-gold);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  /* Interactive List Hover Effect */
+  .interactive-list li {
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+  .interactive-list li:hover {
+    color: var(--color-ivory);
+    transform: translateX(4px);
+  }
+  .interactive-list li:hover::before {
+    transform: scale(1.5);
+    box-shadow: 0 0 10px var(--color-gold);
   }
 
   .vision-list strong, .values-list strong {
@@ -364,10 +504,72 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     font-family: var(--font-sans);
   }
 
-  /* Gamble Free Gear */
-  .gfg-card {
+  /* 5. Gamble Free Gear (Immersive Edge-to-Edge) */
+  .gfg-immersive {
+    padding: var(--sp-32) 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .gfg-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-serif);
+    font-size: 35vw;
+    font-weight: 700;
+    color: rgba(217, 162, 58, 0.03); /* Extremely faint gold */
+    white-space: nowrap;
+    z-index: 1;
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+  }
+
+  .gfg-overlay {
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at center, transparent 0%, var(--color-ink) 80%);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .gfg-content {
+    text-align: center;
     max-width: 800px;
+    background: rgba(14, 12, 9, 0.6);
+    backdrop-filter: blur(24px) saturate(150%);
+    -webkit-backdrop-filter: blur(24px) saturate(150%);
+    padding: var(--sp-12);
+    border-radius: 32px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+  }
+
+  .gfg-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--color-ivory);
+    margin-bottom: var(--sp-4);
+  }
+  
+  .gfg-subtitle {
+    font-size: 1.25rem;
+    color: rgba(231, 224, 207, 0.9);
+    line-height: 1.6;
     margin: 0 auto;
-    padding: var(--sp-16) var(--sp-8);
+  }
+
+  .gfg-eyebrow {
+    color: var(--color-gold) !important;
+  }
+
+  .gfg-btn {
+    border-color: rgba(217, 162, 58, 0.5) !important;
   }
 </style>
