@@ -120,7 +120,25 @@
   background-color: var(--char);
 }
 
-/* THEME: LIGHT (Ivory - Kept for reference, not used in main flow) */
+/* THEME: BOLD (Sapphire) */
+.theme-bold {
+  --section-bg: #091B33;
+  --section-bg-elevated: #112A4A;
+  --section-text: var(--ivory);
+  --section-text-muted: rgba(251, 246, 234, 0.65);
+  --section-accent: #34E0C5; /* Luminous Cyan accent for Sapphire */
+  --section-border: rgba(251, 246, 234, 0.12);
+
+  --card-glass-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
+  --card-glass-border: 1px solid rgba(255, 255, 255, 0.12);
+  --card-glass-shadow: inset 0 1px 0px rgba(255, 255, 255, 0.15), 0 12px 40px rgba(0, 0, 0, 0.3);
+  --card-text: var(--ivory);
+  
+  background-color: var(--section-bg);
+  color: var(--section-text);
+}
+
+/* THEME: LIGHT (Ivory) */
 .theme-light {
   --section-bg: var(--ivory);
   --section-bg-elevated: var(--cream);
@@ -133,6 +151,9 @@
   --card-glass-border: 1px solid rgba(20, 19, 14, 0.08);
   --card-glass-shadow: inset 0 1px 1px rgba(255, 255, 255, 1), 0 12px 40px rgba(0, 0, 0, 0.05);
   --card-text: var(--text-on-light);
+  
+  background-color: var(--section-bg);
+  color: var(--section-text);
 }
 
 /* THEME: EMERALD (Primary Brand) */
@@ -151,20 +172,7 @@
   --card-text: var(--text-on-dark);
 }
 
-/* THEME: LIGHT (Ivory) */
-.theme-light {
-  --section-bg: var(--ivory);
-  --section-bg-elevated: var(--cream);
-  --section-text: var(--text-on-light);
-  --section-text-muted: var(--text-on-light-muted);
-  --section-accent: var(--emerald);
-  --section-border: var(--border-on-light);
 
-  --card-glass-bg: rgba(255, 255, 255, 0.6);
-  --card-glass-border: 1px solid rgba(20, 19, 14, 0.08);
-  --card-glass-shadow: inset 0 1px 1px rgba(255, 255, 255, 1), 0 12px 40px rgba(0, 0, 0, 0.05);
-  --card-text: var(--text-on-light);
-}
 
 /* Apply default theme to body if no class exists */
 body {

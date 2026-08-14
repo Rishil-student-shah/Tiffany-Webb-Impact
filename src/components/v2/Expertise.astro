@@ -1,7 +1,7 @@
 ---
-import Waveform from './Waveform.astro';
-import Eyebrow from './Eyebrow.astro';
-import Button from './Button.astro';
+import Waveform from '../Waveform.astro';
+import Eyebrow from '../Eyebrow.astro';
+import Button from '../Button.astro';
 ---
 
 <section class="expertise section-pad theme-ink">
@@ -14,13 +14,13 @@ import Button from './Button.astro';
     </div>
         <!-- Flagship Keynote -->
     <div class="morph-card-wrap flagship-wrap">
-      <div class="flagship-card morph-card" style="--card-accent: var(--color-gold);">
+      <div class="flagship-card morph-card" style="--card-accent: var(--color-gold); display: none;" data-status="pending-approval">
         <div class="flagship-meta">
           <span class="flagship-badge">Flagship Keynote</span>
         </div>
         <h3 class="flagship-title">Break the Silence: Prevention Begins with a Conversation</h3>
         <p class="flagship-desc">Her signature stage talk. Her story, the case for prevention that meets people where they are, and something every person in the room can do next.</p>
-        <span class="card-link card-link-expand" style="margin-top: auto; padding-top: var(--sp-4);">VIEW DETAILS &rarr; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
+        <span class="card-link card-link-expand" style="margin-top: auto; padding-top: var(--sp-4);">View topics &rarr; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
         <div class="card-expanded-content">
           <p style="margin-bottom: 1rem; color: var(--color-ivory);"><strong>Break the Silence: Prevention Begins with a Conversation</strong></p>
           <p style="margin-bottom: 1rem; color: var(--color-ivory);">The keynote that anchors a main stage.</p>
@@ -43,7 +43,7 @@ import Button from './Button.astro';
           </div>
           <h3 class="expertise-card-title">Prevention & Awareness</h3>
           <p class="expertise-card-desc">Community awareness, youth focus, and engaging elected officials — with culturally rooted prevention models.</p>
-          <span class="card-link card-link-expand" style="margin-top: auto; padding-top: var(--sp-4);">VIEW 5 TOPICS &rarr; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
+          <span class="card-link card-link-expand" style="margin-top: auto; padding-top: var(--sp-4);">View topics &rarr; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
           <div class="card-expanded-content">
             <h4 style="margin-bottom: 1rem; color: var(--color-ivory); font-size: 1.5rem;">Prevention & Awareness</h4>
             <p style="margin-bottom: 2rem; color: var(--color-ivory);">Five talks that reach communities before harm takes hold — from broad public awareness, to youth sessions on sports betting, to moving prevention into policy attention.</p>
@@ -72,7 +72,7 @@ import Button from './Button.astro';
               <p>How to move prevention from community work into policy attention — building relationships with elected officials, pursuing resolutions, and making the case in language decision-makers respond to.</p>
               <p><em>For: policy makers, local government officials, advocacy groups</em></p>
             </div>
-            <Button href="/speaking/prevention-awareness" variant="primary">SEE FULL TRACK &rarr;</Button>
+            <Button href="/speaking/prevention-awareness" variant="primary">See full track details &rarr;</Button>
           </div>
         </div>
       </div>
@@ -85,7 +85,7 @@ import Button from './Button.astro';
           </div>
           <h3 class="expertise-card-title">Treatment, Recovery & Professional Training</h3>
           <p class="expertise-card-desc">CE-oriented depth on co-occurring disorders, suicide prevention, motivational interviewing, and linkage to services.</p>
-          <span class="card-link card-link-expand" style="margin-top: auto; padding-top: var(--sp-4);">VIEW 8 TOPICS &rarr; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
+          <span class="card-link card-link-expand" style="margin-top: auto; padding-top: var(--sp-4);">View topics &rarr; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
           <div class="card-expanded-content">
             <h4 style="margin-bottom: 1rem; color: var(--color-ivory); font-size: 1.5rem;">Treatment, Recovery & Professional Training</h4>
             <p style="margin-bottom: 2rem; color: var(--color-ivory);">Eight sessions built for clinicians, treatment providers, and frontline teams — her largest track, and the one most often booked for professional development.</p>
@@ -129,7 +129,7 @@ import Button from './Button.astro';
               <p>The referral pathway from first disclosure through to sustained support. Covers what exists, what is missing, and how to build a warm handoff that people actually follow through on.</p>
               <p><em>For: behavioral health professionals, program managers, recovery coaches</em></p>
             </div>
-            <Button href="/speaking/treatment-recovery" variant="primary">SEE FULL TRACK &rarr;</Button>
+            <Button href="/speaking/treatment-recovery" variant="primary">See full track details &rarr;</Button>
           </div>
         </div>
       </div>
@@ -142,7 +142,7 @@ import Button from './Button.astro';
           </div>
           <h3 class="expertise-card-title">Family & Community Impact</h3>
           <p class="expertise-card-desc">The link between gambling, domestic violence, and trauma — and supporting the families living with it.</p>
-          <span class="card-link card-link-expand" style="margin-top: auto; padding-top: var(--sp-4);">VIEW 4 TOPICS &rarr; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
+          <span class="card-link card-link-expand" style="margin-top: auto; padding-top: var(--sp-4);">View topics &rarr; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
           <div class="card-expanded-content">
             <h4 style="margin-bottom: 1rem; color: var(--color-ivory); font-size: 1.5rem;">Family & Community Impact</h4>
             <p style="margin-bottom: 2rem; color: var(--color-ivory);">Four sessions on everyone gambling harm reaches beyond the individual — partners, children, and whole family systems.</p>
@@ -166,7 +166,7 @@ import Button from './Button.astro';
               <p>A systems-level look at how gambling harm reshapes family roles, communication patterns, and children's development — and what intervention looks like across the whole system rather than one person.</p>
               <p><em>For: marriage and family therapists, social workers, educators</em></p>
             </div>
-            <Button href="/speaking/family-community" variant="primary">SEE FULL TRACK &rarr;</Button>
+            <Button href="/speaking/family-community" variant="primary">See full track details &rarr;</Button>
           </div>
         </div>
       </div>
@@ -179,7 +179,7 @@ import Button from './Button.astro';
           </div>
           <h3 class="expertise-card-title">Creative & Promotional Engagement</h3>
           <p class="expertise-card-desc">Art competitions, responsible gifting, and ROSC council engagement — turning awareness into participation.</p>
-          <span class="card-link card-link-expand" style="margin-top: auto; padding-top: var(--sp-4);">VIEW 3 TOPICS &rarr; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
+          <span class="card-link card-link-expand" style="margin-top: auto; padding-top: var(--sp-4);">View topics &rarr; <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
           <div class="card-expanded-content">
             <h4 style="margin-bottom: 1rem; color: var(--color-ivory); font-size: 1.5rem;">Creative & Promotional Engagement</h4>
             <p style="margin-bottom: 2rem; color: var(--color-ivory);">Three sessions that turn prevention into something people take part in, rather than something they sit and listen to.</p>
@@ -198,13 +198,13 @@ import Button from './Button.astro';
               <p>How gambling prevention fits within a Recovery Oriented System of Care — integrating it into existing recovery infrastructure rather than building a parallel system alongside it.</p>
               <p><em>For: ROSC members, coalition leaders</em></p>
             </div>
-            <Button href="/speaking/creative-engagement" variant="primary">SEE FULL TRACK &rarr;</Button>
+            <Button href="/speaking/creative-engagement" variant="primary">See full track details &rarr;</Button>
           </div>
         </div>
       </div>
     </div>    
     <div class="expertise-footer">
-      <a href="/speaking" class="expertise-btn">Explore all 21 topics →</a>
+      <a href="/speaking" class="expertise-btn">Explore all 20 topics →</a>
     </div>
   </div>
 </section>
@@ -214,7 +214,10 @@ import Button from './Button.astro';
     position: relative;
     z-index: 2;
     padding: var(--sp-24) 0;
-    background: var(--glow-gradient);
+    position: relative;
+    z-index: 2;
+    padding: var(--sp-24) 0;
+    background: var(--color-ink);
   }
   
   .expertise-container {
@@ -233,7 +236,8 @@ import Button from './Button.astro';
 
   .expertise-sub {
     font-size: 1.25rem;
-    color: var(--section-text-muted);
+    color: var(--color-ivory);
+    opacity: 0.8;
     max-width: 700px;
     margin: 0 auto;
   }
@@ -304,9 +308,13 @@ import Button from './Button.astro';
     text-decoration: none;
     color: var(--card-text);
     padding: var(--sp-8);
+    padding: var(--sp-8);
     min-height: 100%;
     border-left-width: 4px;
     border-left-color: var(--card-accent, var(--color-gold));
+    background: rgba(20, 18, 14, 0.9);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
   }
 
   /* Interactive Inner Glow on Hover */
@@ -360,7 +368,7 @@ import Button from './Button.astro';
   }
   
   .expertise-card-desc {
-    color: var(--section-text-muted);
+    color: var(--color-ivory);
     line-height: 1.6;
     font-size: 1rem;
     margin: 0;

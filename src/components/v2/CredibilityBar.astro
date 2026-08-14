@@ -1,8 +1,8 @@
 ---
-import Waveform from './Waveform.astro';
+import Waveform from '../Waveform.astro';
 ---
 
-<section class="credibility-bar theme-ink reveal-up">
+<section class="credibility-bar theme-ink reveal-up" style="background-color: var(--color-ink); color: var(--color-gold); min-height: 76px; display: flex; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.05);">
   <Waveform opacity={0.04} flipX={true} />
   <div class="credibility-container">
     <div class="credibility-item">
@@ -20,7 +20,7 @@ import Waveform from './Waveform.astro';
     <div class="credibility-divider"></div>
     
     <div class="credibility-item">
-      <span class="credibility-stat">21</span>
+      <span class="credibility-stat">20</span>
       <span class="text-micro credibility-label">Speaking Topics</span>
     </div>
   </div>
@@ -28,10 +28,9 @@ import Waveform from './Waveform.astro';
 
 <style>
   .credibility-bar {
-    color: var(--color-gold);
-    padding: var(--sp-8) 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: var(--sp-6) 0;
+    border-top: none;
+    border-bottom: none;
   }
 
   .credibility-container {

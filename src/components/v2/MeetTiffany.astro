@@ -1,0 +1,168 @@
+---
+import Waveform from '../Waveform.astro';
+import Eyebrow from '../Eyebrow.astro';
+import Button from '../Button.astro';
+import { Image } from 'astro:assets';
+import aboutImg from '../../assets/tiffany_about_new.jpg';
+---
+
+<section class="meet-tiffany theme-bold reveal-up">
+  <div style="color: var(--color-teal); position: absolute; inset: 0; pointer-events: none;">
+    <Waveform opacity={0.08} flipX={true} variant="B" />
+  </div>
+  <div class="meet-container">
+    <div class="meet-grid">
+      <div class="meet-content meet-glass-card">
+        <Eyebrow>Meet Tiffany</Eyebrow>
+        <h2 class="section-title">Chicago soul, <br/><span class="italic-accent">Louisiana heart.</span></h2>
+        
+        <div class="meet-prose">
+          <p>Chicago-born and raised, with deep Louisiana family roots, Tiffany Webb has spent more than fifteen years doing prevention work where it actually happens — in school gyms, clinic waiting rooms, church basements, and community centres across Illinois.</p>
+          <p>She came to this work through behavioral health. She stayed because she kept meeting families who had never been given language for what was happening to them. A father who couldn't explain where the money went. A student who thought a betting app was just a game. A wife who assumed she was the only one.</p>
+          <p>Today she works with health systems, schools, coalitions, and government agencies to build prevention that reaches the people other programs miss — and she does it without lecturing, shaming, or pretending the problem is simple.</p>
+        </div>
+        
+        <div class="meet-cta">
+          <Button href="/about" variant="outline" style="border-color: #14130E; color: #14130E; background: transparent;">READ HER FULL STORY &rarr;</Button>
+        </div>
+      </div>
+      
+      <div class="meet-image-col">
+        <div class="meet-image-glass-offset"></div>
+        <div class="meet-image-wrap">
+          <Image src={aboutImg} alt="Tiffany Webb editorial portrait" class="meet-img" />
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .meet-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--sp-6);
+  }
+
+  .meet-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-12);
+    align-items: center;
+  }
+
+  @media (min-width: 1024px) {
+    .meet-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-24);
+    }
+  }
+  
+  /* Text Glass Card */
+  .meet-glass-card {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(16px) saturate(120%);
+    -webkit-backdrop-filter: blur(16px) saturate(120%);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    border-radius: 24px;
+    padding: var(--sp-8);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    position: relative;
+    transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
+    transform-style: preserve-3d;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    will-change: transform, backdrop-filter;
+  }
+  
+  .meet-glass-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .meet-prose {
+    margin-bottom: var(--sp-8);
+  }
+  /* Matching Hero Typography */
+  .meet-prose p {
+    font-size: 1.125rem;
+    color: #14130E;
+    font-weight: 400;
+    line-height: 1.66;
+  }
+  
+  .meet-cta {
+    margin-top: var(--sp-8);
+  }
+
+  /* Unique Asymmetrical Photo Treatment */
+  .meet-image-col {
+    position: relative;
+    padding: 20px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 1000px;
+  }
+  
+  .meet-image-wrap {
+    width: 100%;
+    max-width: 440px;
+    aspect-ratio: 4/5;
+    border-radius: 16px;
+    overflow: hidden;
+    position: relative;
+    border: 1px solid rgba(0,0,0,0.1);
+    z-index: 2;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .meet-image-glass-offset {
+    position: absolute;
+    top: 40px;
+    left: calc(50% - 200px); /* rough centering offset */
+    width: 100%;
+    max-width: 440px;
+    aspect-ratio: 4/5;
+    background: rgba(251, 246, 234, 0.3);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(0,0,0,0.05);
+    border-radius: 16px;
+    z-index: 1;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s ease;
+  }
+
+  @media (min-width: 1024px) {
+    .meet-image-glass-offset {
+      left: 10%; /* Adjust for desktop grid */
+    }
+  }
+
+  .meet-image-col:hover .meet-image-wrap {
+    transform: translate(-15px, -15px) rotate(-1.5deg);
+  }
+  
+  .meet-image-col:hover .meet-image-glass-offset {
+    transform: translate(15px, 15px) rotate(2deg);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
+  
+  .meet-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+  }
+  
+  .meet-image-col:hover .meet-img {
+    transform: scale(1.08);
+  }
+  
+  .meet-content :global(.eyebrow) {
+    color: #0E6B54 !important;
+  }
+</style>
