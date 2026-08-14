@@ -25,24 +25,32 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
       </div>
     </section>
 
-    <!-- 2. Her Roots (Asymmetric Split Layout) -->
+    <!-- 2. Her Roots (Premium Story Layout) -->
     <section class="roots section-pad theme-ink relative">
-      <div class="container split-layout">
-        <div class="split-left stagger-group">
-          <div class="sticky-quote">
-            <h2 class="massive-quote stagger-item">"When we rise,<br><span class="italic-accent">we rise together."</span></h2>
+      <Waveform opacity={0.04} />
+      <div class="container">
+        <div class="glass-card premium-story-card reveal-up">
+          <div class="story-grid">
+            <div class="story-left">
+              <h2 class="massive-quote">"When we rise,<br><span class="italic-accent">we rise together."</span></h2>
+              <div class="story-divider"></div>
+              <p class="story-meta">The roots of a Community Impact Strategist.</p>
+            </div>
+            
+            <div class="story-right prose-column stagger-group">
+              <p class="stagger-item drop-cap">Chicago-born and raised, with deep Louisiana family roots, Tiffany grew up between two places that shaped how she works. A city that taught her resilience and directness. A family culture that taught her hospitality — that you meet people where they are, and you feed them before you ask them anything.</p>
+              
+              <p class="stagger-item">Hers was a family that believed in literacy, healing, and empowerment. Books on the table. Doors open. Somebody always being helped through something. That inheritance is what she brought into public health, and it is still how she works: start where the person actually is, not where the pamphlet assumes they are.</p>
+              
+              <p class="stagger-item">She has spent more than fifteen years and over four thousand hours doing gambling-prevention outreach. Not from a conference room — in schools, clinics, community centres, and the rooms most prevention programs never reach. She came to it through behavioral health, and she stayed because she kept meeting families who had no language for what was happening to them.</p>
+              
+              <div class="highlight-box stagger-item">
+                <p>Gambling harm hides. It doesn't smell like alcohol or show up on a drug test. It shows up as a missing paycheck, a second job nobody understands, a marriage that quietly stops working. By the time most families name it, they have been carrying it alone for years.</p>
+              </div>
+              
+              <p class="stagger-item">That is the silence her work exists to break. Her approach blends behavioral-health expertise, community outreach, and an entrepreneurial streak that turned a personal mission into a brand people wear. Every part of it points the same direction: turning pain into power for the people other programs overlook.</p>
+            </div>
           </div>
-        </div>
-        <div class="split-right prose-column stagger-group">
-          <p class="stagger-item">Chicago-born and raised, with deep Louisiana family roots, Tiffany grew up between two places that shaped how she works. A city that taught her resilience and directness. A family culture that taught her hospitality — that you meet people where they are, and you feed them before you ask them anything.</p>
-          
-          <p class="stagger-item">Hers was a family that believed in literacy, healing, and empowerment. Books on the table. Doors open. Somebody always being helped through something. That inheritance is what she brought into public health, and it is still how she works: start where the person actually is, not where the pamphlet assumes they are.</p>
-          
-          <p class="stagger-item">She has spent more than fifteen years and over four thousand hours doing gambling-prevention outreach. Not from a conference room — in schools, clinics, community centres, and the rooms most prevention programs never reach. She came to it through behavioral health, and she stayed because she kept meeting families who had no language for what was happening to them.</p>
-          
-          <p class="stagger-item">Gambling harm hides. It doesn't smell like alcohol or show up on a drug test. It shows up as a missing paycheck, a second job nobody understands, a marriage that quietly stops working. By the time most families name it, they have been carrying it alone for years.</p>
-          
-          <p class="stagger-item">That is the silence her work exists to break. Her approach blends behavioral-health expertise, community outreach, and an entrepreneurial streak that turned a personal mission into a brand people wear. Every part of it points the same direction: turning pain into power for the people other programs overlook.</p>
         </div>
       </div>
     </section>
@@ -61,42 +69,42 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
           <div class="timeline-center-line"></div>
           
           <div class="v-timeline-item left reveal-in">
-            <div class="v-timeline-content glass-card glass-emerald">
+            <div class="v-timeline-content glass-card">
               <span class="timeline-num">01</span>
               <h3>Behavioral Health</h3>
             </div>
           </div>
           
           <div class="v-timeline-item right reveal-in" style="transition-delay: 0.1s;">
-            <div class="v-timeline-content glass-card glass-emerald">
+            <div class="v-timeline-content glass-card">
               <span class="timeline-num">02</span>
               <h3>Community Outreach</h3>
             </div>
           </div>
           
           <div class="v-timeline-item left reveal-in">
-            <div class="v-timeline-content glass-card glass-emerald">
+            <div class="v-timeline-content glass-card">
               <span class="timeline-num">03</span>
               <h3>Gambling Prevention</h3>
             </div>
           </div>
           
           <div class="v-timeline-item right reveal-in" style="transition-delay: 0.1s;">
-            <div class="v-timeline-content glass-card glass-emerald">
+            <div class="v-timeline-content glass-card">
               <span class="timeline-num">04</span>
               <h3>Public Health Education</h3>
             </div>
           </div>
           
           <div class="v-timeline-item left reveal-in">
-            <div class="v-timeline-content glass-card glass-emerald">
+            <div class="v-timeline-content glass-card">
               <span class="timeline-num">05</span>
               <h3>Partnership Building</h3>
             </div>
           </div>
           
           <div class="v-timeline-item right reveal-in" style="transition-delay: 0.1s;">
-            <div class="v-timeline-content glass-card glass-emerald">
+            <div class="v-timeline-content glass-card">
               <span class="timeline-num">06</span>
               <h3>Community Impact Strategist</h3>
             </div>
@@ -111,13 +119,13 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
         <div class="masonry-grid stagger-group">
           
           <!-- Mission: Full Width Panoramic -->
-          <div class="masonry-item mission glass-card glass-gold stagger-item">
+          <div class="masonry-item mission glass-card stagger-item">
             <Eyebrow>Mission</Eyebrow>
             <p class="mission-statement">So that no individual, family, or community faces gambling harm in silence, shame, or isolation — because prevention begins with a <span class="italic-accent">conversation.</span></p>
           </div>
           
           <!-- Vision: Left Column -->
-          <div class="masonry-item vision glass-card glass-berry stagger-item">
+          <div class="masonry-item vision glass-card stagger-item">
             <Eyebrow>Vision</Eyebrow>
             <h2 class="mb-6 text-2xl font-serif text-ivory">Where this is going.</h2>
             <ul class="vision-list">
@@ -128,7 +136,7 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
           </div>
           
           <!-- Values: Right Column -->
-          <div class="masonry-item values glass-card glass-berry stagger-item">
+          <div class="masonry-item values glass-card stagger-item">
             <Eyebrow>Values</Eyebrow>
             <h2 class="mb-6 text-2xl font-serif text-ivory">What she works from.</h2>
             <ul class="values-list interactive-list">
@@ -309,49 +317,32 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     border-color: rgba(255,255,255,0.15);
   }
 
-  /* Playful Glass Colors */
-  .glass-emerald {
-    background: rgba(25, 45, 35, 0.45);
-  }
-  .glass-emerald:hover {
-    border-color: rgba(62, 171, 113, 0.4);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(62, 171, 113, 0.2);
+  /* Premium Story Card (Roots) */
+  .premium-story-card {
+    padding: var(--sp-12) var(--sp-8);
   }
 
-  .glass-gold {
-    background: rgba(45, 38, 20, 0.45);
-  }
-  .glass-gold:hover {
-    border-color: rgba(217, 162, 58, 0.4);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(217, 162, 58, 0.2);
+  @media (min-width: 992px) {
+    .premium-story-card {
+      padding: var(--sp-20);
+    }
   }
 
-  .glass-berry {
-    background: rgba(40, 25, 30, 0.45);
-  }
-  .glass-berry:hover {
-    border-color: rgba(183, 75, 103, 0.4);
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(183, 75, 103, 0.2);
-  }
-
-  /* 2. Roots Split Layout */
-  .split-layout {
+  .story-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--sp-12);
   }
 
   @media (min-width: 1024px) {
-    .split-layout {
-      grid-template-columns: 5fr 7fr;
-      gap: var(--sp-16);
-      align-items: start;
+    .story-grid {
+      grid-template-columns: 1fr 1.5fr;
+      gap: var(--sp-20);
     }
   }
 
-  .sticky-quote {
-    position: sticky;
-    top: 120px;
+  .story-left {
+    position: relative;
   }
 
   .massive-quote {
@@ -359,13 +350,60 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     font-size: clamp(2.5rem, 4vw, 3.5rem);
     line-height: 1.1;
     color: var(--color-ivory);
+    margin-bottom: var(--sp-8);
+  }
+
+  .story-divider {
+    width: 60px;
+    height: 2px;
+    background: var(--color-gold);
+    margin-bottom: var(--sp-8);
+  }
+
+  .story-meta {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: rgba(217, 162, 58, 0.8);
+    letter-spacing: 0.1em;
+  }
+
+  .story-right {
+    position: relative;
+  }
+
+  .drop-cap::first-letter {
+    float: left;
+    font-family: var(--font-serif);
+    font-size: 4.5rem;
+    line-height: 0.8;
+    padding-top: 4px;
+    padding-right: 12px;
+    padding-left: 3px;
+    color: var(--color-gold);
   }
 
   .prose-column p {
     font-size: 1.125rem;
-    line-height: 1.7;
-    color: rgba(231, 224, 207, 0.85);
-    margin-bottom: var(--sp-8);
+    line-height: 1.8;
+    color: rgba(231, 224, 207, 0.9);
+    margin-bottom: var(--sp-6);
+  }
+
+  .highlight-box {
+    background: rgba(217, 162, 58, 0.05);
+    border-left: 3px solid var(--color-gold);
+    padding: var(--sp-6) var(--sp-8);
+    margin: var(--sp-8) 0;
+    border-radius: 0 16px 16px 0;
+  }
+
+  .highlight-box p {
+    margin-bottom: 0;
+    color: var(--color-ivory);
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-style: italic;
   }
 
   /* 3. Vertical Timeline */
