@@ -210,12 +210,26 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
       </div>
     </section>
 
-    <!-- 6. Closing CTA -->
-    <section class="closing section-pad theme-ink text-center reveal-up">
-      <div class="container">
-        <h2>Let's start a conversation.</h2>
-        <p class="subtitle mx-auto mb-8 mt-4">Whether you're planning a conference, building a prevention program, or trying to reach a community that hasn't responded to anything yet — that's the work.</p>
-        <Button href="/book" variant="primary" className="magnetic-btn">Invite Tiffany to Speak &rarr;</Button>
+    <!-- 6. Let's Talk CTA -->
+    <section class="section-pad theme-ink relative">
+      <Waveform opacity={0.06} flipY={true} />
+      <div class="container relative z-10">
+        
+        <div class="cta-card ultra-glass-card glass-topaz animated-card mx-auto max-w-5xl reveal-up">
+          <div class="ultra-padding-wrapper text-center relative overflow-hidden">
+            <!-- Inner Glow -->
+            <div class="cta-inner-glow"></div>
+            
+            <h2 class="font-serif text-5xl md:text-7xl mb-8 text-ivory relative z-10">Let's start a <span class="italic-accent text-gold">conversation.</span></h2>
+            <p class="text-xl text-ivory/80 mb-12 max-w-2xl mx-auto font-light leading-relaxed relative z-10">
+              Whether you're planning a conference, building a prevention program, or trying to reach a community that hasn't responded to anything yet — that's the work.
+            </p>
+            <div class="relative z-10">
+              <Button href="mailto:booking@tiffanywebb.com" variant="secondary" className="magnetic-btn px-12 py-5 text-lg cta-btn">Invite Tiffany to Speak &rarr;</Button>
+            </div>
+          </div>
+        </div>
+
       </div>
     </section>
 
@@ -842,5 +856,39 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
   
   .gfg-premium-btn:hover::before {
     transform: translateY(0);
+  }
+
+  /* 6. CTA Card Design */
+  .cta-card {
+    border-radius: 40px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 40px rgba(217, 162, 58, 0.05);
+  }
+
+  .cta-inner-glow {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top center, rgba(217, 162, 58, 0.15), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .cta-btn {
+    background: var(--color-gold) !important;
+    color: var(--color-ink) !important;
+    border: none !important;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    box-shadow: 0 10px 30px rgba(217, 162, 58, 0.2);
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+  }
+  
+  .cta-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(217, 162, 58, 0.4);
+    background: #FFC95C !important; /* Lighter, glowing gold on hover */
   }
 </style>
