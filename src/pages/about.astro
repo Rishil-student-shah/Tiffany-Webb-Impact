@@ -200,7 +200,7 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
             <h2 class="gfg-title text-center">GambleFreeGear</h2>
             <div class="gfg-divider"></div>
             <p class="gfg-subtitle text-center">Prevention you can wear. An apparel brand designed to break the silence on gambling addiction and start conversations in the communities that need them most.</p>
-            <div class="flex justify-center mt-12">
+            <div class="gfg-btn-wrapper">
               <a href="https://gamblefreegear.com" target="_blank" rel="noopener noreferrer" class="gfg-premium-btn">
                 <span>Explore the Collection</span> <span class="arrow text-xl leading-none">&rarr;</span>
               </a>
@@ -816,8 +816,17 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
     text-transform: uppercase;
   }
 
+  .gfg-btn-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3.5rem;
+    width: 100%;
+  }
+
   .gfg-premium-btn {
     display: inline-flex;
+    margin: 0 auto; /* Backup centering */
     align-items: center;
     gap: var(--sp-4);
     background: transparent;
