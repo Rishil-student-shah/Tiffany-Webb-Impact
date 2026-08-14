@@ -7,6 +7,11 @@ const year = new Date().getFullYear();
 <footer class="footer theme-ink">
   <Waveform opacity={0.06} />
   <div class="footer-container">
+    <div class="footer-middle">
+      <p class="footer-quote">"Every conversation is an opportunity to plant a seed of hope, strengthen a community, and inspire meaningful change."</p>
+      <p class="footer-mission">Faith. Family. Community. Purpose. Impact. &nbsp;&middot;&nbsp; Break the Silence.</p>
+    </div>
+
     <div class="footer-top">
       <div class="footer-brand">
         <h2 class="footer-logo">Tiffany Webb</h2>
@@ -51,11 +56,6 @@ const year = new Date().getFullYear();
         <Button href="/book" variant="primary">Book Tiffany</Button>
       </div>
     </div>
-    
-    <div class="footer-middle">
-      <p class="footer-quote">"Every conversation is an opportunity to plant a seed of hope, strengthen a community, and inspire meaningful change."</p>
-      <p class="footer-mission">Faith. Family. Community. Purpose. Impact. &nbsp;&middot;&nbsp; Break the Silence.</p>
-    </div>
 
     <div class="footer-bottom">
       <p class="text-micro">&copy; {year} Tiffany Webb. All rights reserved.</p>
@@ -86,7 +86,7 @@ const year = new Date().getFullYear();
     display: grid;
     grid-template-columns: 1fr;
     gap: var(--sp-12);
-    padding-bottom: var(--sp-16);
+    padding: var(--sp-16) 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
@@ -145,7 +145,7 @@ const year = new Date().getFullYear();
 
   .footer-middle {
     text-align: center;
-    padding: var(--sp-16) 0;
+    padding-bottom: var(--sp-16);
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
