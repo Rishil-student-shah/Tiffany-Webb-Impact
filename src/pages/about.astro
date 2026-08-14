@@ -139,19 +139,23 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
 
     <!-- 4. Core (Mission, Vision, Values - Pure Glass Masonry Grid) -->
     <section class="core section-pad theme-ink relative">
-      <div class="container">
-        <div class="masonry-grid stagger-group">
+      <div class="container relative">
+        
+        <!-- Ambient Background Glow -->
+        <div class="ambient-glow" style="top: 50%; left: 50%; transform: translate(-50%, -50%); width: 80vw; height: 80vw; background: radial-gradient(circle, rgba(217, 162, 58, 0.05) 0%, transparent 60%);"></div>
+
+        <div class="masonry-grid stagger-group relative z-10">
           
-          <!-- Mission: Full Width Panoramic -->
-          <div class="masonry-item mission ultra-glass-card stagger-item">
+          <!-- Mission: Full Width Panoramic (Obsidian) -->
+          <div class="masonry-item mission ultra-glass-card glass-obsidian stagger-item animated-card">
             <div class="ultra-padding-wrapper">
               <Eyebrow className="eyebrow-padded">Mission</Eyebrow>
-              <p class="mission-statement">So that no individual, family, or community faces gambling harm in silence, shame, or isolation — because prevention begins with a <span class="italic-accent">conversation.</span></p>
+              <p class="mission-statement">So that no individual, family, or community faces gambling harm in silence, shame, or isolation — because prevention begins with a <span class="italic-accent text-gold">conversation.</span></p>
             </div>
           </div>
           
-          <!-- Vision: Left Column -->
-          <div class="masonry-item vision ultra-glass-card stagger-item">
+          <!-- Vision: Left Column (Emerald) -->
+          <div class="masonry-item vision ultra-glass-card glass-emerald stagger-item animated-card" style="animation-delay: -2s;">
             <div class="ultra-padding-wrapper">
               <Eyebrow className="eyebrow-padded">Vision</Eyebrow>
               <h2 class="mb-6 text-2xl font-serif text-ivory">Where this is going.</h2>
@@ -163,8 +167,8 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
             </div>
           </div>
           
-          <!-- Values: Right Column -->
-          <div class="masonry-item values ultra-glass-card stagger-item">
+          <!-- Values: Right Column (Amethyst) -->
+          <div class="masonry-item values ultra-glass-card glass-amethyst stagger-item animated-card" style="animation-delay: -4s;">
             <div class="ultra-padding-wrapper">
               <Eyebrow className="eyebrow-padded">Values</Eyebrow>
               <h2 class="mb-6 text-2xl font-serif text-ivory">What she works from.</h2>
@@ -450,6 +454,16 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
   @keyframes float-slow {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-10px); }
+  }
+
+  .animated-card {
+    /* Add a continuous floating animation to generic cards */
+    animation: float-slow 8s ease-in-out infinite;
+  }
+  
+  .animated-card:hover {
+    animation-play-state: paused;
+    transform: translateY(-12px) scale(1.02);
   }
 
   /* Suspend float animation on hover and use standard glass hover */
