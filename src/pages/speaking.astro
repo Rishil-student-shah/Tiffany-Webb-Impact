@@ -16,6 +16,10 @@ import Waveform from '../components/Waveform.astro';
       <div class="ambient-glow" style="top: 0; left: 50%; transform: translate(-50%, 0); width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(50,100,200, 0.05) 0%, transparent 70%);"></div>
 
       <div class="container hero-grid reveal-up spk-hero-container">
+        <!-- New Image Container for the Hero left side -->
+        <div class="hero-image-wrap blob-shape reveal-in" style="transition-delay: 0.2s;">
+           <img src="/tiffany_hero_speaker.jpg" alt="Tiffany Webb Speaking on Stage" class="about-hero-img" style="width: 100%; height: 100%; object-fit: cover;" />
+        </div>
         <div class="hero-content spk-hero-content">
           <Eyebrow>Speaking & Training</Eyebrow>
           <h1 class="inner-hero-title">Bring Tiffany <br/><span class="italic-accent">to your stage.</span></h1>
@@ -38,42 +42,42 @@ import Waveform from '../components/Waveform.astro';
         
         <div class="asym-grid stagger-group">
           <!-- Card 1 -->
-          <div class="grid-card card-span-8 ultra-glass-card glass-sapphire stagger-item">
+          <div class="grid-card card-span-8 ultra-glass-card glass-sapphire stagger-item animated-card">
             <div class="ultra-padding-wrapper">
               <h3 class="spk-card-title">Frontline credibility</h3>
               <p class="spk-card-desc">Four thousand hours of actual outreach. She has had these conversations in real rooms, with real families, for fifteen years.</p>
             </div>
           </div>
           <!-- Card 2 -->
-          <div class="grid-card card-span-4 ultra-glass-card glass-amethyst stagger-item">
+          <div class="grid-card card-span-4 ultra-glass-card glass-amethyst stagger-item animated-card" style="animation-delay: -1s;">
             <div class="ultra-padding-wrapper">
               <h3 class="spk-card-title">Cultural fluency</h3>
               <p class="spk-card-desc">She reaches communities that standard prevention programming consistently misses — because she knows how to enter them respectfully.</p>
             </div>
           </div>
           <!-- Card 3 -->
-          <div class="grid-card card-span-4 ultra-glass-card glass-topaz stagger-item">
+          <div class="grid-card card-span-4 ultra-glass-card glass-topaz stagger-item animated-card" style="animation-delay: -2s;">
             <div class="ultra-padding-wrapper">
               <h3 class="spk-card-title">Evidence-based</h3>
               <p class="spk-card-desc">Screening, early intervention, motivational interviewing, harm reduction. The methods are real and current.</p>
             </div>
           </div>
           <!-- Card 4 -->
-          <div class="grid-card card-span-8 ultra-glass-card glass-sapphire stagger-item">
+          <div class="grid-card card-span-8 ultra-glass-card glass-sapphire stagger-item animated-card" style="animation-delay: -3s;">
             <div class="ultra-padding-wrapper">
               <h3 class="spk-card-title">Practical takeaways</h3>
               <p class="spk-card-desc">Audiences leave with something they can use on Monday, not a feeling that fades by Friday.</p>
             </div>
           </div>
           <!-- Card 5 -->
-          <div class="grid-card card-span-6 ultra-glass-card glass-amethyst stagger-item">
+          <div class="grid-card card-span-6 ultra-glass-card glass-amethyst stagger-item animated-card" style="animation-delay: -4s;">
             <div class="ultra-padding-wrapper">
               <h3 class="spk-card-title">Community-centred</h3>
               <p class="spk-card-desc">Fifteen years of coalition and partnership work sits behind every talk she gives.</p>
             </div>
           </div>
           <!-- Card 6 -->
-          <div class="grid-card card-span-6 ultra-glass-card glass-emerald stagger-item">
+          <div class="grid-card card-span-6 ultra-glass-card glass-emerald stagger-item animated-card" style="animation-delay: -5s;">
             <div class="ultra-padding-wrapper">
               <h3 class="spk-card-title">Trusted professional</h3>
               <p class="spk-card-desc">BBA, MHP, and genuine institutional affiliations in behavioral and public health.</p>
@@ -288,7 +292,7 @@ import Waveform from '../components/Waveform.astro';
     </section>
 
     <!-- 6. Closing CTA -->
-    <section class="section-pad theme-ink relative overflow-hidden" style="margin-bottom: 4rem;">
+    <section class="section-pad theme-ink relative overflow-hidden">
       <div class="container">
         <div class="cta-card ultra-glass-card glass-topaz reveal-up">
           <div class="ultra-padding-wrapper text-center relative overflow-hidden">
@@ -368,7 +372,7 @@ import Waveform from '../components/Waveform.astro';
   .spk-card-title {
     font-size: 1.5rem;
     color: var(--color-gold);
-    margin-bottom: var(--sp-3);
+    margin-bottom: 0.75rem;
   }
   .spk-card-desc {
     color: var(--text-on-dark-muted);
@@ -380,12 +384,12 @@ import Waveform from '../components/Waveform.astro';
   .tab-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: var(--sp-3);
+    gap: 0.75rem;
     margin-bottom: var(--sp-8);
     justify-content: center;
   }
   .tab-btn {
-    padding: var(--sp-3) var(--sp-6);
+    padding: 0.75rem var(--sp-6);
     border-radius: 40px;
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.05);
@@ -428,7 +432,7 @@ import Waveform from '../components/Waveform.astro';
   }
 
   .tab-header {
-    margin-bottom: var(--sp-10);
+    margin-bottom: 2.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: var(--sp-6);
   }
@@ -546,7 +550,7 @@ import Waveform from '../components/Waveform.astro';
     border-radius: 4px;
     display: inline-flex;
     align-items: center;
-    gap: var(--sp-3);
+    gap: 0.75rem;
     box-shadow: 0 10px 30px rgba(217, 162, 58, 0.2);
     transition: all 0.4s ease;
     text-transform: uppercase;
