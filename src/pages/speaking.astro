@@ -1,227 +1,308 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
+import Button from '../components/Button.astro';
+import Waveform from '../components/Waveform.astro';
 ---
 
 <Layout title="Speaking & Training | Tiffany Webb" theme="secondary">
-  <main class="page-content">
+  <main class="page-content bg-ink text-ivory relative overflow-hidden">
     
-    <!-- 3.1 Hero -->
-    <section class="inner-hero theme-dark">
-      <div class="container reveal-up">
-        <Eyebrow>Speaking</Eyebrow>
-        <h1 class="inner-hero-title">Bring Tiffany to your stage.</h1>
-        <p class="inner-hero-sub">Keynotes, conference sessions, panels, workshops, and school programs on gambling prevention, public health, and community impact.</p>
-        <div class="mt-8">
-          <a href="/book" class="btn btn-primary">Invite Tiffany to Speak &rarr;</a>
+    <!-- Ambient Base Glow -->
+    <div class="fixed inset-0 pointer-events-none z-0">
+      <div class="absolute top-0 left-1/4 w-[50vw] h-[50vw] bg-[radial-gradient(circle,rgba(50,100,200,0.03)_0%,transparent_70%)]"></div>
+      <div class="absolute bottom-0 right-1/4 w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(150,50,200,0.03)_0%,transparent_70%)]"></div>
+    </div>
+
+    <!-- 1. Cinematic Hero -->
+    <section class="spk-hero relative z-10 flex items-center min-h-[90vh]">
+      <Waveform opacity={0.05} variant="B" flipX={true} />
+      <div class="container relative">
+        <div class="max-w-5xl mx-auto text-center reveal-up">
+          <Eyebrow className="mb-6 justify-center">Speaking & Training</Eyebrow>
+          <h1 class="spk-title font-serif mb-8 text-gradient">Bring Tiffany to your stage.</h1>
+          <p class="text-2xl text-ivory/80 max-w-3xl mx-auto font-light leading-relaxed mb-12">
+            Keynotes, conference sessions, panels, workshops, and school programs on gambling prevention, public health, and community impact.
+          </p>
+          <div class="flex justify-center">
+            <Button href="/book" variant="primary" className="magnetic-btn px-10 py-4 text-lg btn-glow">Invite Tiffany to Speak &rarr;</Button>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 3.2 Why Tiffany -->
-    <section class="why-tiffany section-pad theme-ink" style="position: relative; overflow: hidden;">
-      <div class="container stagger-group" style="position: relative; z-index: 2;">
-        <h2 class="stagger-item">Why Tiffany.</h2>
+    <!-- 2. Dynamic Asymmetrical Grid (Why Tiffany) -->
+    <section class="section-pad relative z-10">
+      <div class="container">
+        <div class="text-center mb-16 reveal-up">
+          <h2 class="font-serif text-5xl md:text-6xl text-gradient-sapphire">Why Tiffany.</h2>
+        </div>
         
-        <div class="grid-3 mt-12">
-          <a href="#topics" class="feature-box stagger-item">
-            <h3>Frontline credibility</h3>
-            <p>Four thousand hours of actual outreach. She has had these conversations in real rooms, with real families, for fifteen years.</p>
-            <span class="card-arrow">&rarr;</span>
-          </a>
-          <a href="#topics" class="feature-box stagger-item">
-            <h3>Cultural fluency</h3>
-            <p>She reaches communities that standard prevention programming consistently misses — because she knows how to enter them respectfully.</p>
-            <span class="card-arrow">&rarr;</span>
-          </a>
-          <a href="#topics" class="feature-box stagger-item">
-            <h3>Evidence-based</h3>
-            <p>Screening, early intervention, motivational interviewing, harm reduction. The methods are real and current.</p>
-            <span class="card-arrow">&rarr;</span>
-          </a>
-          <a href="#topics" class="feature-box stagger-item">
-            <h3>Practical takeaways</h3>
-            <p>Audiences leave with something they can use on Monday, not a feeling that fades by Friday.</p>
-            <span class="card-arrow">&rarr;</span>
-          </a>
-          <a href="#topics" class="feature-box stagger-item">
-            <h3>Community-centred</h3>
-            <p>Fifteen years of coalition and partnership work sits behind every talk she gives.</p>
-            <span class="card-arrow">&rarr;</span>
-          </a>
-          <a href="#topics" class="feature-box stagger-item">
-            <h3>Trusted professional</h3>
-            <p>BBA, MHP, and genuine institutional affiliations in behavioral and public health.</p>
-            <span class="card-arrow">&rarr;</span>
-          </a>
+        <div class="asym-grid stagger-group">
+          <!-- Card 1 -->
+          <div class="grid-card ultra-glass-card glass-sapphire animated-card stagger-item">
+            <div class="ultra-padding-wrapper">
+              <h3 class="text-2xl font-serif text-gold mb-4">Frontline credibility</h3>
+              <p class="text-ivory/80 text-lg leading-relaxed">Four thousand hours of actual outreach. She has had these conversations in real rooms, with real families, for fifteen years.</p>
+            </div>
+          </div>
+          <!-- Card 2 -->
+          <div class="grid-card ultra-glass-card glass-amethyst animated-card stagger-item">
+            <div class="ultra-padding-wrapper">
+              <h3 class="text-2xl font-serif text-gold mb-4">Cultural fluency</h3>
+              <p class="text-ivory/80 text-lg leading-relaxed">She reaches communities that standard prevention programming consistently misses — because she knows how to enter them respectfully.</p>
+            </div>
+          </div>
+          <!-- Card 3 -->
+          <div class="grid-card ultra-glass-card glass-topaz animated-card stagger-item">
+            <div class="ultra-padding-wrapper">
+              <h3 class="text-2xl font-serif text-gold mb-4">Evidence-based</h3>
+              <p class="text-ivory/80 text-lg leading-relaxed">Screening, early intervention, motivational interviewing, harm reduction. The methods are real and current.</p>
+            </div>
+          </div>
+          <!-- Card 4 -->
+          <div class="grid-card ultra-glass-card glass-sapphire animated-card stagger-item">
+            <div class="ultra-padding-wrapper">
+              <h3 class="text-2xl font-serif text-gold mb-4">Practical takeaways</h3>
+              <p class="text-ivory/80 text-lg leading-relaxed">Audiences leave with something they can use on Monday, not a feeling that fades by Friday.</p>
+            </div>
+          </div>
+          <!-- Card 5 -->
+          <div class="grid-card ultra-glass-card glass-amethyst animated-card stagger-item">
+            <div class="ultra-padding-wrapper">
+              <h3 class="text-2xl font-serif text-gold mb-4">Community-centred</h3>
+              <p class="text-ivory/80 text-lg leading-relaxed">Fifteen years of coalition and partnership work sits behind every talk she gives.</p>
+            </div>
+          </div>
+          <!-- Card 6 -->
+          <div class="grid-card ultra-glass-card glass-emerald animated-card stagger-item">
+            <div class="ultra-padding-wrapper">
+              <h3 class="text-2xl font-serif text-gold mb-4">Trusted professional</h3>
+              <p class="text-ivory/80 text-lg leading-relaxed">BBA, MHP, and genuine institutional affiliations in behavioral and public health.</p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 3.3 The Four Tracks -->
-    <section class="tracks section-pad bg-cream">
-      <div class="container stagger-group">
-        <h2 class="stagger-item">Twenty-one topics. Four tracks. One throughline.</h2>
-        <p class="subtitle stagger-item">Every topic below is one she actively delivers. If your audience sits somewhere between two of them, she'll build the session you actually need.</p>
+    <!-- 3. Interactive Tracks (Tab System) -->
+    <section class="section-pad relative z-10" id="topics">
+      <Waveform opacity={0.04} variant="A" />
+      <div class="container relative">
         
-        <div class="tracks-list mt-12">
-          <!-- Track 01 -->
-          <div class="track-block stagger-item">
-            <h3 class="track-title">Track 01 — Prevention &amp; Awareness</h3>
-            <p class="track-meta text-micro">For general audiences, community organizations, and prevention professionals.</p>
-            <ul class="topic-list">
-              <li>
-                <h4>1. Gambling Prevention and Community Awareness</h4>
-                <p>An accessible introduction to how gambling harm develops, who it affects, and what prevention looks like at community scale. Covers warning signs, risk factors, and the practical steps organizations can take before harm becomes crisis.</p>
-              </li>
-              <li>
-                <h4>2. Don't Bet on Your Future (Youth Focus)</h4>
-                <p>Built for students, and for the adults around them. Addresses sports-betting apps, gaming-to-gambling crossover, peer pressure, and the specific ways young people are being reached by an industry that knows exactly what it's doing. Age-appropriate and non-preachy.</p>
-              </li>
-              <li>
-                <h4>3. Problem Gambling Awareness Month (March)</h4>
-                <p>A ready-to-deliver session built around the national March awareness moment. Ideal for organizations that want to mark PGAM with something more substantial than a social post.</p>
-              </li>
-              <li>
-                <h4>4. National Screening Day</h4>
-                <p>Why screening matters, how it works, and how to run it without making people feel accused. Practical guidance for organizations implementing gambling screening alongside existing health screening.</p>
-              </li>
-              <li>
-                <h4>5. Outreach: Engaging Elected Officials &amp; Resolutions</h4>
-                <p>How to move prevention from community work into policy attention — building relationships with elected officials, pursuing resolutions, and making the case in language decision-makers respond to.</p>
-              </li>
-            </ul>
-          </div>
+        <div class="max-w-4xl mx-auto text-center reveal-up mb-16">
+          <h2 class="font-serif text-5xl md:text-6xl mb-6">Twenty-one topics. <span class="italic-accent text-gold">Four tracks.</span></h2>
+          <p class="text-xl text-ivory/70 font-light">
+            Every topic below is one she actively delivers. Select a track to explore the sessions.
+          </p>
+        </div>
+
+        <!-- Tabs UI -->
+        <div class="tab-nav reveal-up">
+          <button class="tab-btn active" data-target="track-1">Prevention & Awareness</button>
+          <button class="tab-btn" data-target="track-2">Treatment & Recovery</button>
+          <button class="tab-btn" data-target="track-3">Family Impact</button>
+          <button class="tab-btn" data-target="track-4">Creative Engagement</button>
+        </div>
+
+        <!-- Massive Master Glass Container -->
+        <div class="ultra-glass-card glass-obsidian reveal-up min-h-[500px] relative overflow-hidden">
+          <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(217,162,58,0.05),transparent_70%)] pointer-events-none"></div>
           
-          <!-- Track 02 -->
-          <div class="track-block stagger-item">
-            <h3 class="track-title">Track 02 — Treatment, Recovery &amp; Professional Training</h3>
-            <p class="track-meta text-micro">For clinicians, treatment providers, and frontline professionals.</p>
-            <ul class="topic-list">
-              <li>
-                <h4>6. Gambling and Co-Occurring Disorders: Substance Use Disorder and the Workplace</h4>
-                <p>Gambling harm rarely arrives alone. Covers the overlap with substance use, how it presents in workplace settings, and what HR leaders and EAP teams should be watching for.</p>
-              </li>
-              <li>
-                <h4>7. The Changing Face of Gambling Addiction</h4>
-                <p>Gambling has moved into phones, apps, and everyday life. Examines how legalized sports betting and digital access have changed who develops problems, how fast, and what that means for treatment.</p>
-              </li>
-              <li>
-                <h4>8. Gambling and Suicide</h4>
-                <p>A careful, clinically grounded session on the elevated suicide risk associated with gambling disorder — what the research shows, what warning signs look like, and how to respond. Delivered with appropriate sensitivity for professional audiences.</p>
-              </li>
-              <li>
-                <h4>9. Resources: Self-Exclusion</h4>
-                <p>What self-exclusion programs are, how they actually work, their limits, and how to help someone use them as part of a wider plan rather than a standalone fix.</p>
-              </li>
-              <li>
-                <h4>10. Harm Reduction Strategies for Problem Gambling</h4>
-                <p>Meeting people where they are. Practical harm-reduction approaches for those not ready to stop entirely — and how to hold that position without enabling.</p>
-              </li>
-              <li>
-                <h4>11. Motivational Interviewing Tools</h4>
-                <p>Hands-on training in motivational interviewing applied specifically to gambling conversations. Skills-based, with practice, not just theory.</p>
-              </li>
-              <li>
-                <h4>12. Screening and Prevention</h4>
-                <p>How to integrate gambling screening into primary care and social service settings — which tools to use, how to introduce them, and what to do with the results.</p>
-              </li>
-              <li>
-                <h4>13. Guidelines for Gambling Treatment: Linkage to Services, Recovery Support &amp; Referrals</h4>
-                <p>The referral pathway from first disclosure to sustained support. Covers what exists, what's missing, and how to build a warm handoff that people actually follow through on.</p>
-              </li>
-            </ul>
-          </div>
-          
-          <!-- Track 03 -->
-          <div class="track-block stagger-item">
-            <h3 class="track-title">Track 03 — Family &amp; Community Impact</h3>
-            <p class="track-meta text-micro">For those working with families, or living with the impact.</p>
-            <ul class="topic-list">
-              <li>
-                <h4>14. Gambling, Significant Others, and Impact</h4>
-                <p>Gambling harm is rarely contained to one person. Examines the financial, emotional, and relational impact on partners and significant others — and what support for them looks like.</p>
-              </li>
-              <li>
-                <h4>15. The Link Between Gambling, Domestic Violence, and Trauma</h4>
-                <p>An evidence-informed session on the documented overlap between gambling harm, intimate partner violence, and trauma. Essential for advocates encountering gambling in cases they thought were about something else.</p>
-              </li>
-              <li>
-                <h4>16. Families Living with Problem Gambling: Impacts, Coping Strategies, and Help-Seeking</h4>
-                <p>Practical guidance for families in it right now — coping strategies, financial protection, how to have the conversation, and where to go for help.</p>
-              </li>
-              <li>
-                <h4>17. Gambling Harm in Family Systems</h4>
-                <p>A systems-level look at how gambling harm reshapes family roles, communication, and children's development — and what intervention looks like across the whole system.</p>
-              </li>
-            </ul>
-          </div>
-          
-          <!-- Track 04 -->
-          <div class="track-block stagger-item">
-            <h3 class="track-title">Track 04 — Creative &amp; Promotional Engagement</h3>
-            <p class="track-meta text-micro">For organizations building awareness campaigns and community engagement.</p>
-            <ul class="topic-list">
-              <li>
-                <h4>18. Promotion: Art Competition</h4>
-                <p>How to run a youth art competition as a prevention tool — turning awareness into participation, and giving young people a way into the conversation that isn't a lecture.</p>
-              </li>
-              <li>
-                <h4>19. Promotion: Responsible Gifting</h4>
-                <p>Lottery tickets and scratch cards are given to minors as gifts more often than most adults realize. A practical, non-judgmental session on responsible gifting for parents and community leaders.</p>
-              </li>
-              <li>
-                <h4>20. Gambling Prevention and ROSC Council Engagement</h4>
-                <p>How gambling prevention fits within a Recovery Oriented System of Care — integrating it into existing recovery infrastructure rather than building parallel systems.</p>
-              </li>
-            </ul>
-          </div>
-          
-          <!-- Flagship Keynote -->
-          <div class="track-block stagger-item" style="border-left: 4px solid var(--color-gold); padding-left: var(--sp-6);">
-            <h3 class="track-title" style="color: var(--color-emerald);">Flagship Keynote</h3>
-            <ul class="topic-list mt-4">
-              <li>
-                <h4>21. Break the Silence: Prevention Begins with a Conversation</h4>
-                <p>Her signature talk. Weaves her own story, the cultural case for prevention that meets people where they are, and a practical call to action. Built for main stages and general audiences, and adaptable to any of the tracks above.</p>
-              </li>
-            </ul>
+          <div class="ultra-padding-wrapper">
+            
+            <!-- Track 1 Content -->
+            <div class="tab-content active" id="track-1">
+              <div class="mb-10 border-b border-white/10 pb-6">
+                <h3 class="text-3xl font-serif text-gold mb-2">Prevention & Awareness</h3>
+                <p class="text-ivory/60 font-mono text-sm uppercase tracking-widest">For general audiences & communities</p>
+              </div>
+              <div class="grid md:grid-cols-2 gap-8 stagger-group">
+                <div class="stagger-item">
+                  <h4 class="text-xl font-medium mb-3 text-ivory">1. Gambling Prevention and Community Awareness</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">An accessible introduction to how gambling harm develops, who it affects, and what prevention looks like at community scale. Covers warning signs and risk factors.</p>
+                </div>
+                <div class="stagger-item">
+                  <h4 class="text-xl font-medium mb-3 text-ivory">2. Don't Bet on Your Future</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Built for students. Addresses sports-betting apps, gaming-to-gambling crossover, and peer pressure. Age-appropriate and non-preachy.</p>
+                </div>
+                <div class="stagger-item">
+                  <h4 class="text-xl font-medium mb-3 text-ivory">3. Problem Gambling Awareness Month</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">A ready-to-deliver session built around the national March awareness moment. Ideal for organizations marking PGAM.</p>
+                </div>
+                <div class="stagger-item">
+                  <h4 class="text-xl font-medium mb-3 text-ivory">4. National Screening Day</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Why screening matters, how it works, and how to run it without making people feel accused.</p>
+                </div>
+                <div class="stagger-item">
+                  <h4 class="text-xl font-medium mb-3 text-ivory">5. Engaging Elected Officials</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">How to move prevention into policy attention—building relationships with officials and making the case for resolutions.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Track 2 Content -->
+            <div class="tab-content" id="track-2">
+              <div class="mb-10 border-b border-white/10 pb-6">
+                <h3 class="text-3xl font-serif text-gold mb-2">Treatment, Recovery & Training</h3>
+                <p class="text-ivory/60 font-mono text-sm uppercase tracking-widest">For clinicians & frontline professionals</p>
+              </div>
+              <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">6. Co-Occurring Disorders in the Workplace</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Covers the overlap with substance use and what HR/EAP teams should watch for.</p>
+                </div>
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">7. The Changing Face of Addiction</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">How legalized sports betting and digital access have changed who develops problems and how fast.</p>
+                </div>
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">8. Gambling and Suicide</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">A clinically grounded session on the elevated suicide risk associated with gambling disorder.</p>
+                </div>
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">9. Resources: Self-Exclusion</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">What programs exist, their limits, and how to use them as part of a wider plan.</p>
+                </div>
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">10. Harm Reduction Strategies</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Meeting people where they are. Practical approaches for those not ready to stop entirely.</p>
+                </div>
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">11. Motivational Interviewing</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Hands-on training applied specifically to gambling conversations.</p>
+                </div>
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">12. Screening Integration</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Integrating screening into primary care—which tools to use and what to do with results.</p>
+                </div>
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">13. Linkage to Services</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">The referral pathway from first disclosure to sustained support.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Track 3 Content -->
+            <div class="tab-content" id="track-3">
+              <div class="mb-10 border-b border-white/10 pb-6">
+                <h3 class="text-3xl font-serif text-gold mb-2">Family & Community Impact</h3>
+                <p class="text-ivory/60 font-mono text-sm uppercase tracking-widest">For those living with the impact</p>
+              </div>
+              <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">14. Significant Others and Impact</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Examines the financial, emotional, and relational impact on partners, and what support looks like.</p>
+                </div>
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">15. Gambling, Violence & Trauma</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">The documented overlap between gambling harm, intimate partner violence, and trauma.</p>
+                </div>
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">16. Coping Strategies & Help-Seeking</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Guidance for families in it right now—financial protection and how to have the conversation.</p>
+                </div>
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">17. Harm in Family Systems</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">How gambling harm reshapes family roles and children's development.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Track 4 Content -->
+            <div class="tab-content" id="track-4">
+              <div class="mb-10 border-b border-white/10 pb-6">
+                <h3 class="text-3xl font-serif text-gold mb-2">Creative Engagement</h3>
+                <p class="text-ivory/60 font-mono text-sm uppercase tracking-widest">For organizations building campaigns</p>
+              </div>
+              <div class="grid md:grid-cols-2 gap-8">
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">18. Promotion: Art Competition</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">How to run a youth art competition as a prevention tool to turn awareness into participation.</p>
+                </div>
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">19. Responsible Gifting</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">A practical session on responsible gifting for parents and community leaders regarding lottery tickets.</p>
+                </div>
+                <div>
+                  <h4 class="text-xl font-medium mb-3 text-ivory">20. ROSC Council Engagement</h4>
+                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Integrating gambling prevention into a Recovery Oriented System of Care.</p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
     </section>
 
-    <!-- 3.6 What Organizers Get -->
-    <section class="organizers section-pad">
-      <div class="container grid-2 stagger-group">
-        <div class="stagger-item">
-          <h2>What working with her looks like.</h2>
-        </div>
-        <div class="stagger-item">
-          <ul class="benefits-list">
-            <li>
-              <strong>Pre-event consultation</strong> — she learns your audience, your goals, and your constraints before writing a word.
-            </li>
-            <li>
-              <strong>Content built for your room</strong> — sessions are tailored, not recycled from a standard deck.
-            </li>
-            <li>
-              <strong>Promotional assets</strong> — headshot, bio, session description, and social graphics, supplied ready to use.
-            </li>
-            <li>
-              <strong>Post-event resources</strong> — takeaways your attendees can act on after they leave.
-            </li>
-          </ul>
+    <!-- 4. Flagship Keynote -->
+    <section class="section-pad relative z-10">
+      <div class="container">
+        <div class="cta-card ultra-glass-card glass-ruby animated-card mx-auto max-w-5xl reveal-up">
+          <div class="ultra-padding-wrapper text-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(217,162,58,0.2),transparent_60%)] pointer-events-none"></div>
+            
+            <Eyebrow className="mb-6 justify-center">The Flagship Keynote</Eyebrow>
+            <h2 class="font-serif text-4xl md:text-6xl mb-6 text-ivory relative z-10">Break the Silence</h2>
+            <p class="text-xl text-ivory/80 mb-10 max-w-2xl mx-auto font-light leading-relaxed relative z-10">
+              Her signature talk. Weaves her own story, the cultural case for prevention that meets people where they are, and a practical call to action. Built for main stages.
+            </p>
+            <div class="relative z-10 gfg-btn-wrapper" style="margin-top: 0;">
+              <a href="/book" class="cta-btn px-10 py-4 text-lg inline-flex items-center gap-4 rounded-sm">
+                Book this Keynote <span class="text-xl leading-none">&rarr;</span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- 3.7 Closing -->
-    <section class="closing section-pad bg-ink text-center theme-dark">
-      <div class="container stagger-group">
-        <h2 class="stagger-item color-ivory">Let's talk about your event.</h2>
-        <div class="mt-8 stagger-item">
-          <a href="/book" class="btn btn-primary">Invite Tiffany to Speak &rarr;</a>
+    <!-- 5. What Organizers Get (Timeline) -->
+    <section class="section-pad relative z-10">
+      <div class="container">
+        <div class="grid md:grid-cols-2 gap-16 items-center">
+          <div class="reveal-up">
+            <h2 class="font-serif text-5xl mb-6 text-gradient-sapphire">What working with her looks like.</h2>
+            <p class="text-xl text-ivory/70 font-light">She builds the session you actually need, not the one she gave yesterday.</p>
+          </div>
+          
+          <div class="timeline-container stagger-group">
+            <div class="timeline-node stagger-item">
+              <h4 class="text-2xl font-serif text-gold mb-2">Pre-event consultation</h4>
+              <p class="text-ivory/70 font-light">She learns your audience, your goals, and your constraints before writing a word.</p>
+            </div>
+            <div class="timeline-node stagger-item">
+              <h4 class="text-2xl font-serif text-gold mb-2">Content built for your room</h4>
+              <p class="text-ivory/70 font-light">Sessions are tailored specifically to your community's current challenges.</p>
+            </div>
+            <div class="timeline-node stagger-item">
+              <h4 class="text-2xl font-serif text-gold mb-2">Promotional assets</h4>
+              <p class="text-ivory/70 font-light">Headshot, bio, session description, and social graphics, supplied ready to use.</p>
+            </div>
+            <div class="timeline-node stagger-item" style="padding-bottom: 0;">
+              <h4 class="text-2xl font-serif text-gold mb-2">Post-event resources</h4>
+              <p class="text-ivory/70 font-light">Actionable takeaways your attendees can implement the following Monday.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Closing CTA -->
+    <section class="section-pad relative z-10 mt-12 mb-12">
+      <div class="container">
+        <div class="cta-card ultra-glass-card glass-topaz animated-card mx-auto max-w-4xl reveal-up text-center">
+          <div class="ultra-padding-wrapper relative overflow-hidden">
+             <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(217,162,58,0.15),transparent_70%)] pointer-events-none"></div>
+             
+             <h2 class="font-serif text-5xl md:text-6xl mb-8 text-ivory relative z-10">Let's talk about your <span class="italic-accent text-gold">event.</span></h2>
+             <div class="relative z-10 flex justify-center">
+               <a href="/book" class="cta-btn px-12 py-5 text-lg inline-flex items-center gap-4 rounded-sm">
+                 Check Availability <span class="text-xl leading-none">&rarr;</span>
+               </a>
+             </div>
+          </div>
         </div>
       </div>
     </section>
@@ -230,297 +311,231 @@ import Eyebrow from '../components/Eyebrow.astro';
 </Layout>
 
 <style>
-  .page-content {
-    padding-top: 0;
+  /* Premium Glass Tints */
+  .glass-sapphire {
+    background: rgba(15, 30, 60, 0.15);
+    border-color: rgba(50, 100, 200, 0.1);
+  }
+  .glass-sapphire:hover {
+    background: rgba(15, 30, 60, 0.3);
+    border-color: rgba(50, 100, 200, 0.3);
+    box-shadow: 0 20px 40px rgba(50, 100, 200, 0.1);
   }
 
-  .inner-hero {
-    background-color: var(--color-ink);
-    color: var(--color-ivory);
-    padding: calc(var(--sp-24) + 80px) 0 var(--sp-12);
+  .glass-amethyst {
+    background: rgba(40, 15, 60, 0.15);
+    border-color: rgba(150, 50, 200, 0.1);
+  }
+  .glass-amethyst:hover {
+    background: rgba(40, 15, 60, 0.3);
+    border-color: rgba(150, 50, 200, 0.3);
+    box-shadow: 0 20px 40px rgba(150, 50, 200, 0.1);
   }
 
-  .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--sp-6);
+  /* Typography Enhancements */
+  .text-gradient-sapphire {
+    background: linear-gradient(135deg, #fff 0%, #8ca8ff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
-  .inner-hero-title {
-    margin-bottom: var(--sp-4);
-  }
+  /* Hero */
+  .spk-hero { padding: 10rem 0 6rem; }
+  .spk-title { font-size: clamp(3rem, 7vw, 6rem); line-height: 1.1; letter-spacing: -0.02em; }
 
-  .inner-hero-sub {
-    font-size: 1.25rem;
-    color: rgba(253, 252, 248, 0.8);
-    max-width: 700px;
-  }
-
-  .section-pad {
-    padding: var(--sp-24) 0;
-  }
-
-  .bg-cream { background-color: var(--color-cream); }
-  .bg-ink { background-color: var(--color-ink); }
-  .color-ivory { color: var(--color-ivory); }
-
-  .subtitle {
-    font-size: 1.25rem;
-    color: var(--color-charcoal);
-    max-width: 800px;
-  }
-
-  .grid-3 {
+  /* Asymmetrical Grid */
+  .asym-grid {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-8);
+    grid-template-columns: repeat(12, 1fr);
+    gap: 2rem;
   }
-
+  .grid-card { grid-column: span 12; display: flex; flex-direction: column; }
+  
   @media (min-width: 768px) {
-    .grid-3 {
-      grid-template-columns: repeat(2, 1fr);
-    }
+    .grid-card:nth-child(1) { grid-column: span 8; }
+    .grid-card:nth-child(2) { grid-column: span 4; }
+    .grid-card:nth-child(3) { grid-column: span 4; }
+    .grid-card:nth-child(4) { grid-column: span 8; }
+    .grid-card:nth-child(5) { grid-column: span 6; }
+    .grid-card:nth-child(6) { grid-column: span 6; }
   }
 
-  @media (min-width: 1024px) {
-    .grid-3 {
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--sp-12);
-    }
-  }
-
-  .feature-box {
+  /* Interactive Tabs System */
+  .tab-nav {
     display: flex;
-    flex-direction: column;
-    text-decoration: none;
-    color: inherit;
-    background: var(--card-glass-bg);
-    color: var(--card-text);
-    backdrop-filter: blur(16px) saturate(180%);
-    -webkit-backdrop-filter: blur(16px) saturate(180%);
-    border: var(--card-glass-border);
-    box-shadow: var(--card-glass-shadow);
-    border-radius: var(--card-radius);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .feature-box:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(14, 107, 84, 0.08); /* Emerald glow */
-    border-color: rgba(14, 107, 84, 0.3);
-  }
-
-  .card-arrow {
-    position: absolute;
-    bottom: var(--sp-8);
-    right: var(--sp-8);
-    font-size: 1.25rem;
-    color: var(--color-emerald);
-    opacity: 0;
-    transform: translateX(-10px);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .feature-box:hover .card-arrow {
-    opacity: 1;
-    transform: translateX(0) scale(1.15);
-  }
-
-  .feature-box h3 {
-    font-size: 1.25rem;
-    margin-bottom: var(--sp-2);
-    color: var(--color-emerald);
-    transition: color 0.3s ease;
-  }
-
-  .feature-box:hover h3 {
-    color: var(--color-ink);
-  }
-
-  .feature-box p {
-    color: var(--color-charcoal);
-    margin-bottom: var(--sp-8); /* Space for arrow */
-  }
-
-  .mt-12 { margin-top: var(--sp-12); }
-  .mt-8 { margin-top: var(--sp-8); }
-  .mt-4 { margin-top: var(--sp-4); }
-
-  .tracks-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-16);
-  }
-
-  .track-block {
-    background-color: var(--color-ivory);
-    padding: var(--sp-8);
-    border: 1px solid var(--border-light);
-  }
-
-  .track-title {
-    font-size: 2rem;
-    margin-bottom: var(--sp-2);
-  }
-
-  .track-meta {
-    color: var(--color-muted-grey);
-    margin-bottom: var(--sp-8);
-  }
-
-  .topic-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-4);
-  }
-
-  .topic-list li {
-    cursor: pointer;
-    padding: var(--sp-6);
-    background-color: #ffffff;
-    border: 1px solid var(--border-light);
-    border-radius: 2px;
-    transition: all 0.3s ease;
-  }
-  
-  .topic-list li:hover {
-    box-shadow: 0 4px 12px rgba(17,17,17,0.05);
-    border-color: var(--color-emerald);
-  }
-
-  .topic-list h4 {
-    font-size: 1.125rem;
-    font-weight: 500;
-    margin-bottom: 0;
-    position: relative;
-    padding-right: var(--sp-8);
-    transition: color 0.3s ease;
-  }
-  
-  .topic-list h4::after {
-    content: '+';
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
-    color: var(--color-emerald);
-    transition: transform 0.3s ease;
-  }
-  
-  .topic-list li.is-open h4::after {
-    content: '−';
-    transform: translateY(-50%);
-  }
-  
-  .topic-list li:hover h4 {
-    color: var(--color-emerald);
-  }
-
-  .topic-list p {
-    color: var(--color-charcoal);
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    transition: all 0.3s ease;
-    margin: 0;
-  }
-  
-  .topic-list li.is-open p {
-    max-height: 200px;
-    opacity: 1;
-    margin-top: var(--sp-4);
-  }
-  
-  /* Make the first one open by default for discoverability */
-  .topic-list li:first-child p {
-    max-height: 200px;
-    opacity: 1;
-    margin-top: var(--sp-4);
-  }
-  .topic-list li:first-child h4::after {
-    content: '−';
-  }
-
-
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-8);
-  }
-
-  @media (min-width: 768px) {
-    .grid-2 {
-      grid-template-columns: 1fr 1.5fr;
-      gap: var(--sp-16);
-    }
-  }
-
-  .benefits-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-6);
-  }
-
-  .benefits-list li {
-    font-size: 1.125rem;
-    color: var(--color-charcoal);
-  }
-
-  .benefits-list strong {
-    color: var(--color-ink);
-  }
-
-  .text-center { text-align: center; }
-
-  /* Generic Button Style for this page since we need a native anchor for the specific class */
-  .btn {
-    display: inline-flex;
-    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
     justify-content: center;
-    padding: var(--sp-4) var(--sp-8);
+  }
+  .tab-btn {
+    padding: 1rem 2rem;
+    border-radius: 40px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    color: var(--color-ivory);
     font-family: var(--font-mono);
-    font-size: var(--text-button);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    text-decoration: none;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .tab-btn:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.15);
+  }
+  .tab-btn.active {
+    background: rgba(217, 162, 58, 0.15);
+    border-color: rgba(217, 162, 58, 0.4);
+    color: var(--color-gold);
+    box-shadow: 0 0 30px rgba(217, 162, 58, 0.15);
+    transform: scale(1.05);
+  }
+
+  /* Tab Content Transitions */
+  .tab-content {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .tab-content.active {
+    display: block;
+    animation: fadeSlideUp 0.5s forwards cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Timeline */
+  .timeline-container {
+    position: relative;
+    padding-left: 2rem;
+  }
+  .timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 2px;
+    height: calc(100% - 20px);
+    background: linear-gradient(to bottom, var(--color-gold) 0%, rgba(217,162,58,0.1) 100%);
+  }
+  .timeline-node {
+    position: relative;
+    padding-bottom: 3.5rem;
+  }
+  .timeline-node::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: -2.32rem;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-ink);
+    border: 2px solid var(--color-gold);
+    box-shadow: 0 0 15px rgba(217, 162, 58, 0.5);
     transition: all 0.3s ease;
-    border-radius: 2px;
   }
-  .btn-primary {
-    background-color: var(--color-gold);
-    color: var(--color-ink);
-    border: 1px solid var(--color-gold);
+  .timeline-node:hover::before {
+    background: var(--color-gold);
+    transform: scale(1.3);
   }
-  .btn-primary:hover {
-    background-color: #E5C354;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
+
+  /* CTA specific styles reused from About */
+  .cta-card {
+    border-radius: 40px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 40px rgba(217, 162, 58, 0.05);
+  }
+  .cta-btn {
+    background: var(--color-gold) !important;
+    color: var(--color-ink) !important;
+    border: none !important;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    box-shadow: 0 10px 30px rgba(217, 162, 58, 0.2);
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+  }
+  .cta-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(217, 162, 58, 0.4);
+    background: #FFC95C !important;
+  }
+  
+  /* Add glowing button effect to hero button */
+  .btn-glow {
+    box-shadow: 0 0 20px rgba(217,162,58,0.2);
+  }
+  .btn-glow:hover {
+    box-shadow: 0 0 35px rgba(217,162,58,0.4);
   }
 </style>
 
 <script>
-  // Add accordion click handlers to topic list items
+  // Interactive Tab System
   document.addEventListener('DOMContentLoaded', () => {
-    const topics = document.querySelectorAll('.topic-list li');
-    
-    // First topic is open by default via CSS. Let's add the class so the JS state matches.
-    topics.forEach((topic, index) => {
-      if (index === 0) {
-        topic.classList.add('is-open');
-      }
-      
-      topic.addEventListener('click', () => {
-        // Optional: Close others (accordion style)
-        // topics.forEach(t => {
-        //   if (t !== topic) t.classList.remove('is-open');
-        // });
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // Remove active state from all
+        tabBtns.forEach(b => b.classList.remove('active'));
+        tabContents.forEach(c => c.classList.remove('active'));
+
+        // Add active state to clicked
+        btn.classList.add('active');
+        const targetId = btn.getAttribute('data-target');
+        const targetContent = document.getElementById(targetId);
         
-        topic.classList.toggle('is-open');
+        if (targetContent) {
+          targetContent.classList.add('active');
+          
+          // Re-trigger stagger animations if any inside the tab
+          const staggerItems = targetContent.querySelectorAll('.stagger-item');
+          staggerItems.forEach((item, index) => {
+            item.style.animation = 'none';
+            item.style.opacity = '0';
+            setTimeout(() => {
+              item.style.animation = `fadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s forwards`;
+            }, 10);
+          });
+        }
       });
     });
+
+    // Re-initialize intersection observers for the new DOM elements to enable scroll motion
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.15
+    };
+
+    const revealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    const staggerObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal-up').forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.stagger-group').forEach(group => staggerObserver.observe(group));
   });
 </script>
