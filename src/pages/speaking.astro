@@ -5,80 +5,78 @@ import Button from '../components/Button.astro';
 import Waveform from '../components/Waveform.astro';
 ---
 
-<Layout title="Speaking & Training | Tiffany Webb" theme="dark">
-  <main class="page-content theme-dark relative overflow-hidden">
+<Layout title="Speaking & Training | Tiffany Webb" theme="ink">
+  <main class="page-content">
     
-    <!-- Ambient Base Glow -->
-    <div class="fixed inset-0 pointer-events-none z-0">
-      <div class="absolute top-0 left-1/4 w-[50vw] h-[50vw] bg-[radial-gradient(circle,rgba(50,100,200,0.03)_0%,transparent_70%)]"></div>
-      <div class="absolute bottom-0 right-1/4 w-[60vw] h-[60vw] bg-[radial-gradient(circle,rgba(150,50,200,0.03)_0%,transparent_70%)]"></div>
-    </div>
-
     <!-- 1. Cinematic Hero -->
-    <section class="spk-hero relative z-10 flex items-center min-h-[90vh]">
+    <section class="inner-hero theme-ink spk-hero-custom relative overflow-hidden">
       <Waveform opacity={0.05} variant="B" flipX={true} />
-      <div class="container relative">
-        <div class="max-w-5xl mx-auto text-center reveal-up">
-          <Eyebrow className="mb-6 justify-center">Speaking & Training</Eyebrow>
-          <h1 class="spk-title font-serif mb-8 text-gradient">Bring Tiffany to your stage.</h1>
-          <p class="text-2xl text-ivory/80 max-w-3xl mx-auto font-light leading-relaxed mb-12">
+      
+      <!-- Glowing Background Orb for effect -->
+      <div class="ambient-glow" style="top: 0; left: 50%; transform: translate(-50%, 0); width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(50,100,200, 0.05) 0%, transparent 70%);"></div>
+
+      <div class="container hero-grid reveal-up spk-hero-container">
+        <div class="hero-content spk-hero-content">
+          <Eyebrow>Speaking & Training</Eyebrow>
+          <h1 class="inner-hero-title">Bring Tiffany <br/><span class="italic-accent">to your stage.</span></h1>
+          <p class="inner-hero-sub text-micro spk-hero-sub">
             Keynotes, conference sessions, panels, workshops, and school programs on gambling prevention, public health, and community impact.
           </p>
-          <div class="flex justify-center">
-            <Button href="/book" variant="primary" className="magnetic-btn px-10 py-4 text-lg btn-glow">Invite Tiffany to Speak &rarr;</Button>
+          <div class="spk-hero-btn-wrap">
+            <Button href="/book" variant="primary" className="magnetic-btn btn-glow">Invite Tiffany to Speak &rarr;</Button>
           </div>
         </div>
       </div>
     </section>
 
     <!-- 2. Dynamic Asymmetrical Grid (Why Tiffany) -->
-    <section class="section-pad relative z-10">
+    <section class="section-pad theme-ink relative overflow-hidden">
       <div class="container">
-        <div class="text-center mb-16 reveal-up">
-          <h2 class="font-serif text-5xl md:text-6xl text-gradient-sapphire">Why Tiffany.</h2>
+        <div class="spk-section-header reveal-up">
+          <h2 class="section-title">Why <span class="italic-accent">Tiffany.</span></h2>
         </div>
         
         <div class="asym-grid stagger-group">
           <!-- Card 1 -->
-          <div class="grid-card ultra-glass-card glass-sapphire animated-card stagger-item">
+          <div class="grid-card card-span-8 ultra-glass-card glass-sapphire stagger-item">
             <div class="ultra-padding-wrapper">
-              <h3 class="text-2xl font-serif text-gold mb-4">Frontline credibility</h3>
-              <p class="text-ivory/80 text-lg leading-relaxed">Four thousand hours of actual outreach. She has had these conversations in real rooms, with real families, for fifteen years.</p>
+              <h3 class="spk-card-title">Frontline credibility</h3>
+              <p class="spk-card-desc">Four thousand hours of actual outreach. She has had these conversations in real rooms, with real families, for fifteen years.</p>
             </div>
           </div>
           <!-- Card 2 -->
-          <div class="grid-card ultra-glass-card glass-amethyst animated-card stagger-item">
+          <div class="grid-card card-span-4 ultra-glass-card glass-amethyst stagger-item">
             <div class="ultra-padding-wrapper">
-              <h3 class="text-2xl font-serif text-gold mb-4">Cultural fluency</h3>
-              <p class="text-ivory/80 text-lg leading-relaxed">She reaches communities that standard prevention programming consistently misses — because she knows how to enter them respectfully.</p>
+              <h3 class="spk-card-title">Cultural fluency</h3>
+              <p class="spk-card-desc">She reaches communities that standard prevention programming consistently misses — because she knows how to enter them respectfully.</p>
             </div>
           </div>
           <!-- Card 3 -->
-          <div class="grid-card ultra-glass-card glass-topaz animated-card stagger-item">
+          <div class="grid-card card-span-4 ultra-glass-card glass-topaz stagger-item">
             <div class="ultra-padding-wrapper">
-              <h3 class="text-2xl font-serif text-gold mb-4">Evidence-based</h3>
-              <p class="text-ivory/80 text-lg leading-relaxed">Screening, early intervention, motivational interviewing, harm reduction. The methods are real and current.</p>
+              <h3 class="spk-card-title">Evidence-based</h3>
+              <p class="spk-card-desc">Screening, early intervention, motivational interviewing, harm reduction. The methods are real and current.</p>
             </div>
           </div>
           <!-- Card 4 -->
-          <div class="grid-card ultra-glass-card glass-sapphire animated-card stagger-item">
+          <div class="grid-card card-span-8 ultra-glass-card glass-sapphire stagger-item">
             <div class="ultra-padding-wrapper">
-              <h3 class="text-2xl font-serif text-gold mb-4">Practical takeaways</h3>
-              <p class="text-ivory/80 text-lg leading-relaxed">Audiences leave with something they can use on Monday, not a feeling that fades by Friday.</p>
+              <h3 class="spk-card-title">Practical takeaways</h3>
+              <p class="spk-card-desc">Audiences leave with something they can use on Monday, not a feeling that fades by Friday.</p>
             </div>
           </div>
           <!-- Card 5 -->
-          <div class="grid-card ultra-glass-card glass-amethyst animated-card stagger-item">
+          <div class="grid-card card-span-6 ultra-glass-card glass-amethyst stagger-item">
             <div class="ultra-padding-wrapper">
-              <h3 class="text-2xl font-serif text-gold mb-4">Community-centred</h3>
-              <p class="text-ivory/80 text-lg leading-relaxed">Fifteen years of coalition and partnership work sits behind every talk she gives.</p>
+              <h3 class="spk-card-title">Community-centred</h3>
+              <p class="spk-card-desc">Fifteen years of coalition and partnership work sits behind every talk she gives.</p>
             </div>
           </div>
           <!-- Card 6 -->
-          <div class="grid-card ultra-glass-card glass-emerald animated-card stagger-item">
+          <div class="grid-card card-span-6 ultra-glass-card glass-emerald stagger-item">
             <div class="ultra-padding-wrapper">
-              <h3 class="text-2xl font-serif text-gold mb-4">Trusted professional</h3>
-              <p class="text-ivory/80 text-lg leading-relaxed">BBA, MHP, and genuine institutional affiliations in behavioral and public health.</p>
+              <h3 class="spk-card-title">Trusted professional</h3>
+              <p class="spk-card-desc">BBA, MHP, and genuine institutional affiliations in behavioral and public health.</p>
             </div>
           </div>
         </div>
@@ -86,13 +84,13 @@ import Waveform from '../components/Waveform.astro';
     </section>
 
     <!-- 3. Interactive Tracks (Tab System) -->
-    <section class="section-pad relative z-10" id="topics">
+    <section class="section-pad theme-ink relative overflow-hidden" id="topics">
       <Waveform opacity={0.04} variant="A" />
-      <div class="container relative">
+      <div class="container relative z-10">
         
-        <div class="max-w-4xl mx-auto text-center reveal-up mb-16">
-          <h2 class="font-serif text-5xl md:text-6xl mb-6">Twenty-one topics. <span class="italic-accent text-gold">Four tracks.</span></h2>
-          <p class="text-xl text-ivory/70 font-light">
+        <div class="spk-section-header reveal-up">
+          <h2 class="section-title">Twenty-one topics. <br/><span class="italic-accent text-gold">Four tracks.</span></h2>
+          <p class="subtitle mx-auto">
             Every topic below is one she actively delivers. Select a track to explore the sessions.
           </p>
         </div>
@@ -106,127 +104,127 @@ import Waveform from '../components/Waveform.astro';
         </div>
 
         <!-- Massive Master Glass Container -->
-        <div class="ultra-glass-card glass-obsidian reveal-up min-h-[500px] relative overflow-hidden">
-          <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(217,162,58,0.05),transparent_70%)] pointer-events-none"></div>
+        <div class="ultra-glass-card glass-obsidian spk-tab-container reveal-up">
+          <div class="ambient-glow" style="top: 0; left: 50%; transform: translate(-50%, -10%); width: 100%; height: 50%; background: radial-gradient(circle, rgba(217,162,58,0.05) 0%, transparent 70%);"></div>
           
           <div class="ultra-padding-wrapper">
             
             <!-- Track 1 Content -->
             <div class="tab-content active" id="track-1">
-              <div class="mb-10 border-b border-white/10 pb-6">
-                <h3 class="text-3xl font-serif text-gold mb-2">Prevention & Awareness</h3>
-                <p class="text-ivory/60 font-mono text-sm uppercase tracking-widest">For general audiences & communities</p>
+              <div class="tab-header">
+                <h3 class="tab-title">Prevention & Awareness</h3>
+                <p class="tab-subtitle">For general audiences & communities</p>
               </div>
-              <div class="grid md:grid-cols-2 gap-8 stagger-group">
-                <div class="stagger-item">
-                  <h4 class="text-xl font-medium mb-3 text-ivory">1. Gambling Prevention and Community Awareness</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">An accessible introduction to how gambling harm develops, who it affects, and what prevention looks like at community scale. Covers warning signs and risk factors.</p>
+              <div class="tab-grid stagger-group">
+                <div class="tab-grid-item stagger-item">
+                  <h4 class="tab-item-title">1. Gambling Prevention and Community Awareness</h4>
+                  <p class="tab-item-desc">An accessible introduction to how gambling harm develops, who it affects, and what prevention looks like at community scale. Covers warning signs and risk factors.</p>
                 </div>
-                <div class="stagger-item">
-                  <h4 class="text-xl font-medium mb-3 text-ivory">2. Don't Bet on Your Future</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Built for students. Addresses sports-betting apps, gaming-to-gambling crossover, and peer pressure. Age-appropriate and non-preachy.</p>
+                <div class="tab-grid-item stagger-item">
+                  <h4 class="tab-item-title">2. Don't Bet on Your Future</h4>
+                  <p class="tab-item-desc">Built for students. Addresses sports-betting apps, gaming-to-gambling crossover, and peer pressure. Age-appropriate and non-preachy.</p>
                 </div>
-                <div class="stagger-item">
-                  <h4 class="text-xl font-medium mb-3 text-ivory">3. Problem Gambling Awareness Month</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">A ready-to-deliver session built around the national March awareness moment. Ideal for organizations marking PGAM.</p>
+                <div class="tab-grid-item stagger-item">
+                  <h4 class="tab-item-title">3. Problem Gambling Awareness Month</h4>
+                  <p class="tab-item-desc">A ready-to-deliver session built around the national March awareness moment. Ideal for organizations marking PGAM.</p>
                 </div>
-                <div class="stagger-item">
-                  <h4 class="text-xl font-medium mb-3 text-ivory">4. National Screening Day</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Why screening matters, how it works, and how to run it without making people feel accused.</p>
+                <div class="tab-grid-item stagger-item">
+                  <h4 class="tab-item-title">4. National Screening Day</h4>
+                  <p class="tab-item-desc">Why screening matters, how it works, and how to run it without making people feel accused.</p>
                 </div>
-                <div class="stagger-item">
-                  <h4 class="text-xl font-medium mb-3 text-ivory">5. Engaging Elected Officials</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">How to move prevention into policy attention—building relationships with officials and making the case for resolutions.</p>
+                <div class="tab-grid-item stagger-item">
+                  <h4 class="tab-item-title">5. Engaging Elected Officials</h4>
+                  <p class="tab-item-desc">How to move prevention into policy attention—building relationships with officials and making the case for resolutions.</p>
                 </div>
               </div>
             </div>
 
             <!-- Track 2 Content -->
             <div class="tab-content" id="track-2">
-              <div class="mb-10 border-b border-white/10 pb-6">
-                <h3 class="text-3xl font-serif text-gold mb-2">Treatment, Recovery & Training</h3>
-                <p class="text-ivory/60 font-mono text-sm uppercase tracking-widest">For clinicians & frontline professionals</p>
+              <div class="tab-header">
+                <h3 class="tab-title">Treatment, Recovery & Training</h3>
+                <p class="tab-subtitle">For clinicians & frontline professionals</p>
               </div>
-              <div class="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">6. Co-Occurring Disorders in the Workplace</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Covers the overlap with substance use and what HR/EAP teams should watch for.</p>
+              <div class="tab-grid">
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">6. Co-Occurring Disorders in the Workplace</h4>
+                  <p class="tab-item-desc">Covers the overlap with substance use and what HR/EAP teams should watch for.</p>
                 </div>
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">7. The Changing Face of Addiction</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">How legalized sports betting and digital access have changed who develops problems and how fast.</p>
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">7. The Changing Face of Addiction</h4>
+                  <p class="tab-item-desc">How legalized sports betting and digital access have changed who develops problems and how fast.</p>
                 </div>
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">8. Gambling and Suicide</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">A clinically grounded session on the elevated suicide risk associated with gambling disorder.</p>
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">8. Gambling and Suicide</h4>
+                  <p class="tab-item-desc">A clinically grounded session on the elevated suicide risk associated with gambling disorder.</p>
                 </div>
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">9. Resources: Self-Exclusion</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">What programs exist, their limits, and how to use them as part of a wider plan.</p>
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">9. Resources: Self-Exclusion</h4>
+                  <p class="tab-item-desc">What programs exist, their limits, and how to use them as part of a wider plan.</p>
                 </div>
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">10. Harm Reduction Strategies</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Meeting people where they are. Practical approaches for those not ready to stop entirely.</p>
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">10. Harm Reduction Strategies</h4>
+                  <p class="tab-item-desc">Meeting people where they are. Practical approaches for those not ready to stop entirely.</p>
                 </div>
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">11. Motivational Interviewing</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Hands-on training applied specifically to gambling conversations.</p>
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">11. Motivational Interviewing</h4>
+                  <p class="tab-item-desc">Hands-on training applied specifically to gambling conversations.</p>
                 </div>
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">12. Screening Integration</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Integrating screening into primary care—which tools to use and what to do with results.</p>
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">12. Screening Integration</h4>
+                  <p class="tab-item-desc">Integrating screening into primary care—which tools to use and what to do with results.</p>
                 </div>
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">13. Linkage to Services</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">The referral pathway from first disclosure to sustained support.</p>
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">13. Linkage to Services</h4>
+                  <p class="tab-item-desc">The referral pathway from first disclosure to sustained support.</p>
                 </div>
               </div>
             </div>
 
             <!-- Track 3 Content -->
             <div class="tab-content" id="track-3">
-              <div class="mb-10 border-b border-white/10 pb-6">
-                <h3 class="text-3xl font-serif text-gold mb-2">Family & Community Impact</h3>
-                <p class="text-ivory/60 font-mono text-sm uppercase tracking-widest">For those living with the impact</p>
+              <div class="tab-header">
+                <h3 class="tab-title">Family & Community Impact</h3>
+                <p class="tab-subtitle">For those living with the impact</p>
               </div>
-              <div class="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">14. Significant Others and Impact</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Examines the financial, emotional, and relational impact on partners, and what support looks like.</p>
+              <div class="tab-grid">
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">14. Significant Others and Impact</h4>
+                  <p class="tab-item-desc">Examines the financial, emotional, and relational impact on partners, and what support looks like.</p>
                 </div>
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">15. Gambling, Violence & Trauma</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">The documented overlap between gambling harm, intimate partner violence, and trauma.</p>
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">15. Gambling, Violence & Trauma</h4>
+                  <p class="tab-item-desc">The documented overlap between gambling harm, intimate partner violence, and trauma.</p>
                 </div>
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">16. Coping Strategies & Help-Seeking</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Guidance for families in it right now—financial protection and how to have the conversation.</p>
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">16. Coping Strategies & Help-Seeking</h4>
+                  <p class="tab-item-desc">Guidance for families in it right now—financial protection and how to have the conversation.</p>
                 </div>
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">17. Harm in Family Systems</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">How gambling harm reshapes family roles and children's development.</p>
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">17. Harm in Family Systems</h4>
+                  <p class="tab-item-desc">How gambling harm reshapes family roles and children's development.</p>
                 </div>
               </div>
             </div>
 
             <!-- Track 4 Content -->
             <div class="tab-content" id="track-4">
-              <div class="mb-10 border-b border-white/10 pb-6">
-                <h3 class="text-3xl font-serif text-gold mb-2">Creative Engagement</h3>
-                <p class="text-ivory/60 font-mono text-sm uppercase tracking-widest">For organizations building campaigns</p>
+              <div class="tab-header">
+                <h3 class="tab-title">Creative Engagement</h3>
+                <p class="tab-subtitle">For organizations building campaigns</p>
               </div>
-              <div class="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">18. Promotion: Art Competition</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">How to run a youth art competition as a prevention tool to turn awareness into participation.</p>
+              <div class="tab-grid">
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">18. Promotion: Art Competition</h4>
+                  <p class="tab-item-desc">How to run a youth art competition as a prevention tool to turn awareness into participation.</p>
                 </div>
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">19. Responsible Gifting</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">A practical session on responsible gifting for parents and community leaders regarding lottery tickets.</p>
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">19. Responsible Gifting</h4>
+                  <p class="tab-item-desc">A practical session on responsible gifting for parents and community leaders regarding lottery tickets.</p>
                 </div>
-                <div>
-                  <h4 class="text-xl font-medium mb-3 text-ivory">20. ROSC Council Engagement</h4>
-                  <p class="text-ivory/70 font-light leading-relaxed text-sm">Integrating gambling prevention into a Recovery Oriented System of Care.</p>
+                <div class="tab-grid-item">
+                  <h4 class="tab-item-title">20. ROSC Council Engagement</h4>
+                  <p class="tab-item-desc">Integrating gambling prevention into a Recovery Oriented System of Care.</p>
                 </div>
               </div>
             </div>
@@ -237,20 +235,20 @@ import Waveform from '../components/Waveform.astro';
     </section>
 
     <!-- 4. Flagship Keynote -->
-    <section class="section-pad relative z-10">
+    <section class="section-pad theme-ink relative overflow-hidden">
       <div class="container">
-        <div class="cta-card ultra-glass-card glass-ruby animated-card mx-auto max-w-5xl reveal-up">
+        <div class="cta-card ultra-glass-card glass-ruby reveal-up">
           <div class="ultra-padding-wrapper text-center relative overflow-hidden">
-            <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_100%,rgba(217,162,58,0.2),transparent_60%)] pointer-events-none"></div>
+            <div class="ambient-glow" style="top: auto; bottom: 0; left: 50%; transform: translate(-50%, 0); width: 100%; height: 60%; background: radial-gradient(circle, rgba(217,162,58,0.15) 0%, transparent 60%);"></div>
             
             <Eyebrow className="mb-6 justify-center">The Flagship Keynote</Eyebrow>
-            <h2 class="font-serif text-4xl md:text-6xl mb-6 text-ivory relative z-10">Break the Silence</h2>
-            <p class="text-xl text-ivory/80 mb-10 max-w-2xl mx-auto font-light leading-relaxed relative z-10">
+            <h2 class="section-title spk-flagship-title relative z-10">Break the Silence</h2>
+            <p class="subtitle spk-flagship-sub mx-auto relative z-10" style="max-width: 700px; margin-bottom: 2rem;">
               Her signature talk. Weaves her own story, the cultural case for prevention that meets people where they are, and a practical call to action. Built for main stages.
             </p>
-            <div class="relative z-10 gfg-btn-wrapper" style="margin-top: 0;">
-              <a href="/book" class="cta-btn px-10 py-4 text-lg inline-flex items-center gap-4 rounded-sm">
-                Book this Keynote <span class="text-xl leading-none">&rarr;</span>
+            <div class="spk-hero-btn-wrap relative z-10">
+              <a href="/book" class="cta-btn gfg-btn-book">
+                Book this Keynote <span class="arrow">&rarr;</span>
               </a>
             </div>
           </div>
@@ -259,30 +257,30 @@ import Waveform from '../components/Waveform.astro';
     </section>
 
     <!-- 5. What Organizers Get (Timeline) -->
-    <section class="section-pad relative z-10">
+    <section class="section-pad theme-ink relative overflow-hidden">
       <div class="container">
-        <div class="grid md:grid-cols-2 gap-16 items-center">
-          <div class="reveal-up">
-            <h2 class="font-serif text-5xl mb-6 text-gradient-sapphire">What working with her looks like.</h2>
-            <p class="text-xl text-ivory/70 font-light">She builds the session you actually need, not the one she gave yesterday.</p>
+        <div class="timeline-layout">
+          <div class="timeline-header reveal-up">
+            <h2 class="section-title">What working <br/><span class="italic-accent">looks like.</span></h2>
+            <p class="subtitle">She builds the session you actually need, not the one she gave yesterday.</p>
           </div>
           
           <div class="timeline-container stagger-group">
             <div class="timeline-node stagger-item">
-              <h4 class="text-2xl font-serif text-gold mb-2">Pre-event consultation</h4>
-              <p class="text-ivory/70 font-light">She learns your audience, your goals, and your constraints before writing a word.</p>
+              <h4 class="timeline-node-title">Pre-event consultation</h4>
+              <p class="timeline-node-desc">She learns your audience, your goals, and your constraints before writing a word.</p>
             </div>
             <div class="timeline-node stagger-item">
-              <h4 class="text-2xl font-serif text-gold mb-2">Content built for your room</h4>
-              <p class="text-ivory/70 font-light">Sessions are tailored specifically to your community's current challenges.</p>
+              <h4 class="timeline-node-title">Content built for your room</h4>
+              <p class="timeline-node-desc">Sessions are tailored specifically to your community's current challenges.</p>
             </div>
             <div class="timeline-node stagger-item">
-              <h4 class="text-2xl font-serif text-gold mb-2">Promotional assets</h4>
-              <p class="text-ivory/70 font-light">Headshot, bio, session description, and social graphics, supplied ready to use.</p>
+              <h4 class="timeline-node-title">Promotional assets</h4>
+              <p class="timeline-node-desc">Headshot, bio, session description, and social graphics, supplied ready to use.</p>
             </div>
-            <div class="timeline-node stagger-item" style="padding-bottom: 0;">
-              <h4 class="text-2xl font-serif text-gold mb-2">Post-event resources</h4>
-              <p class="text-ivory/70 font-light">Actionable takeaways your attendees can implement the following Monday.</p>
+            <div class="timeline-node stagger-item last">
+              <h4 class="timeline-node-title">Post-event resources</h4>
+              <p class="timeline-node-desc">Actionable takeaways your attendees can implement the following Monday.</p>
             </div>
           </div>
         </div>
@@ -290,16 +288,16 @@ import Waveform from '../components/Waveform.astro';
     </section>
 
     <!-- 6. Closing CTA -->
-    <section class="section-pad relative z-10 mt-12 mb-12">
+    <section class="section-pad theme-ink relative overflow-hidden" style="margin-bottom: 4rem;">
       <div class="container">
-        <div class="cta-card ultra-glass-card glass-topaz animated-card mx-auto max-w-4xl reveal-up text-center">
-          <div class="ultra-padding-wrapper relative overflow-hidden">
-             <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(217,162,58,0.15),transparent_70%)] pointer-events-none"></div>
+        <div class="cta-card ultra-glass-card glass-topaz reveal-up">
+          <div class="ultra-padding-wrapper text-center relative overflow-hidden">
+             <div class="ambient-glow" style="top: 0; left: 50%; transform: translate(-50%, 0); width: 100%; height: 100%; background: radial-gradient(circle, rgba(217,162,58,0.1) 0%, transparent 70%);"></div>
              
-             <h2 class="font-serif text-5xl md:text-6xl mb-8 text-ivory relative z-10">Let's talk about your <span class="italic-accent text-gold">event.</span></h2>
-             <div class="relative z-10 flex justify-center">
-               <a href="/book" class="cta-btn px-12 py-5 text-lg inline-flex items-center gap-4 rounded-sm">
-                 Check Availability <span class="text-xl leading-none">&rarr;</span>
+             <h2 class="section-title spk-cta-title relative z-10" style="margin-bottom: 2rem;">Let's talk about your <span class="italic-accent text-gold">event.</span></h2>
+             <div class="spk-hero-btn-wrap relative z-10">
+               <a href="/book" class="cta-btn gfg-btn-book">
+                 Check Availability <span class="arrow">&rarr;</span>
                </a>
              </div>
           </div>
@@ -311,6 +309,267 @@ import Waveform from '../components/Waveform.astro';
 </Layout>
 
 <style>
+  /* Base Overrides for Speaking Page */
+  .spk-hero-custom {
+    padding-top: var(--sp-24);
+    padding-bottom: var(--sp-12);
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+  }
+  .spk-hero-content {
+    text-align: center;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .spk-hero-sub {
+    font-size: 1.25rem;
+    color: var(--text-on-dark-muted);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: var(--sp-8);
+  }
+  .spk-hero-btn-wrap {
+    margin-top: var(--sp-4);
+    display: flex;
+    justify-content: center;
+  }
+  
+  .spk-section-header {
+    text-align: center;
+    margin-bottom: var(--sp-16);
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Asymmetrical Grid */
+  .asym-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--sp-6);
+  }
+  @media (min-width: 768px) {
+    .asym-grid {
+      grid-template-columns: repeat(12, 1fr);
+    }
+    .card-span-8 { grid-column: span 8; }
+    .card-span-4 { grid-column: span 4; }
+    .card-span-6 { grid-column: span 6; }
+  }
+  .grid-card {
+    display: flex;
+    flex-direction: column;
+  }
+  .spk-card-title {
+    font-size: 1.5rem;
+    color: var(--color-gold);
+    margin-bottom: var(--sp-3);
+  }
+  .spk-card-desc {
+    color: var(--text-on-dark-muted);
+    font-size: 1.1rem;
+    margin: 0;
+  }
+
+  /* Interactive Tabs System */
+  .tab-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-8);
+    justify-content: center;
+  }
+  .tab-btn {
+    padding: var(--sp-3) var(--sp-6);
+    border-radius: 40px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.05);
+    color: var(--text-on-dark);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .tab-btn:hover {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.15);
+  }
+  .tab-btn.active {
+    background: rgba(217, 162, 58, 0.15);
+    border-color: rgba(217, 162, 58, 0.4);
+    color: var(--color-gold);
+    box-shadow: 0 0 30px rgba(217, 162, 58, 0.15);
+    transform: scale(1.05);
+  }
+
+  .spk-tab-container {
+    min-height: 500px;
+  }
+  .tab-content {
+    display: none;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .tab-content.active {
+    display: block;
+    animation: fadeSlideUp 0.5s forwards cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  @keyframes fadeSlideUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .tab-header {
+    margin-bottom: var(--sp-10);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: var(--sp-6);
+  }
+  .tab-title {
+    font-size: 2rem;
+    color: var(--color-gold);
+    margin-bottom: var(--sp-2);
+  }
+  .tab-subtitle {
+    color: var(--text-on-dark-muted);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0;
+  }
+
+  .tab-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+  }
+  @media (min-width: 768px) {
+    .tab-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .tab-item-title {
+    font-size: 1.2rem;
+    font-weight: 500;
+    margin-bottom: var(--sp-2);
+    color: var(--text-on-dark);
+  }
+  .tab-item-desc {
+    color: var(--text-on-dark-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* Timeline */
+  .timeline-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-12);
+    align-items: start;
+  }
+  @media (min-width: 992px) {
+    .timeline-layout {
+      grid-template-columns: 1fr 1fr;
+      gap: var(--sp-16);
+    }
+    .timeline-header {
+      position: sticky;
+      top: 150px;
+    }
+  }
+  .timeline-container {
+    position: relative;
+    padding-left: var(--sp-8);
+  }
+  .timeline-container::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 2px;
+    height: calc(100% - 20px);
+    background: linear-gradient(to bottom, var(--color-gold) 0%, rgba(217,162,58,0.1) 100%);
+  }
+  .timeline-node {
+    position: relative;
+    padding-bottom: var(--sp-12);
+  }
+  .timeline-node.last {
+    padding-bottom: 0;
+  }
+  .timeline-node::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: calc(var(--sp-8) * -1 - 5px);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--ink);
+    border: 2px solid var(--color-gold);
+    box-shadow: 0 0 15px rgba(217, 162, 58, 0.5);
+    transition: all 0.3s ease;
+  }
+  .timeline-node:hover::before {
+    background: var(--color-gold);
+    transform: scale(1.3);
+  }
+  .timeline-node-title {
+    font-size: 1.5rem;
+    color: var(--color-gold);
+    margin-bottom: var(--sp-2);
+  }
+  .timeline-node-desc {
+    color: var(--text-on-dark-muted);
+    font-size: 1.05rem;
+    margin: 0;
+  }
+
+  /* Special CTA Button from About */
+  .gfg-btn-book {
+    background: var(--color-gold) !important;
+    color: var(--ink) !important;
+    border: none !important;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: var(--sp-4) var(--sp-8);
+    font-size: 1.1rem;
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-3);
+    box-shadow: 0 10px 30px rgba(217, 162, 58, 0.2);
+    transition: all 0.4s ease;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  .gfg-btn-book:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(217, 162, 58, 0.4);
+    background: #FFC95C !important;
+  }
+  .gfg-btn-book .arrow {
+    font-size: 1.3rem;
+    line-height: 1;
+  }
+
+  .cta-card {
+    border-radius: 40px;
+    box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 40px rgba(217, 162, 58, 0.05);
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   /* Premium Glass Tints */
   .glass-sapphire {
     background: rgba(15, 30, 60, 0.15);
@@ -332,143 +591,6 @@ import Waveform from '../components/Waveform.astro';
     box-shadow: 0 20px 40px rgba(150, 50, 200, 0.1);
   }
 
-  /* Typography Enhancements */
-  .text-gradient-sapphire {
-    background: linear-gradient(135deg, #fff 0%, #8ca8ff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  /* Hero */
-  .spk-hero { padding: 10rem 0 6rem; }
-  .spk-title { font-size: clamp(3rem, 7vw, 6rem); line-height: 1.1; letter-spacing: -0.02em; }
-
-  /* Asymmetrical Grid */
-  .asym-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 2rem;
-  }
-  .grid-card { grid-column: span 12; display: flex; flex-direction: column; }
-  
-  @media (min-width: 768px) {
-    .grid-card:nth-child(1) { grid-column: span 8; }
-    .grid-card:nth-child(2) { grid-column: span 4; }
-    .grid-card:nth-child(3) { grid-column: span 4; }
-    .grid-card:nth-child(4) { grid-column: span 8; }
-    .grid-card:nth-child(5) { grid-column: span 6; }
-    .grid-card:nth-child(6) { grid-column: span 6; }
-  }
-
-  /* Interactive Tabs System */
-  .tab-nav {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    justify-content: center;
-  }
-  .tab-btn {
-    padding: 1rem 2rem;
-    border-radius: 40px;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.05);
-    color: var(--color-ivory);
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.75rem;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .tab-btn:hover {
-    background: rgba(255,255,255,0.08);
-    border-color: rgba(255,255,255,0.15);
-  }
-  .tab-btn.active {
-    background: rgba(217, 162, 58, 0.15);
-    border-color: rgba(217, 162, 58, 0.4);
-    color: var(--color-gold);
-    box-shadow: 0 0 30px rgba(217, 162, 58, 0.15);
-    transform: scale(1.05);
-  }
-
-  /* Tab Content Transitions */
-  .tab-content {
-    display: none;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .tab-content.active {
-    display: block;
-    animation: fadeSlideUp 0.5s forwards cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  
-  @keyframes fadeSlideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  /* Timeline */
-  .timeline-container {
-    position: relative;
-    padding-left: 2rem;
-  }
-  .timeline-container::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 0;
-    width: 2px;
-    height: calc(100% - 20px);
-    background: linear-gradient(to bottom, var(--color-gold) 0%, rgba(217,162,58,0.1) 100%);
-  }
-  .timeline-node {
-    position: relative;
-    padding-bottom: 3.5rem;
-  }
-  .timeline-node::before {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: -2.32rem;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--color-ink);
-    border: 2px solid var(--color-gold);
-    box-shadow: 0 0 15px rgba(217, 162, 58, 0.5);
-    transition: all 0.3s ease;
-  }
-  .timeline-node:hover::before {
-    background: var(--color-gold);
-    transform: scale(1.3);
-  }
-
-  /* CTA specific styles reused from About */
-  .cta-card {
-    border-radius: 40px;
-    box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 40px rgba(217, 162, 58, 0.05);
-  }
-  .cta-btn {
-    background: var(--color-gold) !important;
-    color: var(--color-ink) !important;
-    border: none !important;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    box-shadow: 0 10px 30px rgba(217, 162, 58, 0.2);
-    transition: all 0.4s ease;
-    text-transform: uppercase;
-  }
-  .cta-btn:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 15px 40px rgba(217, 162, 58, 0.4);
-    background: #FFC95C !important;
-  }
-  
-  /* Add glowing button effect to hero button */
   .btn-glow {
     box-shadow: 0 0 20px rgba(217,162,58,0.2);
   }
@@ -509,33 +631,5 @@ import Waveform from '../components/Waveform.astro';
         }
       });
     });
-
-    // Re-initialize intersection observers for the new DOM elements to enable scroll motion
-    const observerOptions = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.15
-    };
-
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    const staggerObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, observerOptions);
-
-    document.querySelectorAll('.reveal-up').forEach(el => revealObserver.observe(el));
-    document.querySelectorAll('.stagger-group').forEach(group => staggerObserver.observe(group));
   });
 </script>
