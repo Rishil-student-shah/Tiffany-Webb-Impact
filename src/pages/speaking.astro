@@ -334,6 +334,23 @@ import Waveform from '../components/Waveform.astro';
 </Layout>
 
 <style>
+  /* Base Overrides */
+  .spk-hero-custom {
+    padding-top: 10rem;
+    padding-bottom: 4rem;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+  }
+  
+  .ambient-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
   /* Hero Layout */
   .spk-hero-flex {
     display: flex;
