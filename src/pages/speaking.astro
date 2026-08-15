@@ -64,42 +64,42 @@ import Waveform from '../components/Waveform.astro';
         <div class="asym-grid stagger-group">
           <!-- Card 1 -->
           <div class="grid-card card-span-8 ultra-glass-card glass-sapphire stagger-item animated-card">
-            <div class="ultra-padding-wrapper">
+            <div class="spk-card-wrapper">
               <h3 class="spk-card-title">Frontline credibility</h3>
               <p class="spk-card-desc">Four thousand hours of actual outreach. She has had these conversations in real rooms, with real families, for fifteen years.</p>
             </div>
           </div>
           <!-- Card 2 -->
           <div class="grid-card card-span-4 ultra-glass-card glass-amethyst stagger-item animated-card" style="animation-delay: -1s;">
-            <div class="ultra-padding-wrapper">
+            <div class="spk-card-wrapper">
               <h3 class="spk-card-title">Cultural fluency</h3>
               <p class="spk-card-desc">She reaches communities that standard prevention programming consistently misses — because she knows how to enter them respectfully.</p>
             </div>
           </div>
           <!-- Card 3 -->
           <div class="grid-card card-span-4 ultra-glass-card glass-topaz stagger-item animated-card" style="animation-delay: -2s;">
-            <div class="ultra-padding-wrapper">
+            <div class="spk-card-wrapper">
               <h3 class="spk-card-title">Evidence-based</h3>
               <p class="spk-card-desc">Screening, early intervention, motivational interviewing, harm reduction. The methods are real and current.</p>
             </div>
           </div>
           <!-- Card 4 -->
           <div class="grid-card card-span-8 ultra-glass-card glass-sapphire stagger-item animated-card" style="animation-delay: -3s;">
-            <div class="ultra-padding-wrapper">
+            <div class="spk-card-wrapper">
               <h3 class="spk-card-title">Practical takeaways</h3>
               <p class="spk-card-desc">Audiences leave with something they can use on Monday, not a feeling that fades by Friday.</p>
             </div>
           </div>
           <!-- Card 5 -->
           <div class="grid-card card-span-6 ultra-glass-card glass-amethyst stagger-item animated-card" style="animation-delay: -4s;">
-            <div class="ultra-padding-wrapper">
+            <div class="spk-card-wrapper">
               <h3 class="spk-card-title">Community-centred</h3>
               <p class="spk-card-desc">Fifteen years of coalition and partnership work sits behind every talk she gives.</p>
             </div>
           </div>
           <!-- Card 6 -->
           <div class="grid-card card-span-6 ultra-glass-card glass-emerald stagger-item animated-card" style="animation-delay: -5s;">
-            <div class="ultra-padding-wrapper">
+            <div class="spk-card-wrapper">
               <h3 class="spk-card-title">Trusted professional</h3>
               <p class="spk-card-desc">BBA, MHP, and genuine institutional affiliations in behavioral and public health.</p>
             </div>
@@ -361,14 +361,17 @@ import Waveform from '../components/Waveform.astro';
   @media (min-width: 992px) {
     .spk-hero-flex {
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: center;
+      gap: 5rem;
       text-align: left;
     }
     .hero-video-box {
       width: 45%;
+      max-width: 450px;
     }
     .hero-content-box {
-      width: 50%;
+      width: 45%;
+      max-width: 500px;
       text-align: left;
     }
     .spk-hero-sub {
@@ -407,14 +410,25 @@ import Waveform from '../components/Waveform.astro';
     display: flex;
     flex-direction: column;
   }
+  .spk-card-wrapper {
+    padding: 2.25rem;
+    position: relative;
+    z-index: 2;
+  }
+  @media (min-width: 992px) {
+    .spk-card-wrapper {
+      padding: 3rem;
+    }
+  }
   .spk-card-title {
     font-size: 1.5rem;
     color: var(--color-gold);
     margin-bottom: 0.75rem;
   }
   .spk-card-desc {
-    color: var(--text-on-dark-muted);
+    color: var(--color-ivory);
     font-size: 1.1rem;
+    line-height: 1.6;
     margin: 0;
   }
 
@@ -493,23 +507,25 @@ import Waveform from '../components/Waveform.astro';
   .tab-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--sp-8);
+    gap: 2.5rem;
   }
   @media (min-width: 768px) {
     .tab-grid {
       grid-template-columns: 1fr 1fr;
+      gap: 3rem 4rem;
     }
   }
   .tab-item-title {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     font-weight: 500;
-    margin-bottom: var(--sp-2);
-    color: var(--text-on-dark);
+    margin-bottom: 0.75rem;
+    color: var(--color-ivory);
+    line-height: 1.3;
   }
   .tab-item-desc {
     color: var(--text-on-dark-muted);
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    line-height: 1.7;
     margin: 0;
   }
 
