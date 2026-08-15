@@ -8,34 +8,55 @@ import Waveform from '../components/Waveform.astro';
 <Layout title="Speaking & Training | Tiffany Webb" theme="ink">
   <main class="page-content">
     
-    <!-- 1. Cinematic Hero -->
+    <!-- 1. Cinematic Hero with Video -->
     <section class="inner-hero theme-ink spk-hero-custom relative overflow-hidden">
       <Waveform opacity={0.05} variant="B" flipX={true} />
       
       <!-- Glowing Background Orb for effect -->
-      <div class="ambient-glow" style="top: 0; left: 50%; transform: translate(-50%, 0); width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(50,100,200, 0.05) 0%, transparent 70%);"></div>
+      <div class="ambient-glow" style="top: 0; left: 50%; transform: translate(-50%, 0); width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(50,100,200, 0.08) 0%, transparent 70%);"></div>
 
-      <div class="container hero-grid reveal-up spk-hero-container">
-        <!-- New Image Container for the Hero left side -->
-        <div class="hero-image-wrap blob-shape reveal-in" style="transition-delay: 0.2s;">
-           <img src="/tiffany_hero_speaker.jpg" alt="Tiffany Webb Speaking on Stage" class="about-hero-img" style="width: 100%; height: 100%; object-fit: cover;" />
-        </div>
-        <div class="hero-content spk-hero-content">
-          <Eyebrow>Speaking & Training</Eyebrow>
-          <h1 class="inner-hero-title">Bring Tiffany <br/><span class="italic-accent">to your stage.</span></h1>
-          <p class="inner-hero-sub text-micro spk-hero-sub">
-            Keynotes, conference sessions, panels, workshops, and school programs on gambling prevention, public health, and community impact.
-          </p>
-          <div class="spk-hero-btn-wrap">
-            <Button href="/book" variant="primary" className="magnetic-btn btn-glow">Invite Tiffany to Speak &rarr;</Button>
+      <div class="container relative z-10">
+        <div class="spk-hero-flex">
+          
+          <!-- LEFT SIDE: Podcast Video Thumbnail -->
+          <div class="hero-video-box reveal-in" style="transition-delay: 0.2s;">
+            <div class="reel-video-card" style="margin: 0; width: 100%; max-width: 500px; cursor: pointer;">
+              <div class="reel-video-inner" style="position: relative; border-radius: 24px; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1);">
+                <img src="/_astro/thumb_3.CL4h2dZr_1r0zg9.webp" alt="Tiffany Webb Podcast Interview" style="width: 100%; height: auto; display: block;" onerror="this.src='/thumb_3.jpg'" />
+                <div class="reel-play-overlay" style="position: absolute; inset: 0; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; transition: background 0.3s;">
+                  <div class="reel-play-button" style="width: 80px; height: 80px; background: rgba(217, 162, 58, 0.9); border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 10px 30px rgba(217,162,58,0.3);">
+                    <svg viewBox="0 0 24 24" width="40" height="40" fill="var(--color-ivory)" style="margin-left: 5px;"><path d="M8 5v14l11-7z"/></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
+
+          <!-- RIGHT SIDE: Text Content -->
+          <div class="hero-content-box reveal-up">
+            <Eyebrow>Speaking & Training</Eyebrow>
+            <h1 class="inner-hero-title">Bring Tiffany <br/><span class="italic-accent">to your stage.</span></h1>
+            <p class="inner-hero-sub text-micro spk-hero-sub">
+              Keynotes, conference sessions, panels, workshops, and school programs on gambling prevention, public health, and community impact.
+            </p>
+            <div class="spk-hero-btn-wrap">
+              <Button href="/book" variant="primary" className="magnetic-btn btn-glow">Invite Tiffany to Speak &rarr;</Button>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
     <!-- 2. Dynamic Asymmetrical Grid (Why Tiffany) -->
     <section class="section-pad theme-ink relative overflow-hidden">
-      <div class="container">
+      <Waveform opacity={0.03} />
+      
+      <!-- Huge glowing orbs so the glassmorphism actually has something to blur! -->
+      <div class="ambient-glow" style="top: 20%; left: 10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(50, 100, 200, 0.15) 0%, transparent 70%);"></div>
+      <div class="ambient-glow" style="bottom: -10%; right: 10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(200, 100, 255, 0.1) 0%, transparent 70%);"></div>
+      
+      <div class="container relative z-10">
         <div class="spk-section-header reveal-up">
           <h2 class="section-title">Why <span class="italic-accent">Tiffany.</span></h2>
         </div>
@@ -261,7 +282,7 @@ import Waveform from '../components/Waveform.astro';
     </section>
 
     <!-- 5. What Organizers Get (Timeline) -->
-    <section class="section-pad theme-ink relative overflow-hidden">
+    <section class="section-pad theme-ink relative overflow-hidden" style="z-index: 20;">
       <div class="container">
         <div class="timeline-layout">
           <div class="timeline-header reveal-up">
@@ -313,39 +334,55 @@ import Waveform from '../components/Waveform.astro';
 </Layout>
 
 <style>
-  /* Base Overrides for Speaking Page */
-  .spk-hero-custom {
-    padding-top: var(--sp-24);
-    padding-bottom: var(--sp-12);
-    min-height: 80vh;
+  /* Hero Layout */
+  .spk-hero-flex {
     display: flex;
+    flex-direction: column-reverse;
     align-items: center;
+    gap: 4rem;
   }
-  .spk-hero-content {
+  .hero-content-box {
     text-align: center;
-    max-width: 900px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
   }
   .spk-hero-sub {
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     color: var(--text-on-dark-muted);
-    max-width: 700px;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+    max-width: 600px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: var(--sp-8);
   }
   .spk-hero-btn-wrap {
-    margin-top: var(--sp-4);
     display: flex;
     justify-content: center;
   }
-  
+
+  @media (min-width: 992px) {
+    .spk-hero-flex {
+      flex-direction: row;
+      justify-content: space-between;
+      text-align: left;
+    }
+    .hero-video-box {
+      width: 45%;
+    }
+    .hero-content-box {
+      width: 50%;
+      text-align: left;
+    }
+    .spk-hero-sub {
+      margin-left: 0;
+      font-size: 1.25rem;
+    }
+    .spk-hero-btn-wrap {
+      justify-content: flex-start;
+    }
+  }
+
   .spk-section-header {
     text-align: center;
-    margin-bottom: var(--sp-16);
+    margin-bottom: 4rem;
     max-width: 800px;
     margin-left: auto;
     margin-right: auto;
@@ -355,11 +392,12 @@ import Waveform from '../components/Waveform.astro';
   .asym-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
-    gap: var(--sp-6);
+    gap: 1.5rem;
   }
   @media (min-width: 768px) {
     .asym-grid {
       grid-template-columns: repeat(12, 1fr);
+      gap: 2rem;
     }
     .card-span-8 { grid-column: span 8; }
     .card-span-4 { grid-column: span 4; }
@@ -384,12 +422,13 @@ import Waveform from '../components/Waveform.astro';
   .tab-nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;
-    margin-bottom: var(--sp-8);
+    gap: 1rem;
+    margin-bottom: 3rem;
     justify-content: center;
   }
   .tab-btn {
-    padding: 0.75rem var(--sp-6);
+    display: inline-block;
+    padding: 1rem 1.5rem;
     border-radius: 40px;
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(255,255,255,0.05);
@@ -397,9 +436,10 @@ import Waveform from '../components/Waveform.astro';
     font-family: var(--font-mono);
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    white-space: nowrap;
   }
   .tab-btn:hover {
     background: rgba(255,255,255,0.08);
