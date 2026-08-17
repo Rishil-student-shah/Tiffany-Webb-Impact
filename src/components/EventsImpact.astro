@@ -77,7 +77,7 @@ const events = [
   <div class="events-scroller-wrap relative z-10 reveal-in" style="transition-delay: 0.2s;">
     <div class="events-scroller" id="eventsContainer">
       {events.map((event) => (
-        <div class={`event-card ultra-glass-card ${event.glass} animated-card-subtle`}>
+        <a href="/impact" class={`event-card ultra-glass-card ${event.glass} animated-card-subtle`}>
           <div class="event-card-inner">
             <div class="event-meta">
               <span class="event-date">{event.date}</span>
@@ -96,7 +96,7 @@ const events = [
               </div>
             </div>
           </div>
-        </div>
+        </a>
       ))}
     </div>
   </div>
@@ -188,6 +188,9 @@ const events = [
     scroll-snap-align: start;
     display: flex;
     flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
   }
   @media (min-width: 768px) {
     .event-card {
