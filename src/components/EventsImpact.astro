@@ -1,0 +1,276 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import Waveform from './Waveform.astro';
+import Button from './Button.astro';
+
+// Placeholder data - scalable for "all her events"
+const events = [
+  {
+    title: "National Conference on Problem Gambling",
+    location: "Chicago, IL",
+    date: "Upcoming",
+    impact: "1,500+ Attendees",
+    type: "Keynote",
+    glass: "glass-sapphire"
+  },
+  {
+    title: "Illinois Public Health Summit",
+    location: "Springfield, IL",
+    date: "Upcoming",
+    impact: "Statewide Focus",
+    type: "Featured Speaker",
+    glass: "glass-amethyst"
+  },
+  {
+    title: "University Wellness Symposium",
+    location: "Virtual",
+    date: "Past Event",
+    impact: "50+ Campuses",
+    type: "Workshop",
+    glass: "glass-topaz"
+  },
+  {
+    title: "Corporate Responsibility Forum",
+    location: "Las Vegas, NV",
+    date: "Past Event",
+    impact: "Industry Leaders",
+    type: "Panelist",
+    glass: "glass-emerald"
+  },
+  {
+    title: "Community Coalition Training",
+    location: "Peoria, IL",
+    date: "Past Event",
+    impact: "Frontline Workers",
+    type: "Training",
+    glass: "glass-sapphire"
+  }
+];
+---
+
+<section id="events" class="events-impact section-pad theme-ink relative overflow-hidden">
+  <Waveform opacity={0.04} variant="B" flipY={true} />
+  
+  <!-- Glowing Background Orbs for glassmorphism pop -->
+  <div class="ambient-glow" style="top: 20%; left: -10%; width: 50vw; height: 50vw; background: radial-gradient(circle, rgba(217, 162, 58, 0.1) 0%, transparent 70%);"></div>
+  <div class="ambient-glow" style="bottom: -20%; right: -10%; width: 60vw; height: 60vw; background: radial-gradient(circle, rgba(50, 100, 200, 0.1) 0%, transparent 70%);"></div>
+
+  <div class="container relative z-10">
+    <div class="events-header stagger-group">
+      <div class="stagger-item">
+        <Eyebrow>Stages & Impact</Eyebrow>
+        <h2 class="section-title">Where she's making <br/><span class="italic-accent">an impact.</span></h2>
+      </div>
+      <div class="stagger-item events-header-nav hidden-mobile">
+        <div class="nav-controls">
+          <button class="nav-arrow prev-arrow" aria-label="Previous events">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="nav-arrow next-arrow" aria-label="Next events">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="events-scroller-wrap relative z-10 reveal-in" style="transition-delay: 0.2s;">
+    <div class="events-scroller" id="eventsContainer">
+      {events.map((event) => (
+        <div class={`event-card ultra-glass-card ${event.glass} animated-card-subtle`}>
+          <div class="event-card-inner">
+            <div class="event-meta">
+              <span class="event-date">{event.date}</span>
+              <span class="event-type">{event.type}</span>
+            </div>
+            <h3 class="event-title">{event.title}</h3>
+            
+            <div class="event-footer">
+              <div class="event-detail">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <span>{event.location}</span>
+              </div>
+              <div class="event-detail impact-highlight">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                <span>{event.impact}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+  
+  <div class="container relative z-10 hidden-desktop" style="margin-top: 2rem;">
+     <div class="spk-hero-btn-wrap" style="justify-content: center;">
+         <p class="text-micro" style="color: var(--text-on-dark-muted);">Swipe to view all events &rarr;</p>
+     </div>
+  </div>
+
+</section>
+
+<style>
+  .events-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+  
+  .nav-controls {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  .nav-arrow {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.03);
+    color: var(--color-ivory);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+  .nav-arrow:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.2);
+    color: var(--color-gold);
+  }
+
+  /* Scroller */
+  .events-scroller-wrap {
+    width: 100%;
+    padding-left: max(1rem, calc((100vw - 1200px) / 2));
+    padding-right: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 2rem; /* shadow room */
+  }
+  
+  .events-scroller {
+    display: flex;
+    gap: 2rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Firefox */
+    padding-right: max(1rem, calc((100vw - 1200px) / 2));
+  }
+  .events-scroller::-webkit-scrollbar {
+    display: none; /* Chrome/Safari */
+  }
+
+  .event-card {
+    flex: 0 0 320px;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+  }
+  @media (min-width: 768px) {
+    .event-card {
+      flex: 0 0 400px;
+    }
+  }
+
+  .event-card-inner {
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  .event-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .event-date {
+    color: var(--color-gold);
+  }
+  .event-type {
+    background: rgba(255,255,255,0.05);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    color: var(--text-on-dark);
+  }
+
+  .event-title {
+    font-size: 1.75rem;
+    color: var(--color-ivory);
+    line-height: 1.3;
+    margin-bottom: 3rem;
+  }
+
+  .event-footer {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 1.5rem;
+  }
+
+  .event-detail {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-on-dark-muted);
+    font-size: 0.95rem;
+  }
+  .impact-highlight {
+    color: var(--color-gold);
+  }
+
+  .hidden-mobile { display: none; }
+  .hidden-desktop { display: block; }
+  
+  @media(min-width: 768px) {
+    .hidden-mobile { display: block; }
+    .hidden-desktop { display: none; }
+  }
+
+  /* Slight float animation */
+  @keyframes float-subtle {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+  }
+  .animated-card-subtle {
+    animation: float-subtle 6s ease-in-out infinite;
+  }
+  .event-card:nth-child(2n) { animation-delay: -2s; }
+  .event-card:nth-child(3n) { animation-delay: -4s; }
+  
+  .event-card:hover {
+    animation-play-state: paused;
+    transform: translateY(-8px);
+  }
+</style>
+
+<script>
+  // Simple scroller logic for desktop arrows
+  document.addEventListener('DOMContentLoaded', () => {
+    const scroller = document.getElementById('eventsContainer');
+    const prevBtn = document.querySelector('.prev-arrow');
+    const nextBtn = document.querySelector('.next-arrow');
+    
+    if(scroller && prevBtn && nextBtn) {
+      const scrollAmount = 400 + 32; // card width + gap
+      
+      prevBtn.addEventListener('click', () => {
+        scroller.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+      });
+      
+      nextBtn.addEventListener('click', () => {
+        scroller.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+      });
+    }
+  });
+</script>
