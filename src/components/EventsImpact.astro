@@ -58,7 +58,7 @@ const events = [
   <div class="container relative z-10">
     <div class="events-header stagger-group">
       <div class="stagger-item">
-        <Eyebrow>Stages & Impact</Eyebrow>
+        <Eyebrow className="events-eyebrow-large">Stages & Impact</Eyebrow>
         <h2 class="section-title">Where she's making <br/><span class="italic-accent">an impact.</span></h2>
       </div>
       <div class="stagger-item events-header-nav hidden-mobile">
@@ -110,6 +110,26 @@ const events = [
 </section>
 
 <style>
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+
+  .events-eyebrow-large {
+    font-size: 1.125rem !important; /* Larger than default micro */
+    letter-spacing: 0.15em;
+  }
+
+  .ambient-glow {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
   .events-header {
     display: flex;
     justify-content: space-between;
