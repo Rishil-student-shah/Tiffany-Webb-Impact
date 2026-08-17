@@ -94,6 +94,9 @@ const events = [
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 <span>{event.impact}</span>
               </div>
+              <div class="event-action-btn">
+                Click for more info <span class="arrow">&rarr;</span>
+              </div>
             </div>
           </div>
         </a>
@@ -250,6 +253,30 @@ const events = [
   }
   .impact-highlight {
     color: var(--color-gold);
+  }
+
+  .event-action-btn {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px dashed rgba(255,255,255,0.1);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-ivory);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: color 0.3s ease;
+  }
+  .event-card:hover .event-action-btn {
+    color: var(--color-gold);
+  }
+  .event-action-btn .arrow {
+    transition: transform 0.3s ease;
+  }
+  .event-card:hover .event-action-btn .arrow {
+    transform: translateX(4px);
   }
 
   .hidden-mobile { display: none; }
