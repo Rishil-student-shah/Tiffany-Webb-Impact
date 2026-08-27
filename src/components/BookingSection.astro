@@ -138,7 +138,7 @@ const { hideJourney = false } = Astro.props;
         </div>
 
         <div class="form-submit text-center" style="margin-top: var(--sp-4);">
-          <button type="submit" class="submit-btn magnetic-btn">{content.btn_submit || "Submit Request →"} &rarr;</button>
+          <button type="submit" class="submit-btn magnetic-btn">{content.btn_submit || "Submit Request &rarr;"}</button>
         </div>
       </form>
       <div id="home-success-msg" style="display: none; text-align: center; padding: 2rem 0;" class="mt-8">
@@ -240,7 +240,7 @@ const { hideJourney = false } = Astro.props;
         const submitBtn = form.querySelector('button[type="submit"]');
         if (submitBtn) {
             submitBtn.disabled = true;
-            submitBtn.innerHTML = 'Submitting...';
+            submitBtn.innerHTML = "Submit Request &rarr;";
         }
 
         try {
@@ -272,7 +272,7 @@ const { hideJourney = false } = Astro.props;
             alert('There was a problem submitting your request. Please try again later.');
             if (submitBtn) {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '{content.btn_submit || "Submit Request →"} &rarr;';
+              submitBtn.innerHTML = "Submit Request &rarr;";
             }
           }
         } catch (error) {
@@ -280,7 +280,7 @@ const { hideJourney = false } = Astro.props;
           alert('Could not connect to the server. Please try again later.');
           if (submitBtn) {
               submitBtn.disabled = false;
-              submitBtn.innerHTML = '{content.btn_submit || "Submit Request →"} &rarr;';
+              submitBtn.innerHTML = "Submit Request &rarr;";
           }
         }
       });
