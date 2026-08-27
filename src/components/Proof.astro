@@ -48,8 +48,8 @@ const headline = content.headline || "Credibility you can feel.";
                   <p class="slide-quote">"{test.content_html || test.subtitle}"</p>
                   <div class="slide-author">
                     <span class="author-name">{test.title}</span>
-                    {(test.subtitle || test.content_html) && (
-                      <span class="author-role">Client</span>
+                    {test.subtitle && (
+                      <span class="author-role">{test.subtitle}</span>
                     )}
                   </div>
                 </div>
@@ -109,17 +109,40 @@ const headline = content.headline || "Credibility you can feel.";
         }
       }
 
-      nextBtn.addEventListener('click', () => {
+      function goNext() {
         const newIndex = (currentIndex + 1) % totalSlides;
         updateSlider(newIndex);
+      }
+
+      function goPrev() {
+        const newIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        updateSlider(newIndex);
+      }
+
+      // Autoplay Logic
+      let autoplayInterval;
+      
+      function startAutoplay() {
+        autoplayInterval = setInterval(goNext, 6000);
+      }
+
+      function resetAutoplay() {
+        clearInterval(autoplayInterval);
+        startAutoplay();
+      }
+
+      nextBtn.addEventListener('click', () => {
+        goNext();
+        resetAutoplay();
       });
 
       prevBtn.addEventListener('click', () => {
-        const newIndex = (currentIndex - 1 + totalSlides) % totalSlides;
-        updateSlider(newIndex);
+        goPrev();
+        resetAutoplay();
       });
       
       updateProgress();
+      startAutoplay();
     });
   </script>
 )}
