@@ -6,12 +6,12 @@ import { Image } from 'astro:assets';
 const { content = {} } = Astro.props;
 
 // Fallbacks if DB is empty
-const eyebrow = content.eyebrow || "COMMUNITY IMPACT STRATEGIST &middot; SPEAKER";
-const title1 = content.title_line_1 || "Bold ideas, human connection, and";
-const title2 = content.title_line_2 || "meaningful impact.";
-const metaText = content.meta || "TIFFANY WEBB";
-const subtext = content.subtext || "I help healthcare and <b>community leaders think bigger about impact.</b> I bring lived understanding, professional expertise, and community insight together to challenge convention, reimagine what's possible, and build bold strategies that help organizations&mdash;<b>and the people,</b> families, and communities they serve&mdash;thrive.";
-const formats = content.formats || "SPEAKING &middot; STRATEGY &middot; PUBLIC &amp; BEHAVIORAL HEALTH &middot; COMMUNITY ENGAGEMENT &middot; PROGRAM DEVELOPMENT";
+const eyebrow = content.eyebrow ?? "COMMUNITY IMPACT STRATEGIST &middot; SPEAKER";
+const title1 = content.title_line_1 ?? "Bold ideas, human connection, and";
+const title2 = content.title_line_2 ?? "meaningful impact.";
+const metaText = content.meta ?? "TIFFANY WEBB";
+const subtext = content.subtext ?? "I help healthcare and <b>community leaders think bigger about impact.</b> I bring lived understanding, professional expertise, and community insight together to challenge convention, reimagine what's possible, and build bold strategies that help organizations&mdash;<b>and the people,</b> families, and communities they serve&mdash;thrive.";
+const formats = content.formats ?? "SPEAKING &middot; STRATEGY &middot; PUBLIC &amp; BEHAVIORAL HEALTH &middot; COMMUNITY ENGAGEMENT &middot; PROGRAM DEVELOPMENT";
 
 const showReel = false;
 ---
@@ -23,9 +23,7 @@ const showReel = false;
   
   <div class="hero-container">
     <div class="hero-content">
-      <div class="hero-eyebrow-wrap">
-        <span class="hero-eyebrow" set:html={eyebrow}></span>
-      </div>
+      {eyebrow && (<div class="hero-eyebrow-wrap"><span class="hero-eyebrow" set:html={eyebrow}></span></div>)}
       
       <h1 class="hero-title">
         <span class="hero-title-cream" set:html={title1}></span>

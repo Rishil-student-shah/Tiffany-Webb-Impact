@@ -2,15 +2,19 @@
 import Waveform from './Waveform.astro';
 import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
+const { content = {}, collections = {} } = Astro.props;
+const eyebrow = content.eyebrow ?? "Speaking Tracks";
+const headline = content.headline ?? 'What she <span class="italic-accent">speaks about.</span>';
+const subtext = content.subtext ?? "Twenty topics across four tracks - practical enough to use on Monday, human enough that the room stays with her.";
 ---
 
 <section class="expertise section-pad theme-ink">
   <Waveform opacity={0.06} flipY={true} />
   <div class="expertise-container">
     <div class="expertise-header">
-      <Eyebrow>Speaking Tracks</Eyebrow>
-      <h2 class="section-title">What she <span class="italic-accent">speaks about.</span></h2>
-      <p class="expertise-sub">Twenty topics across four tracks — practical enough to use on Monday, human enough that the room stays with her.</p>
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      {headline && <h2 class="section-title" set:html={headline}></h2>}
+      {subtext && <p class="expertise-sub">{subtext}</p>}
     </div>
 
 

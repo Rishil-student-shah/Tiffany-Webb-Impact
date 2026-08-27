@@ -5,10 +5,10 @@ import Eyebrow from './Eyebrow.astro';
 const { content = {}, collections = {} } = Astro.props;
 const audiences = collections.who_can_benefit || collections.where_she_works || [];
 
-const eyebrow = content.eyebrow || "WHO CAN BENEFIT FROM TIFFANY'S WORK?";
-const headline = content.headline || "For leaders ready to rethink what's possible.";
-const p1 = content.body_1 || "Tiffany works with leaders and organizations navigating growth, change, engagement, and community impact. She brings a human-centered perspective to complex challenges—helping organizations understand the people they serve, rethink familiar approaches, and build strategies designed for meaningful, sustainable impact.";
-const p2 = content.body_2 || "";
+const eyebrow = content.eyebrow ?? "WHO CAN BENEFIT FROM TIFFANY'S WORK?";
+const headline = content.headline ?? "For leaders ready to rethink what's possible.";
+const p1 = content.body_1 ?? "Tiffany works with leaders and organizations navigating growth, change, engagement, and community impact. She brings a human-centered perspective to complex challenges—helping organizations understand the people they serve, rethink familiar approaches, and build strategies designed for meaningful, sustainable impact.";
+const p2 = content.body_2 ?? "";
 
 const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\">rethink what's</span><br/><span class=\"italic-accent\">possible.</span>";
 ---

@@ -42,6 +42,7 @@ const newsletterBtn = dbContent.newsletter_btn || 'JOIN';
 const year = new Date().getFullYear();
 ---
 
+{dbContent.section_is_active !== '0' && (
 <footer class="site-footer theme-ink relative" style="overflow: hidden; padding-top: 4rem; background: var(--color-ink); border-top: 1px solid rgba(255,255,255,0.05);">
   <Waveform opacity={0.04} variant="C" />
 
@@ -125,6 +126,7 @@ const year = new Date().getFullYear();
 
   </div>
 </footer>
+)}
 
 <style>
   .footer-grid {

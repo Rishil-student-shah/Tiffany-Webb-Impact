@@ -6,8 +6,8 @@ const { content = {}, collections = {} } = Astro.props;
 const attributes = collections.proof_attributes || [];
 const testimonials = collections.proof_testimonials || [];
 
-const eyebrow = content.eyebrow || "WHY ORGANIZATIONS BRING ME IN";
-const headline = content.headline || "Credibility you can feel.";
+const eyebrow = content.eyebrow ?? "WHY ORGANIZATIONS BRING ME IN";
+const headline = content.headline ?? "Credibility you can feel.";
 ---
 
 <section id="proof" class="proof section-pad theme-ink relative" style="padding-top: 6rem; padding-bottom: 6rem;">
@@ -15,8 +15,8 @@ const headline = content.headline || "Credibility you can feel.";
   
   <div class="container-narrow relative z-10">
     <div class="proof-header">
-      <Eyebrow>{eyebrow}</Eyebrow>
-      <h2 class="section-title works-title">{headline}</h2>
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
+      {headline && <h2 class="section-title works-title">{headline}</h2>}
     </div>
 
     {/* Attribute Cards Grid */}

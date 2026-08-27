@@ -6,13 +6,6 @@ let items = collections.credibility_bar || [];
 
 // Filter out TBC and cap at 4 items
 items = items.filter(item => item.title && item.title.toUpperCase() !== 'TBC').slice(0, 4);
-
-if (items.length === 0) {
-  // Fallbacks if db is empty or all are TBC
-  items = [
-    { title: '15+', subtitle: 'YEARS' }
-  ];
-}
 ---
 
 {items.length > 0 && (

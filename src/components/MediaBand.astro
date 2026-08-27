@@ -1,16 +1,16 @@
 ﻿---
 const { content = {} } = Astro.props;
 
-const headline = content.headline || "Ready for the room — and the story.";
-const link1 = content.link_1 || "Download the speaker sheet";
-const link2 = content.link_2 || "Media resources";
+const headline = content.headline ?? "Ready for the room — and the story.";
+const link1 = content.link_1 ?? "Download the speaker sheet";
+const link2 = content.link_2 ?? "Media resources";
 ---
 
 <div class="media-band-section theme-ink">
   <div class="container-narrow relative z-10 h-full" style="padding-left: 5vw; padding-right: 5vw;">
     <div class="media-band-wrapper">
       <div class="media-left">
-        <h3 class="media-headline" style="background: linear-gradient(92deg, var(--color-gold), var(--color-coral)); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block;">{headline}</h3>
+        {headline && <h3 class="media-headline" style="background: linear-gradient(92deg, var(--color-gold), var(--color-coral)); -webkit-background-clip: text; background-clip: text; color: transparent; display: inline-block;">{headline}</h3>}
       </div>
       
       <div class="media-right">
