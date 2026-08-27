@@ -152,4 +152,23 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
     line-height: 1.25;
     font-weight: 400;
   }
+
+  /* Interactive Hover Effects */
+  .audience-title {
+    transition: color 0.25s ease, transform 0.25s ease;
+  }
+  
+  .audience-item {
+    transition: border-color 0.25s ease;
+  }
+
+  .audience-item:hover .audience-title {
+    color: var(--color-gold);
+    transform: translateX(4px);
+  }
+  
+  .audience-item:hover .num-slash {
+    color: var(--color-gold);
+    opacity: 0.8;
+  }
 </style>
