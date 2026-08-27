@@ -6,14 +6,14 @@ import Button from './Button.astro';
 const { content = {}, collections = {} } = Astro.props;
 const audiences = collections.where_she_works || [];
 
-const eyebrow = content.eyebrow || "WHO CAN BENEFIT FROM THIS WORK?";
+const eyebrow = content.eyebrow || "WHO CAN BENEFIT FROM TIFFANY'S WORK?";
 const headline = content.headline || "For leaders ready to rethink what's possible.";
-const p1 = content.body_1 || "I help healthcare, behavioral health, public health, nonprofit, education, and community leaders think differently about how they reach people and create impact.";
-const p2 = content.body_2 || "My work combines lived understanding, professional expertise, and community insight to help leaders challenge familiar approaches, uncover opportunities, design stronger programs, and build strategies that connect organizational goals with the people, families, and communities they serve.";
+const p1 = content.body_1 || "Tiffany works with leaders and organizations navigating growth, change, engagement, and community impact. She brings a human-centered perspective to complex challenges—helping organizations understand the people they serve, rethink familiar approaches, and build strategies designed for meaningful, sustainable impact.";
+const p2 = content.body_2 || "";
 const btn = content.button_text || "How I help →";
 
-// Process headline to make "what's possible." italic with gradient
-const formattedHeadline = headline.replace("what's possible.", `<span class="italic-accent">what's possible.</span>`);
+// Process headline to make "rethink what's possible." italic with gradient
+const formattedHeadline = headline.replace("rethink what's possible.", `<br/><span class="italic-accent">rethink what's possible.</span>`);
 ---
 
 <section id="where-she-works" class="where-works section-pad theme-ink relative">
@@ -25,11 +25,11 @@ const formattedHeadline = headline.replace("what's possible.", `<span class="ita
       <!-- Left Column: Copy -->
       <div class="works-content reveal-up">
         <Eyebrow>{eyebrow}</Eyebrow>
-        <h2 class="section-title" set:html={formattedHeadline}></h2>
+        <h2 class="section-title meet-title" set:html={formattedHeadline}></h2>
         
         <div class="works-prose">
-          <p>{p1}</p>
-          <p>{p2}</p>
+          {p1 && <p>{p1}</p>}
+          {p2 && <p>{p2}</p>}
         </div>
       </div>
       
@@ -40,15 +40,11 @@ const formattedHeadline = headline.replace("what's possible.", `<span class="ita
             const num = (index + 1).toString().padStart(2, '0');
             return (
               <div class="audience-item">
-                <span class="audience-num">{num}</span>
+                <span class="audience-num">{num} <span class="num-slash">//</span></span>
                 <span class="audience-title">{aud.title}</span>
               </div>
             );
           })}
-        </div>
-        
-        <div class="works-cta">
-          <a href="/services" class="magnetic-btn link-arrow">{btn}</a>
         </div>
       </div>
       
@@ -65,13 +61,19 @@ const formattedHeadline = headline.replace("what's possible.", `<span class="ita
 
   @media (min-width: 1024px) {
     .works-grid {
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1fr 1fr;
       gap: var(--sp-16);
       align-items: flex-start;
     }
   }
 
   /* Left Column */
+  .meet-title {
+    font-size: clamp(3rem, 5vw, 4.5rem); 
+    line-height: 1.1; 
+    margin-bottom: var(--sp-8);
+  }
+
   .works-prose {
     max-width: 46ch;
     display: flex;
@@ -90,13 +92,14 @@ const formattedHeadline = headline.replace("what's possible.", `<span class="ita
   .works-audiences {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-12);
+    padding-top: var(--sp-6);
   }
 
   .audience-list {
     display: grid;
     grid-template-columns: 1fr;
     column-gap: var(--sp-8);
+    border-top: 1px solid rgba(255,255,255,0.1);
   }
 
   @media (min-width: 640px) {
@@ -108,39 +111,29 @@ const formattedHeadline = headline.replace("what's possible.", `<span class="ita
   .audience-item {
     display: flex;
     align-items: center;
-    gap: var(--sp-5);
+    gap: var(--sp-3);
     padding: var(--sp-5) 0;
     border-bottom: 1px solid rgba(255,255,255,0.1);
   }
 
   .audience-num {
     color: var(--color-gold);
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+  }
+  
+  .num-slash {
+    color: rgba(217, 162, 58, 0.5); /* Dimmer gold for the slashes */
+    font-size: 0.8rem;
   }
 
   .audience-title {
     color: var(--color-ivory);
     font-size: 1rem;
     font-weight: 500;
-  }
-
-  .works-cta {
-    padding-top: var(--sp-2);
-  }
-  
-  .link-arrow {
-    color: var(--color-gold);
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    transition: color 0.3s ease;
-  }
-  
-  .link-arrow:hover {
-    color: var(--color-coral);
   }
 </style>
