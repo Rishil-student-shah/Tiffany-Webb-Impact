@@ -47,25 +47,25 @@ const { hideJourney = false } = Astro.props;
       <form id="home-booking-form" class="inline-form">
         <div class="form-row">
           <div class="form-group">
-            <label for="home-name">Your Name *</label>
+            <label for="home-name">{content.label_name || "YOUR NAME"} *</label>
             <input type="text" id="home-name" name="name" required placeholder="Jane Doe" />
           </div>
           <div class="form-group">
-            <label for="home-org">Organization *</label>
+            <label for="home-org">{content.label_org || "ORGANIZATION"} *</label>
             <input type="text" id="home-org" name="org" required placeholder="Health Dept" />
           </div>
         </div>
         
         <div class="form-row">
           <div class="form-group">
-            <label for="home-email">Email Address *</label>
+            <label for="home-email">{content.label_email || "EMAIL ADDRESS"} *</label>
             <input type="email" id="home-email" name="email" required placeholder="jane@example.com" pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}" title="Please enter a valid email address" />
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label for="home-phone">Phone Number *</label>
+            <label for="home-phone">{content.label_phone || "PHONE NUMBER"} *</label>
             <div style="display: flex; gap: 0;">
               <div style="flex: 0 0 140px; position: relative;">
                 <input type="hidden" id="home-country-code" name="country_code" value="+1" />
@@ -84,7 +84,7 @@ const { hideJourney = false } = Astro.props;
 
         <div class="form-row">
           <div class="form-group" style="position: relative;">
-            <label for="home-event_type_select">Event Type *</label>
+            <label for="home-event_type_select">{content.label_type || "EVENT TYPE"} *</label>
             <select id="home-event_type_select" required class="select-input" onchange="if(this.value === 'Other'){document.getElementById('home_custom_event_wrapper').style.display='block';document.getElementById('home-event_type').value='';}else{document.getElementById('home_custom_event_wrapper').style.display='none';document.getElementById('home-event_type').value=this.value;}">
               <option value="">Select event type</option>
               <option value="Conference">Conference</option>
@@ -105,18 +105,18 @@ const { hideJourney = false } = Astro.props;
             <input type="hidden" id="home-event_type-hidden" name="event_type_fallback" disabled />
           </div>
           <div class="form-group">
-            <label for="home-date">Event Date *</label>
+            <label for="home-date">{content.label_date || "EVENT DATE"} *</label>
             <input type="date" id="home-date" name="date" required />
           </div>
         </div>
 
         <div class="form-row">
           <div class="form-group">
-            <label for="home-location">Location (or "Virtual") *</label>
+            <label for="home-location">{content.label_location || "LOCATION (OR \"VIRTUAL\")"} *</label>
             <input type="text" id="home-location" name="location" required placeholder="City, State" />
           </div>
           <div class="form-group">
-            <label for="home-size">Audience Size *</label>
+            <label for="home-size">{content.label_size || "AUDIENCE SIZE"} *</label>
             <select id="home-size" name="size" required class="select-input">
               <option value="">Select size</option>
               <option value="Under 50">Under 50</option>
@@ -128,7 +128,7 @@ const { hideJourney = false } = Astro.props;
         </div>
 
         <div class="form-group full-width">
-          <label for="home-details">Tell us about your audience and goals *</label>
+          <label for="home-details">{content.label_details || "TELL US ABOUT YOUR AUDIENCE AND GOALS"} *</label>
           <textarea id="home-details" name="details" rows="4" required placeholder="We are looking for..."></textarea>
         </div>
         
@@ -138,7 +138,7 @@ const { hideJourney = false } = Astro.props;
         </div>
 
         <div class="form-submit text-center" style="margin-top: var(--sp-4);">
-          <button type="submit" class="submit-btn magnetic-btn">Submit Request &rarr;</button>
+          <button type="submit" class="submit-btn magnetic-btn">{content.btn_submit || "Submit Request →"} &rarr;</button>
         </div>
       </form>
       <div id="home-success-msg" style="display: none; text-align: center; padding: 2rem 0;" class="mt-8">
@@ -272,7 +272,7 @@ const { hideJourney = false } = Astro.props;
             alert('There was a problem submitting your request. Please try again later.');
             if (submitBtn) {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Submit Request &rarr;';
+                submitBtn.innerHTML = '{content.btn_submit || "Submit Request →"} &rarr;';
             }
           }
         } catch (error) {
@@ -280,7 +280,7 @@ const { hideJourney = false } = Astro.props;
           alert('Could not connect to the server. Please try again later.');
           if (submitBtn) {
               submitBtn.disabled = false;
-              submitBtn.innerHTML = 'Submit Request &rarr;';
+              submitBtn.innerHTML = '{content.btn_submit || "Submit Request →"} &rarr;';
           }
         }
       });
