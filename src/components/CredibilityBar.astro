@@ -1,30 +1,29 @@
----
+﻿---
 import Waveform from './Waveform.astro';
 
 const { collections = {} } = Astro.props;
 let items = collections.credibility_bar || [];
 
+// Filter out TBC and cap at 4 items
+items = items.filter(item => item.title && item.title.toUpperCase() !== 'TBC').slice(0, 4);
+
 if (items.length === 0) {
-  // Fallbacks if db is empty
+  // Fallbacks if db is empty or all are TBC
   items = [
-    { title: "15+", subtitle: "Years" },
-    { title: "4,000+", subtitle: "Hours of Outreach" },
-    { title: "20", subtitle: "Speaking Topics" }
+    { title: '15+', subtitle: 'YEARS' }
   ];
 }
-
-// Cap at 6 items
-items = items.slice(0, 6);
 ---
 
-<section class="credibility-bar theme-ink reveal-up">
+{items.length > 0 && (
+<section class="credibility-bar theme-ink reveal-up" aria-label="Key Figures">
   <Waveform opacity={0.04} flipX={true} />
   <div class="credibility-container">
     {items.map((item, index) => (
       <>
         <div class="credibility-item">
           <span class="credibility-stat">{item.title}</span>
-          <span class="text-micro credibility-label">{item.subtitle}</span>
+          <span class="credibility-label">{item.subtitle}</span>
         </div>
         
         {index < items.length - 1 && (
@@ -34,12 +33,12 @@ items = items.slice(0, 6);
     ))}
   </div>
 </section>
+)}
 
 <style>
   .credibility-bar {
-    color: var(--color-gold);
-    padding: var(--sp-8) 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    padding: var(--sp-12) 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
@@ -51,16 +50,14 @@ items = items.slice(0, 6);
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--sp-6);
+    gap: var(--sp-8);
   }
 
   @media (min-width: 768px) {
     .credibility-container {
       flex-direction: row;
       justify-content: center;
-      flex-wrap: wrap;
-      column-gap: 4rem;
-      row-gap: 3rem;
+      gap: 0;
     }
   }
 
@@ -69,32 +66,38 @@ items = items.slice(0, 6);
     flex-direction: column;
     align-items: center;
     text-align: center;
+    padding: 0 4vw; /* Responsive spacing */
   }
 
   .credibility-stat {
     font-family: var(--font-serif);
-    font-size: var(--text-h2);
+    font-size: clamp(3.5rem, 6vw, 4.5rem); /* Large serif numeral */
     line-height: 1;
-    margin-bottom: var(--sp-2);
+    margin-bottom: var(--sp-3);
+    color: var(--color-ivory); 
+  }
+
+  .credibility-label {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-gold); /* small-caps gold label */
   }
 
   .credibility-divider {
-    width: 40px;
+    width: 60px;
     height: 1px;
     background-color: var(--color-gold);
-    opacity: 0.3;
+    opacity: 0.25;
   }
 
   @media (min-width: 768px) {
     .credibility-divider {
       width: 1px;
-      height: 60px;
+      height: 80px;
       align-self: center;
-    }
-    
-    /* Hide dividers that wrap to a new line to keep it clean */
-    .credibility-divider:nth-of-type(3n) {
-      display: none;
     }
   }
 </style>
