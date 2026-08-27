@@ -30,7 +30,15 @@ try {
 
 const quote = dbContent.quote || '"Every conversation is an opportunity to plant a seed of hope, strengthen a community, and inspire meaningful change."';
 const valuesLine = dbContent.values_line || 'FAITH. FAMILY. COMMUNITY. PURPOSE. IMPACT.';
-const endorsement = dbContent.endorsement || 'I\'m also the founder of GambleFreeGear — purpose-driven apparel raising awareness of gambling harm.';
+const endorsement = dbContent.endorsement || 'I\'m also the founder of GambleFreeGear ?" purpose-driven apparel raising awareness of gambling harm.';
+const col1Title = dbContent.col1_title || 'EXPLORE';
+const col2Title = dbContent.col2_title || 'CONNECT';
+const col3Title = dbContent.col3_title || 'CONTACT';
+const col4Title = dbContent.col4_title || 'NEWSLETTER';
+const contactEmail = dbContent.contact_email || 'booking@tiffanywebbimpact.com';
+const contactLocation = dbContent.contact_location || 'Chicago, IL &middot; Available nationally';
+const newsletterPlaceholder = dbContent.newsletter_placeholder || 'Email address';
+const newsletterBtn = dbContent.newsletter_btn || 'JOIN';
 const year = new Date().getFullYear();
 ---
 
@@ -54,7 +62,7 @@ const year = new Date().getFullYear();
       
       {/* Col 1: EXPLORE */}
       <div>
-        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ivory); margin-bottom: 1.5rem;">EXPLORE</h4>
+        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ivory); margin-bottom: 1.5rem;">{col1Title}</h4>
         <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
           <li><a href="/about" class="footer-link">About</a></li>
           <li><a href="/services" class="footer-link">Services</a></li>
@@ -66,7 +74,7 @@ const year = new Date().getFullYear();
 
       {/* Col 2: CONNECT */}
       <div>
-        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ivory); margin-bottom: 1.5rem;">CONNECT</h4>
+        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ivory); margin-bottom: 1.5rem;">{col2Title}</h4>
         <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
           {activeSocials.length > 0 ? (
             activeSocials.map(social => (
@@ -80,19 +88,19 @@ const year = new Date().getFullYear();
 
       {/* Col 3: CONTACT */}
       <div>
-        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ivory); margin-bottom: 1.5rem;">CONTACT</h4>
+        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ivory); margin-bottom: 1.5rem;">{col3Title}</h4>
         <div style="font-family: var(--font-sans); font-size: 0.95rem; color: rgba(255,255,255,0.65); line-height: 1.8;">
-          <p><a href="mailto:booking@tiffanywebbimpact.com" class="footer-link">booking@tiffanywebbimpact.com</a></p>
-          <p style="margin-top: 1rem; color: rgba(255,255,255,0.45); line-height: 1.5;">Chicago, IL &middot; Available nationally</p>
+          <p><a href="mailto:booking@tiffanywebbimpact.com" class="footer-link" href={`mailto:${contactEmail}`} class="footer-link">{contactEmail}</a></p>
+          <p style="margin-top: 1rem; color: rgba(255,255,255,0.45); line-height: 1.5;" set:html={contactLocation}></p>
         </div>
       </div>
 
       {/* Col 4: NEWSLETTER */}
       <div>
-        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ivory); margin-bottom: 1.5rem;">NEWSLETTER</h4>
+        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ivory); margin-bottom: 1.5rem;">{col4Title}</h4>
         <form style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;" onsubmit="event.preventDefault();">
-          <input type="email" placeholder="Email address" required class="newsletter-input" />
-          <button type="submit" class="newsletter-btn">JOIN</button>
+          <input type="email" placeholder={newsletterPlaceholder} required class="newsletter-input" />
+          <button type="submit" class="newsletter-btn">{newsletterBtn}</button>
         </form>
       </div>
 
