@@ -1,0 +1,261 @@
+﻿---
+import Eyebrow from './Eyebrow.astro';
+
+const { content = {}, collections = {} } = Astro.props;
+const events = collections.events || [];
+
+const eyebrow = content.eyebrow || "STAGES & IMPACT";
+const headline = content.headline || "Where the work has taken me.";
+---
+
+<section id="impact-preview" class="events-impact section-pad theme-ink relative" style="padding-top: 6rem; padding-bottom: 6rem; overflow: hidden;">
+  <div class="container relative z-10">
+    <div class="events-header">
+      <Eyebrow>{eyebrow}</Eyebrow>
+      <h2 class="section-title text-gradient">{headline}</h2>
+    </div>
+
+    {events.length === 0 ? (
+      /* EMPTY STATE */
+      <div class="events-empty-state reveal-up">
+        <p class="empty-text">Next dates announced soon.</p>
+        <a href="/work-with-tiffany" class="btn-primary mt-4">Work with Tiffany</a>
+      </div>
+    ) : (
+      /* POPULATED STATE - CAROUSEL */
+      <div class="events-carousel-wrapper reveal-up">
+        <div class="events-carousel">
+          {events.map((evt) => {
+            const status = evt.tag || "Upcoming";
+            const format = evt.subtitle || "Keynote";
+            const name = evt.title;
+            const city = evt.content_html || "City, State";
+            const audience = evt.stat_number || "500+";
+            const link = evt.link_url || "/impact";
+
+            return (
+              <div class="event-card">
+                <div class="event-meta">
+                  <span class={`status-tag ${status.toLowerCase() === 'past' ? 'past' : 'upcoming'}`}>{status}</span>
+                  <span class="format-tag">{format}</span>
+                </div>
+                <h3 class="event-name">{name}</h3>
+                <div class="event-details">
+                  <div class="detail-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                    {city}
+                  </div>
+                  <div class="detail-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                    {audience} Attendees
+                  </div>
+                </div>
+                <a href={link} class="event-link">
+                  Event details <span class="arrow">&rarr;</span>
+                </a>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    )}
+
+    <div class="events-footer reveal-up" style="transition-delay: 0.2s;">
+      <a href="/impact" class="text-link">See the full picture <span class="arrow">&rarr;</span></a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .events-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .text-gradient {
+    background: linear-gradient(92deg, var(--color-gold), var(--color-coral));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+  }
+
+  /* Empty State */
+  .events-empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px dashed rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-lg);
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .empty-text {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--color-ivory);
+    font-weight: 300;
+  }
+
+  /* Populated Carousel */
+  .events-carousel-wrapper {
+    margin-bottom: 4rem;
+    width: 100%;
+    overflow-x: auto;
+    padding-bottom: 2rem;
+    /* Hide scrollbar for cleaner look */
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .events-carousel-wrapper::-webkit-scrollbar {
+    display: none;
+  }
+
+  .events-carousel {
+    display: flex;
+    gap: 2rem;
+    width: max-content;
+  }
+
+  .event-card {
+    width: 380px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+  }
+
+  .event-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(217, 162, 58, 0.3);
+    transform: translateY(-4px);
+  }
+
+  .event-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .status-tag {
+    padding: 0.35rem 0.8rem;
+    border-radius: 100px;
+    font-weight: 600;
+  }
+
+  .status-tag.upcoming {
+    background: rgba(217, 162, 58, 0.15);
+    color: var(--color-gold);
+  }
+
+  .status-tag.past {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--color-parchment);
+  }
+
+  .format-tag {
+    color: var(--color-parchment);
+    opacity: 0.8;
+  }
+
+  .event-name {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    color: var(--color-ivory);
+    line-height: 1.3;
+    font-weight: 400;
+  }
+
+  .event-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    flex-grow: 1;
+  }
+
+  .detail-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: rgba(251, 246, 234, 0.7);
+    font-size: 0.95rem;
+  }
+
+  .detail-item svg {
+    width: 18px;
+    height: 18px;
+    opacity: 0.7;
+    color: var(--color-gold);
+  }
+
+  .event-link {
+    color: var(--color-gold);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: opacity 0.3s ease;
+  }
+
+  .event-link:hover {
+    opacity: 0.8;
+  }
+
+  /* Footer Link */
+  .events-footer {
+    text-align: center;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 3rem;
+  }
+
+  .text-link {
+    color: var(--color-ivory);
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    transition: color 0.3s ease;
+  }
+
+  .text-link:hover {
+    color: var(--color-gold);
+  }
+
+  .arrow {
+    transition: transform 0.3s ease;
+  }
+
+  .text-link:hover .arrow, .event-link:hover .arrow {
+    transform: translateX(4px);
+  }
+</style>

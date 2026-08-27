@@ -8,6 +8,7 @@ import Expertise from '../components/Expertise.astro';
 import WhereSheWorks from '../components/WhereSheWorks.astro';
 import MediaBand from '../components/MediaBand.astro';
 import BookingSection from '../components/BookingSection.astro';
+import EventsImpact from '../components/EventsImpact.astro';
 import Proof from '../components/Proof.astro';
 import mysql from 'mysql2/promise';
 
@@ -64,6 +65,7 @@ try {
 		<MeetTiffany content={dbContent.meet_tiffany || {}} collections={dbCollections} />
 		<Expertise content={dbContent.expertise || {}} collections={dbCollections} />
 		<WhereSheWorks content={dbContent.who_can_benefit || {}} collections={dbCollections} />
+		<EventsImpact content={dbContent.events || {}} collections={dbCollections} />
 		<Proof content={dbContent.proof || {}} collections={dbCollections} />
 		<BookingSection content={dbContent.booking || {}} />
 	</main>
