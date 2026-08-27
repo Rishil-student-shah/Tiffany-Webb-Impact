@@ -1,4 +1,6 @@
-﻿---
+﻿const fs = require('fs');
+
+const content = ---
 import Waveform from './Waveform.astro';
 import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
@@ -169,3 +171,5 @@ const btn = content.button_text || "More about me \u2192";
     transform: scale(1.08);
   }
 </style>
+;
+fs.writeFileSync('D:/FREELANCE/TIFFANY WEB/Landing Page Work/tiffany-webb-astro/src/components/MeetTiffany.astro', content, 'utf8');
