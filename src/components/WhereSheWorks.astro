@@ -3,7 +3,7 @@ import Waveform from './Waveform.astro';
 import Eyebrow from './Eyebrow.astro';
 
 const { content = {}, collections = {} } = Astro.props;
-const audiences = collections.who_can_benefit || [];
+const audiences = collections.who_can_benefit || collections.where_she_works || [];
 
 const eyebrow = content.eyebrow || "WHO CAN BENEFIT FROM TIFFANY'S WORK?";
 const headline = content.headline || "For leaders ready to rethink what's possible.";
@@ -13,16 +13,21 @@ const p2 = content.body_2 || "";
 const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\">rethink what's</span><br/><span class=\"italic-accent\">possible.</span>";
 ---
 
-<section id="where-she-works" class="where-works section-pad theme-ink relative" style="padding-top: 8rem; padding-bottom: 8rem;">
-  <Waveform opacity={0.05} variant="B" flipY={true} />
+<section id="where-she-works" class="where-works section-pad theme-ink relative" style="padding-top: 6rem; padding-bottom: 6rem; overflow: hidden;">
+  <!-- Waveform placed softly behind -->
+  <Waveform opacity={0.03} variant="B" flipY={true} />
   
-  <div class="container relative z-10">
+  <!-- Changed to container-narrow to force massive gaps on the left and right sides of the screen -->
+  <div class="container-narrow relative z-10">
     <div class="works-grid">
       
       <!-- Left Column: Copy -->
       <div class="works-content reveal-up">
-        <div style="margin-bottom: 2rem;"><Eyebrow>{eyebrow}</Eyebrow></div>
-        <h2 class="section-title" style="font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.05; margin-bottom: 3rem; letter-spacing: -0.01em;" set:html={formattedHeadline}></h2>
+        <div style="margin-bottom: 1.5rem;">
+          <Eyebrow>{eyebrow}</Eyebrow>
+        </div>
+        
+        <h2 class="section-title works-title" style="font-size: clamp(2.2rem, 3.5vw, 3.5rem); line-height: 1.1; margin-bottom: 2rem; letter-spacing: -0.01em;" set:html={formattedHeadline}></h2>
         
         <div class="works-prose">
           {p1 && <p>{p1}</p>}
@@ -36,9 +41,9 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
           {audiences.map((aud, index) => {
             const num = (index + 1).toString().padStart(2, '0');
             return (
-              <div class="audience-item" style="padding: 1.8rem 0;">
+              <div class="audience-item" style="padding: 1.75rem 0;">
                 <div class="audience-num">{num} <span class="num-slash">//</span></div>
-                <div class="audience-title" style="font-size: 1.4rem; font-family: var(--font-serif); line-height: 1.25;">{aud.title}</div>
+                <div class="audience-title" style="font-size: 1.35rem; font-family: var(--font-serif); line-height: 1.25;">{aud.title}</div>
               </div>
             );
           })}
@@ -53,37 +58,40 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
   .works-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 3rem;
   }
 
+  /* Desktop layout */
   @media (min-width: 1024px) {
     .works-grid {
+      /* Pushes left column to be slightly narrower than right column */
       grid-template-columns: 0.9fr 1.1fr;
-      gap: 6rem;
-      align-items: center; /* Vertically centers the left text with the right list */
+      /* Small gap in the middle, since we want the huge gap on the outside */
+      gap: 3rem;
+      align-items: center;
     }
   }
 
-  /* Left Column Spacing Fixes */
-  .works-content {
-    display: flex;
-    flex-direction: column;
-    padding-right: 2rem; /* Extra breathing room horizontally */
+  /* Left Column */
+  .works-title {
+    /* Adjusted font size to match container-narrow safely */
+    font-size: clamp(2.2rem, 3.5vw, 3.5rem); 
+    line-height: 1.1; 
+    margin-bottom: 2rem; 
+    letter-spacing: -0.01em;
   }
 
-
-
   .works-prose {
-    max-width: 42ch;
+    max-width: 40ch;
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
+    gap: 1.25rem;
   }
 
   .works-prose p {
     font-size: 1.05rem;
-    color: rgba(251, 246, 234, 0.7); /* Ivory dimmed */
-    line-height: 1.7;
+    color: rgba(251, 246, 234, 0.75);
+    line-height: 1.6;
     font-weight: 400;
   }
 
@@ -108,12 +116,11 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
   .audience-item {
     display: flex;
     align-items: flex-start;
-    gap: 1rem;
-    padding: 1.8rem 0;
+    gap: 0.75rem;
+    padding: 1.75rem 0;
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
 
-  /* Remove bottom border from the last two items to match the old design */
   @media (min-width: 640px) {
     .audience-item:nth-last-child(-n+2) {
       border-bottom: none;
@@ -123,24 +130,24 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
   .audience-num {
     color: var(--color-gold);
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     letter-spacing: 0.1em;
     display: flex;
     align-items: center;
-    gap: 0.4rem;
+    gap: 0.35rem;
     flex-shrink: 0;
-    width: 3.5rem;
-    margin-top: 0.4rem; /* Align with the first line of the serif text */
+    width: 2.75rem;
+    margin-top: 0.25rem;
   }
   
   .num-slash {
     color: rgba(217, 162, 58, 0.4);
-    font-size: 0.75rem;
+    font-size: 0.65rem;
   }
 
   .audience-title {
     color: var(--color-ivory);
-    font-size: 1.4rem;
+    font-size: 1.35rem;
     font-family: var(--font-serif);
     line-height: 1.25;
     font-weight: 400;
