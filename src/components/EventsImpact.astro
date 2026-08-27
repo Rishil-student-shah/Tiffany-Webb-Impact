@@ -7,11 +7,13 @@ const events = collections.events || [];
 
 const eyebrow = content.eyebrow || "STAGES & IMPACT";
 const headline = content.headline || "Where the work has taken me.";
+const btnText = content.btn_text || "BOOK TIFFANY";
+const btnLink = content.btn_link || "/work-with-tiffany";
 ---
 
 <section id="impact-preview" class="events-impact section-pad theme-ink relative" style="padding-top: 6rem; padding-bottom: 6rem; overflow: hidden;">
   <Waveform opacity={0.03} variant="B" flipY={true} />
-  <div class="container relative z-10">
+  <div class="container-narrow relative z-10" style="padding-left: 5vw; padding-right: 5vw; max-width: 1300px; margin: 0 auto;">
     <div class="events-header">
       <Eyebrow>{eyebrow}</Eyebrow>
       <h2 class="section-title text-gradient">{headline}</h2>
@@ -26,7 +28,7 @@ const headline = content.headline || "Where the work has taken me.";
     ) : (
       /* POPULATED STATE - CAROUSEL */
       <div class="events-carousel-wrapper reveal-up">
-        <div class="events-carousel">
+        <div class="events-carousel" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem; width: 100%;">
           {events.map((evt) => {
             const status = evt.icon_svg || "Upcoming";
             const format = evt.subtitle || "Keynote";
@@ -129,7 +131,7 @@ const headline = content.headline || "Where the work has taken me.";
   .events-carousel {
     display: flex;
     gap: 2rem;
-    width: max-content;
+    /* width: max-content; removed to allow wrapping */
   }
 
   .event-card {
@@ -286,4 +288,10 @@ const headline = content.headline || "Where the work has taken me.";
     transform: translateY(-3px);
   }
 
+
+  #populated-book-btn:hover {
+    background: #E5C354 !important;
+    border-color: #E5C354 !important;
+    transform: translateY(-3px);
+  }
 </style>
