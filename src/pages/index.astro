@@ -5,7 +5,6 @@ import ImpactBand from '../components/ImpactBand.astro';
 import CredibilityBar from '../components/CredibilityBar.astro';
 import MeetTiffany from '../components/MeetTiffany.astro';
 import Expertise from '../components/Expertise.astro';
-import SpeakingFormats from '../components/SpeakingFormats.astro';
 import WhereSheWorks from '../components/WhereSheWorks.astro';
 import MediaBand from '../components/MediaBand.astro';
 import BookingSection from '../components/BookingSection.astro';
@@ -64,7 +63,6 @@ try {
 		<CredibilityBar collections={dbCollections} />
 		<MeetTiffany content={dbContent.meet_tiffany || {}} collections={dbCollections} />
 		<Expertise content={dbContent.expertise || {}} collections={dbCollections} />
-		<SpeakingFormats content={dbContent.speaking_formats || {}} collections={dbCollections} />
 		<WhereSheWorks content={dbContent.who_can_benefit || {}} collections={dbCollections} />
 		<Proof content={dbContent.proof || {}} collections={dbCollections} />
 		<BookingSection content={dbContent.booking || {}} />
