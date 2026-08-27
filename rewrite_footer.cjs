@@ -1,4 +1,11 @@
----
+﻿const fs = require('fs');
+let content = fs.readFileSync('D:/FREELANCE/TIFFANY WEB/Landing Page Work/tiffany-webb-astro/src/components/Footer.astro', 'utf8');
+
+// We are going to replace the static variables with a database fetch.
+// We also need to inline all the CSS classes since Tailwind was breaking.
+// I will rewrite Footer.astro to ensure 100% styling safety and CRM integration.
+
+const newFooter = `---
 import Waveform from './Waveform.astro';
 import mysql from 'mysql2/promise';
 
@@ -16,12 +23,12 @@ try {
     queueLimit: 0
   });
 
-  const [contentRows] = await pool.query(`SELECT key_name, content_value FROM website_content WHERE section = 'footer'`);
+  const [contentRows] = await pool.query(\`SELECT key_name, content_value FROM website_content WHERE section = 'footer'\`);
   contentRows.forEach(row => {
     dbContent[row.key_name] = row.content_value;
   });
 
-  const [socialRows] = await pool.query(`SELECT title, subtitle FROM website_collections WHERE section_name = 'social_links' ORDER BY sort_order ASC`);
+  const [socialRows] = await pool.query(\`SELECT title, subtitle FROM website_collections WHERE section_name = 'social_links' ORDER BY sort_order ASC\`);
   activeSocials = socialRows.map(row => ({ platform: row.title, url: row.subtitle })).filter(link => link.url);
 
 } catch(e) {
@@ -30,7 +37,7 @@ try {
 
 const quote = dbContent.quote || '"Every conversation is an opportunity to plant a seed of hope, strengthen a community, and inspire meaningful change."';
 const valuesLine = dbContent.values_line || 'FAITH. FAMILY. COMMUNITY. PURPOSE. IMPACT.';
-const endorsement = dbContent.endorsement || 'I\'m also the founder of GambleFreeGear — purpose-driven apparel raising awareness of gambling harm.';
+const endorsement = dbContent.endorsement || 'I\\'m also the founder of GambleFreeGear — purpose-driven apparel raising awareness of gambling harm.';
 const year = new Date().getFullYear();
 ---
 
@@ -217,3 +224,6 @@ const year = new Date().getFullYear();
     }
   }
 </style>
+`;
+
+fs.writeFileSync('D:/FREELANCE/TIFFANY WEB/Landing Page Work/tiffany-webb-astro/src/components/Footer.astro', newFooter, 'utf8');
