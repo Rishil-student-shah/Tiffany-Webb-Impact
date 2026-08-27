@@ -1,199 +1,269 @@
----
+﻿---
 import Waveform from './Waveform.astro';
-import Newsletter from './Newsletter.astro';
-import Button from './Button.astro';
-import { navLinks, navCta } from '../config/navigation.js';
 
-const year = new Date().getFullYear();
+// Config array for social links. Empty URL means it won't render.
+const socialLinks = [
+  { platform: "LinkedIn", url: "https://linkedin.com/in/tiffanywebb", active: true },
+  { platform: "Instagram", url: "https://instagram.com/tiffanywebb", active: true },
+  { platform: "YouTube", url: "", active: false }, // empty/inactive
+  { platform: "TikTok", url: "", active: false } // empty/inactive
+];
+
+const activeSocials = socialLinks.filter(link => link.url && link.active);
+const year = new Date().getFullYear(); // Using dynamic year for future-proofing, though spec says 2026
 ---
 
-<Newsletter />
+<footer class="site-footer theme-ink relative" style="overflow: hidden; padding-top: 4rem;">
+  <Waveform opacity={0.04} variant="C" />
 
-<footer class="footer theme-ink" style="position: relative;">
-  <Waveform opacity={0.06} />
-  
-  <!-- Values Strip -->
-  <div class="values-strip" style="position: relative; z-index: 10; padding: 1.5rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2); display: flex; justify-content: center; align-items: center; width: 100%;">
-    <p style="color: var(--color-gold); font-family: var(--font-mono); font-size: 1.1rem; letter-spacing: 0.15em; text-transform: uppercase; text-align: center; margin: 0;">FAITH &middot; FAMILY &middot; COMMUNITY &middot; PURPOSE &middot; IMPACT</p>
-  </div>
-
-  <div class="footer-container" style="position: relative; z-index: 10;">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <h2 class="footer-logo">Tiffany Webb</h2>
-        <p class="italic-accent" style="font-family: var(--font-serif); font-size: 1.15rem; margin-top: 0.25rem; white-space: nowrap;">Community Impact Strategist</p>
-        <p style="margin-top: 1rem; color: rgba(255,255,255,0.6); font-size: 0.9rem;">
-          Chicago, IL<br/>
-          Speaking globally.
-        </p>
-        
-        <!-- GambleFreeGear Endorsement -->
-        <div style="margin-top: 2rem; padding: 1rem; border-left: 2px solid var(--color-gold); background: rgba(255,255,255,0.03);">
-          <p style="font-family: var(--font-sans); font-size: 0.85rem; color: rgba(255,255,255,0.8); line-height: 1.4;">Founder of <strong style="color: var(--color-ivory);">GambleFreeGear</strong>. Reclaiming spaces from gambling harm.</p>
-        </div>
+  <div class="container relative z-10">
+    
+    {/* Top Band: Quote and Values */}
+    <div class="footer-top-band text-center mb-16">
+      <p class="footer-quote">
+        "Every conversation is an opportunity to plant a seed of hope, strengthen a community, and inspire meaningful change."
+      </p>
+      <div class="values-line mt-6 pt-6 border-t border-white/10">
+        FAITH. FAMILY. COMMUNITY. PURPOSE. IMPACT.
       </div>
+    </div>
+
+    {/* Four Columns Grid */}
+    <div class="footer-grid">
       
-      <div class="footer-navs">
-        <div class="footer-col">
-          <h3 class="text-micro footer-heading">Explore</h3>
-          <ul class="footer-links">
-            {navLinks.map((link) => (
-              <li><a href={link.href}>{link.label}</a></li>
-            ))}
-          </ul>
-        </div>
-        
-        <div class="footer-col">
-          <h3 class="text-micro footer-heading">Connect</h3>
-          <ul class="footer-links">
-            <li><a href="https://linkedin.com/in/tiffanywebb" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-            <li><a href="https://instagram.com/tiffanywebb" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-            <li><a href="https://youtube.com/@tiffanywebb" target="_blank" rel="noopener noreferrer">YouTube</a></li>
-            <li><a href="https://tiktok.com/@tiffanywebb" target="_blank" rel="noopener noreferrer">TikTok</a></li>
-          </ul>
-        </div>
+      {/* Col 1: EXPLORE */}
+      <div class="footer-col">
+        <h4 class="col-heading">EXPLORE</h4>
+        <ul class="col-links">
+          <li><a href="/about">About</a></li>
+          <li><a href="/services">Services</a></li>
+          <li><a href="/impact">Impact</a></li>
+          <li><a href="/media">Media</a></li>
+          <li><a href="/insights">Insights</a></li>
+        </ul>
+      </div>
 
-        <div class="footer-col">
-          <h3 class="text-micro footer-heading">Contact</h3>
-          <ul class="footer-links">
-            <li>Booking enquiries</li>
-            <li><a href="/work-with-tiffany">booking@tiffanywebb.com</a></li>
-            <li>Media enquiries welcome.</li>
-          </ul>
+      {/* Col 2: CONNECT */}
+      <div class="footer-col">
+        <h4 class="col-heading">CONNECT</h4>
+        <ul class="col-links">
+          {activeSocials.length > 0 ? (
+            activeSocials.map(social => (
+              <li><a href={social.url} target="_blank" rel="noopener noreferrer">{social.platform}</a></li>
+            ))
+          ) : (
+            <li><span class="text-muted">No active channels</span></li>
+          )}
+        </ul>
+      </div>
+
+      {/* Col 3: CONTACT */}
+      <div class="footer-col">
+        <h4 class="col-heading">CONTACT</h4>
+        <div class="col-text">
+          <p><a href="mailto:booking@tiffanywebbimpact.com" class="hover-gold">booking@tiffanywebbimpact.com</a></p>
+          <p class="mt-4 text-muted" style="line-height: 1.5;">Chicago, IL &middot; Available nationally</p>
         </div>
+      </div>
+
+      {/* Col 4: NEWSLETTER */}
+      <div class="footer-col">
+        <h4 class="col-heading">NEWSLETTER</h4>
+        <form class="footer-newsletter-form mt-4" onsubmit="event.preventDefault();">
+          <input type="email" placeholder="Email address" required class="newsletter-input" />
+          <button type="submit" class="newsletter-btn">JOIN</button>
+        </form>
+      </div>
+
+    </div>
+
+    {/* Endorsement Line */}
+    <div class="endorsement-line text-center mt-16 pt-8 border-t border-white/10">
+      <p class="text-muted">
+        I'm also the founder of <a href="https://gamblefreegear.com" target="_blank" rel="noopener noreferrer" class="gold-link">GambleFreeGear</a> — purpose-driven apparel raising awareness of gambling harm.
+      </p>
+    </div>
+
+    {/* Bottom Rule */}
+    <div class="bottom-rule mt-12 pb-8 flex flex-col md:flex-row justify-between items-center gap-4 text-micro text-muted">
+      <span>&copy; 2026 Tiffany Webb</span>
+      <div class="legal-links flex gap-4">
+        <a href="/privacy" class="hover-gold">Privacy Policy</a>
+        <span>&middot;</span>
+        <a href="/terms" class="hover-gold">Terms of Use</a>
       </div>
     </div>
 
-    <div class="footer-bottom">
-      <p class="text-micro">&copy; {year} Tiffany Webb. All rights reserved.</p>
-      <div class="footer-legal">
-        <a href="/privacy" class="text-micro">Privacy Policy</a>
-        <a href="/terms" class="text-micro">Terms of Use</a>
-      </div>
-    </div>
   </div>
 </footer>
 
 <style>
-  .footer {
-    position: relative;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    background: var(--glow-gradient);
-    z-index: 10;
+  .site-footer {
+    background: var(--color-ink);
+    border-top: 1px solid rgba(255,255,255,0.05);
   }
 
-  .footer-container {
-    width: 100%;
-    max-width: 1200px;
+  /* Top Band */
+  .footer-quote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    font-style: italic;
+    color: var(--color-ivory);
+    max-width: 800px;
     margin: 0 auto;
-    padding: var(--sp-16) var(--sp-6) var(--sp-8);
+    line-height: 1.4;
+    font-weight: 300;
   }
 
-  .footer-top {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-12);
-    margin-bottom: var(--sp-16);
+  .values-line {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--color-gold);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    border-top: 1px solid rgba(255,255,255,0.05);
   }
 
-  @media (min-width: 1024px) {
-    .footer-top {
-      flex-direction: row;
-      justify-content: space-between;
-      gap: var(--sp-24);
+  /* Footer Grid */
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  @media (min-width: 640px) {
+    .footer-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  .footer-brand {
-    flex: 0 0 auto;
-    max-width: 300px;
+  @media (min-width: 1024px) {
+    .footer-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
   }
 
-  .footer-logo {
-    font-family: var(--font-serif);
-    font-size: 2rem;
+  .col-heading {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
     color: var(--color-ivory);
-    margin-bottom: var(--sp-2);
+    margin-bottom: 1.5rem;
   }
 
-  .footer-tagline {
-    color: var(--color-gold);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
+  .col-links, .col-text {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.8;
   }
-
-  .footer-navs {
-    flex: 1;
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--sp-12);
-    justify-content: space-between;
-  }
-
-  .footer-col {
-    min-width: 120px;
-  }
-
-  .footer-heading {
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: var(--sp-6);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .footer-links {
+  
+  .col-links {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--sp-4);
+    gap: 0.75rem;
   }
 
-  .footer-links li {
-    font-size: 0.95rem;
-    color: rgba(231, 224, 207, 0.7);
-  }
-
-  .footer-links a {
-    color: inherit;
+  .col-links a, .hover-gold {
+    color: rgba(255,255,255,0.65);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: color 0.3s ease;
   }
 
-  .footer-links a:hover {
+  .col-links a:hover, .hover-gold:hover {
     color: var(--color-gold);
   }
 
-  .footer-bottom {
+  .text-muted {
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* Newsletter Form */
+  .footer-newsletter-form {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-4);
-    align-items: center;
-    padding-top: var(--sp-8);
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: rgba(255, 255, 255, 0.4);
+    gap: 0.75rem;
   }
 
-  @media (min-width: 768px) {
-    .footer-bottom {
-      flex-direction: row;
-      justify-content: space-between;
-    }
+  .newsletter-input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 4px;
+    color: var(--color-ivory);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
   }
 
-  .footer-legal {
-    display: flex;
-    gap: var(--sp-6);
+  .newsletter-input:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    background: rgba(255,255,255,0.06);
   }
 
-  .footer-legal a {
-    color: inherit;
+  .newsletter-btn {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--color-ivory);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .newsletter-btn:hover {
+    background: var(--color-gold);
+    color: var(--color-ink);
+    border-color: var(--color-gold);
+  }
+
+  /* Endorsement Line */
+  .endorsement-line {
+    border-top: 1px solid rgba(255,255,255,0.05);
+    font-size: 0.95rem;
+  }
+
+  .gold-link {
+    color: var(--color-gold);
     text-decoration: none;
-    transition: color 0.2s ease;
+    transition: opacity 0.3s ease;
   }
 
-  .footer-legal a:hover {
-    color: var(--color-parchment);
+  .gold-link:hover {
+    opacity: 0.8;
+  }
+
+  /* Utility Layout */
+  .border-t { border-top-width: 1px; }
+  .border-white\/10 { border-color: rgba(255,255,255,0.1); }
+  .mt-4 { margin-top: 1rem; }
+  .mt-6 { margin-top: 1.5rem; }
+  .mt-12 { margin-top: 3rem; }
+  .mt-16 { margin-top: 4rem; }
+  .pt-6 { padding-top: 1.5rem; }
+  .pt-8 { padding-top: 2rem; }
+  .pb-8 { padding-bottom: 2rem; }
+  .mb-16 { margin-bottom: 4rem; }
+  .text-center { text-align: center; }
+  .flex { display: flex; }
+  .flex-col { flex-direction: column; }
+  .justify-between { justify-content: space-between; }
+  .items-center { align-items: center; }
+  .gap-4 { gap: 1rem; }
+  
+  @media (min-width: 768px) {
+    .md\:flex-row { flex-direction: row; }
   }
 </style>
