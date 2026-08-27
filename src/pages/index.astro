@@ -1,4 +1,4 @@
----
+﻿---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
 import ImpactBand from '../components/ImpactBand.astro';
@@ -6,10 +6,7 @@ import CredibilityBar from '../components/CredibilityBar.astro';
 import MeetTiffany from '../components/MeetTiffany.astro';
 import Expertise from '../components/Expertise.astro';
 import SpeakingFormats from '../components/SpeakingFormats.astro';
-
-
-import Proof from '../components/Proof.astro';
-import EventsImpact from '../components/EventsImpact.astro';
+import WhereSheWorks from '../components/WhereSheWorks.astro';
 import MediaBand from '../components/MediaBand.astro';
 import BookingSection from '../components/BookingSection.astro';
 import mysql from 'mysql2/promise';
@@ -42,20 +39,20 @@ try {
   });
 
   // Fetch Collections
-  const [collectionRows] = await pool.query(`
-    SELECT c.* 
-    FROM website_collections c
-    JOIN website_pages p ON c.page_id = p.id 
-    WHERE p.slug = 'home'
-    ORDER BY c.section_name, c.sort_order
+  const [colRows] = await pool.query(`
+    SELECT section_name, item_title as title, item_order as sort_order, subtitle, content_html, image_url, icon_svg 
+    FROM website_collections 
+    JOIN website_pages ON website_collections.page_id = website_pages.id 
+    WHERE website_pages.slug = 'home'
+    ORDER BY section_name, item_order ASC
   `);
-
-  collectionRows.forEach(row => {
+  
+  colRows.forEach(row => {
     if (!dbCollections[row.section_name]) dbCollections[row.section_name] = [];
     dbCollections[row.section_name].push(row);
   });
 } catch (e) {
-  console.error("Failed to load DB content for Astro page", e);
+  console.error("Database connection failed for SSG, using fallbacks:", e);
 }
 ---
 
@@ -67,10 +64,7 @@ try {
 		<MeetTiffany content={dbContent.meet_tiffany || {}} collections={dbCollections} />
 		<Expertise content={dbContent.expertise || {}} collections={dbCollections} />
 		<SpeakingFormats content={dbContent.speaking_formats || {}} collections={dbCollections} />
-		
-		
-		<Proof content={dbContent.proof || {}} collections={dbCollections} />
-		<EventsImpact content={dbContent.events || {}} collections={dbCollections} />
+		<WhereSheWorks content={dbContent.where_she_works || {}} collections={dbCollections} />
 		<BookingSection content={dbContent.booking || {}} />
 	</main>
 </Layout>

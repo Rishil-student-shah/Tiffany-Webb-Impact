@@ -1,0 +1,146 @@
+﻿---
+import Waveform from './Waveform.astro';
+import Eyebrow from './Eyebrow.astro';
+import Button from './Button.astro';
+
+const { content = {}, collections = {} } = Astro.props;
+const audiences = collections.where_she_works || [];
+
+const eyebrow = content.eyebrow || "WHO CAN BENEFIT FROM THIS WORK?";
+const headline = content.headline || "For leaders ready to rethink what's possible.";
+const p1 = content.body_1 || "I help healthcare, behavioral health, public health, nonprofit, education, and community leaders think differently about how they reach people and create impact.";
+const p2 = content.body_2 || "My work combines lived understanding, professional expertise, and community insight to help leaders challenge familiar approaches, uncover opportunities, design stronger programs, and build strategies that connect organizational goals with the people, families, and communities they serve.";
+const btn = content.button_text || "How I help →";
+
+// Process headline to make "what's possible." italic with gradient
+const formattedHeadline = headline.replace("what's possible.", `<span class="italic-accent">what's possible.</span>`);
+---
+
+<section id="where-she-works" class="where-works section-pad theme-ink relative">
+  <Waveform opacity={0.05} variant="B" flipY={true} />
+  
+  <div class="container relative z-10">
+    <div class="works-grid">
+      
+      <!-- Left Column: Copy -->
+      <div class="works-content reveal-up">
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <h2 class="section-title" set:html={formattedHeadline}></h2>
+        
+        <div class="works-prose">
+          <p>{p1}</p>
+          <p>{p2}</p>
+        </div>
+      </div>
+      
+      <!-- Right Column: Audiences -->
+      <div class="works-audiences reveal-up" style="transition-delay: 0.1s;">
+        <div class="audience-list">
+          {audiences.map((aud, index) => {
+            const num = (index + 1).toString().padStart(2, '0');
+            return (
+              <div class="audience-item">
+                <span class="audience-num">{num}</span>
+                <span class="audience-title">{aud.title}</span>
+              </div>
+            );
+          })}
+        </div>
+        
+        <div class="works-cta">
+          <a href="/services" class="magnetic-btn link-arrow">{btn}</a>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</section>
+
+<style>
+  .works-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-12);
+  }
+
+  @media (min-width: 1024px) {
+    .works-grid {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: var(--sp-16);
+      align-items: flex-start;
+    }
+  }
+
+  /* Left Column */
+  .works-prose {
+    max-width: 46ch;
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
+  }
+
+  .works-prose p {
+    font-size: 1.15rem;
+    color: var(--color-ivory);
+    line-height: 1.6;
+    opacity: 0.9;
+  }
+
+  /* Right Column (Audiences) */
+  .works-audiences {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-12);
+  }
+
+  .audience-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    column-gap: var(--sp-8);
+  }
+
+  @media (min-width: 640px) {
+    .audience-list {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .audience-item {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-5);
+    padding: var(--sp-5) 0;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+
+  .audience-num {
+    color: var(--color-gold);
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+  }
+
+  .audience-title {
+    color: var(--color-ivory);
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .works-cta {
+    padding-top: var(--sp-2);
+  }
+  
+  .link-arrow {
+    color: var(--color-gold);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: color 0.3s ease;
+  }
+  
+  .link-arrow:hover {
+    color: var(--color-coral);
+  }
+</style>
