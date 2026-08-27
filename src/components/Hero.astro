@@ -2,7 +2,6 @@
 import Button from './Button.astro';
 import Waveform from './Waveform.astro';
 import { Image } from 'astro:assets';
-import speakerImg from '../assets/tiffany_hero_new.jpg';
 
 const { content = {} } = Astro.props;
 
@@ -52,7 +51,7 @@ const showReel = false;
     <div class="hero-media">
       <div class="hero-glass-frame">
         <div class="hero-image-mask parallax-wrap">
-          <Image src={speakerImg} alt="Tiffany Webb" class="hero-image parallax-img" data-speed="0.15" widths={[400, 800]} sizes="(max-width: 768px) 400px, 800px" />
+          <img src={content.hero_image || "/uploads/tiffany_hero_composite.jpg"} alt="Tiffany Webb" class="hero-image parallax-img" data-speed="0.15" />
         </div>
       </div>
     </div>
@@ -145,8 +144,8 @@ const showReel = false;
     display: flex;
     align-items: center;
     overflow: hidden;
-    background: var(--glow-gradient);
-    padding-top: 110px;
+    padding-top: 110px; /* Space for fixed nav */
+    background-color: var(--color-ink);
   }
 
   .hero-waveform {
