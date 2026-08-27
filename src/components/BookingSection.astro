@@ -4,9 +4,10 @@ import Eyebrow from './Eyebrow.astro';
 
 interface Props {
   hideJourney?: boolean;
+  content?: Record<string, string>;
 }
 
-const { hideJourney = false } = Astro.props;
+const { hideJourney = false, content = {} } = Astro.props;
 ---
 
 <section class="booking booking-section section-pad full-color-section relative overflow-hidden">
