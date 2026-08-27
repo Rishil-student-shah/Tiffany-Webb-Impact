@@ -40,11 +40,11 @@ try {
 
   // Fetch Collections
   const [colRows] = await pool.query(`
-    SELECT section_name, item_title as title, item_order as sort_order, subtitle, content_html, image_url, icon_svg 
+    SELECT section_name, title, sort_order, subtitle, content_html, image_url, icon_svg 
     FROM website_collections 
     JOIN website_pages ON website_collections.page_id = website_pages.id 
     WHERE website_pages.slug = 'home'
-    ORDER BY section_name, item_order ASC
+    ORDER BY section_name, sort_order ASC
   `);
   
   colRows.forEach(row => {
