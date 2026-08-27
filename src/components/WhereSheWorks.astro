@@ -22,7 +22,7 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
       <!-- Left Column: Copy -->
       <div class="works-content reveal-up">
         <div style="margin-bottom: 2rem;"><Eyebrow>{eyebrow}</Eyebrow></div>
-        <h2 class="section-title" style="font-size: clamp(3.5rem, 5.5vw, 5.5rem); line-height: 1.05; margin-bottom: 3rem; letter-spacing: -0.01em;" set:html={formattedHeadline}></h2>
+        <h2 class="section-title" style="font-size: clamp(2.5rem, 4vw, 4rem); line-height: 1.05; margin-bottom: 3rem; letter-spacing: -0.01em;" set:html={formattedHeadline}></h2>
         
         <div class="works-prose">
           {p1 && <p>{p1}</p>}
@@ -36,9 +36,9 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
           {audiences.map((aud, index) => {
             const num = (index + 1).toString().padStart(2, '0');
             return (
-              <div class="audience-item" style="padding: 2.5rem 0;">
+              <div class="audience-item" style="padding: 1.8rem 0;">
                 <div class="audience-num">{num} <span class="num-slash">//</span></div>
-                <div class="audience-title" style="font-size: 1.8rem; font-family: var(--font-serif); line-height: 1.25;">{aud.title}</div>
+                <div class="audience-title" style="font-size: 1.4rem; font-family: var(--font-serif); line-height: 1.25;">{aud.title}</div>
               </div>
             );
           })}
@@ -81,7 +81,7 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
   }
 
   .works-prose p {
-    font-size: 1.125rem;
+    font-size: 1.05rem;
     color: rgba(251, 246, 234, 0.7); /* Ivory dimmed */
     line-height: 1.7;
     font-weight: 400;
@@ -96,7 +96,7 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
   .audience-list {
     display: grid;
     grid-template-columns: 1fr;
-    column-gap: 4rem;
+    column-gap: 2rem;
   }
 
   @media (min-width: 640px) {
@@ -109,7 +109,7 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
     display: flex;
     align-items: flex-start;
     gap: 1rem;
-    padding: 2.5rem 0;
+    padding: 1.8rem 0;
     border-bottom: 1px solid rgba(255,255,255,0.06);
   }
 
@@ -140,7 +140,7 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
 
   .audience-title {
     color: var(--color-ivory);
-    font-size: 1.8rem;
+    font-size: 1.4rem;
     font-family: var(--font-serif);
     line-height: 1.25;
     font-weight: 400;
