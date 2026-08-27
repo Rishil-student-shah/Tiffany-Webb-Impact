@@ -1,5 +1,6 @@
 ﻿---
 import Eyebrow from './Eyebrow.astro';
+import Waveform from './Waveform.astro';
 
 const { content = {}, collections = {} } = Astro.props;
 const events = collections.events || [];
@@ -9,6 +10,7 @@ const headline = content.headline || "Where the work has taken me.";
 ---
 
 <section id="impact-preview" class="events-impact section-pad theme-ink relative" style="padding-top: 6rem; padding-bottom: 6rem; overflow: hidden;">
+  <Waveform opacity={0.03} variant="B" flipY={true} />
   <div class="container relative z-10">
     <div class="events-header">
       <Eyebrow>{eyebrow}</Eyebrow>
@@ -19,7 +21,7 @@ const headline = content.headline || "Where the work has taken me.";
       /* EMPTY STATE */
       <div class="events-empty-state reveal-up">
         <p class="empty-text">Next dates announced soon.</p>
-        <a href="/work-with-tiffany" class="btn-primary mt-4">Work with Tiffany</a>
+        <a href="/work-with-tiffany" class="btn btn-outline-ivory mt-4">Work with Tiffany</a>
       </div>
     ) : (
       /* POPULATED STATE - CAROUSEL */
