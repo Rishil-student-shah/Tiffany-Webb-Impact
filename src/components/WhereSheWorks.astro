@@ -21,8 +21,8 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
       
       <!-- Left Column: Copy -->
       <div class="works-content reveal-up">
-        <Eyebrow>{eyebrow}</Eyebrow>
-        <h2 class="section-title works-title" set:html={formattedHeadline}></h2>
+        <div style="margin-bottom: 2rem;"><Eyebrow>{eyebrow}</Eyebrow></div>
+        <h2 class="section-title" style="font-size: clamp(3.5rem, 5.5vw, 5.5rem); line-height: 1.05; margin-bottom: 3rem; letter-spacing: -0.01em;" set:html={formattedHeadline}></h2>
         
         <div class="works-prose">
           {p1 && <p>{p1}</p>}
@@ -36,9 +36,9 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
           {audiences.map((aud, index) => {
             const num = (index + 1).toString().padStart(2, '0');
             return (
-              <div class="audience-item">
+              <div class="audience-item" style="padding: 2.5rem 0;">
                 <div class="audience-num">{num} <span class="num-slash">//</span></div>
-                <div class="audience-title">{aud.title}</div>
+                <div class="audience-title" style="font-size: 1.8rem; font-family: var(--font-serif); line-height: 1.25;">{aud.title}</div>
               </div>
             );
           })}
@@ -71,18 +71,7 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
     padding-right: 2rem; /* Extra breathing room horizontally */
   }
 
-  .works-content :global(.eyebrow) {
-    margin-bottom: 2rem !important; /* Push headline down from eyebrow */
-    font-size: 0.85rem;
-    letter-spacing: 0.15em;
-  }
 
-  .works-title {
-    font-size: clamp(3.5rem, 5.5vw, 5.5rem); 
-    line-height: 1.05; 
-    margin-bottom: 3rem; /* Push paragraph down from headline */
-    letter-spacing: -0.01em;
-  }
 
   .works-prose {
     max-width: 42ch;
