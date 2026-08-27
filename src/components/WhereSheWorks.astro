@@ -64,11 +64,23 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
     }
   }
 
-  /* Left Column */
+  /* Left Column Spacing Fixes */
+  .works-content {
+    display: flex;
+    flex-direction: column;
+    padding-right: 2rem; /* Extra breathing room horizontally */
+  }
+
+  .works-content :global(.eyebrow) {
+    margin-bottom: 2rem !important; /* Push headline down from eyebrow */
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+  }
+
   .works-title {
     font-size: clamp(3.5rem, 5.5vw, 5.5rem); 
     line-height: 1.05; 
-    margin-bottom: 2.5rem;
+    margin-bottom: 3rem; /* Push paragraph down from headline */
     letter-spacing: -0.01em;
   }
 
