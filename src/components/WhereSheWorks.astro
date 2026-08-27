@@ -13,7 +13,7 @@ const p2 = content.body_2 || "";
 const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\">rethink what's</span><br/><span class=\"italic-accent\">possible.</span>";
 ---
 
-<section id="where-she-works" class="where-works section-pad theme-ink relative">
+<section id="where-she-works" class="where-works section-pad theme-ink relative" style="padding-top: 8rem; padding-bottom: 8rem;">
   <Waveform opacity={0.05} variant="B" flipY={true} />
   
   <div class="container relative z-10">
@@ -22,7 +22,7 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
       <!-- Left Column: Copy -->
       <div class="works-content reveal-up">
         <Eyebrow>{eyebrow}</Eyebrow>
-        <h2 class="section-title meet-title" set:html={formattedHeadline}></h2>
+        <h2 class="section-title works-title" set:html={formattedHeadline}></h2>
         
         <div class="works-prose">
           {p1 && <p>{p1}</p>}
@@ -53,36 +53,37 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
   .works-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--sp-16);
+    gap: 4rem;
   }
 
   @media (min-width: 1024px) {
     .works-grid {
-      grid-template-columns: 1fr 1.2fr;
-      gap: 5rem;
-      align-items: center;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 6rem;
+      align-items: center; /* Vertically centers the left text with the right list */
     }
   }
 
   /* Left Column */
-  .meet-title {
-    font-size: clamp(3rem, 5vw, 4.5rem); 
-    line-height: 1.1; 
-    margin-bottom: var(--sp-8);
+  .works-title {
+    font-size: clamp(3.5rem, 5.5vw, 5.5rem); 
+    line-height: 1.05; 
+    margin-bottom: 2.5rem;
+    letter-spacing: -0.01em;
   }
 
   .works-prose {
     max-width: 42ch;
     display: flex;
     flex-direction: column;
-    gap: var(--sp-6);
+    gap: 1.5rem;
   }
 
   .works-prose p {
-    font-size: 1.15rem;
-    color: var(--color-ivory);
-    line-height: 1.6;
-    opacity: 0.9;
+    font-size: 1.125rem;
+    color: rgba(251, 246, 234, 0.7); /* Ivory dimmed */
+    line-height: 1.7;
+    font-weight: 400;
   }
 
   /* Right Column (Audiences) */
@@ -94,8 +95,7 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
   .audience-list {
     display: grid;
     grid-template-columns: 1fr;
-    column-gap: 3rem;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    column-gap: 4rem;
   }
 
   @media (min-width: 640px) {
@@ -106,21 +106,30 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
 
   .audience-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
-    padding: 2rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  /* Remove bottom border from the last two items to match the old design */
+  @media (min-width: 640px) {
+    .audience-item:nth-last-child(-n+2) {
+      border-bottom: none;
+    }
   }
 
   .audience-num {
     color: var(--color-gold);
     font-family: var(--font-mono);
     font-size: 0.85rem;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.4rem;
     flex-shrink: 0;
+    width: 3.5rem;
+    margin-top: 0.4rem; /* Align with the first line of the serif text */
   }
   
   .num-slash {
@@ -130,8 +139,9 @@ const formattedHeadline = "For leaders ready<br/>to <span class=\"italic-accent\
 
   .audience-title {
     color: var(--color-ivory);
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-family: var(--font-serif);
-    line-height: 1.2;
+    line-height: 1.25;
+    font-weight: 400;
   }
 </style>
