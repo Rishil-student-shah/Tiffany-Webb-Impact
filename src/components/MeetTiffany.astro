@@ -9,161 +9,30 @@ const { content = {} } = Astro.props;
 
 // Fallbacks
 const eyebrow = content.eyebrow || "MEET TIFFANY";
-const title2 = content.title_line_2 || "Chicago Heart × Louisiana Soul";
-const p1 = content.paragraph_1 || "I came to this work through behavioral health, but I stayed because I kept meeting families who had never been given language for what was happening to them.";
-const p2 = content.paragraph_2 || "A father who couldn't explain where the money went. A student who thought a betting app was just a game. A wife who assumed she was the only one.";
-const p3 = content.paragraph_3 || "Today, my work extends beyond prevention into how organizations reach people at all.";
-const btn = content.button_text || "More about me →";
----
-
-<section class="meet-tiffany theme-ink reveal-up">
-  <Waveform opacity={0.06} flipX={true} variant="B" />
-  <div class="meet-container">
-    <div class="meet-grid">
-      <div class="meet-content">
-        <Eyebrow>{eyebrow}</Eyebrow>
-        <h2 class="section-title italic-accent meet-title">{title2}</h2>
-        
-        <div class="meet-prose">
-          <p>{p1}</p>
-          <p>{p2}</p>
-          <p>{p3}</p>
-        </div>
-        
-        <div class="meet-cta">
-          <Button href="/about" variant="secondary" className="magnetic-btn">{btn}</Button>
-        </div>
-      </div>
-      
-      <div class="meet-image-col">
-        <div class="meet-image-glass-offset"></div>
-        <div class="meet-image-wrap">
-          {content.image ? (
-            <img src={content.image} alt="Tiffany Webb editorial portrait" class="meet-img" />
-          ) : (
-            <Image src={aboutImg} alt="Tiffany Webb editorial portrait" class="meet-img" />
-          )}
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<style>
-  .meet-tiffany {
-    padding: var(--sp-24) 0;
-    position: relative;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .meet-container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--sp-6);
-  }
-
-  .meet-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-12);
-    align-items: center;
-  }
-
-  @media (min-width: 1024px) {
-    .meet-grid {
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: var(--sp-16);
-    }
-  }
-  
-  .meet-title {
-    font-size: clamp(3rem, 5vw, 4.5rem); 
-    line-height: 1.1; 
-    margin-bottom: var(--sp-8);
-  }
-
-  .meet-prose {
-    margin-bottom: var(--sp-8);
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-4);
-  }
-  
-  .meet-prose p {
-    font-size: 1.15rem;
-    color: #e7e0cf;
-    font-weight: 400;
-    line-height: 1.66;
-    max-width: 52ch;
-  }
-  
-  .meet-cta {
-    margin-top: var(--sp-8);
-  }
-
-  /* Soft-cornered arch frame */
-  .meet-image-col {
-    position: relative;
-    padding: 20px; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    perspective: 1000px;
-  }
-  
-  .meet-image-wrap {
-    width: 100%;
-    max-width: 440px;
-    aspect-ratio: 3.5/5;
-    border-radius: 300px 300px 16px 16px; /* Arch frame */
-    overflow: hidden;
-    position: relative;
-    border: 1px solid var(--color-gold);
-    z-index: 2;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  
-  .meet-image-glass-offset {
-    position: absolute;
-    top: 40px;
-    left: calc(50% - 200px); 
-    width: 100%;
-    max-width: 440px;
-    aspect-ratio: 3.5/5;
-    background: rgba(20, 18, 14, 0.3);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 300px 300px 16px 16px; /* Echoes the arch */
-    z-index: 1;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s ease;
-  }
-
-  @media (min-width: 1024px) {
-    .meet-image-glass-offset {
-      left: 10%; 
-    }
-  }
-
-  .meet-image-col:hover .meet-image-wrap {
-    transform: translate(-15px, -15px) rotate(-1.5deg);
-  }
-  
-  .meet-image-col:hover .meet-image-glass-offset {
-    transform: translate(15px, 15px) rotate(2deg);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-  }
-  
-  .meet-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.8s ease;
-  }
-  
-  .meet-image-col:hover .meet-img {
-    transform: scale(1.08);
-  }
-</style>
+const title1 = content.title_line_1 || "";
+const title2 = content.title_line_2 || "Chicago Heart �Z\�X[�H��[��ۜ�HH�۝[��\�Yܘ\�H�H�[YH�\��ܚ���Y��Z]�[ܘ[X[�]H�^YY�X�]\�HH�\YY][���[Z[Y\���Y�]�\��Y[��]�[�[��XY�H�܈�]�\�\[�[���[K���ۜ��H�۝[��\�Yܘ\̈�H�]\�����[��^Z[��\�HH[ۙ^H�[��H�Y[����Y�H�][��\�\��\�H�[YK�H�Y�H��\��[YY�H�\�HۛHۙK���ۜ��H�۝[��\�Yܘ\����^K^H�ܚ�^[���^[ۙ�]�[�[ۈ[����ܙ�[�^�][ۜ��XX�[�H][���ۜ���H�۝[���]ۗ�^�[ܙHX��]YH8����KKB���X�[ۈ�\��H�YY]]Y��[�H[YKZ[���]�X[]\����]�Y�ܛH�X�]O^���H�\^��Y_H�\�X[�H���ς�]��\��H�YY]X�۝Z[�\����]��\��H�YY]YܚY���]��\��H�YY]X�۝[����^YX���Ϟ�^YX����O�^YX���ς���\��H��X�[ۋ]]HYY]]]H����]L_H�[��\��H�][X�XX��[����]L�O��[��������]��\��H�YY]\���H�����_O������O������O����]����]��\��H�YY]X�H����]ۈ�Y�H��X��]��\�X[�H��X�ۙ\�H��\�Ә[YOH�XYۙ]X�X����؝�OН]ۏ���]����]����]��\��H�YY]Z[XY�KX�����]��\��H�YY]Z[XY�KY�\��[ٙ��]���]���]��\��H�YY]Z[XY�K]ܘ\�����۝[��[XY�H�
+�[Y�ܘ�^��۝[��[XY�_H[H�Y��[�H�X��Y]ܚX[ܝ�Z]��\��H�YY]Z[YȈς�
+H�
+�[XY�Hܘ�^�X��][Y�H[H�Y��[�H�X��Y]ܚX[ܝ�Z]��\��H�YY]Z[YȈς�
+_B��]����]����]����]�����X�[ۏ����[O���YY]]Y��[�HY[�Έ�\����L�
+H��][ێ��[]]�N�ܙ\�X���N�\��Y�ؘJ�MK�MK�MK�JNB���YY]X�۝Z[�\��Y�L	NX^]�Y�L�X\��[��]]�Y[�Έ�\�K\�M�NB���YY]YܚY\�^N�ܚYܚY][\]KX��[[�ΈY���\��\�K\�LL�N[YۋZ][\Έ�[�\�B�HYYXH
+Z[�]�Y�L�
+H�YY]YܚYܚY][\]KX��[[�ΈK�Y���Y���\��\�K\�LM�NB�B���YY]]]H�۝\�^�N��[\
+ܙ[K]���\�[JN��[�KZZY��K�N��X\��[�X���N��\�K\�N
+NB���YY]\���HX\��[�X���N��\�K\�N
+N\�^N��^�^Y\�X�[ێ���[[��\��\�K\�M
+NB���YY]\���H�۝\�^�N�K�M\�[N��܎��M�Lَ�۝]�ZY��[�KZZY��K���X^]�Y�L��B���YY]X�HX\��[�]���\�K\�N
+NB��ʈ�ٝX�ܛ�\�Y\����[YH
+��YY]Z[XY�KX����][ێ��[]]�NY[�Έ���\�^N��^�\�Y�KX�۝[���[�\�[YۋZ][\Έ�[�\�\��X�]�N�LB���YY]Z[XY�K]ܘ\�Y�L	NX^]�Y�\�X�\�][ΈˍK�N�ܙ\�\�Y]\Έ��M�M��ʈ\����[YH
+�ݙ\���ΈY[���][ێ��[]]�N�ܙ\��\��Y�\�KX��܋Y��
+N�Z[�^����\�Y�Έ��ؘJ�
+N�[��][ێ��[�ٛܛH���X�X�X�^�Y\��M�K��JNB���YY]Z[XY�KY�\��[ٙ��]��][ێ�X���]N��Y���[�L	HH�
+N���Y�L	NX^]�Y�\�X�\�][ΈˍK�N�X��ܛ�[���ؘJ�NM��N�X����Y�[\���\�L�
+N]�X��]X�X����Y�[\���\�L�
+N�ܙ\��\��Y�ؘJ�MK�MK�MK�MJN�ܙ\�\�Y]\Έ��M�M��ʈX��\�H\��
+��Z[�^�N�[��][ێ��[�ٛܛH���X�X�X�^�Y\��M�K��JK��\�Y����X\�NB��YYXH
+Z[�]�Y�L�
+H�YY]Z[XY�KY�\��[ٙ��]Y��L	N��B�B���YY]Z[XY�KX���ݙ\��YY]Z[XY�K]ܘ\�[�ٛܛN��[��]JLM\LM\
+H��]JLK�YY�NB���YY]Z[XY�KX���ݙ\��YY]Z[XY�KY�\��[ٙ��]�[�ٛܛN��[��]JM\M\
+H��]J�Y�N��\�Y�Έ�L�ؘJ��NB���YY]Z[Y��Y�L	NZY��L	Nؚ�X�Y�]��ݙ\��[��][ێ��[�ٛܛH��X\�NB���YY]Z[XY�KX���ݙ\��YY]Z[Y��[�ٛܛN���[JK�
+NB���[O
