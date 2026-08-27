@@ -31,6 +31,11 @@ body {
   --glow-gradient: radial-gradient(100% 100% at 50% -10%, #1a2622 0%, var(--color-ink) 55%);
 }
 
+/* Ensure the first section on any page clears the fixed Navbar */
+#smooth-content > *:first-child {
+  padding-top: 140px !important; 
+}
+
 /* Framed Page Layout */
 .page-wrapper {
   padding: 12px;
