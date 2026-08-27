@@ -21,18 +21,18 @@ const headline = content.headline || "Where the work has taken me.";
       /* EMPTY STATE */
       <div class="events-empty-state reveal-up">
         <p class="empty-text">Next dates announced soon.</p>
-        <a href="/work-with-tiffany" class="btn btn-outline-ivory mt-4" id="empty-state-btn">Work with Tiffany</a>
+        <a href="/work-with-tiffany" class="btn btn-outline-ivory mt-4" id="empty-state-btn">Book Tiffany</a>
       </div>
     ) : (
       /* POPULATED STATE - CAROUSEL */
       <div class="events-carousel-wrapper reveal-up">
         <div class="events-carousel">
           {events.map((evt) => {
-            const status = evt.tag || "Upcoming";
+            const status = evt.icon_svg || "Upcoming";
             const format = evt.subtitle || "Keynote";
             const name = evt.title;
             const city = evt.content_html || "City, State";
-            const audience = evt.stat_number || "500+";
+            const audience = evt.image_url || "500+";
             const link = evt.link_url || "/impact";
 
             return (
