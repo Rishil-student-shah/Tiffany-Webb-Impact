@@ -1,0 +1,230 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Waveform from '../Waveform.astro';
+
+const partnerCategories = [
+  {
+    category: "Strategic Partners",
+    description: "State agencies, public health departments, and leading advocacy organizations that Tiffany works with to shape policy and broad-scale prevention.",
+    partners: [
+      "Illinois Department of Human Services",
+      "Illinois Council on Problem Gambling",
+      "National Council on Problem Gambling"
+    ],
+    themeColor: "#84AC9F",
+    themeRgb: "132, 172, 159" /* Sage Green */
+  },
+  {
+    category: "Clinical Collaborations",
+    description: "Healthcare systems, recovery centers, and clinical networks where Tiffany trains staff on recognizing and treating hidden gambling disorders.",
+    partners: [
+      "Healthcare Alternative Systems (HAS)",
+      "Gateway Foundation",
+      "LSSI (Lutheran Social Services of Illinois)",
+      "Rincon Family Services"
+    ],
+    themeColor: "#7A9BB8",
+    themeRgb: "122, 155, 184" /* Slate Blue */
+  },
+  {
+    category: "Community Impact",
+    description: "Local coalitions, youth organizations, and educational districts where the frontline prevention work actually takes place.",
+    partners: [
+      "Chicago Public Schools",
+      "South Side Health Collaborative",
+      "Pilsen Wellness Center",
+      "Suburban Youth Taskforce"
+    ],
+    themeColor: "#B8866D",
+    themeRgb: "184, 134, 109" /* Muted Terracotta */
+  }
+];
+---
+
+<section class="impact-partners theme-ink relative overflow-hidden">
+  <Waveform opacity={0.06} variant="A" flipY={true} />
+
+  <div class="container stagger-group relative z-10">
+    <div style="max-width: 800px; margin: 0 auto; margin-bottom: 5rem; display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <Eyebrow className="text-center justify-center">Network</Eyebrow>
+      <h2 class="section-title text-center" style="text-align: center; margin-left: auto; margin-right: auto;">Partners & <br/><span class="italic-accent">Collaborations</span></h2>
+      <p class="section-desc mt-6 mx-auto" style="margin-top: 1.5rem;">
+        Sustainable prevention requires community infrastructure. These are the organizations Tiffany works alongside to ensure the message lasts long after she leaves the room.
+      </p>
+    </div>
+
+    <div class="network-bento-grid-v2 stagger-item">
+      {partnerCategories.map(cat => (
+        <div class="network-card-v2" style={`--card-accent: ${cat.themeColor}; --card-glow-rgb: ${cat.themeRgb};`}>
+          <div class="network-card-inner-v2">
+            
+            <div class="card-top-v2">
+              <h3 class="cat-title-v2">{cat.category}</h3>
+              <p class="cat-desc-v2">{cat.description}</p>
+            </div>
+            
+            <div class="divider-v2"></div>
+            
+            <ul class="partner-ul-v2">
+              {cat.partners.map(partner => (
+                <li class="partner-li-v2">
+                  <div class="check-icon-wrap-v2">
+                    <svg class="check-icon-v2" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                  </div>
+                  <span>{partner}</span>
+                </li>
+              ))}
+            </ul>
+            
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .impact-partners {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    padding: var(--sp-32) 0;
+  }
+
+  .network-bento-grid-v2 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .network-bento-grid-v2 {
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-8);
+    }
+  }
+
+  /* Premium Muted Glass Styling (Low Contrast, Organic, Dynamic) */
+  .network-card-v2 {
+    position: relative;
+    border-radius: 32px;
+    padding: 1.5px;
+    background: linear-gradient(135deg, rgba(var(--card-glow-rgb), 0.25), rgba(var(--card-glow-rgb), 0.05), transparent 70%); /* Dynamic border */
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    height: 100%;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  }
+
+  .network-card-v2:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.5), 0 0 40px rgba(var(--card-glow-rgb), 0.08); /* Dynamic hover glow */
+  }
+
+  .network-card-inner-v2 {
+    background: rgba(12, 16, 14, 0.95); /* Deep ink */
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-radius: 31px;
+    padding: 3rem 2rem;
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    box-shadow: inset 0 0 20px rgba(var(--card-glow-rgb), 0.03); /* Dynamic inner reflection */
+  }
+
+  /* Dynamic Inner Glow */
+  .network-card-inner-v2::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top left, rgba(var(--card-glow-rgb), 0.08), transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .card-top-v2, .divider-v2, .partner-ul-v2 {
+    position: relative;
+    z-index: 2;
+  }
+
+  .cat-title-v2 {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    color: var(--card-accent); /* Dynamic color */
+    margin-bottom: var(--sp-4);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .cat-desc-v2 {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    color: rgba(251, 246, 234, 0.6); /* Highly muted ivory */
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .divider-v2 {
+    height: 1px;
+    background: linear-gradient(to right, rgba(var(--card-glow-rgb), 0.15), transparent);
+    margin: var(--sp-8) 0;
+    width: 100%;
+  }
+
+  .partner-ul-v2 {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    flex-grow: 1;
+  }
+
+  .partner-li-v2 {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-4);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: rgba(251, 246, 234, 0.7); /* Muted ivory */
+    line-height: 1.4;
+    transition: color 0.3s ease, transform 0.3s ease;
+  }
+
+  .partner-li-v2:hover {
+    color: var(--card-accent); /* Dynamic hover text */
+    transform: translateX(4px);
+  }
+
+  .check-icon-wrap-v2 {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(var(--card-glow-rgb), 0.08); /* Dynamic bg */
+    border: 1px solid rgba(var(--card-glow-rgb), 0.12); /* Dynamic border */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    transition: background 0.3s ease;
+  }
+  
+  .partner-li-v2:hover .check-icon-wrap-v2 {
+    background: rgba(var(--card-glow-rgb), 0.15); /* Dynamic hover bg */
+  }
+
+  .check-icon-v2 {
+    color: var(--card-accent); /* Dynamic icon */
+  }
+</style>

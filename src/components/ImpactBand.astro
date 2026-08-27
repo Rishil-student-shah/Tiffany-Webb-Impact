@@ -1,0 +1,90 @@
+---
+const { collections = {} } = Astro.props;
+const items = collections.impact_band || [];
+---
+
+{items.length > 0 && (
+<section class="impact-band theme-ink" aria-label="Impact Core Focus Areas">
+  <div class="band-container">
+    {items.map((item, index) => (
+      <div class="band-item">
+        <div class="band-icon" set:html={item.icon_svg}></div>
+        <div class="band-title">{item.title}</div>
+      </div>
+    ))}
+  </div>
+</section>
+)}
+
+<style>
+  .impact-band {
+    width: 100%;
+    padding: var(--sp-8) var(--sp-4);
+    position: relative;
+    z-index: 10;
+  }
+
+  .band-container {
+    max-width: 1440px;
+    margin: 0 auto;
+    display: grid;
+    /* Stack two-by-two on mobile */
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-6) var(--sp-2);
+  }
+
+  .band-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: var(--sp-3);
+  }
+
+  /* Desktop layout: 4 columns with vertical hairline dividers */
+  @media (min-width: 1024px) {
+    .impact-band {
+      padding: var(--sp-6) var(--sp-4);
+    }
+    
+    .band-container {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+    }
+
+    .band-item {
+      flex-direction: row;
+      gap: var(--sp-3);
+      border-right: 1px solid rgba(217, 162, 58, 0.25);
+      padding: 0 var(--sp-4);
+    }
+
+    .band-item:last-child {
+      border-right: none;
+    }
+  }
+
+  .band-icon {
+    color: var(--color-gold, #D9A23A);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.9;
+  }
+  
+  .band-icon :global(svg) {
+    width: 24px;
+    height: 24px;
+  }
+
+  .band-title {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-gold, #D9A23A);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    line-height: 1.4;
+  }
+</style>

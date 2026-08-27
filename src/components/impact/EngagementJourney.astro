@@ -1,0 +1,152 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Waveform from '../Waveform.astro';
+
+const steps = [
+  {
+    num: "01",
+    title: "Discovery & Alignment",
+    desc: "Before a contract is signed, Tiffany holds a discovery call to understand the unique cultural, clinical, or demographic realities of your audience."
+  },
+  {
+    num: "02",
+    title: "Customization",
+    desc: "There are no canned speeches. The data, the tone, and the actionable takeaways are adapted to match the specific needs identified in discovery."
+  },
+  {
+    num: "03",
+    title: "Delivery",
+    desc: "Whether a 60-minute keynote or a half-day intensive, Tiffany delivers with the authority of lived experience and the precision of public health evidence."
+  },
+  {
+    num: "04",
+    title: "Follow-up & Integration",
+    desc: "Post-event, you receive actionable resources, structural recommendations, or continuing education assets to ensure the impact outlasts the presentation."
+  }
+];
+---
+
+<section class="impact-journey-v2 theme-ink relative overflow-hidden">
+  <Waveform opacity={0.06} variant="A" flipY={true} />
+
+  <div class="container stagger-group relative z-10">
+    <div style="max-width: 800px; margin: 0 auto; margin-bottom: 5rem; display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <Eyebrow className="text-center justify-center">Process</Eyebrow>
+      <h2 class="section-title text-center" style="text-align: center; margin-left: auto; margin-right: auto;">The Engagement <span class="italic-accent">Journey</span></h2>
+    </div>
+
+    <div class="journey-flow stagger-item">
+      <div class="journey-line"></div>
+      
+      <div class="steps-container">
+        {steps.map((step, index) => (
+          <div class="step-card ultra-glass-card">
+            <div class="step-num">{step.num}</div>
+            <h3 class="step-title">{step.title}</h3>
+            <p class="step-desc">{step.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .impact-journey-v2 {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: var(--ink);
+    padding-top: 10rem !important;
+    padding-bottom: 10rem !important;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .journey-flow {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .journey-line {
+    display: none;
+    position: absolute;
+    top: 50px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, rgba(217, 162, 58, 0.5), transparent);
+    z-index: 1;
+  }
+
+  @media (min-width: 768px) {
+    .journey-line {
+      display: block;
+    }
+  }
+
+  .steps-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-6);
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (min-width: 768px) {
+    .steps-container {
+      grid-template-columns: repeat(4, 1fr);
+      gap: var(--sp-4);
+    }
+  }
+
+  .step-card {
+    padding: var(--sp-6) var(--sp-5);
+    text-align: left;
+    position: relative;
+  }
+
+  @media (min-width: 768px) {
+    .step-card {
+      text-align: center;
+      padding: var(--sp-8) var(--sp-4);
+    }
+  }
+
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--ink);
+    border: 2px solid var(--color-gold);
+    color: var(--color-gold);
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    margin-bottom: var(--sp-4);
+    box-shadow: 0 0 20px rgba(217, 162, 58, 0.2);
+  }
+  
+  @media (min-width: 768px) {
+    .step-num {
+      margin: 0 auto var(--sp-6);
+    }
+  }
+
+  .step-title {
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    color: var(--color-ivory);
+    margin-bottom: var(--sp-3);
+  }
+
+  .step-desc {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>

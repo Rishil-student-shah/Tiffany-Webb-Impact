@@ -1,30 +1,76 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/Hero.astro';
+import ImpactBand from '../components/ImpactBand.astro';
 import CredibilityBar from '../components/CredibilityBar.astro';
 import MeetTiffany from '../components/MeetTiffany.astro';
 import Expertise from '../components/Expertise.astro';
 import SpeakingFormats from '../components/SpeakingFormats.astro';
-import SpeakerReel from '../components/SpeakerReel.astro';
-import Impact from '../components/Impact.astro';
-import EventsImpact from '../components/EventsImpact.astro';
+
+
 import Proof from '../components/Proof.astro';
-import Newsletter from '../components/Newsletter.astro';
+import EventsImpact from '../components/EventsImpact.astro';
+import MediaBand from '../components/MediaBand.astro';
 import BookingSection from '../components/BookingSection.astro';
+import mysql from 'mysql2/promise';
+
+// Fetch content from the CRM Database
+let dbContent = {};
+let dbCollections = {};
+try {
+  const pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '@rishil8124shah',
+    database: 'tiffany_crm',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+  });
+  
+  // Fetch KV content
+  const [rows] = await pool.query(`
+    SELECT section, key_name, content_value 
+    FROM website_content 
+    JOIN website_pages ON website_content.page_id = website_pages.id 
+    WHERE website_pages.slug = 'home'
+  `);
+  
+  rows.forEach(row => {
+    if (!dbContent[row.section]) dbContent[row.section] = {};
+    dbContent[row.section][row.key_name] = row.content_value;
+  });
+
+  // Fetch Collections
+  const [collectionRows] = await pool.query(`
+    SELECT c.* 
+    FROM website_collections c
+    JOIN website_pages p ON c.page_id = p.id 
+    WHERE p.slug = 'home'
+    ORDER BY c.section_name, c.sort_order
+  `);
+
+  collectionRows.forEach(row => {
+    if (!dbCollections[row.section_name]) dbCollections[row.section_name] = [];
+    dbCollections[row.section_name].push(row);
+  });
+} catch (e) {
+  console.error("Failed to load DB content for Astro page", e);
+}
 ---
 
 <Layout title="Tiffany Webb | Strategist & Speaker">
 	<main>
-		<Hero />
-		<CredibilityBar />
-		<MeetTiffany />
-		<Expertise />
-		<SpeakingFormats />
-		<SpeakerReel />
-		<Impact />
-		<EventsImpact />
-		<Proof />
-		<Newsletter />
-		<BookingSection />
+		<Hero content={dbContent.hero || {}} />
+		<ImpactBand collections={dbCollections} />
+		<CredibilityBar collections={dbCollections} />
+		<MeetTiffany content={dbContent.meet_tiffany || {}} collections={dbCollections} />
+		<Expertise content={dbContent.expertise || {}} collections={dbCollections} />
+		<SpeakingFormats content={dbContent.speaking_formats || {}} collections={dbCollections} />
+		
+		
+		<Proof content={dbContent.proof || {}} collections={dbCollections} />
+		<EventsImpact content={dbContent.events || {}} collections={dbCollections} />
+		<BookingSection content={dbContent.booking || {}} />
 	</main>
 </Layout>

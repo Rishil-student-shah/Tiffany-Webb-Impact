@@ -1,0 +1,211 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Waveform from '../Waveform.astro';
+import Button from '../Button.astro';
+
+const upcomingEvents = [
+  {
+    date: "OCT 24, 2026",
+    name: "National Council on Problem Gambling Conference",
+    location: "Las Vegas, NV",
+    type: "Public Keynote",
+    desc: "Mainstage address on the intersection of youth culture and sports betting.",
+    bgStart: "#5A4614",
+    bgEnd: "#1E190A",
+    border: "rgba(200, 162, 76, 0.4)"
+  },
+  {
+    date: "NOV 12, 2026",
+    name: "Illinois Department of Human Services Training",
+    location: "Springfield, IL",
+    type: "Private Training",
+    desc: "Closed-door clinical protocol training for state social workers.",
+    bgStart: "#5A2C18",
+    bgEnd: "#1E0F0A",
+    border: "rgba(193, 84, 39, 0.4)"
+  },
+  {
+    date: "JAN 08, 2027",
+    name: "Chicago Public Schools District Assembly",
+    location: "Chicago, IL",
+    type: "Private Workshop",
+    desc: "The beginning of the winter high school athletic awareness tour.",
+    bgStart: "#0A2B1A",
+    bgEnd: "#050F0A",
+    border: "rgba(14, 107, 84, 0.4)"
+  }
+];
+---
+
+<section class="upcoming section-pad theme-ink relative overflow-hidden">
+  <Waveform opacity={0.05} variant="B" flipX={true} />
+  
+  <div class="container stagger-group relative z-10">
+    <div class="upcoming-header stagger-item">
+      <Eyebrow className="text-center justify-center">Upcoming</Eyebrow>
+      <h2 class="section-title text-center">Confirmed <span class="italic-accent">Engagements</span></h2>
+      <p class="upcoming-desc">Upcoming stages where Tiffany will be delivering keynotes, trainings, and workshops across the country.</p>
+    </div>
+    
+    <div class="upcoming-grid stagger-item">
+      {upcomingEvents.map((ev) => (
+        <div class="upcoming-card" style={`--bg-start: ${ev.bgStart}; --bg-end: ${ev.bgEnd}; --card-border: ${ev.border};`}>
+          <div class="card-inner">
+            <div class="card-top">
+              <span class="card-date">{ev.date}</span>
+              <span class="card-type">{ev.type}</span>
+            </div>
+            <h3 class="card-name">{ev.name}</h3>
+            <p class="card-desc">{ev.desc}</p>
+            <div class="card-bottom">
+              <div class="card-location">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <span>{ev.location}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+    
+    <div class="upcoming-cta stagger-item">
+      <Button href="/book" variant="primary" className="magnetic-btn">REQUEST BOOKING &rarr;</Button>
+    </div>
+  </div>
+</section>
+
+<style>
+  .upcoming {
+    padding: var(--sp-32) 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .upcoming-header {
+    max-width: 700px;
+    margin: 0 auto 4rem;
+    text-align: center;
+  }
+
+  .upcoming-desc {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    margin-top: 1.5rem;
+  }
+
+  .upcoming-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .upcoming-grid {
+      grid-template-columns: repeat(3, 1fr);
+      align-items: stretch;
+    }
+  }
+
+  .upcoming-card {
+    position: relative;
+    border-radius: var(--radius-xl);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  }
+
+  /* Gradient layer — transparent by default, solid on hover */
+  .upcoming-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom right, var(--bg-start), var(--bg-end));
+    opacity: 0.3;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+  }
+
+  .upcoming-card:hover::before {
+    opacity: 1;
+  }
+
+  .upcoming-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    border-color: var(--card-border);
+  }
+
+  .card-inner {
+    padding: var(--sp-8);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    z-index: 1;
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--sp-8);
+  }
+
+  .card-date {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    color: var(--color-gold);
+  }
+
+  .card-type {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.05);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    color: var(--text-on-dark);
+  }
+
+  .card-name {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    color: var(--color-ivory);
+    line-height: 1.3;
+    margin-bottom: var(--sp-4);
+  }
+
+  .card-desc {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin-bottom: var(--sp-8);
+  }
+
+  .card-bottom {
+    margin-top: auto;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: var(--sp-4);
+  }
+
+  .card-location {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-on-dark-muted);
+    font-size: 0.9rem;
+  }
+
+  .upcoming-cta {
+    margin-top: 4rem;
+    text-align: center;
+  }
+</style>

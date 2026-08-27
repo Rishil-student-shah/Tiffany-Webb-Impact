@@ -1,0 +1,472 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Waveform from '../Waveform.astro';
+import { Image } from 'astro:assets';
+import thumb1 from '../../assets/thumb_1.jpg';
+import thumb2 from '../../assets/thumb_2.jpg';
+import thumb3 from '../../assets/thumb_3.jpg';
+
+const stories = [
+  {
+    title: "The Silent Epidemic in High School Athletics",
+    situation: "A suburban school district noticed an uptick in sports betting among student athletes, but coaches and counselors felt unequipped to address it without alienating students.",
+    action: "Tiffany delivered a targeted assembly for athletes, followed by a 2-hour intensive workshop for the coaching staff, framing gambling through the lens of performance.",
+    outcome: "The athletic department integrated a permanent gambling awareness module into their seasonal kickoff, and 12 students self-referred to counseling.",
+    quote: "Tiffany didn't lecture them. She spoke their language. It was the first time I saw our athletes actually listen to a presentation on addiction.",
+    thumb: thumb1,
+    bgStart: 'rgba(26, 42, 32, 0.6)', // Forest Green
+    bgEnd: 'rgba(10, 21, 16, 0.4)'
+  },
+  {
+    title: "Closing the Gap in Clinical Protocols",
+    situation: "A regional healthcare system was successfully screening for substance use, but their intake process completely missed behavioral addictions, leaving gambling harm undiagnosed.",
+    action: "Through a half-day clinical training, Tiffany walked their frontline workers through the hidden signs of gambling disorder, and how to adapt existing screening tools.",
+    outcome: "The system updated their standard intake protocols across 4 clinics, leading to a 300% increase in identified gambling risk factors within the first quarter.",
+    quote: "She completely shifted our clinical perspective. We were looking right past a massive community health issue because we didn't know the right questions to ask.",
+    thumb: thumb2,
+    bgStart: 'rgba(42, 26, 16, 0.6)', // Burnt Orange
+    bgEnd: 'rgba(26, 10, 5, 0.4)'
+  },
+  {
+    title: "Empowering Community Coalitions",
+    situation: "A neighborhood health collaborative wanted to launch a prevention campaign, but felt disconnected from the realities of modern mobile betting and youth culture.",
+    action: "Tiffany facilitated a strategic planning forum, bringing together public health officials, parents, and community leaders to map out culturally fluent intervention points.",
+    outcome: "The collaborative secured state funding for a peer-to-peer education program designed entirely around the framework Tiffany helped them build.",
+    quote: "She brings evidence, but more importantly, she brings empathy. She helped us build a strategy that actually reflects the people we serve.",
+    thumb: thumb3,
+    bgStart: 'rgba(26, 21, 37, 0.6)', // Amethyst/Berry
+    bgEnd: 'rgba(15, 10, 21, 0.4)'
+  }
+];
+---
+
+<section class="outcome-stories theme-ink relative overflow-hidden">
+  <Waveform opacity={0.05} variant="C" />
+
+  <div class="container relative z-10">
+    <div style="max-width: 800px; margin: 0 auto; margin-bottom: 4rem; display: flex; flex-direction: column; align-items: center; text-align: center;">
+      <Eyebrow className="text-center justify-center">Outcomes</Eyebrow>
+      <h2 class="section-title text-center" style="text-align: center; margin-left: auto; margin-right: auto;">What change <br/><span class="italic-accent">looks like.</span></h2>
+    </div>
+
+    <div class="outcomes-carousel-wrap">
+      
+      <!-- Prev Button -->
+      <button class="nav-btn prev-btn" aria-label="Previous Outcome">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+
+      <div class="carousel-viewport">
+        <div class="carousel-track">
+          {stories.map((story, i) => (
+            <div class="carousel-slide">
+              <div class="story-bento gfg-style-card">
+                <div class="story-bento-inner">
+                  
+                  <!-- Left: Text Content -->
+                  <div class="story-text-col">
+                    <div class="story-header">
+                      <span class="story-index-badge">0{i + 1}</span>
+                      <h3 class="story-title">{story.title}</h3>
+                    </div>
+                    
+                    <div class="story-blocks">
+                      <div class="story-block">
+                        <h4 class="block-label">The Situation</h4>
+                        <p class="block-text">{story.situation}</p>
+                      </div>
+                      
+                      <div class="story-block outcome-block">
+                        <h4 class="block-label text-gold">What Changed</h4>
+                        <p class="block-text text-white">{story.outcome}</p>
+                      </div>
+                    </div>
+                    
+                    <blockquote class="story-quote">"{story.quote}"</blockquote>
+                  </div>
+                  
+                  <!-- Right: Video Reel -->
+                  <div class="story-video-col">
+                    <div class="reel-video-card">
+                      <div class="reel-video-inner">
+                        <Image src={story.thumb} alt={`Video for ${story.title}`} class="reel-thumb-img" />
+                        <div class="reel-play-overlay">
+                          <div class="reel-play-button">
+                            <svg viewBox="0 0 24 24" width="32" height="32" fill="var(--color-ivory)"><path d="M8 5v14l11-7z"/></svg>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="reel-video-info">
+                        <p class="reel-video-meta">Watch Video {i + 1}</p>
+                        <h3 class="reel-video-title">See the impact in action</h3>
+                      </div>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Next Button -->
+      <button class="nav-btn next-btn" aria-label="Next Outcome">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      
+    </div>
+    
+    <!-- Carousel Dots -->
+    <div class="carousel-dots" style="margin-top: var(--sp-16);">
+      {stories.map((_, i) => (
+        <button class={`dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Go to slide ${i + 1}`}></button>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<script is:inline>
+  document.addEventListener("DOMContentLoaded", () => {
+    const track = document.querySelector('.carousel-track');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const nextBtn = document.querySelector('.next-btn');
+    const prevBtn = document.querySelector('.prev-btn');
+    const dots = document.querySelectorAll('.dot');
+    
+    if(!track || !slides.length) return;
+
+    let currentIndex = 0;
+    const totalSlides = slides.length;
+
+    function goToSlide(index) {
+      if (index < 0) index = totalSlides - 1;
+      if (index >= totalSlides) index = 0;
+      
+      currentIndex = index;
+      const offset = currentIndex * -100;
+      track.style.transform = `translateX(${offset}%)`;
+      
+      // Update dots
+      dots.forEach(dot => dot.classList.remove('active'));
+      if(dots[currentIndex]) dots[currentIndex].classList.add('active');
+    }
+
+    nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
+    prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
+    
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => goToSlide(index));
+    });
+  });
+</script>
+
+<style>
+  .outcome-stories {
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+    padding: var(--sp-24) 0;
+  }
+
+  /* Carousel Layout */
+  .outcomes-carousel-wrap {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-6);
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .carousel-viewport {
+    flex: 1;
+    overflow: hidden;
+    border-radius: var(--radius-2xl);
+    mask-image: linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%);
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    width: 100%;
+  }
+
+  .carousel-slide {
+    flex: 0 0 100%;
+    width: 100%;
+    padding: 0 10px; /* Slight buffer so shadow isn't clipped by mask */
+  }
+
+  /* Bento Card Layout - GambleFreeGear Style */
+  .gfg-style-card {
+    position: relative;
+    border-radius: 40px;
+    padding: 2px; /* For gradient border effect */
+    background: linear-gradient(135deg, rgba(217, 162, 58, 0.5), rgba(217, 162, 58, 0.05), transparent 60%);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 40px rgba(217, 162, 58, 0.1);
+  }
+
+  .story-bento-inner {
+    background: rgba(10, 8, 7, 0.95); /* Extremely dark inner */
+    backdrop-filter: blur(40px);
+    -webkit-backdrop-filter: blur(40px);
+    border-radius: 38px;
+    padding: var(--sp-8);
+    position: relative;
+    overflow: hidden;
+    z-index: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+    height: 100%;
+  }
+
+  /* Inner Glow */
+  .story-bento-inner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at top right, rgba(217, 162, 58, 0.15), transparent 50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .story-text-col, .story-video-col {
+    position: relative;
+    z-index: 2;
+  }
+
+  @media (min-width: 992px) {
+    .story-bento-inner {
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: var(--sp-12);
+      padding: var(--sp-12);
+      align-items: center;
+    }
+  }
+
+  /* Left Side: Text */
+  .story-text-col {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+
+  .story-header { margin-bottom: var(--sp-6); }
+
+  .story-index-badge {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    color: var(--color-gold);
+    display: block;
+    margin-bottom: var(--sp-3);
+  }
+
+  .story-title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    color: var(--color-ivory);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+  }
+
+  .story-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
+    margin-bottom: var(--sp-8);
+  }
+
+  .block-label {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: var(--sp-2);
+  }
+
+  .block-label.text-gold { color: var(--color-gold); }
+
+  .block-text {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    color: rgba(255, 255, 255, 0.7);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .block-text.text-white {
+    color: var(--color-ivory);
+    font-weight: 500;
+  }
+
+  .outcome-block {
+    background: rgba(217, 162, 58, 0.05);
+    padding: var(--sp-5);
+    border-radius: var(--radius-lg);
+    border-left: 2px solid var(--color-gold);
+  }
+
+  .story-quote {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.6);
+    line-height: 1.6;
+    margin: 0;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    padding-top: var(--sp-6);
+  }
+
+  /* Right Side: Video */
+  .story-video-col {
+    width: 100%;
+  }
+
+  .reel-video-card {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.4s ease;
+  }
+
+  .reel-video-card:hover {
+    transform: translateY(-5px);
+  }
+
+  .reel-video-inner {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    aspect-ratio: 4/3;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+
+  .reel-thumb-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+  }
+
+  .reel-video-card:hover .reel-thumb-img {
+    transform: scale(1.05);
+  }
+
+  .reel-play-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.4s ease;
+  }
+
+  .reel-video-card:hover .reel-play-overlay {
+    background: rgba(0,0,0,0.4);
+  }
+
+  .reel-play-button {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(217, 162, 58, 0.9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease;
+    padding-left: 5px; /* Visual center for play icon */
+  }
+
+  .reel-video-card:hover .reel-play-button {
+    transform: scale(1.1);
+    background: var(--color-gold);
+  }
+
+  .reel-video-info {
+    margin-top: var(--sp-4);
+    text-align: center;
+  }
+
+  .reel-video-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-ivory);
+    margin: 0;
+    transition: color 0.3s ease;
+  }
+
+  .reel-video-card:hover .reel-video-title {
+    color: var(--color-gold);
+  }
+
+  .reel-video-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-gold);
+    margin-bottom: 4px;
+  }
+
+  /* Navigation Buttons */
+  .nav-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--color-ivory);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+
+  .nav-btn:hover {
+    background: rgba(217, 162, 58, 0.1);
+    border-color: var(--color-gold);
+    color: var(--color-gold);
+  }
+
+  .nav-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  /* Dots */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: var(--sp-10);
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .dot.active {
+    background: var(--color-gold);
+    transform: scale(1.2);
+  }
+</style>

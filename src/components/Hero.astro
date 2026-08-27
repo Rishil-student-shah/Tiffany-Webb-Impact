@@ -1,9 +1,20 @@
 ---
 import Button from './Button.astro';
-import Eyebrow from './Eyebrow.astro';
 import Waveform from './Waveform.astro';
 import { Image } from 'astro:assets';
 import speakerImg from '../assets/tiffany_hero_new.jpg';
+
+const { content = {} } = Astro.props;
+
+// Fallbacks if DB is empty
+const eyebrow = content.eyebrow || "COMMUNITY IMPACT STRATEGIST &middot; SPEAKER";
+const title1 = content.title_line_1 || "Bold ideas, human connection, and";
+const title2 = content.title_line_2 || "meaningful impact.";
+const metaText = content.meta || "TIFFANY WEBB";
+const subtext = content.subtext || "I help healthcare and <b>community leaders think bigger about impact.</b> I bring lived understanding, professional expertise, and community insight together to challenge convention, reimagine what's possible, and build bold strategies that help organizations&mdash;<b>and the people,</b> families, and communities they serve&mdash;thrive.";
+const formats = content.formats || "SPEAKING &middot; STRATEGY &middot; PUBLIC &amp; BEHAVIORAL HEALTH &middot; COMMUNITY ENGAGEMENT &middot; PROGRAM DEVELOPMENT";
+
+const showReel = false;
 ---
 
 <section class="hero theme-dark">
@@ -14,38 +25,34 @@ import speakerImg from '../assets/tiffany_hero_new.jpg';
   <div class="hero-container">
     <div class="hero-content">
       <div class="hero-eyebrow-wrap">
-        <span class="hero-eyebrow">COMMUNITY IMPACT STRATEGIST · PUBLIC HEALTH EDUCATOR & SPEAKER</span>
+        <span class="hero-eyebrow" set:html={eyebrow}></span>
       </div>
       
       <h1 class="hero-title">
-        <span class="hero-title-line">Break the</span>
-        <span class="hero-title-line italic-accent">Silence.</span>
+        <span class="hero-title-cream" set:html={title1}></span>
+        <span class="hero-title-gradient" set:html={title2}></span>
       </h1>
       
       <div class="hero-meta">
-        <span>TIFFANY WEBB, BBA, MHP</span>
+        <span set:html={metaText}></span>
       </div>
       
-      <p class="hero-subtext">
-        Fifteen years turning the hardest conversations about gambling harm into prevention communities can actually use.
-      </p>
+      <p class="hero-subtext" set:html={subtext}></p>
       
       <div class="hero-ctas">
-        <Button href="/book" variant="primary" className="magnetic-btn">Book Tiffany</Button>
-        <Button href="/about" variant="secondary" className="magnetic-btn">WATCH THE REEL</Button>
+        <Button href="/work-with-tiffany" variant="primary" className="magnetic-btn">WORK WITH TIFFANY</Button>
+        {showReel && (
+          <Button href="#" variant="secondary" className="magnetic-btn">WATCH THE REEL</Button>
+        )}
       </div>
 
-      <p class="hero-formats-list text-micro" style="margin-top: 24px; color: var(--color-gold); opacity: 0.8;">
-        Keynotes · Conference sessions · Panels · Workshops · School programs
-      </p>
-
-
+      <div class="hero-capability-strip" set:html={formats}></div>
     </div>
     
     <div class="hero-media">
       <div class="hero-glass-frame">
         <div class="hero-image-mask parallax-wrap">
-          <Image src={speakerImg} alt="Tiffany Webb speaking on stage" class="hero-image parallax-img" data-speed="0.15" widths={[400, 800]} sizes="(max-width: 768px) 400px, 800px" />
+          <Image src={speakerImg} alt="Tiffany Webb" class="hero-image parallax-img" data-speed="0.15" widths={[400, 800]} sizes="(max-width: 768px) 400px, 800px" />
         </div>
       </div>
     </div>
@@ -57,9 +64,9 @@ import speakerImg from '../assets/tiffany_hero_new.jpg';
     // GSAP Timeline for Hero Entrance
     const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
     
-    tl.fromTo(".hero-title-line", 
-      { y: 100, opacity: 0, rotation: 2 },
-      { y: 0, opacity: 1, rotation: 0, duration: 1.2, stagger: 0.2 }
+    tl.fromTo(".hero-title span", 
+      { y: 60, opacity: 0, rotation: 2 },
+      { y: 0, opacity: 1, rotation: 0, duration: 1.2, stagger: 0.1 }
     )
     .fromTo(".hero-eyebrow-wrap", 
       { opacity: 0, x: -20 },
@@ -81,7 +88,11 @@ import speakerImg from '../assets/tiffany_hero_new.jpg';
       { opacity: 1, scale: 1, duration: 0.6, stagger: 0.1 },
       "-=0.4"
     )
-
+    .fromTo(".hero-capability-strip",
+      { opacity: 0 },
+      { opacity: 1, duration: 0.8 },
+      "-=0.2"
+    )
     .fromTo(".hero-glass-frame", 
       { opacity: 0, y: 40 },
       { opacity: 1, y: 0, duration: 1.5, ease: "power3.out" },
@@ -97,9 +108,6 @@ import speakerImg from '../assets/tiffany_hero_new.jpg';
       { scale: 1.05, duration: 2, ease: "power2.out" },
       0
     );
-
-
-    // Parallax Effect is now handled by vanilla JS in motion.js (data-speed) to prevent GSAP layout shifts.
 
     // Magnetic Button Effect
     const magneticBtns = document.querySelectorAll('.magnetic-btn');
@@ -138,7 +146,7 @@ import speakerImg from '../assets/tiffany_hero_new.jpg';
     align-items: center;
     overflow: hidden;
     background: var(--glow-gradient);
-    padding-top: 110px; /* Reduced from 160px to move text up */
+    padding-top: 110px;
   }
 
   .hero-waveform {
@@ -165,21 +173,20 @@ import speakerImg from '../assets/tiffany_hero_new.jpg';
 
   @media (min-width: 1024px) {
     .hero-container {
-      grid-template-columns: 6fr 4fr; /* 60/40 split */
+      grid-template-columns: 6fr 4fr;
       align-items: center;
       min-height: calc(100vh - 80px);
     }
   }
 
   .hero-content {
-    max-width: 720px;
-    padding-left: var(--sp-4);
+    max-width: 100%;
   }
 
   @media (min-width: 1024px) {
     .hero-content {
-      padding-left: 5vw; /* Push inward from the left */
-      margin-top: 40px;  /* Push down a bit more */
+      padding-left: 2vw;
+      margin-top: 40px;
     }
   }
 
@@ -190,52 +197,55 @@ import speakerImg from '../assets/tiffany_hero_new.jpg';
 
   .hero-eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.95rem; /* Increased from 0.7rem */
-    letter-spacing: 0.25em; /* Adjusted from 0.34em to balance larger text */
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
     text-transform: uppercase;
     color: var(--color-gold);
     display: inline-block;
   }
 
   .hero-title {
-    margin-bottom: var(--sp-2);
+    margin-bottom: var(--sp-4);
     font-family: var(--font-serif);
-    font-size: clamp(3.5rem, 8vw, 6.5rem);
-    line-height: 0.98;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    line-height: 1.1;
     letter-spacing: -0.01em;
-    color: var(--color-ivory);
-    display: flex;
-    flex-direction: column;
+    font-weight: 300;
   }
 
-  .hero-title-line {
-    display: block;
-    clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+  .hero-title span {
+    display: inline-block;
+  }
+
+  .hero-title-cream {
+    color: var(--color-ivory);
+  }
+
+  .hero-title-gradient {
+    background: linear-gradient(92deg, var(--color-gold), var(--color-coral));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: 400;
   }
 
   .hero-meta {
     display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: var(--sp-4);
-    color: #e7e0cf;
-    margin-bottom: var(--sp-8);
-    font-size: 0.95rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .hero-meta .highlight {
-    color: var(--color-gold);
+    color: var(--color-ivory);
+    margin-bottom: var(--sp-6);
+    font-size: 0.85rem;
+    font-family: var(--font-mono);
     font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
   }
 
   .hero-subtext {
     font-size: 1.125rem;
     color: #e7e0cf;
     margin-bottom: var(--sp-8);
-    max-width: 600px;
+    max-width: 52ch; /* Requested by user */
     font-weight: 400;
     line-height: 1.66;
   }
@@ -249,10 +259,18 @@ import speakerImg from '../assets/tiffany_hero_new.jpg';
     display: flex;
     gap: var(--sp-4);
     flex-wrap: wrap;
-    margin-bottom: var(--sp-12);
+    margin-bottom: var(--sp-8);
   }
 
-
+  .hero-capability-strip {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-gold);
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    line-height: 1.6;
+  }
 
   .hero-media {
     display: flex;
@@ -262,36 +280,22 @@ import speakerImg from '../assets/tiffany_hero_new.jpg';
     perspective: 1000px;
   }
 
-  /* Glow behind image */
-  .hero-media::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at center, rgba(14, 107, 84, 0.35) 0%, transparent 70%);
-    z-index: -1;
-    border-radius: 50%;
-    pointer-events: none;
-  }
-
   .hero-glass-frame {
     padding: 14px;
     background: rgba(20, 18, 14, 0.45);
     backdrop-filter: blur(16px) saturate(120%);
     -webkit-backdrop-filter: blur(16px) saturate(120%);
-    border: 1px solid rgba(255,255,255,0.12);
+    border: 1px solid var(--color-gold); /* Thin gold border */
     border-radius: 999px 999px 16px 16px; /* Elegant Cathedral Arch */
     box-shadow: 
       0 30px 60px rgba(0,0,0,0.5), 
-      inset 0 1px 1px rgba(255,255,255,0.2),
+      inset 0 1px 1px rgba(217,162,58,0.2),
       inset 0 -1px 1px rgba(0,0,0,0.5);
     position: relative;
-    /* Gentle floating animation for uniqueness */
     animation: heroFloat 8s ease-in-out infinite;
     transform-style: preserve-3d;
     transform: translateZ(0);
     backface-visibility: hidden;
-    will-change: transform, backdrop-filter;
   }
 
   @keyframes heroFloat {
@@ -304,17 +308,23 @@ import speakerImg from '../assets/tiffany_hero_new.jpg';
     width: 100%;
     max-width: 440px;
     aspect-ratio: 4 / 5;
-    border-radius: 999px 999px 12px 12px; /* Matches outer arch perfectly */
+    border-radius: 999px 999px 12px 12px;
     overflow: hidden;
     position: relative;
-    border: 1px solid var(--color-gold);
     clip-path: inset(100% 0 0 0); /* for GSAP */
   }
 
   .hero-image {
     width: 100%;
-    height: 120%; /* Extra height for parallax */
+    height: 120%;
     object-fit: cover;
     transform: scale(1.15); /* for GSAP */
+  }
+
+  /* Single column on mobile is the default grid behavior */
+  @media (max-width: 1023px) {
+    .hero-media {
+      margin-top: var(--sp-8); /* Put below buttons/text */
+    }
   }
 </style>

@@ -105,7 +105,7 @@ import Button from './Button.astro';
       <!-- 5. Workshop -->
       <div class="flip-card stagger-item">
         <div class="flip-card-inner">
-          <div class="flip-card-front glass-card" style="--card-accent: var(--color-purple);">
+          <div class="flip-card-front glass-card" style="--card-accent: var(--color-berry);">
             <div class="card-icon-box">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
             </div>
@@ -113,7 +113,7 @@ import Button from './Button.astro';
             <p class="format-desc">Interactive training for clinicians, coalitions, and frontline teams. Tools, not theory.</p>
             <span class="card-link">SEE DETAILS <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
           </div>
-          <div class="flip-card-back glass-card" style="--card-accent: var(--color-purple);">
+          <div class="flip-card-back glass-card" style="--card-accent: var(--color-berry);">
             <h3 class="format-title" style="margin-bottom: var(--sp-6);">Workshop</h3>
             <p class="format-desc" style="color: var(--color-ivory);">Half-day or full-day, hands-on throughout. Skills practice in screening, motivational interviewing, and building referral pathways that people actually follow.</p>
             <p class="format-desc">Built for teams who need to apply it on Monday, not just understand it on Friday.</p>
@@ -127,7 +127,7 @@ import Button from './Button.astro';
       <!-- 6. Custom Program -->
       <div class="flip-card stagger-item">
         <div class="flip-card-inner">
-          <div class="flip-card-front glass-card" style="--card-accent: var(--color-blue);">
+          <div class="flip-card-front glass-card" style="--card-accent: var(--color-royal);">
             <div class="card-icon-box">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
             </div>
@@ -135,7 +135,7 @@ import Button from './Button.astro';
             <p class="format-desc">Built around your audience, objectives, timeline, and format.</p>
             <span class="card-link">SEE DETAILS <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"></polyline></svg></span>
           </div>
-          <div class="flip-card-back glass-card" style="--card-accent: var(--color-blue);">
+          <div class="flip-card-back glass-card" style="--card-accent: var(--color-royal);">
             <h3 class="format-title" style="margin-bottom: var(--sp-6);">Custom Program</h3>
             <p class="format-desc" style="color: var(--color-ivory);">A multi-session series, ongoing coalition support, or a program designed from scratch for your community.</p>
             <p class="format-desc">For organizations that want more than a single talk — where the goal is something that continues after she leaves.</p>
@@ -147,8 +147,12 @@ import Button from './Button.astro';
       </div>
     </div>
     
-    <div class="formats-footer stagger-item">
-      <Button href="/book" variant="primary">Invite Tiffany to Speak &rarr;</Button>
+    <div class="formats-footer stagger-item text-center">
+      <div class="custom-callout glass-card">
+        <p class="custom-callout-text">
+          Don't see the exact format you need? <span class="highlight">Tiffany frequently designs custom engagements for specialized organizations.</span>
+        </p>
+      </div>
     </div>
   </div>
 </section>
@@ -339,8 +343,32 @@ import Button from './Button.astro';
   }
 
   .formats-footer {
-    margin-top: var(--sp-16);
+    margin-top: var(--sp-24);
     display: flex;
     justify-content: center;
+    position: relative;
+    z-index: 2;
+  }
+
+  .custom-callout {
+    display: inline-block;
+    padding: var(--sp-4) var(--sp-8);
+    border: 1px solid rgba(217, 162, 58, 0.3);
+    border-radius: 100px;
+    background: rgba(217, 162, 58, 0.05);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    backdrop-filter: blur(12px);
+  }
+
+  .custom-callout-text {
+    font-family: var(--font-sans);
+    color: rgba(255,255,255,0.75);
+    font-size: 1.05rem;
+    margin: 0;
+  }
+
+  .custom-callout-text .highlight {
+    color: var(--color-gold);
+    font-weight: 500;
   }
 </style>

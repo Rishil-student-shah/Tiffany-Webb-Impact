@@ -1,28 +1,37 @@
 ---
 import Waveform from './Waveform.astro';
+
+const { collections = {} } = Astro.props;
+let items = collections.credibility_bar || [];
+
+if (items.length === 0) {
+  // Fallbacks if db is empty
+  items = [
+    { title: "15+", subtitle: "Years" },
+    { title: "4,000+", subtitle: "Hours of Outreach" },
+    { title: "20", subtitle: "Speaking Topics" }
+  ];
+}
+
+// Cap at 6 items
+items = items.slice(0, 6);
 ---
 
 <section class="credibility-bar theme-ink reveal-up">
   <Waveform opacity={0.04} flipX={true} />
   <div class="credibility-container">
-    <div class="credibility-item">
-      <span class="credibility-stat">15+</span>
-      <span class="text-micro credibility-label">Years</span>
-    </div>
-    
-    <div class="credibility-divider"></div>
-    
-    <div class="credibility-item">
-      <span class="credibility-stat">4,000+</span>
-      <span class="text-micro credibility-label">Hours of Outreach</span>
-    </div>
-    
-    <div class="credibility-divider"></div>
-    
-    <div class="credibility-item">
-      <span class="credibility-stat">21</span>
-      <span class="text-micro credibility-label">Speaking Topics</span>
-    </div>
+    {items.map((item, index) => (
+      <>
+        <div class="credibility-item">
+          <span class="credibility-stat">{item.title}</span>
+          <span class="text-micro credibility-label">{item.subtitle}</span>
+        </div>
+        
+        {index < items.length - 1 && (
+          <div class="credibility-divider"></div>
+        )}
+      </>
+    ))}
   </div>
 </section>
 
@@ -36,7 +45,7 @@ import Waveform from './Waveform.astro';
 
   .credibility-container {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--sp-6);
     display: flex;
@@ -48,7 +57,10 @@ import Waveform from './Waveform.astro';
   @media (min-width: 768px) {
     .credibility-container {
       flex-direction: row;
-      justify-content: space-between;
+      justify-content: center;
+      flex-wrap: wrap;
+      column-gap: 4rem;
+      row-gap: 3rem;
     }
   }
 
@@ -77,6 +89,12 @@ import Waveform from './Waveform.astro';
     .credibility-divider {
       width: 1px;
       height: 60px;
+      align-self: center;
+    }
+    
+    /* Hide dividers that wrap to a new line to keep it clean */
+    .credibility-divider:nth-of-type(3n) {
+      display: none;
     }
   }
 </style>

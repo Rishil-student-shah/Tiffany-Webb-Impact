@@ -1,308 +1,36 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Eyebrow from '../components/Eyebrow.astro';
+import ImpactHero from '../components/impact/ImpactHero.astro';
+import UpcomingEngagements from '../components/impact/UpcomingEngagements.astro';
+import PastEngagements from '../components/impact/PastEngagements.astro';
+import OutcomeStories from '../components/impact/OutcomeStories.astro';
+import ImpactPartners from '../components/impact/ImpactPartners.astro';
+import ImpactGallery from '../components/impact/ImpactGallery.astro';
+import EngagementJourney from '../components/impact/EngagementJourney.astro';
+import BookingSection from '../components/BookingSection.astro';
 ---
 
 <Layout title="Community Impact | Tiffany Webb" theme="secondary">
   <main class="page-content">
     
-    <!-- 4.1 Hero -->
-    <section class="inner-hero theme-dark">
-      <div class="container reveal-up">
-        <Eyebrow>Impact</Eyebrow>
-        <h1 class="inner-hero-title">The work behind the numbers.</h1>
-        <p class="inner-hero-sub">Fifteen years of prevention work, measured the way it actually matters — in conversations started, systems changed, and communities that stopped waiting for permission to talk about this.</p>
-      </div>
-    </section>
+    <!-- 
+      WHAT WE NEED FROM TIFFANY BEFORE THIS PAGE CAN BE REAL:
+      - Past engagements: event name, date, host organisation, city, format, audience size — as many as she can recall, even approximate.
+      - Written permission per named event and per named organisation.
+      - Any outcome numbers she has, even rough — people screened, staff trained, students reached, resolutions passed.
+      - Real photographs from real events, with permission.
+      - Three contacts willing to give a testimonial, and permission to approach them.
+      - Her partner list with the relationship type for each.
+    -->
 
-    <!-- 4.2 Numbers -->
-    <section class="credibility-bar reveal-up">
-      <div class="credibility-container">
-        <div class="credibility-item">
-          <span class="credibility-stat">15+</span>
-          <span class="text-micro credibility-label">Years</span>
-        </div>
-        <div class="credibility-divider"></div>
-        <div class="credibility-item">
-          <span class="credibility-stat">4,000+</span>
-          <span class="text-micro credibility-label">Hours of Outreach</span>
-        </div>
-        <div class="credibility-divider"></div>
-        <div class="credibility-item">
-          <span class="credibility-stat">21</span>
-          <span class="text-micro credibility-label">Speaking Topics</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4.3 How She Works -->
-    <section class="how-works section-pad bg-cream">
-      <div class="container stagger-group">
-        <h2 class="stagger-item">Prevention that meets people where they are.</h2>
-        
-        <div class="prose-column stagger-item mt-8">
-          <p>The standard prevention model assumes people will come to information. Tiffany's work starts from the opposite assumption: that the people most at risk are the least likely to seek anything out — and that reaching them requires showing up in the places they already are, with someone they already trust.</p>
-          <p>That means school gyms, not just assemblies. Church basements, not just clinics. Barbershops, community fairs, and recovery meetings. It means partnering with organizations that already hold trust, rather than arriving as an outside expert.</p>
-          <p>It is slower than a campaign. It is also the only thing that works in communities where campaigns have been failing for years.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4.4 Partnerships & Organizations -->
-    <section class="partners section-pad">
-      <div class="container stagger-group">
-        <h2 class="stagger-item text-center">Where she's worked.</h2>
-        
-        <div class="partner-list stagger-item mt-12">
-          <span class="partner-chip">Healthcare Alternative Systems (HAS)</span>
-          <span class="partner-chip">Illinois Council on Problem Gambling</span>
-          <span class="partner-chip">Schools and school districts</span>
-          <span class="partner-chip">Community coalitions</span>
-          <span class="partner-chip">Behavioral health organizations</span>
-          <span class="partner-chip">Recovery organizations</span>
-          <span class="partner-chip">Public health partners</span>
-        </div>
-        
-        <p class="text-micro text-center mt-12 stagger-item" style="color: var(--color-muted-grey);">
-          Participant in the statewide "Are You Really Winning?" awareness campaign.
-        </p>
-      </div>
-    </section>
-
-    <!-- 4.5 Community Work -->
-    <section class="community section-pad bg-cream">
-      <div class="container stagger-group">
-        <h2 class="stagger-item">In the room.</h2>
-        <div class="image-gallery mt-8 stagger-item">
-          <img src="/impact_community_1.jpg" alt="Tiffany Webb working in a community setting" class="gallery-image" />
-          <img src="/impact_community_2.jpg" alt="Tiffany Webb with healthcare professionals" class="gallery-image" />
-          <img src="/impact_community_3.jpg" alt="Tiffany Webb speaking to a large audience" class="gallery-image" />
-        </div>
-      </div>
-    </section>
-
-    <!-- 4.6 Case Studies -->
-    <section class="cases section-pad">
-      <div class="container stagger-group">
-        <h2 class="stagger-item">What change looks like.</h2>
-        <div class="case-study-image-container mt-8 stagger-item">
-          <img src="/case_study_hero.jpg" alt="Case Study Header" class="case-study-hero" />
-          <div class="case-study-overlay">
-            <h3 class="color-ivory" style="font-size: 2rem;">Annual Community Impact</h3>
-            <p class="color-ivory" style="opacity: 0.9; margin-top: 8px;">Case Studies Pending Client Input</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- 4.7 Closing -->
-    <section class="closing section-pad bg-ink text-center theme-dark">
-      <div class="container stagger-group">
-        <h2 class="stagger-item color-ivory">Bring this work to your community.</h2>
-        <div class="mt-8 stagger-item">
-          <a href="/book" class="btn btn-primary">Invite Tiffany to Speak &rarr;</a>
-        </div>
-      </div>
-    </section>
-
+    <ImpactHero />
+    <UpcomingEngagements />
+    <PastEngagements />
+    <OutcomeStories />
+    <ImpactPartners />
+    <ImpactGallery />
+    <EngagementJourney />
+    <BookingSection hideJourney={true} />
+    
   </main>
 </Layout>
-
-<style>
-  .page-content {
-    padding-top: 0;
-  }
-
-  .inner-hero {
-    background-color: var(--color-ink);
-    color: var(--color-ivory);
-    padding: calc(var(--sp-24) + 80px) 0 var(--sp-12);
-  }
-
-  .container {
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--sp-6);
-  }
-
-  .inner-hero-title {
-    margin-bottom: var(--sp-4);
-  }
-
-  .inner-hero-sub {
-    font-size: 1.25rem;
-    color: rgba(253, 252, 248, 0.8);
-    max-width: 800px;
-  }
-
-  /* Credibility Bar copied from component for seamless integration */
-  .credibility-bar {
-    background-color: var(--color-ink);
-    color: var(--color-gold);
-    padding: var(--sp-8) 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-  .credibility-container {
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 0 var(--sp-6);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--sp-6);
-  }
-  @media (min-width: 768px) {
-    .credibility-container {
-      flex-direction: row;
-      justify-content: space-between;
-    }
-  }
-  .credibility-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-  .credibility-stat {
-    font-family: var(--font-serif);
-    font-size: var(--text-h2);
-    line-height: 1;
-    margin-bottom: var(--sp-2);
-  }
-  .credibility-divider {
-    width: 40px;
-    height: 1px;
-    background-color: var(--color-gold);
-    opacity: 0.3;
-  }
-  @media (min-width: 768px) {
-    .credibility-divider {
-      width: 1px;
-      height: 60px;
-    }
-  }
-
-  .section-pad { padding: var(--sp-24) 0; }
-  .bg-cream { background-color: var(--color-cream); }
-  .bg-ink { background-color: var(--color-ink); }
-  .color-ivory { color: var(--color-ivory); }
-  .text-center { text-align: center; }
-  .mt-12 { margin-top: var(--sp-12); }
-  .mt-8 { margin-top: var(--sp-8); }
-
-  .prose-column {
-    max-width: 720px;
-    font-size: 1.125rem;
-    color: var(--color-charcoal);
-  }
-  .prose-column p {
-    margin-bottom: var(--sp-6);
-  }
-
-  .partner-list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: var(--sp-4);
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .partner-chip {
-    padding: var(--sp-4) var(--sp-6);
-    background-color: var(--color-ivory);
-    border: 1px solid var(--border-light);
-    border-radius: 2px;
-    font-size: 1rem;
-    color: var(--color-charcoal);
-  }
-
-  .image-gallery {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-6);
-  }
-  @media (min-width: 768px) {
-    .image-gallery {
-      grid-template-columns: repeat(3, 1fr);
-    }
-  }
-
-  .gallery-image {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border-radius: 2px;
-  }
-
-  .case-study-image-container {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: 2px;
-    overflow: hidden;
-  }
-  
-  @media (min-width: 768px) {
-    .case-study-image-container {
-      aspect-ratio: 21 / 9;
-    }
-  }
-
-  .case-study-hero {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .case-study-overlay {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    padding: var(--sp-12) var(--sp-8) var(--sp-8);
-    background: linear-gradient(to top, rgba(17,17,17,0.8) 0%, rgba(17,17,17,0) 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-  }
-
-  .placeholder-box {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px dashed rgba(17, 17, 17, 0.2);
-    color: rgba(17, 17, 17, 0.5);
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    font-size: 0.75rem;
-  }
-
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--sp-4) var(--sp-8);
-    font-family: var(--font-mono);
-    font-size: var(--text-button);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    border-radius: 2px;
-  }
-  .btn-primary {
-    background-color: var(--color-gold);
-    color: var(--color-ink);
-    border: 1px solid var(--color-gold);
-  }
-  .btn-primary:hover {
-    background-color: #E5C354;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(212, 175, 55, 0.2);
-  }
-</style>

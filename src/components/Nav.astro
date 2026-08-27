@@ -1,12 +1,18 @@
 ---
 import Button from './Button.astro';
+import { navLinks, navCta } from '../config/navigation.js';
 ---
 
 <header class="header js-header" role="banner" aria-label="Main Navigation">
   <!-- The clickable Dynamic Island pill (only active when scrolled-down) -->
-  <button class="island-back-to-top js-island-btn" aria-label="Back to top">
-    <span class="island-name">Tiffany Webb</span>
-  </button>
+  <div class="island-back-to-top">
+    <button class="js-island-btn" aria-label="Back to top" style="background:none; border:none; color:inherit; font:inherit; cursor:pointer; display:flex; align-items:center; padding: 0; outline: none;">
+      <span class="island-name">Tiffany Webb</span>
+    </button>
+    <button class="menu-toggle js-menu-toggle island-menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
+      <span class="hamburger"></span>
+    </button>
+  </div>
 
   <div class="header-container">
     <a href="/" class="logo" aria-label="Tiffany Webb Homepage">
@@ -16,13 +22,11 @@ import Button from './Button.astro';
 
     <nav class="nav-desktop" aria-label="Desktop Navigation">
       <ul class="nav-list">
-        <li><a href="/" class="nav-link">Home</a></li>
-        <li><a href="/about" class="nav-link">About</a></li>
-        <li><a href="/speaking" class="nav-link">Speaking</a></li>
-        <li><a href="/impact" class="nav-link">Impact</a></li>
-        <li><a href="/media" class="nav-link">Media</a></li>
+        {navLinks.map((link) => (
+          <li><a href={link.href} class="nav-link">{link.label}</a></li>
+        ))}
       </ul>
-      <Button href="/book" variant="primary" className="nav-cta">Book Tiffany</Button>
+      <Button href={navCta.href} variant="secondary" className="nav-cta">{navCta.label}</Button>
     </nav>
 
     <button class="menu-toggle js-menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
@@ -33,25 +37,21 @@ import Button from './Button.astro';
   <!-- Mobile Overlay -->
   <nav id="mobile-nav" class="nav-mobile" aria-hidden="true" aria-label="Mobile Navigation">
     <ul class="nav-mobile-list">
-      <li><a href="/" class="nav-mobile-link">Home</a></li>
-      <li><a href="/about" class="nav-mobile-link">About</a></li>
-      <li><a href="/speaking" class="nav-mobile-link">Speaking</a></li>
-      <li><a href="/impact" class="nav-mobile-link">Impact</a></li>
-      <li><a href="/media" class="nav-mobile-link">Media</a></li>
-      <li class="mt-8"><Button href="/book" variant="primary">Book Tiffany</Button></li>
+      {navLinks.map((link) => (
+        <li><a href={link.href} class="nav-mobile-link">{link.label}</a></li>
+      ))}
+      <li class="mt-8"><Button href={navCta.href} variant="secondary">{navCta.label}</Button></li>
     </ul>
   </nav>
 </header>
 
 <script>
   const header = document.querySelector('.js-header') as HTMLElement | null;
-  const toggle = document.querySelector('.js-menu-toggle') as HTMLButtonElement | null;
   const mobileNav = document.getElementById('mobile-nav');
   const islandBtn = document.querySelector('.js-island-btn') as HTMLButtonElement | null;
 
   let lastScrollY = window.scrollY;
   let ticking = false;
-  let scrollDirection = 'down';
 
   // Scroll to top when clicking the dynamic island pill
   islandBtn?.addEventListener('click', () => {
@@ -60,33 +60,18 @@ import Button from './Button.astro';
 
   const updateHeaderState = () => {
     const currentScrollY = window.scrollY;
-    
-    // Determine scroll direction with a 2px buffer to ignore micro-jitters
-    if (currentScrollY > lastScrollY + 2) {
-      scrollDirection = 'down';
-    } else if (currentScrollY < lastScrollY - 2) {
-      scrollDirection = 'up';
-    }
 
-    // ── ZONE 1: Top of page — fully transparent, full nav ──
+    // ZONE 1: Top of page – fully transparent, full nav
     if (currentScrollY <= 15) {
       if (header?.classList.contains('is-scrolled-down') || header?.classList.contains('is-scrolled-up')) {
         header?.classList.remove('is-scrolled-down', 'is-scrolled-up');
       }
     }
-    // ── ZONE 2: Scrolling DOWN past threshold → Dynamic Island ──
-    // Trigger almost instantly
-    else if (scrollDirection === 'down' && currentScrollY > 30) {
+    // ZONE 2: Scrolled past top -> Dynamic Island (always on, even when scrolling up)
+    else if (currentScrollY > 15) {
       if (!header?.classList.contains('is-scrolled-down')) {
         header?.classList.remove('is-scrolled-up');
         header?.classList.add('is-scrolled-down');
-      }
-    }
-    // ── ZONE 3: Scrolling UP (must be past top threshold) ──
-    else if (scrollDirection === 'up' && currentScrollY > 15) {
-      if (!header?.classList.contains('is-scrolled-up')) {
-        header?.classList.remove('is-scrolled-down');
-        header?.classList.add('is-scrolled-up');
       }
     }
 
@@ -101,19 +86,25 @@ import Button from './Button.astro';
     }
   }, { passive: true });
 
-  // Mobile Menu Toggle
-  toggle?.addEventListener('click', () => {
-    const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-    toggle.setAttribute('aria-expanded', String(!isExpanded));
-    mobileNav?.setAttribute('aria-hidden', String(isExpanded));
+  // Initial check in case they navigated to a page scrolled down
+  updateHeaderState();
 
-    if (!isExpanded) {
-      header?.classList.add('menu-open');
-      document.body.style.overflow = 'hidden';
-    } else {
-      header?.classList.remove('menu-open');
-      document.body.style.overflow = '';
-    }
+  // Mobile Menu Toggles
+  const toggles = document.querySelectorAll('.js-menu-toggle');
+  toggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggles.forEach(t => t.setAttribute('aria-expanded', String(!isExpanded)));
+      mobileNav?.setAttribute('aria-hidden', String(isExpanded));
+
+      if (!isExpanded) {
+        header?.classList.add('menu-open');
+        document.body.style.overflow = 'hidden';
+      } else {
+        header?.classList.remove('menu-open');
+        document.body.style.overflow = '';
+      }
+    });
   });
 </script>
 
@@ -156,20 +147,6 @@ import Button from './Button.astro';
   }
 
   /* ============================================================
-     STATE: SCROLLING UP — Glassmorphic floating full-width bar
-  ============================================================ */
-  .header.is-scrolled-up {
-    background: rgba(14, 12, 9, 0.75);
-    backdrop-filter: blur(20px) saturate(150%);
-    -webkit-backdrop-filter: blur(20px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.09);
-    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.55);
-    padding: var(--sp-4) var(--sp-8);
-    max-width: 1100px;
-    width: calc(100% - 80px);
-  }
-
-  /* ============================================================
      STATE: SCROLLING DOWN — Dynamic Island pill (name only)
   ============================================================ */
   .header.is-scrolled-down {
@@ -199,7 +176,7 @@ import Button from './Button.astro';
   /* ============================================================
      MOBILE MENU OPEN override
   ============================================================ */
-  .header.menu-open {
+  .header:not(.is-scrolled-down).menu-open {
     max-width: calc(100% - 32px) !important;
     background: var(--color-charcoal) !important;
     border-color: transparent !important;
@@ -218,8 +195,8 @@ import Button from './Button.astro';
     height: 100%;
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
+    justify-content: space-between;
+    padding: 0 16px;
     background: transparent;
     border: none;
     color: var(--color-ivory);
@@ -229,10 +206,17 @@ import Button from './Button.astro';
     border-radius: inherit;
   }
 
+  .island-menu-toggle {
+    display: block !important;
+    position: relative;
+    width: 24px;
+    height: 24px;
+  }
+
   .header.is-scrolled-down .island-back-to-top {
     opacity: 1;
     pointer-events: auto;
-  } /* <-- FIXED MISSING BRACKET HERE */
+  }
 
   .island-name {
     font-family: var(--font-serif);
@@ -305,9 +289,6 @@ import Button from './Button.astro';
   }
 
   /* Shrink logo text in floating bar to keep things compact */
-  .header.is-scrolled-up .logo-text {
-    font-size: 1.5rem;
-  }
 
   .logo-sub {
     font-family: var(--font-serif);
@@ -317,12 +298,6 @@ import Button from './Button.astro';
     max-height: 40px;
     opacity: 1;
     transition: opacity 0.4s ease, max-height 0.4s ease, margin-top 0.4s ease;
-  }
-
-  .header.is-scrolled-up .logo-sub {
-    opacity: 0;
-    max-height: 0;
-    margin-top: 0;
   }
 
   .logo-sub .italic-accent {
@@ -458,7 +433,7 @@ import Button from './Button.astro';
   }
 
   /* ============================================================
-     MOBILE OVERLAY
+     MOBILE OVERLAY / COMPACT DROPDOWN
   ============================================================ */
   .nav-mobile {
     position: fixed;
@@ -478,10 +453,32 @@ import Button from './Button.astro';
     transition: opacity 0.4s ease, visibility 0.4s ease;
   }
 
+  /* When the header is the Dynamic Island pill, make the menu a small compact dropdown */
+  .header.is-scrolled-down .nav-mobile {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    width: 220px; /* Match pill width exactly */
+    height: auto;
+    border-radius: 24px;
+    padding: var(--sp-6) var(--sp-4);
+    background: #0e0c09;
+    border: 1px solid rgba(217, 162, 58, 0.35); /* Gold border */
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(217, 162, 58, 0.15);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
   .nav-mobile[aria-hidden="false"] {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
+  }
+
+  .header.is-scrolled-down .nav-mobile[aria-hidden="false"] {
+    transform: translateX(-50%) translateY(0);
   }
 
   .nav-mobile-list {
@@ -492,14 +489,36 @@ import Button from './Button.astro';
     list-style: none;
   }
 
+  /* Shrink the gap inside the compact dropdown */
+  .header.is-scrolled-down .nav-mobile-list {
+    gap: var(--sp-4);
+  }
+
   .nav-mobile-link {
     font-family: var(--font-serif);
     font-size: var(--text-h3);
     color: var(--color-ivory);
     text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .nav-mobile-link:hover {
+    color: var(--color-gold);
+  }
+
+  /* Shrink text size inside the compact dropdown */
+  .header.is-scrolled-down .nav-mobile-link {
+    font-size: 1.15rem;
+    padding: var(--sp-1) 0;
+    display: block;
   }
 
   .mt-8 {
     margin-top: var(--sp-8);
   }
+
+  .header.is-scrolled-down .mt-8 {
+    margin-top: var(--sp-4);
+  }
 </style>
+

@@ -1,128 +1,76 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
+import Waveform from '../components/Waveform.astro';
 ---
 
-<Layout title="Media & Press | Tiffany Webb" theme="secondary">
-  <main class="page-content">
+<Layout title="Press Kits | Tiffany Webb" theme="dark">
+  <main class="page-content bg-ink">
     
-    <!-- 7.0 Hero -->
-    <section class="inner-hero theme-dark">
-      <div class="container reveal-up">
-        <Eyebrow>Media & Press</Eyebrow>
-        <h1 class="inner-hero-title">Media &amp; Press Resources</h1>
-        <p class="inner-hero-sub">Everything you need to feature, interview, or introduce Tiffany — without needing to email first.</p>
+    <!-- Hero -->
+    <section class="spk-hero-v2 relative overflow-hidden" style="position: relative;">
+      <Waveform opacity={0.05} variant="A" flipX={true} />
+      
+      <div class="spk-container" style="position: relative; z-index: 10;">
+        <div class="spk-hero-content text-center">
+          <Eyebrow className="justify-center">Media & Press</Eyebrow>
+          <h1 class="spk-h1">Official <span class="italic-accent">Press Kits.</span></h1>
+          <p class="spk-subtitle">
+            Downloadable assets, one-sheets, and capability decks for event organizers, journalists, and partners.
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- 7.1 Bios -->
-    <section class="bios section-pad">
-      <div class="container stagger-group">
-        <h2 class="stagger-item">Official Bios</h2>
+    <!-- Downloads Grid -->
+    <section class="spk-section relative overflow-hidden" style="padding-top: 2rem; position: relative;">
+      <Waveform opacity={0.04} variant="B" flipY={true} />
+      <div class="spk-container" style="position: relative; z-index: 10;">
         
-        <div class="bio-grid mt-8">
-          <div class="bio-card stagger-item">
-            <h3>Short (≈40 words)</h3>
-            <div class="bio-text">
-              <p>Tiffany Webb is a public-health educator and Community Impact Strategist with 15+ years and 4,000+ hours preventing gambling harm. She helps conferences, schools, and health systems turn hard conversations into action — with the cultural fluency to reach the people other programs miss.</p>
-            </div>
-            <button class="btn btn-secondary btn-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.innerText); alert('Copied to clipboard');">Copy Bio</button>
-          </div>
+        <div class="spk-tracks-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
           
-          <div class="bio-card stagger-item">
-            <h3>Medium (≈90 words)</h3>
-            <div class="bio-text">
-              <p>Tiffany Webb, BBA, MHP, is a Chicago-born public-health educator, gambling-prevention leader, and Community Impact Strategist with deep Louisiana roots. Over 15+ years and 4,000+ hours of frontline outreach, she has built coalitions, trained professionals, and led community screenings across Illinois — partnering with health systems, schools, government, and recovery organizations. A dynamic keynote speaker, panelist, and workshop facilitator, she makes difficult topics approachable and leaves organizations with practical tools. She is also the founder of GambleFreeGear, an awareness apparel brand built to "Break the Silence" on gambling addiction.</p>
+          <!-- Kit 1: One Sheet -->
+          <div class="spk-track-card flex-col">
+            <div class="track-header">
+              <h3 class="track-title">Speaker One-Sheet</h3>
+              <p class="track-subtitle">For Event Organizers</p>
             </div>
-            <button class="btn btn-secondary btn-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.innerText); alert('Copied to clipboard');">Copy Bio</button>
-          </div>
-          
-          <div class="bio-card stagger-item">
-            <h3>Long (≈150 words)</h3>
-            <div class="bio-text">
-              <p>Tiffany Webb, BBA, MHP, is a public-health educator, gambling-prevention leader, and Community Impact Strategist based in the Chicago area. Chicago-born and raised with deep Louisiana family roots, she blends behavioral-health expertise, bold community outreach, and entrepreneurial drive into a singular mission: no one should face gambling harm in silence. Across 15+ years and 4,000+ hours of prevention outreach, Tiffany has led community screenings, built coalitions, trained clinicians and frontline workers, and partnered with hospitals, schools, universities, government agencies, faith communities, and recovery organizations — including work connected to Healthcare Alternative Systems, the Illinois Council on Problem Gambling, and the statewide "Are You Really Winning?" awareness effort. As a keynote speaker, panelist, and workshop facilitator, she is known for making difficult topics approachable, leading with both heart and strategy, and equipping communities with practical tools. She is also the founder of GambleFreeGear, an awareness apparel brand on a mission to "Break the Silence."</p>
+            <p class="text-gray mb-8" style="color: rgba(251, 246, 234, 0.7); line-height: 1.6; margin-bottom: 2rem;">
+              A single-page overview of Tiffany's signature keynotes, core topics, and professional background. Perfect for sharing with your committee or board.
+            </p>
+            <div class="mt-auto">
+              <a href="#" class="download-btn">Download PDF &darr;</a>
             </div>
-            <button class="btn btn-secondary btn-copy" onclick="navigator.clipboard.writeText(this.previousElementSibling.innerText); alert('Copied to clipboard');">Copy Bio</button>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 7.2 Introduction Script -->
-    <section class="intro-script section-pad bg-cream">
-      <div class="container stagger-group">
-        <h2 class="stagger-item">Introduction Script</h2>
-        <p class="subtitle stagger-item">For event hosts</p>
-        
-        <div class="script-box stagger-item mt-8">
-          <p class="script-text">Our next speaker has spent more than fifteen years and four thousand hours doing prevention work in the places it's hardest to do — schools, clinics, and community rooms across Illinois. She's a public-health educator, a Community Impact Strategist, and the founder of GambleFreeGear. She believes prevention begins with a conversation, and she's here to start one with us. Please welcome Tiffany Webb.</p>
-          <button class="btn btn-secondary mt-4" onclick="navigator.clipboard.writeText(this.previousElementSibling.innerText); alert('Copied to clipboard');">Copy Script</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7.3 Headshots -->
-    <section class="headshots section-pad">
-      <div class="container stagger-group">
-        <h2 class="stagger-item">Headshots &amp; Photography</h2>
-        <p class="subtitle stagger-item">High-resolution and web-optimized versions available for download. Please credit where indicated.</p>
-        
-        <div class="grid-2 mt-8 stagger-item">
-          <div class="media-image-container">
-            <img src="/media_portrait.jpg" alt="Tiffany Webb Studio Portrait" class="media-image" />
-            <a href="/media_portrait.jpg" download class="text-micro mt-4" style="text-decoration: underline; display: inline-block;">Download Portrait</a>
+          <!-- Kit 2: Media Kit -->
+          <div class="spk-track-card flex-col">
+            <div class="track-header">
+              <h3 class="track-title">Media Kit</h3>
+              <p class="track-subtitle">For Journalists & Press</p>
+            </div>
+            <p class="text-gray mb-8" style="color: rgba(251, 246, 234, 0.7); line-height: 1.6; margin-bottom: 2rem;">
+              Includes official high-resolution headshots, approved short and long bios, and brand assets for features and interviews.
+            </p>
+            <div class="mt-auto">
+              <a href="#" class="download-btn">Download ZIP &darr;</a>
+            </div>
           </div>
-          <div class="media-image-container">
-            <img src="/media_action.jpg" alt="Tiffany Webb speaking on stage" class="media-image" />
-            <a href="/media_action.jpg" download class="text-micro mt-4" style="text-decoration: underline; display: inline-block;">Download Action Shot</a>
+
+          <!-- Kit 3: Capability Kit -->
+          <div class="spk-track-card flex-col">
+            <div class="track-header">
+              <h3 class="track-title">Capability Kit</h3>
+              <p class="track-subtitle">For Corporate & Healthcare</p>
+            </div>
+            <p class="text-gray mb-8" style="color: rgba(251, 246, 234, 0.7); line-height: 1.6; margin-bottom: 2rem;">
+              A detailed prospectus of consulting services, clinical training capabilities, and specialized organizational workshops.
+            </p>
+            <div class="mt-auto">
+              <a href="#" class="download-btn">Download PDF &darr;</a>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
 
-    <!-- 7.4 Speaker Info & 7.5 Press Resources -->
-    <section class="info-resources section-pad bg-cream">
-      <div class="container grid-2 stagger-group">
-        <div class="stagger-item">
-          <h2>Speaker Information</h2>
-          <ul class="info-list mt-8">
-            <li><strong>Positioning:</strong> Community Impact Strategist &middot; Public Health Educator &amp; Speaker</li>
-            <li><strong>Topic areas:</strong> Prevention &amp; Awareness &middot; Treatment, Recovery &amp; Professional Training &middot; Family &amp; Community Impact &middot; Creative &amp; Promotional Engagement</li>
-            <li><strong>Formats:</strong> Keynote &middot; Conference session &middot; Panel &middot; Workshop &middot; School program &middot; Custom</li>
-            <li><strong>Experience:</strong> 15+ years &middot; 4,000+ hours of gambling-prevention outreach</li>
-          </ul>
-        </div>
-        <div class="stagger-item">
-          <h2>Press Resources</h2>
-          <ul class="resource-links mt-8">
-            <li><a href="#" class="resource-link">Media Kit (PDF) &darr;</a></li>
-            <li><a href="#" class="resource-link">Capability Kit (PDF) &darr;</a></li>
-            <li><a href="#" class="resource-link">Speaker One-Sheet (PDF) &darr;</a></li>
-            <li><a href="#" class="resource-link">Logo &amp; brand assets (ZIP) &darr;</a></li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7.6 Media Appearances -->
-    <section class="appearances section-pad">
-      <div class="container stagger-group">
-        <h2 class="stagger-item">Media Appearances</h2>
-        
-        <div class="appearance-card mt-8 stagger-item">
-          <h3>Gateway Foundation &mdash; <em>Wager Danger</em> podcast</h3>
-          <p>A conversation on community-based gambling prevention and harm reduction.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- 7.7 Media Contact -->
-    <section class="contact section-pad bg-ink text-center theme-dark">
-      <div class="container stagger-group">
-        <h2 class="stagger-item color-ivory">Media Contact</h2>
-        <p class="subtitle stagger-item mx-auto color-ivory" style="opacity: 0.8;">For interviews, quotes, or speaking enquiries:</p>
-        <div class="mt-8 stagger-item">
-          <a href="mailto:booking@tiffanywebb.com" class="contact-email">booking@tiffanywebb.com</a>
         </div>
       </div>
     </section>
@@ -130,183 +78,111 @@ import Eyebrow from '../components/Eyebrow.astro';
   </main>
 </Layout>
 
-<style>
-  .page-content {
-    padding-top: 0;
-  }
-
-  .inner-hero {
-    background-color: var(--color-ink);
-    color: var(--color-ivory);
-    padding: calc(var(--sp-24) + 80px) 0 var(--sp-12);
-  }
-
-  .container {
-    width: 100%;
-    max-width: 1000px;
+<style is:global>
+  .bg-ink { background: var(--ink); }
+  .spk-container {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--sp-6);
   }
-
-  .inner-hero-title {
-    margin-bottom: var(--sp-4);
+  .spk-section {
+    padding: 8rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
-
-  .inner-hero-sub {
-    font-size: 1.25rem;
-    color: rgba(253, 252, 248, 0.8);
-    max-width: 700px;
-  }
-
-  .section-pad { padding: var(--sp-24) 0; }
-  .bg-cream { background-color: var(--color-cream); }
-  .bg-ink { background-color: var(--color-ink); }
-  .color-ivory { color: var(--color-ivory); }
   .text-center { text-align: center; }
-  .mt-12 { margin-top: var(--sp-12); }
-  .mt-8 { margin-top: var(--sp-8); }
-  .mt-4 { margin-top: var(--sp-4); }
-  .mx-auto { margin-left: auto; margin-right: auto; }
-
-  .subtitle {
-    font-size: 1.25rem;
-    color: var(--color-charcoal);
-  }
-
-  .bio-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-8);
-  }
-
-  .bio-card {
-    background-color: var(--color-cream);
-    padding: var(--sp-8);
-    border: 1px solid var(--border-light);
-  }
-
-  .bio-card h3 {
-    margin-bottom: var(--sp-4);
-    font-size: 1.25rem;
-  }
-
-  .bio-text {
-    margin-bottom: var(--sp-6);
-    color: var(--color-charcoal);
-  }
-
-  .script-box {
-    background-color: var(--color-ivory);
-    padding: var(--sp-8);
-    border: 1px solid var(--border-light);
-    border-left: 4px solid var(--color-emerald);
-  }
-
-  .script-text {
-    font-size: 1.125rem;
-    color: var(--color-charcoal);
-  }
-
-  .grid-2 {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-8);
-  }
-  @media (min-width: 768px) {
-    .grid-2 {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--sp-12);
-    }
-  }
-
-  .media-image-container {
+  .flex-col {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    height: 100%;
   }
+  .mt-auto { margin-top: auto; }
 
-  .media-image {
-    width: 100%;
-    aspect-ratio: 4 / 3;
-    object-fit: cover;
-    border-radius: 2px;
-  }
-
-  .info-list {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-4);
-  }
-  .info-list li {
-    color: var(--color-charcoal);
-    line-height: 1.5;
-  }
-  .info-list strong {
-    color: var(--color-ink);
-  }
-
-  .resource-links {
-    display: flex;
-    flex-direction: column;
-    gap: var(--sp-4);
-  }
-  .resource-link {
-    font-family: var(--font-mono);
-    text-transform: uppercase;
-    font-size: 0.875rem;
-    color: var(--color-emerald);
-    text-decoration: none;
-    padding-bottom: 2px;
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s ease;
-  }
-  .resource-link:hover {
-    border-color: var(--color-emerald);
-  }
-
-  .appearance-card {
-    padding: var(--sp-6);
-    background-color: var(--color-cream);
-    border-left: 4px solid var(--color-gold);
-  }
-  .appearance-card h3 {
-    margin-bottom: var(--sp-2);
-  }
-  .appearance-card p {
-    color: var(--color-charcoal);
-  }
-
-  .contact-email {
+  .spk-h1 {
     font-family: var(--font-serif);
-    font-size: 2.5rem;
-    color: var(--color-gold);
-    text-decoration: none;
-    transition: color 0.3s ease;
-  }
-  .contact-email:hover {
+    font-size: clamp(3rem, 6vw, 5rem);
     color: var(--color-ivory);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .spk-subtitle {
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    color: rgba(251, 246, 234, 0.75);
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
   }
 
-  .btn {
-    display: inline-flex;
+  .spk-hero-v2 {
+    padding: 12rem 0 4rem 0;
+  }
+  .spk-hero-content {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: var(--sp-4) var(--sp-8);
+  }
+
+  /* Grid & Cards */
+  .spk-tracks-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  .spk-track-card {
+    background: rgba(15, 15, 15, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 3rem;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+  .spk-track-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(217, 162, 58, 0.4);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 40px rgba(217, 162, 58, 0.05);
+  }
+  .track-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(217, 162, 58, 0.2);
+    transition: border-color 0.4s ease;
+  }
+  .spk-track-card:hover .track-header {
+    border-color: rgba(217, 162, 58, 0.5);
+  }
+  .track-title {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--color-ivory);
+    margin-bottom: 0.5rem;
+  }
+  .track-subtitle {
     font-family: var(--font-mono);
-    font-size: var(--text-button);
+    font-size: 0.8rem;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.1em;
+    color: var(--color-gold);
+    opacity: 0.8;
+  }
+
+  /* Buttons */
+  .download-btn {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: 1px solid rgba(217, 162, 58, 0.5);
+    color: var(--color-gold);
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.85rem;
+    border-radius: 6px;
     text-decoration: none;
     transition: all 0.3s ease;
-    border-radius: 2px;
-    cursor: pointer;
   }
-  .btn-secondary {
-    background-color: transparent;
-    color: var(--color-gold);
-    border: 1px solid var(--color-gold);
-  }
-  .btn-secondary:hover {
-    background-color: rgba(212, 175, 55, 0.1);
+  .download-btn:hover {
+    background: rgba(217, 162, 58, 0.1);
+    border-color: var(--color-gold);
+    color: #fff;
   }
 </style>

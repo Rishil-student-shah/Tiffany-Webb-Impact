@@ -1,98 +1,166 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
+import Waveform from '../components/Waveform.astro';
 ---
 
-<Layout title="Terms of Service | Tiffany Webb" theme="secondary">
-  <main class="page-content">
+<Layout title="Terms of Service | Tiffany Webb" theme="dark">
+  <main class="page-content bg-ink">
     
-    <section class="utility-hero">
-      <div class="container reveal-up">
-        <Eyebrow>Legal</Eyebrow>
-        <h1 class="utility-title">Terms of Use</h1>
+    <section class="spk-hero-v2 relative overflow-hidden" style="padding: 10rem 0 4rem 0; position: relative;">
+      <Waveform opacity={0.04} variant="B" flipY={true} />
+      <div class="spk-container" style="position: relative; z-index: 10;">
+        <div class="text-center">
+          <Eyebrow className="justify-center">Legal</Eyebrow>
+          <h1 class="spk-h1">Terms of <span class="italic-accent">Service.</span></h1>
+          <p class="spk-subtitle">Last updated: August 2026</p>
+        </div>
       </div>
     </section>
 
-    <section class="utility-content section-pad bg-cream">
-      <div class="container prose-column stagger-group">
+    <section class="spk-section relative overflow-hidden" style="padding-top: 4rem; padding-bottom: 8rem; position: relative; background: radial-gradient(circle at right center, rgba(217,162,58,0.03) 0%, transparent 60%);">
+      <Waveform opacity={0.03} variant="D" />
+      <div class="spk-container" style="max-width: 900px; position: relative; z-index: 10;">
         
-        <div class="stagger-item">
-          <p class="intro">By using this website you agree to these terms.</p>
-        </div>
+        <div class="legal-card prose-column">
+          <div class="prose-block">
+            <p class="intro">These Terms of Service govern your use of the website located at tiffanywebb.com and any related services provided by Tiffany Webb. By accessing our website or booking our services, you agree to abide by these Terms.</p>
+          </div>
 
-        <div class="stagger-item mt-8">
-          <h3>Use of this site</h3>
-          <p>This website is provided for information about Tiffany Webb's speaking, training, and consulting services.</p>
-        </div>
-        
-        <div class="stagger-item mt-8">
-          <h3>Intellectual property</h3>
-          <p>All content, including text, images, and branding, is the property of Tiffany Webb unless otherwise credited, and may not be reproduced without permission.</p>
-        </div>
-        
-        <div class="stagger-item mt-8">
-          <h3>No professional advice</h3>
-          <p>Content on this site is educational and does not constitute clinical, medical, or legal advice. If you or someone you know needs support with gambling harm, please contact a qualified professional or a problem-gambling helpline.</p>
-        </div>
-        
-        <div class="stagger-item mt-8 mb-12">
-          <h3>Contact</h3>
-          <p><a href="mailto:booking@tiffanywebb.com" style="text-decoration: underline;">booking@tiffanywebb.com</a></p>
+          <div class="prose-block mt-8">
+            <h3>1. Services and Bookings</h3>
+            <p>Tiffany Webb provides professional speaking, consulting, and training services focusing on public health and gambling prevention. All bookings initiated through this website are considered inquiries and do not constitute a binding contract until a formal Speaker Agreement or Consulting Contract is signed by both parties. We reserve the right to decline any speaking or consulting inquiry at our sole discretion.</p>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>2. Intellectual Property Rights</h3>
+            <p>All content, materials, keynote presentations, slide decks, frameworks, methodologies, and written articles provided by Tiffany Webb (collectively, "Materials") are the exclusive intellectual property of Tiffany Webb and are protected by applicable copyright and trademark law.</p>
+            <ul>
+              <li><strong>Presentations:</strong> Recording, broadcasting, or distributing Tiffany Webb's keynote or workshop presentations without explicit prior written consent is strictly prohibited.</li>
+              <li><strong>Website Content:</strong> You may not modify, publish, transmit, participate in the transfer or sale of, reproduce, create derivative works from, distribute, or in any way exploit any of the content on this website, in whole or in part, without our written permission.</li>
+            </ul>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>3. User Conduct</h3>
+            <p>As a condition of your use of the website, you warrant that you will not use the website for any purpose that is unlawful or prohibited by these Terms. You may not use the website in any manner which could damage, disable, overburden, or impair the website or interfere with any other party's use and enjoyment of the website.</p>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>4. Cancellation and Rescheduling</h3>
+            <p>Specific terms regarding the cancellation, rescheduling, or modification of booked speaking engagements or consulting services will be governed strictly by the individual Speaker Agreement or Consulting Contract signed between the Client and Tiffany Webb. This website does not supersede those individual contractual terms.</p>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>5. Limitations of Liability</h3>
+            <p>The information and services provided on this website are for educational and informational purposes only. Tiffany Webb is a public health educator and Community Impact Strategist. The content provided during speaking engagements or on this website does not constitute formal medical, psychiatric, or legal advice. In no event shall Tiffany Webb be liable for any indirect, incidental, special, consequential or punitive damages arising out of or relating to your use of the website or services.</p>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>6. External Links</h3>
+            <p>Our website may contain links to external sites that are not operated by us. Please be aware that we have no control over the content and policies of those sites, and cannot accept responsibility or liability for their respective privacy practices or content.</p>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>7. Changes to Terms</h3>
+            <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>8. Contact Us</h3>
+            <p>If you have any questions about these Terms, please contact us at:</p>
+            <p><a href="/book" style="color: var(--color-gold);">booking@tiffanywebb.com</a></p>
+          </div>
         </div>
 
       </div>
     </section>
-
   </main>
 </Layout>
 
-<style>
-  .page-content {
-    padding-top: 0;
-  }
-
-  .utility-hero {
-    background-color: var(--color-ink);
-    color: var(--color-ivory);
-    padding: var(--sp-16) 0 var(--sp-12);
-    text-align: center;
-  }
-
-  .container {
-    width: 100%;
-    max-width: 800px;
+<style is:global>
+  .bg-ink { background: var(--ink); }
+  .spk-container {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--sp-6);
   }
+  .spk-section {
+    padding: 6rem 0 10rem 0;
+  }
+  .text-center { text-align: center; }
 
-  .utility-title {
-    margin-bottom: var(--sp-4);
+  .spk-h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 5vw, 4rem);
+    color: var(--color-ivory);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .spk-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
   }
 
-  .section-pad { padding: var(--sp-16) 0; }
-  .bg-cream { background-color: var(--color-cream); }
-  .mt-8 { margin-top: var(--sp-8); }
-  .mb-12 { margin-bottom: var(--sp-12); }
-
-  .prose-column {
-    font-size: 1.125rem;
-    color: var(--color-charcoal);
+  .prose-block {
+    margin-bottom: 3rem;
   }
-  
+  .prose-block h3 {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    color: var(--color-ivory);
+    margin-bottom: 1rem;
+  }
+  .prose-block p {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: rgba(251, 246, 234, 0.75);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+  .prose-block ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+  .prose-block li {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: rgba(251, 246, 234, 0.75);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .prose-block li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-gold);
+    font-weight: bold;
+  }
+  .prose-block strong {
+    color: var(--color-ivory);
+    font-weight: 500;
+  }
   .intro {
-    font-size: 1.25rem;
-    color: var(--color-ink);
-    border-left: 4px solid var(--color-gold);
-    padding-left: var(--sp-4);
+    font-size: 1.35rem !important;
+    color: var(--color-ivory) !important;
   }
-
-  .prose-column h3 {
-    font-size: 1.5rem;
-    color: var(--color-emerald);
-    margin-bottom: var(--sp-2);
+  .legal-card {
+    background: rgba(15, 15, 15, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 3rem 4rem;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
   }
-
-  .prose-column p {
-    line-height: 1.6;
+  @media (max-width: 768px) {
+    .legal-card {
+      padding: 2rem;
+    }
   }
 </style>

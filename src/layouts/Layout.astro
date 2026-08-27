@@ -123,27 +123,26 @@ const {
           });
         }
 
-        // 4. GSAP FLIP Morphing Modal Logic
-        gsap.registerPlugin(Flip);
-
+        // 4. Standard Modal Popup Logic
         const morphOverlay = document.querySelector('.morph-overlay');
         const morphContainer = document.querySelector('.morph-container');
         const morphBackdrop = document.querySelector('.morph-backdrop');
         const closeBtn = document.querySelector('.morph-close-btn');
         const closeIcon = document.querySelector('.close-icon');
-        
+
         let activeCard = null;
         let originalWrap = null;
         let isAnimating = false;
 
         document.querySelectorAll('.morph-card').forEach(card => {
-          card.addEventListener('click', () => {
+          card.addEventListener('click', (e) => {
+            e.preventDefault();
             if (isAnimating || activeCard) return;
             isAnimating = true;
             activeCard = card;
             originalWrap = card.parentElement;
 
-            // Prepare expanded content before FLIP so it calculates final height correctly
+            // Prepare expanded content
             const expandedContent = card.querySelector('.card-expanded-content');
             if(expandedContent) {
               expandedContent.style.display = 'block';
@@ -151,90 +150,49 @@ const {
             }
             card.classList.add('is-expanded');
             
-            // Record initial state
-            const state = Flip.getState(card);
-            
             // Move to global container
             morphContainer.appendChild(card);
             morphOverlay.classList.add('is-active');
             
+            // Fade in modal normally
+            gsap.fromTo(card, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" });
+            
             // Fade in backdrop
             gsap.to(morphBackdrop, { opacity: 1, duration: 0.4 });
             // Show close btn
-            gsap.fromTo(closeBtn, { scale: 0, opacity: 0, rotate: -90 }, { scale: 1, opacity: 1, rotate: 0, duration: 0.5, ease: "back.out(1.5)", delay: 0.3 });
+            gsap.fromTo(closeBtn, { scale: 0, opacity: 0, rotate: -90 }, { scale: 1, opacity: 1, rotate: 0, duration: 0.4, ease: "back.out(1.5)", delay: 0.2, onComplete: () => { isAnimating = false; } });
+          });
+        });
 
-            // FLIP Animation
-            Flip.from(state, {
-              duration: 0.7,
-              ease: "power4.inOut",
-              absolute: true,
-              onComplete: () => {
-                if(expandedContent) {
-                  gsap.fromTo(expandedContent.children, 
-                    { opacity: 0, y: 20 }, 
-                    { opacity: 1, y: 0, duration: 0.4, stagger: 0.1 }
-                  );
-                }
-                isAnimating = false;
+        if (closeBtn) {
+          closeBtn.addEventListener('click', () => {
+            if (isAnimating || !activeCard) return;
+            isAnimating = true;
+
+            // Close Animation normally
+            gsap.to(closeIcon, { rotate: 180, scale: 0.5, opacity: 0, duration: 0.3, ease: "power2.in" });
+            gsap.to(activeCard, { opacity: 0, scale: 0.95, duration: 0.3, ease: "power2.in" });
+            gsap.to(morphBackdrop, { opacity: 0, duration: 0.3, onComplete: () => {
+              // Reset DOM
+              originalWrap.appendChild(activeCard);
+              morphOverlay.classList.remove('is-active');
+              activeCard.classList.remove('is-expanded');
+              
+              // Reset inline styles from animation
+              gsap.set(activeCard, { clearProps: "opacity,scale" });
+              
+              const expandedContent = activeCard.querySelector('.card-expanded-content');
+              if(expandedContent) {
+                expandedContent.style.display = 'none';
               }
-            });
-          });
-        });
-
-        closeBtn.addEventListener('click', () => {
-          if (isAnimating || !activeCard) return;
-          isAnimating = true;
-
-          // Unique Close Animation for the 'X' button
-          gsap.to(closeIcon, { 
-            rotate: 180, 
-            scale: 0.5, 
-            opacity: 0, 
-            duration: 0.3, 
-            ease: "power2.in",
-            onComplete: executeCloseFlip
-          });
-        });
-
-        function executeCloseFlip() {
-          const expandedContent = activeCard.querySelector('.card-expanded-content');
-          
-          // Fade out inner content fast
-          if (expandedContent) {
-            gsap.to(expandedContent, { opacity: 0, duration: 0.2, onComplete: () => performFlipBack() });
-          } else {
-            performFlipBack();
-          }
-        }
-
-        function performFlipBack() {
-          const state = Flip.getState(activeCard);
-          
-          // Reset DOM
-          originalWrap.appendChild(activeCard);
-          morphOverlay.classList.remove('is-active');
-          activeCard.classList.remove('is-expanded');
-          const expandedContent = activeCard.querySelector('.card-expanded-content');
-          if(expandedContent) {
-            expandedContent.style.display = 'none';
-            expandedContent.style.opacity = '1'; // reset for next time
-          }
-          
-          // Fade out backdrop
-          gsap.to(morphBackdrop, { opacity: 0, duration: 0.4 });
-          // Reset close btn
-          gsap.set(closeBtn, { scale: 0, opacity: 0 });
-          gsap.set(closeIcon, { rotate: 0, scale: 1, opacity: 1 });
-
-          Flip.from(state, {
-            duration: 0.7,
-            ease: "power4.inOut",
-            absolute: true,
-            onComplete: () => {
+              
+              gsap.set(closeBtn, { scale: 0, opacity: 0 });
+              gsap.set(closeIcon, { rotate: 0, scale: 1, opacity: 1 });
+              
               activeCard = null;
               originalWrap = null;
               isAnimating = false;
-            }
+            }});
           });
         }
         }); // End document.fonts.ready

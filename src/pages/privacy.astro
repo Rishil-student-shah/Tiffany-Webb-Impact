@@ -1,118 +1,173 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
+import Waveform from '../components/Waveform.astro';
 ---
 
-<Layout title="Privacy Policy | Tiffany Webb" theme="secondary">
-  <main class="page-content">
+<Layout title="Privacy Policy | Tiffany Webb" theme="dark">
+  <main class="page-content bg-ink">
     
-    <section class="utility-hero">
-      <div class="container reveal-up">
-        <Eyebrow>Legal</Eyebrow>
-        <h1 class="utility-title">Privacy Policy</h1>
-        <p class="utility-sub text-micro">Last updated: August 2026</p>
+    <section class="spk-hero-v2 relative overflow-hidden" style="padding: 10rem 0 4rem 0; position: relative;">
+      <Waveform opacity={0.04} variant="A" flipX={true} />
+      <div class="spk-container" style="position: relative; z-index: 10;">
+        <div class="text-center">
+          <Eyebrow className="justify-center">Legal</Eyebrow>
+          <h1 class="spk-h1">Privacy <span class="italic-accent">Policy.</span></h1>
+          <p class="spk-subtitle">Last updated: August 2026</p>
+        </div>
       </div>
     </section>
 
-    <section class="utility-content section-pad bg-cream">
-      <div class="container prose-column stagger-group">
+    <section class="spk-section relative overflow-hidden" style="padding-top: 4rem; padding-bottom: 8rem; position: relative; background: radial-gradient(circle at left center, rgba(217,162,58,0.03) 0%, transparent 60%);">
+      <Waveform opacity={0.03} variant="C" />
+      <div class="spk-container" style="max-width: 900px; position: relative; z-index: 10;">
         
-        <div class="stagger-item">
-          <p class="intro">This policy explains what information this website collects, how it is used, and the choices you have.</p>
-        </div>
+        <div class="legal-card prose-column">
+          <div class="prose-block">
+            <p class="intro">This Privacy Policy governs the manner in which Tiffany Webb ("we", "us", "our") collects, uses, maintains, and discloses information collected from users (each, a "User") of the tiffanywebb.com website ("Site"). This privacy policy applies to the Site and all products and services offered by Tiffany Webb.</p>
+          </div>
 
-        <div class="stagger-item mt-8">
-          <h3>Information we collect</h3>
-          <p>When you submit a booking enquiry, we collect the name, organization, email address, and any other details you choose to provide. When you subscribe to the newsletter, we collect your email address. The site also collects standard analytics data about how pages are used.</p>
-        </div>
-        
-        <div class="stagger-item mt-8">
-          <h3>How we use it</h3>
-          <p>Booking enquiry information is used solely to respond to your enquiry and arrange speaking engagements. Newsletter information is used to send occasional emails, which you can unsubscribe from at any time. Analytics data is used to understand which pages are useful and improve the site.</p>
-        </div>
-        
-        <div class="stagger-item mt-8">
-          <h3>Sharing</h3>
-          <p>We do not sell personal information. Information may be processed by service providers who help operate this site — including email delivery, customer relationship management, messaging services, and website analytics — solely to provide those services.</p>
-        </div>
-        
-        <div class="stagger-item mt-8">
-          <h3>Messaging</h3>
-          <p>If you contact Tiffany Webb via WhatsApp or another messaging service, message content and contact details are processed to respond to your enquiry.</p>
-        </div>
-        
-        <div class="stagger-item mt-8">
-          <h3>Your rights</h3>
-          <p>You may request access to, correction of, or deletion of your personal information at any time by emailing booking@tiffanywebb.com.</p>
-        </div>
-        
-        <div class="stagger-item mt-8">
-          <h3>Cookies</h3>
-          <p>This site uses cookies to understand site usage. You can control cookies through your browser settings.</p>
-        </div>
-        
-        <div class="stagger-item mt-8 mb-12">
-          <h3>Contact</h3>
-          <p>Questions about this policy: <a href="mailto:booking@tiffanywebb.com" style="text-decoration: underline;">booking@tiffanywebb.com</a></p>
+          <div class="prose-block mt-8">
+            <h3>Personal Identification Information</h3>
+            <p>We may collect personal identification information from Users in a variety of ways, including, but not limited to, when Users visit our site, fill out a form, subscribe to the newsletter, and in connection with other activities, services, features or resources we make available on our Site. Users may be asked for, as appropriate, name, email address, mailing address, phone number, and organization details. Users may, however, visit our Site anonymously. We will collect personal identification information from Users only if they voluntarily submit such information to us.</p>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>Non-Personal Identification Information</h3>
+            <p>We may collect non-personal identification information about Users whenever they interact with our Site. Non-personal identification information may include the browser name, the type of computer and technical information about Users means of connection to our Site, such as the operating system and the Internet service providers utilized and other similar information.</p>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>Web Browser Cookies</h3>
+            <p>Our Site may use "cookies" to enhance User experience. User's web browser places cookies on their hard drive for record-keeping purposes and sometimes to track information about them. User may choose to set their web browser to refuse cookies, or to alert you when cookies are being sent. If they do so, note that some parts of the Site may not function properly.</p>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>How We Use Collected Information</h3>
+            <p>Tiffany Webb may collect and use Users personal information for the following purposes:</p>
+            <ul>
+              <li><strong>To improve customer service:</strong> Information you provide helps us respond to your customer service requests and support needs more efficiently.</li>
+              <li><strong>To personalize user experience:</strong> We may use information in the aggregate to understand how our Users as a group use the services and resources provided on our Site.</li>
+              <li><strong>To process speaking inquiries and bookings:</strong> We may use the information Users provide about themselves when placing an inquiry only to provide service to that order. We do not share this information with outside parties except to the extent necessary to provide the service.</li>
+              <li><strong>To send periodic emails:</strong> If User decides to opt-in to our mailing list, they will receive emails that may include company news, updates, related product or service information, etc. If at any time the User would like to unsubscribe from receiving future emails, we include detailed unsubscribe instructions at the bottom of each email.</li>
+            </ul>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>How We Protect Your Information</h3>
+            <p>We adopt appropriate data collection, storage and processing practices and security measures to protect against unauthorized access, alteration, disclosure or destruction of your personal information, username, password, transaction information and data stored on our Site.</p>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>Sharing Your Personal Information</h3>
+            <p>We do not sell, trade, or rent Users personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information regarding visitors and users with our business partners, trusted affiliates and advertisers for the purposes outlined above.</p>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>Your Rights (GDPR & CCPA)</h3>
+            <p>If you are a resident of the EEA or California, you have the right to access the Personal Information we hold about you, to port it to a new service, and to ask that your Personal Information be corrected, updated, or erased. If you would like to exercise these rights, please contact us through the contact information below.</p>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>Changes to This Privacy Policy</h3>
+            <p>Tiffany Webb has the discretion to update this privacy policy at any time. When we do, we will revise the updated date at the bottom of this page. We encourage Users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect.</p>
+          </div>
+          
+          <div class="prose-block mt-8">
+            <h3>Contacting Us</h3>
+            <p>If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us at:</p>
+            <p><a href="/book" style="color: var(--color-gold);">booking@tiffanywebb.com</a></p>
+          </div>
         </div>
 
       </div>
     </section>
-
   </main>
 </Layout>
 
-<style>
-  .page-content {
-    padding-top: 0;
-  }
-
-  .utility-hero {
-    background-color: var(--color-ink);
-    color: var(--color-ivory);
-    padding: var(--sp-16) 0 var(--sp-12);
-    text-align: center;
-  }
-
-  .container {
-    width: 100%;
-    max-width: 800px;
+<style is:global>
+  .bg-ink { background: var(--ink); }
+  .spk-container {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--sp-6);
   }
+  .spk-section {
+    padding: 6rem 0 10rem 0;
+  }
+  .text-center { text-align: center; }
 
-  .utility-title {
-    margin-bottom: var(--sp-4);
+  .spk-h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 5vw, 4rem);
+    color: var(--color-ivory);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .spk-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    color: var(--color-gold);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
   }
 
-  .utility-sub {
-    color: var(--color-muted-grey);
+  .prose-block {
+    margin-bottom: 3rem;
   }
-
-  .section-pad { padding: var(--sp-16) 0; }
-  .bg-cream { background-color: var(--color-cream); }
-  .mt-8 { margin-top: var(--sp-8); }
-  .mb-12 { margin-bottom: var(--sp-12); }
-
-  .prose-column {
-    font-size: 1.125rem;
-    color: var(--color-charcoal);
+  .prose-block h3 {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    color: var(--color-ivory);
+    margin-bottom: 1rem;
   }
-  
+  .prose-block p {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: rgba(251, 246, 234, 0.75);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+  .prose-block ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 1.5rem;
+  }
+  .prose-block li {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: rgba(251, 246, 234, 0.75);
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .prose-block li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-gold);
+    font-weight: bold;
+  }
+  .prose-block strong {
+    color: var(--color-ivory);
+    font-weight: 500;
+  }
   .intro {
-    font-size: 1.25rem;
-    color: var(--color-ink);
-    border-left: 4px solid var(--color-gold);
-    padding-left: var(--sp-4);
+    font-size: 1.35rem !important;
+    color: var(--color-ivory) !important;
   }
-
-  .prose-column h3 {
-    font-size: 1.5rem;
-    color: var(--color-emerald);
-    margin-bottom: var(--sp-2);
+  .legal-card {
+    background: rgba(15, 15, 15, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 3rem 4rem;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
   }
-
-  .prose-column p {
-    line-height: 1.6;
+  @media (max-width: 768px) {
+    .legal-card {
+      padding: 2rem;
+    }
   }
 </style>

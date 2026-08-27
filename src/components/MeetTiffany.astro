@@ -4,6 +4,18 @@ import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
 import { Image } from 'astro:assets';
 import aboutImg from '../assets/tiffany_about_new.jpg';
+
+const { content = {}, collections = {} } = Astro.props;
+const meet_tiffany_cards = collections.meet_tiffany || [];
+
+// Fallbacks
+const eyebrow = content.eyebrow || "Meet Tiffany";
+const title1 = content.title_line_1 || "Chicago soul,";
+const title2 = content.title_line_2 || "Louisiana heart.";
+const p1 = content.paragraph_1 || "Chicago-born and raised...";
+const p2 = content.paragraph_2 || "She brings a rare combination...";
+const p3 = content.paragraph_3 || "Her approach bridges...";
+const btn = content.button_text || "READ HER FULL STORY →";
 ---
 
 <section class="meet-tiffany theme-ink reveal-up">
@@ -11,29 +23,59 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
   <div class="meet-container">
     <div class="meet-grid">
       <div class="meet-content meet-glass-card">
-        <Eyebrow>Meet Tiffany</Eyebrow>
-        <h2 class="section-title">Chicago soul, <br/><span class="italic-accent">Louisiana heart.</span></h2>
+        <Eyebrow>{eyebrow}</Eyebrow>
+        <h2 class="section-title">{title1} <br/><span class="italic-accent">{title2}</span></h2>
         
         <div class="meet-prose">
-          <p>Chicago-born and raised, with deep Louisiana family roots, Tiffany Webb has spent more than fifteen years doing prevention work where it actually happens — in school gyms, clinic waiting rooms, church basements, and community centres across Illinois.</p>
+          <p>{p1}</p>
+          <p>{p2}</p>
+          <p>{p3}</p>
         </div>
         
         <div class="meet-cta">
-          <Button href="/about" variant="secondary" className="magnetic-btn">READ HER FULL STORY &rarr;</Button>
+          <Button href="/about" variant="secondary" className="magnetic-btn">{btn}</Button>
         </div>
       </div>
       
       <div class="meet-image-col">
         <div class="meet-image-glass-offset"></div>
         <div class="meet-image-wrap">
-          <Image src={aboutImg} alt="Tiffany Webb editorial portrait" class="meet-img" />
+          {content.image ? (
+            <img src={content.image} alt="Tiffany Webb editorial portrait" class="meet-img" />
+          ) : (
+            <Image src={aboutImg} alt="Tiffany Webb editorial portrait" class="meet-img" />
+          )}
         </div>
       </div>
     </div>
+
+    <!-- The Three Vignettes -->
+    {meet_tiffany_cards.length > 0 && (
+    <div class="meet-vignettes mt-40">
+      <div class="vignettes-grid">
+        {meet_tiffany_cards.map((card, index) => (
+          <div class="vignette-card ultra-glass-card stagger-item" style={`transition-delay: ${index * 0.1}s;`}>
+            <div class="ultra-padding-wrapper">
+              <div class="card-icon">{card.subtitle || `0${index + 1}`}</div>
+              <h3 class="card-title">{card.title}</h3>
+              <p class="card-text">{card.content_html}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+    )}
   </div>
 </section>
 
 <style>
+  .meet-tiffany {
+    padding-top: var(--sp-16);
+    padding-bottom: 5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+  }
+
   .meet-container {
     width: 100%;
     max-width: 1200px;
@@ -156,5 +198,47 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
   
   .meet-image-col:hover .meet-img {
     transform: scale(1.08);
+  }
+
+  .mt-40 {
+    margin-top: 10rem;
+  }
+
+  .vignettes-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+  }
+
+  @media (min-width: 768px) {
+    .vignettes-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .vignette-card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card-icon {
+    font-family: var(--font-mono);
+    color: var(--color-gold);
+    font-size: 1.125rem;
+    margin-bottom: var(--sp-6);
+  }
+
+  .card-title {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    color: var(--color-ivory);
+    margin-bottom: var(--sp-4);
+  }
+
+  .card-text {
+    color: rgba(231, 224, 207, 0.85);
+    font-size: 1.05rem;
+    line-height: 1.6;
   }
 </style>

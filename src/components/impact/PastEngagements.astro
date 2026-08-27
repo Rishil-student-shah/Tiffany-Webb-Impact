@@ -1,0 +1,381 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Waveform from '../Waveform.astro';
+
+const pastEngagements = [
+  {
+    year: "2026",
+    format: "Keynote",
+    audience: "Professionals",
+    name: "Annual Behavioral Health Summit",
+    host: "Illinois Council on Problem Gambling",
+    city: "Chicago, IL",
+    size: "350+",
+    substance: "Delivered opening keynote on integrating cultural fluency into frontline clinical practices.",
+    bgStart: "#5A4614",
+    bgEnd: "#1E190A",
+    border: "rgba(200, 162, 76, 0.4)"
+  },
+  {
+    year: "2025",
+    format: "Workshop",
+    audience: "Students",
+    name: "Youth Awareness Initiative",
+    host: "Chicago Public Schools",
+    city: "Chicago, IL",
+    size: "1,200",
+    substance: "Multi-school assembly series breaking down the realities of sports betting for high school athletes.",
+    bgStart: "#5A2C18",
+    bgEnd: "#1E0F0A",
+    border: "rgba(193, 84, 39, 0.4)"
+  },
+  {
+    year: "2025",
+    format: "Training",
+    audience: "Professionals",
+    name: "Clinical Intervention Protocols",
+    host: "Healthcare Alternative Systems (HAS)",
+    city: "Oak Park, IL",
+    size: "45",
+    substance: "Intensive half-day training for certified counselors on identifying hidden gambling disorders.",
+    bgStart: "#0A2B1A",
+    bgEnd: "#050F0A",
+    border: "rgba(14, 107, 84, 0.4)"
+  },
+  {
+    year: "2024",
+    format: "Panel",
+    audience: "Community",
+    name: "Community Coalition Forum",
+    host: "South Side Health Collaborative",
+    city: "Chicago, IL",
+    size: "150",
+    substance: "Led a community forum translating public health data into actionable neighborhood strategies.",
+    bgStart: "#4A1E31",
+    bgEnd: "#190A0F",
+    border: "rgba(108, 45, 90, 0.4)"
+  }
+];
+---
+
+<section class="past-engagements section-pad theme-ink relative overflow-hidden" id="engagements-directory">
+  <Waveform opacity={0.05} variant="A" flipY={true} />
+  
+  <div class="container stagger-group relative z-10">
+    <div class="past-header stagger-item">
+      <Eyebrow className="text-center justify-center">Directory</Eyebrow>
+      <h2 class="section-title text-center">Past <span class="italic-accent">Engagements</span></h2>
+      <p class="past-desc">A record of the stages, trainings, and community forums where Tiffany has made a measurable difference.</p>
+    </div>
+    
+    <div class="filters-wrapper stagger-item">
+      <div class="filter-pills" id="engagement-filters">
+        <button class="pill active" data-filter="All">All</button>
+        <button class="pill" data-filter="Keynote">Keynotes</button>
+        <button class="pill" data-filter="Workshop">Workshops</button>
+        <button class="pill" data-filter="Training">Trainings</button>
+        <button class="pill" data-filter="Panel">Panels</button>
+      </div>
+    </div>
+
+    <div class="bento-grid stagger-item" id="engagement-grid">
+      {pastEngagements.map((event) => (
+        <div class="bento-card" data-format={event.format} style={`--bg-start: ${event.bgStart}; --bg-end: ${event.bgEnd}; --card-border: ${event.border};`}>
+          <div class="card-inner">
+            <div class="card-header">
+              <span class="event-year">{event.year}</span>
+              <span class="event-badge">{event.format}</span>
+            </div>
+            
+            <div class="card-body">
+              <h3 class="event-name">{event.name}</h3>
+              <p class="event-host">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="host-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                {event.host} <span class="city-dot">•</span> {event.city}
+              </p>
+            </div>
+            
+            <div class="card-footer">
+              <p class="event-substance">{event.substance}</p>
+              <div class="card-meta">
+                <div class="meta-item">
+                  <span class="meta-label">Audience</span>
+                  <span class="meta-val">{event.audience}</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-label">Reach</span>
+                  <span class="meta-val">{event.size}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .past-engagements {
+    padding: var(--sp-32) 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .past-header {
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    text-align: center;
+  }
+
+  .past-desc {
+    font-size: 1.1rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    margin-top: 1.5rem;
+  }
+
+  /* Filter Pills */
+  .filters-wrapper {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 3rem;
+  }
+
+  .filter-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    background: rgba(255, 255, 255, 0.02);
+    padding: var(--sp-2);
+    border-radius: 100px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+  }
+
+  .pill {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 8px 24px;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .pill:hover {
+    color: var(--color-ivory);
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  .pill.active {
+    background: var(--color-gold);
+    color: var(--ink);
+    box-shadow: 0 4px 15px rgba(217, 162, 58, 0.3);
+  }
+
+  /* Bento Grid */
+  .bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--sp-8);
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .bento-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* Bento Card — colored gradients */
+  .bento-card {
+    position: relative;
+    border-radius: var(--radius-xl);
+    border: 1px solid var(--card-border);
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+  }
+
+  .bento-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom right, var(--bg-start), var(--bg-end));
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+  }
+  
+  .bento-card.hidden {
+    display: none;
+  }
+
+  .bento-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+    border-color: rgba(217, 162, 58, 0.6);
+  }
+
+  .bento-card:hover::before {
+    opacity: 0.15;
+  }
+
+  .card-inner {
+    position: relative;
+    z-index: 2;
+    padding: var(--sp-8);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+
+  /* Header */
+  .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--sp-6);
+    padding-bottom: var(--sp-4);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .event-year {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    color: var(--color-gold);
+    font-weight: 500;
+  }
+
+  .event-badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 6px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 100px;
+    color: var(--color-ivory);
+  }
+
+  /* Body */
+  .card-body {
+    flex-grow: 1;
+    margin-bottom: var(--sp-8);
+  }
+
+  .event-name {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    line-height: 1.2;
+    color: var(--color-ivory);
+    margin-bottom: var(--sp-4);
+  }
+
+  .event-host {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.4;
+  }
+  
+  .host-icon {
+    color: var(--color-gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .city-dot {
+    margin: 0 4px;
+    opacity: 0.5;
+  }
+
+  /* Footer */
+  .card-footer {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-6);
+  }
+
+  .event-substance {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    padding-left: var(--sp-4);
+    border-left: 2px solid rgba(217, 162, 58, 0.4);
+  }
+
+  .card-meta {
+    display: flex;
+    gap: var(--sp-6);
+    padding-top: var(--sp-6);
+    border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .meta-val {
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--color-gold);
+    font-weight: 500;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filters = document.querySelectorAll('#engagement-filters .pill');
+    const cards = document.querySelectorAll('#engagement-grid .bento-card');
+
+    filters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        filters.forEach(f => f.classList.remove('active'));
+        filter.classList.add('active');
+
+        const filterValue = filter.getAttribute('data-filter');
+
+        cards.forEach(card => {
+          if (filterValue === 'All') {
+            card.classList.remove('hidden');
+          } else {
+            const format = card.getAttribute('data-format');
+            if (format === filterValue) {
+              card.classList.remove('hidden');
+            } else {
+              card.classList.add('hidden');
+            }
+          }
+        });
+      });
+    });
+  });
+</script>

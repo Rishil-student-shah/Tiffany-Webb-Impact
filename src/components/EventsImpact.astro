@@ -2,52 +2,13 @@
 import Eyebrow from './Eyebrow.astro';
 import Waveform from './Waveform.astro';
 import Button from './Button.astro';
+import MediaBand from './MediaBand.astro';
 
-// Placeholder data - scalable for "all her events"
-const events = [
-  {
-    title: "National Conference on Problem Gambling",
-    location: "Chicago, IL",
-    date: "Upcoming",
-    impact: "1,500+ Attendees",
-    type: "Keynote",
-    glass: "glass-sapphire"
-  },
-  {
-    title: "Illinois Public Health Summit",
-    location: "Springfield, IL",
-    date: "Upcoming",
-    impact: "Statewide Focus",
-    type: "Featured Speaker",
-    glass: "glass-amethyst"
-  },
-  {
-    title: "University Wellness Symposium",
-    location: "Virtual",
-    date: "Past Event",
-    impact: "50+ Campuses",
-    type: "Workshop",
-    glass: "glass-topaz"
-  },
-  {
-    title: "Corporate Responsibility Forum",
-    location: "Las Vegas, NV",
-    date: "Past Event",
-    impact: "Industry Leaders",
-    type: "Panelist",
-    glass: "glass-emerald"
-  },
-  {
-    title: "Community Coalition Training",
-    location: "Peoria, IL",
-    date: "Past Event",
-    impact: "Frontline Workers",
-    type: "Training",
-    glass: "glass-sapphire"
-  }
-];
+const { collections = {} } = Astro.props;
+const events = collections.events || [];
 ---
 
+{events.length > 0 && (
 <section id="events" class="events-impact section-pad theme-ink relative overflow-hidden">
   <Waveform opacity={0.04} variant="B" flipY={true} />
   
@@ -77,8 +38,8 @@ const events = [
   <div class="events-scroller-wrap relative z-10 reveal-in" style="transition-delay: 0.2s;">
     <div class="events-scroller" id="eventsContainer">
       {events.map((event) => (
-        <a href="/impact" class={`event-card ultra-glass-card ${event.glass} animated-card-subtle`}>
-          <div class="event-card-inner">
+        <a href="/impact" class="event-card ultra-glass-card animated-card-subtle">
+          <div class="ultra-padding-wrapper" style="padding: 2.5rem; display: flex; flex-direction: column; flex-grow: 1;">
             <div class="event-meta">
               <span class="event-date">{event.date}</span>
               <span class="event-type">{event.type}</span>
@@ -94,9 +55,6 @@ const events = [
                 <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
                 <span>{event.impact}</span>
               </div>
-              <div class="event-action-btn">
-                Click for more info <span class="arrow">&rarr;</span>
-              </div>
             </div>
           </div>
         </a>
@@ -110,7 +68,12 @@ const events = [
      </div>
   </div>
 
+  <div class="relative z-10" style="padding-top: var(--sp-12); padding-bottom: var(--sp-6);">
+    <MediaBand />
+  </div>
+
 </section>
+)}
 
 <style>
   .container {
@@ -169,8 +132,6 @@ const events = [
     width: 100%;
     padding-left: max(1rem, calc((100vw - 1200px) / 2));
     padding-right: 1rem;
-    padding-top: 1rem;
-    padding-bottom: 2rem; /* shadow room */
   }
   
   .events-scroller {
@@ -180,7 +141,9 @@ const events = [
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     scrollbar-width: none; /* Firefox */
+    padding-top: 2rem;
     padding-right: max(1rem, calc((100vw - 1200px) / 2));
+    padding-bottom: 2rem;
   }
   .events-scroller::-webkit-scrollbar {
     display: none; /* Chrome/Safari */
@@ -194,18 +157,12 @@ const events = [
     text-decoration: none;
     color: inherit;
     cursor: pointer;
+    height: 100%;
   }
   @media (min-width: 768px) {
     .event-card {
       flex: 0 0 400px;
     }
-  }
-
-  .event-card-inner {
-    padding: 2.5rem;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
   }
 
   .event-meta {
@@ -255,30 +212,6 @@ const events = [
     color: var(--color-gold);
   }
 
-  .event-action-btn {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px dashed rgba(255,255,255,0.1);
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--color-ivory);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    transition: color 0.3s ease;
-  }
-  .event-card:hover .event-action-btn {
-    color: var(--color-gold);
-  }
-  .event-action-btn .arrow {
-    transition: transform 0.3s ease;
-  }
-  .event-card:hover .event-action-btn .arrow {
-    transform: translateX(4px);
-  }
-
   .hidden-mobile { display: none; }
   .hidden-desktop { display: block; }
   
@@ -324,3 +257,4 @@ const events = [
     }
   });
 </script>
+
