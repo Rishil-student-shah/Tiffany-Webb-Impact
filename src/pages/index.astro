@@ -52,6 +52,7 @@ try {
     if (!dbCollections[row.section_name]) dbCollections[row.section_name] = [];
     dbCollections[row.section_name].push(row);
   });
+  await pool.end();
 } catch (e) {
   console.error("Database connection failed for SSG, using fallbacks:", e);
 }

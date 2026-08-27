@@ -16,12 +16,12 @@ try {
   });
   const [rows] = await pool.query('SELECT slug FROM website_pages WHERE is_active = 1');
   activePages = rows.map(r => r.slug === 'home' ? '/' : `/${r.slug}`);
+ await pool.end();
 } catch(e) {
   console.error(e);
 }
 
 const filteredNavLinks = navLinks.filter(link => activePages.includes(link.href) || link.href.startsWith('http'));
-const isNavActive = activePages.includes('navbar'); // We can use a pseudo-slug for navbar if needed, but let's assume Navbar is always active unless explicitly hidden. Actually user said "every page, navbar and all section".
 
 ---
 
