@@ -557,3 +557,13 @@ button {
   animation-play-state: paused;
   transform: translateY(-12px) scale(1.02);
 }
+
+/* ==========================================
+   FORCE CALENDAR ICON TO WHITE
+   ========================================== */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1) !important;
+  opacity: 0.8 !important;
+  cursor: pointer !important;
+}
+
