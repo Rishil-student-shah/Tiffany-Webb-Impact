@@ -3,7 +3,7 @@ const { content = {} } = Astro.props;
 
 const headline = content.headline || "Ready for the room — and the story.";
 const link1 = content.link_1 || "Download the speaker sheet";
-const link2 = content.link_2 || "Media resources &rarr;";
+const link2 = content.link_2 || "Media resources";
 ---
 
 <div class="media-band-section theme-ink">
@@ -17,7 +17,7 @@ const link2 = content.link_2 || "Media resources &rarr;";
         <a href="/media" class="btn btn-outline-ivory media-btn">
           {link1}
         </a>
-        <a href="/media" class="media-text-link" set:html={link2}></a>
+        <a href="/media" class="media-text-link" style="display: inline-block;">{link2} <span class="arrow">&rarr;</span></a>
       </div>
     </div>
   </div>
