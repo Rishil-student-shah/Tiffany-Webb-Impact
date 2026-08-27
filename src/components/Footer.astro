@@ -4,6 +4,7 @@ import mysql from 'mysql2/promise';
 
 let dbContent = {};
 let activeSocials = [];
+let activePages = [];
 
 try {
   const pool = mysql.createPool({
@@ -23,6 +24,9 @@ try {
 
    const [socialRows] = await pool.query(`SELECT title, subtitle FROM website_collections WHERE section_name = 'social_links' ORDER BY sort_order ASC`);
   activeSocials = socialRows.map(row => ({ platform: row.title, url: row.subtitle })).filter(link => link.url);
+  
+  const [pageRows] = await pool.query('SELECT slug FROM website_pages WHERE is_active = 1');
+  activePages = pageRows.map(r => r.slug === 'home' ? '/' : `/${r.slug}`);
 
  await pool.end();
 } catch(e) {
@@ -66,12 +70,13 @@ const year = new Date().getFullYear();
       <div>
         <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ivory); margin-bottom: 1.5rem;">{col1Title}</h4>
         <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
-          <li><a href="/about" class="footer-link">About</a></li>
-          <li><a href="/services" class="footer-link">Services</a></li>
-          <li><a href="/impact" class="footer-link">Impact</a></li>
-          <li><a href="/media" class="footer-link">Media</a></li>
-          <li><a href="/insights" class="footer-link">Insights</a></li>
-        </ul>
+            {activePages.includes('/') && <li><a href="/" class="footer-link">Home</a></li>}
+            {activePages.includes('/about') && <li><a href="/about" class="footer-link">About</a></li>}
+            {activePages.includes('/services') && <li><a href="/services" class="footer-link">Services</a></li>}
+            {activePages.includes('/impact') && <li><a href="/impact" class="footer-link">Impact</a></li>}
+            {activePages.includes('/media') && <li><a href="/media" class="footer-link">Media</a></li>}
+            {activePages.includes('/insights') && <li><a href="/insights" class="footer-link">Insights</a></li>}
+          </ul>
       </div>
 
       {/* Col 2: CONNECT */}
