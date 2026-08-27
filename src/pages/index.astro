@@ -9,6 +9,7 @@ import SpeakingFormats from '../components/SpeakingFormats.astro';
 import WhereSheWorks from '../components/WhereSheWorks.astro';
 import MediaBand from '../components/MediaBand.astro';
 import BookingSection from '../components/BookingSection.astro';
+import Proof from '../components/Proof.astro';
 import mysql from 'mysql2/promise';
 
 // Fetch content from the CRM Database
@@ -65,6 +66,7 @@ try {
 		<Expertise content={dbContent.expertise || {}} collections={dbCollections} />
 		<SpeakingFormats content={dbContent.speaking_formats || {}} collections={dbCollections} />
 		<WhereSheWorks content={dbContent.who_can_benefit || {}} collections={dbCollections} />
+		<Proof content={dbContent.proof || {}} collections={dbCollections} />
 		<BookingSection content={dbContent.booking || {}} />
 	</main>
 </Layout>
