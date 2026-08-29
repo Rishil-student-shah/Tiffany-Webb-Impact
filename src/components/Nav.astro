@@ -1,6 +1,7 @@
 ---
 import Button from './Button.astro';
 import { navLinks, navCta } from '../config/navigation.js';
+import Waveform from './Waveform.astro';
 import mysql from 'mysql2/promise';
 
 let activePages = [];
@@ -25,7 +26,10 @@ const filteredNavLinks = navLinks.filter(link => activePages.includes(link.href)
 
 ---
 
-<header class="header js-header" role="banner" aria-label="Main Navigation">
+<header class="header js-header" role="banner" aria-label="Main Navigation" style="background-color: var(--color-ink); overflow: hidden;">
+    <div style="position: absolute; inset: 0; z-index: -1; pointer-events: none;">
+      <Waveform opacity={0.06} variant="A" />
+    </div>
   <!-- The clickable Dynamic Island pill (only active when scrolled-down) -->
   <div class="island-back-to-top">
     <button class="js-island-btn" aria-label="Back to top" style="background:none; border:none; color:inherit; font:inherit; cursor:pointer; display:flex; align-items:center; padding: 0; outline: none;">
@@ -135,6 +139,8 @@ const filteredNavLinks = navLinks.filter(link => activePages.includes(link.href)
      BASE HEADER — at top of page, transparent over hero
   ============================================================ */
   .header {
+    background-color: var(--color-ink);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     position: fixed;
     top: 32px; /* Pushed down from the top edge as requested */
     left: 50%;
