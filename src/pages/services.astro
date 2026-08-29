@@ -691,18 +691,41 @@ try {
       gap: 2rem;
     }
   }
+  .gear-card {
+    padding: 2rem;
+    border-radius: 16px;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+  }
+  .gear-card:hover {
+    background: #ffffff;
+    border: 1px solid rgba(217, 162, 58, 0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.04), 0 0 20px rgba(217, 162, 58, 0.05);
+  }
   .gear-letter {
     font-family: var(--font-serif);
     font-size: 4.5rem;
     line-height: 1;
     color: var(--color-gold);
     margin-bottom: 1rem;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.4s ease;
+  }
+  .gear-card:hover .gear-letter {
+    transform: scale(1.1) translateX(4px);
+    text-shadow: 0 10px 20px rgba(217, 162, 58, 0.2);
   }
   .gear-title {
     font-family: var(--font-serif);
     font-size: 1.8rem;
     color: var(--ink);
     margin-bottom: 1rem;
+    transition: color 0.3s ease;
+  }
+  .gear-card:hover .gear-title {
+    color: var(--color-gold);
   }
   .gear-body {
     font-family: var(--font-sans);
