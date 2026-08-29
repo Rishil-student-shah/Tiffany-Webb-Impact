@@ -1,11 +1,26 @@
 ---
-const { collections = {} } = Astro.props;
+import Eyebrow from './Eyebrow.astro';
+import Waveform from './Waveform.astro';
+
+const { content = {}, collections = {} } = Astro.props;
 const testimonials = collections.proof_testimonials || [];
+
+const eyebrow = content.eyebrow ?? "CLIENT LOVE";
+const headline = content.headline ?? "Words from the room.";
+const description = content.description ?? "";
 ---
 
 {testimonials.length > 0 && (
-<section id="proof-testimonials" class="section-pad theme-ink relative" style="padding-bottom: 8rem; overflow: hidden;">
-  <div class="container-narrow relative z-10">
+<section id="proof-testimonials" class="section-pad theme-ink relative" style="padding-top: 8rem; padding-bottom: 8rem; overflow: hidden;">
+  <Waveform opacity={0.04} variant="B" flipY={true} />
+  
+  <div class="relative z-10" style="width: 90%; max-width: 1200px; margin: 0 auto;">
+    <div class="reveal-up text-center" style="margin-bottom: 5rem; max-width: 800px; margin-left: auto; margin-right: auto;">
+      <div style="margin-bottom: 1rem;"><Eyebrow className="justify-center">{eyebrow}</Eyebrow></div>
+      <h2 class="section-title works-title" style="margin-bottom: 2rem; font-size: clamp(2.5rem, 4vw, 4rem);"><span class="title-grad">{headline}</span></h2>
+      {description && <p class="subtitle" style="margin: 0; line-height: 1.6; font-size: 1.1rem; color: rgba(251, 246, 234, 0.85);">{description}</p>}
+    </div>
+
     <div class="testimonials-block reveal-up">
       <div class="cinematic-slider">
         <div class="slider-viewport">
@@ -118,6 +133,13 @@ const testimonials = collections.proof_testimonials || [];
 )}
 
 <style>
+  .title-grad {
+    background: linear-gradient(92deg, var(--color-mustard), var(--color-coral), var(--color-berry));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
   /* Testimonials Slider */
   .cinematic-slider {
     position: relative;
