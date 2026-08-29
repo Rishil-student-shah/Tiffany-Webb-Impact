@@ -50,7 +50,7 @@ const resolveImage = (imgName) => {
   <div class="container relative z-10">
     <div class="text-center mb-16 reveal-up">
       <Eyebrow className="justify-center mb-4">{eyebrowText}</Eyebrow>
-      <h2 class="section-title mb-6" set:html={titleHtml}></h2>
+      <h2 class="section-title mb-6"><span class="title-grad" set:html={titleHtml}></span></h2>
       <p class="subtitle mx-auto max-w-2xl">{description}</p>
     </div>
     
@@ -84,19 +84,30 @@ const resolveImage = (imgName) => {
 </section>
 
 <style>
+  .title-grad {
+    background: linear-gradient(92deg, var(--color-mustard), var(--color-coral), var(--color-berry));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
   .videos-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 3rem;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 1rem;
   }
   @media (min-width: 768px) {
     .videos-grid {
       grid-template-columns: repeat(2, 1fr);
+      gap: 2.5rem;
     }
   }
   @media (min-width: 1024px) {
     .videos-grid {
       grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
     }
   }
 
