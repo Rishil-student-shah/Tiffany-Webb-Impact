@@ -196,19 +196,19 @@ try {
       return (
         <section id="gear" class="spk-section relative overflow-hidden" style="padding-top: 2rem;">
           <div class="spk-container relative z-10">
-            <div class="gear-panel">
-              <div class="gear-top-row">
-                <div class="gear-left">
-                  {eyebrow && <Eyebrow className="gear-eyebrow">{eyebrow}</Eyebrow>}
-                  {headline && <h2 class="gear-h2">{headline}</h2>}
-                </div>
-                <div class="gear-right">
-                  {standfirst && <h3 class="gear-standfirst">{standfirst}</h3>}
-                  {description && <p class="gear-desc">{description}</p>}
-                </div>
+            
+            <div class="gear-top-row">
+              <div class="gear-left">
+                {eyebrow && <Eyebrow className="gear-eyebrow justify-start">{eyebrow}</Eyebrow>}
+                {headline && <h2 class="gear-h2">{headline}</h2>}
               </div>
-              
-              <div class="gear-divider"></div>
+              <div class="gear-right">
+                {standfirst && <h3 class="gear-standfirst">{standfirst}</h3>}
+                {description && <p class="gear-desc">{description}</p>}
+              </div>
+            </div>
+            
+            <div class="gear-panel">
               
               {gearCards.length > 0 && (
                 <div class="gear-grid">
@@ -641,16 +641,13 @@ try {
     }
   }
   .gear-eyebrow {
-    color: var(--ink) !important;
-    opacity: 0.6;
     margin-bottom: 1rem;
-    justify-content: flex-start;
   }
   .gear-h2 {
     font-family: var(--font-serif);
     font-size: clamp(3rem, 5vw, 4.5rem);
     line-height: 1.1;
-    color: var(--ink);
+    color: var(--color-ivory);
     margin: 0;
   }
   .gear-standfirst {
@@ -658,14 +655,14 @@ try {
     font-size: 1.35rem;
     font-weight: 600;
     line-height: 1.4;
-    color: var(--ink);
+    color: var(--color-ivory);
     margin: 0 0 1rem 0;
   }
   .gear-desc {
     font-family: var(--font-sans);
     font-size: 1.15rem;
     line-height: 1.6;
-    color: rgba(13, 18, 16, 0.8);
+    color: rgba(251, 246, 234, 0.8);
     margin: 0;
   }
   .gear-divider {
