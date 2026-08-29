@@ -144,6 +144,17 @@ const filteredNavLinks = navLinks.filter(link => activePages.includes(link.href)
     max-width: 1400px;
     z-index: 1000;
     padding: var(--sp-4) var(--sp-4);
+    border: 1px solid transparent;
+    border-radius: 0px;
+    transition: 
+      width 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+      max-width 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+      top 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+      padding 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
+      background 0.4s ease,
+      border-radius 0.4s ease,
+      border-color 0.4s ease,
+      box-shadow 0.4s ease;
   }
   
   @media (min-width: 768px) {
