@@ -2,10 +2,28 @@
 import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Waveform from '../components/Waveform.astro';
-import { Image } from 'astro:assets';
-import img1 from '../assets/thumb_3.jpg';
-import img2 from '../assets/thumb_1.jpg';
-import img3 from '../assets/thumb_2.jpg';
+import mysql from 'mysql2/promise';
+
+let dbContent = {};
+let articles = [];
+try {
+  const pool = mysql.createPool({ host: 'localhost', user: 'root', password: '@rishil8124shah', database: 'tiffany_crm' });
+  
+  const [rows] = await pool.query("SELECT section, key_name, content_value FROM website_content JOIN website_pages ON website_content.page_id = website_pages.id WHERE website_pages.slug = 'insights'");
+  rows.forEach(row => {
+    if (!dbContent[row.section]) dbContent[row.section] = {};
+    dbContent[row.section][row.key_name] = row.content_value;
+  });
+
+  const [colRows] = await pool.query("SELECT title, subtitle, image_url, sort_order FROM website_collections JOIN website_pages ON website_collections.page_id = website_pages.id WHERE website_pages.slug = 'insights' AND section_name = 'articles' ORDER BY sort_order ASC");
+  articles = colRows;
+
+  await pool.end();
+} catch (e) {
+  console.error("DB Error in insights:", e);
+}
+
+const hero = dbContent.hero || {};
 ---
 
 <Layout title="Insights & Articles | Tiffany Webb" theme="dark">
@@ -17,11 +35,9 @@ import img3 from '../assets/thumb_2.jpg';
       
       <div class="spk-container" style="position: relative; z-index: 10;">
         <div class="spk-hero-content text-center">
-          <Eyebrow className="justify-center">Articles & Writing</Eyebrow>
-          <h1 class="spk-h1">Latest <span class="italic-accent">Insights.</span></h1>
-          <p class="spk-subtitle">
-            Perspectives on gambling harm prevention, public health, and community impact.
-          </p>
+          {hero.eyebrow && <Eyebrow className="justify-center">{hero.eyebrow}</Eyebrow>}
+          <h1 class="spk-h1" set:html={hero.headline || 'Latest <span class="italic-accent">Insights.</span>'}></h1>
+          {hero.subtitle && <p class="spk-subtitle">{hero.subtitle}</p>}
         </div>
       </div>
     </section>
@@ -32,191 +48,176 @@ import img3 from '../assets/thumb_2.jpg';
       <div class="spk-container" style="position: relative; z-index: 10;">
         
         <div class="insights-grid">
-          
-          <!-- Article 1 -->
-          <a href="#" class="insight-card">
-            <div class="insight-image">
-              <Image src={img1} alt="Article thumbnail" width={800} height={450} style="width: 100%; height: 100%; object-fit: cover;" />
-            </div>
-            <div class="insight-content">
-              <div class="insight-meta">
-                <span class="insight-tag">Prevention</span>
-                <span class="insight-date">August 12, 2026</span>
+          {articles.map(article => (
+            <a href="#" class="insight-card">
+              <div class="insight-image">
+                <img src={article.image_url} alt={article.title} style="width: 100%; height: 100%; object-fit: cover;" />
               </div>
-              <h3 class="insight-title">The Hidden Cost of Sports Betting on College Campuses</h3>
-              <p class="insight-excerpt">How the normalization of mobile wagering is creating a silent mental health crisis among students, and what administrators can do.</p>
-              <span class="read-more">Read Article &rarr;</span>
-            </div>
-          </a>
-
-          <!-- Article 2 -->
-          <a href="#" class="insight-card">
-            <div class="insight-image">
-              <Image src={img2} alt="Article thumbnail" width={800} height={450} style="width: 100%; height: 100%; object-fit: cover;" />
-            </div>
-            <div class="insight-content">
-              <div class="insight-meta">
-                <span class="insight-tag">Family Impact</span>
-                <span class="insight-date">July 28, 2026</span>
+              <div class="insight-content">
+                <div class="insight-meta">
+                  <span class="insight-tag">{article.subtitle.split('|')[0].trim()}</span>
+                  <span class="insight-date">{article.subtitle.split('|')[1]?.trim() || ''}</span>
+                </div>
+                <h3 class="insight-title">{article.title}</h3>
+                <span class="read-more">Read Article &rarr;</span>
               </div>
-              <h3 class="insight-title">Breaking the Silence: Navigating Financial Trauma</h3>
-              <p class="insight-excerpt">For significant others, discovering gambling harm is often accompanied by profound financial shock. Here is a guide to the first steps of recovery.</p>
-              <span class="read-more">Read Article &rarr;</span>
-            </div>
-          </a>
-
-          <!-- Article 3 -->
-          <a href="#" class="insight-card">
-            <div class="insight-image">
-              <Image src={img3} alt="Article thumbnail" width={800} height={450} style="width: 100%; height: 100%; object-fit: cover;" />
-            </div>
-            <div class="insight-content">
-              <div class="insight-meta">
-                <span class="insight-tag">Public Policy</span>
-                <span class="insight-date">June 15, 2026</span>
-              </div>
-              <h3 class="insight-title">Why Responsible Gifting Matters During the Holidays</h3>
-              <p class="insight-excerpt">Lottery tickets are popular stocking stuffers, but research shows early exposure to gambling products increases the risk of later addiction.</p>
-              <span class="read-more">Read Article &rarr;</span>
-            </div>
-          </a>
-
+            </a>
+          ))}
         </div>
+
       </div>
     </section>
 
   </main>
 </Layout>
 
-<style is:global>
-  .bg-ink { background: var(--ink); }
+<style>
+  .bg-ink {
+    background-color: var(--color-ink);
+    color: var(--color-ivory);
+    min-height: 100vh;
+  }
+  
   .spk-container {
+    width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--sp-6);
   }
-  .spk-section {
-    padding: 8rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  
+  .text-center {
+    text-align: center;
   }
-  .text-center { text-align: center; }
-
-  .spk-h1 {
-    font-family: var(--font-serif);
-    font-size: clamp(3rem, 6vw, 5rem);
-    color: var(--color-ivory);
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
+  
+  .justify-center {
+    justify-content: center;
   }
-  .spk-subtitle {
-    font-family: var(--font-sans);
-    font-size: 1.15rem;
-    color: rgba(251, 246, 234, 0.75);
-    line-height: 1.6;
-    max-width: 700px;
-    margin: 0 auto 3rem auto;
-  }
-
+  
+  /* Hero */
   .spk-hero-v2 {
-    padding: 12rem 0 4rem 0;
+    padding: 8rem 0 4rem;
   }
-  .spk-hero-content {
-    margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  
+  .spk-h1 {
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    line-height: 1.1;
+    margin: 1rem 0 1.5rem;
+    letter-spacing: -0.02em;
+    font-family: var(--font-serif);
   }
-
-  /* Insights Grid */
+  
+  .spk-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    line-height: 1.6;
+    color: rgba(251, 246, 234, 0.7);
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 400;
+  }
+  
+  /* Grid */
+  .spk-section {
+    padding-bottom: 8rem;
+  }
+  
   .insights-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
     gap: 3rem;
   }
-  @media (min-width: 768px) {
-    .insights-grid {
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    }
-  }
-
+  
   .insight-card {
     display: flex;
     flex-direction: column;
-    background: rgba(15, 15, 15, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 16px;
     overflow: hidden;
     text-decoration: none;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
   }
+  
   .insight-card:hover {
     transform: translateY(-8px);
-    border-color: rgba(217, 162, 58, 0.4);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 40px rgba(217, 162, 58, 0.05);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    border-color: rgba(217, 162, 58, 0.3);
   }
-
+  
   .insight-image {
     width: 100%;
-    height: 240px;
-    background-size: cover;
-    background-position: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    aspect-ratio: 16/10;
+    overflow: hidden;
   }
-
+  
+  .insight-card:hover .insight-image img {
+    transform: scale(1.05);
+  }
+  
+  .insight-image img {
+    transition: transform 0.6s ease;
+  }
+  
   .insight-content {
-    padding: 2.5rem;
+    padding: 2rem;
     display: flex;
     flex-direction: column;
     flex-grow: 1;
   }
-
+  
   .insight-meta {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+    font-size: 0.8rem;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.05em;
   }
+  
   .insight-tag {
     color: var(--color-gold);
-    border: 1px solid rgba(217, 162, 58, 0.3);
-    padding: 0.25rem 0.75rem;
-    border-radius: 20px;
+    font-weight: 600;
   }
+  
   .insight-date {
     color: rgba(251, 246, 234, 0.5);
   }
-
+  
   .insight-title {
     font-family: var(--font-serif);
-    font-size: 1.75rem;
+    font-size: 1.6rem;
     color: var(--color-ivory);
     line-height: 1.3;
-    margin-bottom: 1rem;
-    transition: color 0.3s ease;
+    margin: 0 0 1rem 0;
   }
-  .insight-card:hover .insight-title {
-    color: var(--color-gold);
-  }
-
+  
   .insight-excerpt {
-    font-family: var(--font-sans);
-    font-size: 1.05rem;
-    color: rgba(251, 246, 234, 0.7);
+    font-size: 0.95rem;
     line-height: 1.6;
-    margin-bottom: 2rem;
+    color: rgba(251, 246, 234, 0.7);
+    margin: 0 0 2rem 0;
+    flex-grow: 1;
   }
-
+  
   .read-more {
-    margin-top: auto;
     font-family: var(--font-mono);
     font-size: 0.85rem;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-gold);
+    letter-spacing: 0.05em;
+    color: var(--color-ivory);
     font-weight: 600;
+    margin-top: auto;
+    transition: color 0.2s ease;
+  }
+  
+  .insight-card:hover .read-more {
+    color: var(--color-gold);
+  }
+  
+  @media (max-width: 768px) {
+    .insights-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
   }
 </style>

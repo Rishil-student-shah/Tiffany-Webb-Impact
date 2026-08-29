@@ -2,6 +2,23 @@
 import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Waveform from '../components/Waveform.astro';
+import mysql from 'mysql2/promise';
+
+let dbContent = {};
+try {
+  const pool = mysql.createPool({ host: 'localhost', user: 'root', password: '@rishil8124shah', database: 'tiffany_crm' });
+  const [rows] = await pool.query("SELECT section, key_name, content_value FROM website_content JOIN website_pages ON website_content.page_id = website_pages.id WHERE website_pages.slug = 'privacy'");
+  rows.forEach(row => {
+    if (!dbContent[row.section]) dbContent[row.section] = {};
+    dbContent[row.section][row.key_name] = row.content_value;
+  });
+  await pool.end();
+} catch (e) {
+  console.error("DB Error in privacy:", e);
+}
+
+const hero = dbContent.hero || {};
+const legal = dbContent.legal || {};
 ---
 
 <Layout title="Privacy Policy | Tiffany Webb" theme="dark">
@@ -11,9 +28,9 @@ import Waveform from '../components/Waveform.astro';
       <Waveform opacity={0.04} variant="A" flipX={true} />
       <div class="spk-container" style="position: relative; z-index: 10;">
         <div class="text-center">
-          <Eyebrow className="justify-center">Legal</Eyebrow>
-          <h1 class="spk-h1">Privacy <span class="italic-accent">Policy.</span></h1>
-          <p class="spk-subtitle">Last updated: August 2026</p>
+          {hero.eyebrow && <Eyebrow className="justify-center">{hero.eyebrow}</Eyebrow>}
+          <h1 class="spk-h1" set:html={hero.headline || 'Privacy <span class="italic-accent">Policy.</span>'}></h1>
+          {hero.subtitle && <p class="spk-subtitle">{hero.subtitle}</p>}
         </div>
       </div>
     </section>
@@ -21,153 +38,89 @@ import Waveform from '../components/Waveform.astro';
     <section class="spk-section relative overflow-hidden" style="padding-top: 4rem; padding-bottom: 8rem; position: relative; background: radial-gradient(circle at left center, rgba(217,162,58,0.03) 0%, transparent 60%);">
       <Waveform opacity={0.03} variant="C" />
       <div class="spk-container" style="max-width: 900px; position: relative; z-index: 10;">
-        
-        <div class="legal-card prose-column">
-          <div class="prose-block">
-            <p class="intro">This Privacy Policy governs the manner in which Tiffany Webb ("we", "us", "our") collects, uses, maintains, and discloses information collected from users (each, a "User") of the tiffanywebb.com website ("Site"). This privacy policy applies to the Site and all products and services offered by Tiffany Webb.</p>
-          </div>
-
-          <div class="prose-block mt-8">
-            <h3>Personal Identification Information</h3>
-            <p>We may collect personal identification information from Users in a variety of ways, including, but not limited to, when Users visit our site, fill out a form, subscribe to the newsletter, and in connection with other activities, services, features or resources we make available on our Site. Users may be asked for, as appropriate, name, email address, mailing address, phone number, and organization details. Users may, however, visit our Site anonymously. We will collect personal identification information from Users only if they voluntarily submit such information to us.</p>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>Non-Personal Identification Information</h3>
-            <p>We may collect non-personal identification information about Users whenever they interact with our Site. Non-personal identification information may include the browser name, the type of computer and technical information about Users means of connection to our Site, such as the operating system and the Internet service providers utilized and other similar information.</p>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>Web Browser Cookies</h3>
-            <p>Our Site may use "cookies" to enhance User experience. User's web browser places cookies on their hard drive for record-keeping purposes and sometimes to track information about them. User may choose to set their web browser to refuse cookies, or to alert you when cookies are being sent. If they do so, note that some parts of the Site may not function properly.</p>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>How We Use Collected Information</h3>
-            <p>Tiffany Webb may collect and use Users personal information for the following purposes:</p>
-            <ul>
-              <li><strong>To improve customer service:</strong> Information you provide helps us respond to your customer service requests and support needs more efficiently.</li>
-              <li><strong>To personalize user experience:</strong> We may use information in the aggregate to understand how our Users as a group use the services and resources provided on our Site.</li>
-              <li><strong>To process speaking inquiries and bookings:</strong> We may use the information Users provide about themselves when placing an inquiry only to provide service to that order. We do not share this information with outside parties except to the extent necessary to provide the service.</li>
-              <li><strong>To send periodic emails:</strong> If User decides to opt-in to our mailing list, they will receive emails that may include company news, updates, related product or service information, etc. If at any time the User would like to unsubscribe from receiving future emails, we include detailed unsubscribe instructions at the bottom of each email.</li>
-            </ul>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>How We Protect Your Information</h3>
-            <p>We adopt appropriate data collection, storage and processing practices and security measures to protect against unauthorized access, alteration, disclosure or destruction of your personal information, username, password, transaction information and data stored on our Site.</p>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>Sharing Your Personal Information</h3>
-            <p>We do not sell, trade, or rent Users personal identification information to others. We may share generic aggregated demographic information not linked to any personal identification information regarding visitors and users with our business partners, trusted affiliates and advertisers for the purposes outlined above.</p>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>Your Rights (GDPR & CCPA)</h3>
-            <p>If you are a resident of the EEA or California, you have the right to access the Personal Information we hold about you, to port it to a new service, and to ask that your Personal Information be corrected, updated, or erased. If you would like to exercise these rights, please contact us through the contact information below.</p>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>Changes to This Privacy Policy</h3>
-            <p>Tiffany Webb has the discretion to update this privacy policy at any time. When we do, we will revise the updated date at the bottom of this page. We encourage Users to frequently check this page for any changes to stay informed about how we are helping to protect the personal information we collect.</p>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>Contacting Us</h3>
-            <p>If you have any questions about this Privacy Policy, the practices of this site, or your dealings with this site, please contact us at:</p>
-            <p><a href="/book" style="color: var(--color-gold);">booking@tiffanywebb.com</a></p>
-          </div>
-        </div>
-
+        <div class="legal-card prose-column" set:html={legal.body_text || ''}></div>
       </div>
     </section>
+
   </main>
 </Layout>
 
-<style is:global>
-  .bg-ink { background: var(--ink); }
-  .spk-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--sp-6);
-  }
-  .spk-section {
-    padding: 6rem 0 10rem 0;
-  }
+<style>
+  .bg-ink { background: var(--color-ink); color: var(--color-ivory); min-height: 100vh; }
+  .spk-container { width: 90%; max-width: 1200px; margin: 0 auto; }
   .text-center { text-align: center; }
-
+  .justify-center { justify-content: center; }
+  
   .spk-h1 {
-    font-family: var(--font-serif);
-    font-size: clamp(3rem, 5vw, 4rem);
-    color: var(--color-ivory);
+    font-size: clamp(3.5rem, 8vw, 6rem);
     line-height: 1.1;
-    margin-bottom: 1.5rem;
-  }
-  .spk-subtitle {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    color: var(--color-gold);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .prose-block {
-    margin-bottom: 3rem;
-  }
-  .prose-block h3 {
+    margin: 1rem 0 1.5rem;
+    letter-spacing: -0.02em;
     font-family: var(--font-serif);
-    font-size: 1.75rem;
     color: var(--color-ivory);
+  }
+  
+  .spk-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    line-height: 1.6;
+    color: rgba(251, 246, 234, 0.7);
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 400;
+  }
+  
+  .legal-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: clamp(2rem, 5vw, 4rem);
+  }
+  
+  .prose-column {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(251, 246, 234, 0.85);
+  }
+  
+  :global(.prose-block h3) {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--color-gold);
+    margin: 2rem 0 1rem;
+    font-weight: 400;
+  }
+  
+  :global(.prose-block p) {
     margin-bottom: 1rem;
   }
-  .prose-block p {
-    font-family: var(--font-sans);
-    font-size: 1.1rem;
-    color: rgba(251, 246, 234, 0.75);
-    line-height: 1.7;
-    margin-bottom: 1.25rem;
+  
+  :global(.prose-block .intro) {
+    font-size: 1.25rem;
+    color: var(--color-ivory);
+    margin-bottom: 2rem;
   }
-  .prose-block ul {
+  
+  :global(.prose-block ul) {
     list-style: none;
-    padding: 0;
-    margin-bottom: 1.5rem;
-  }
-  .prose-block li {
-    font-family: var(--font-sans);
-    font-size: 1.1rem;
-    color: rgba(251, 246, 234, 0.75);
-    line-height: 1.7;
-    margin-bottom: 1rem;
     padding-left: 1.5rem;
+  }
+  
+  :global(.prose-block ul li) {
+    margin-bottom: 0.75rem;
     position: relative;
   }
-  .prose-block li::before {
+  
+  :global(.prose-block ul li::before) {
     content: "•";
-    position: absolute;
-    left: 0;
     color: var(--color-gold);
-    font-weight: bold;
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
   }
-  .prose-block strong {
+  
+  :global(.prose-block strong) {
     color: var(--color-ivory);
-    font-weight: 500;
   }
-  .intro {
-    font-size: 1.35rem !important;
-    color: var(--color-ivory) !important;
-  }
-  .legal-card {
-    background: rgba(15, 15, 15, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: 3rem 4rem;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    backdrop-filter: blur(10px);
-  }
-  @media (max-width: 768px) {
-    .legal-card {
-      padding: 2rem;
-    }
-  }
+  
+  .mt-8 { margin-top: 2rem; }
 </style>

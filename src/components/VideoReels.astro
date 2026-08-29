@@ -47,11 +47,11 @@ const resolveImage = (imgName) => {
 <section class="section-pad theme-ink relative overflow-hidden" id="video-reels" style="padding-top: 8rem; padding-bottom: 8rem;">
   <Waveform opacity={0.04} variant="B" flipY={true} />
   
-  <div class="relative z-10" style="max-width: 1200px; margin: 0 auto; padding: 0 5vw;">
-    <div class="text-left mb-32 reveal-up">
-      <Eyebrow className="justify-start mb-4">{eyebrowText}</Eyebrow>
-      <h2 class="section-title mb-6"><span class="title-grad" set:html={titleHtml}></span></h2>
-      <p class="subtitle max-w-3xl" style="text-align: left; margin: 0;">{description}</p>
+  <div class="relative z-10" style="width: 90%; max-width: 1200px; margin: 0 auto;">
+    <div class="reveal-up" style="margin-bottom: 5rem; max-width: 800px;">
+      <div style="margin-bottom: 1rem;"><Eyebrow>{eyebrowText}</Eyebrow></div>
+      <h2 class="section-title works-title" style="margin-bottom: 2rem; font-size: clamp(2.5rem, 4vw, 4rem);"><span class="title-grad" set:html={titleHtml}></span></h2>
+      <p class="subtitle" style="text-align: left; margin: 0; line-height: 1.6; font-size: 1.1rem; color: rgba(251, 246, 234, 0.85);">{description}</p>
     </div>
     
     <div class="videos-grid stagger-group">

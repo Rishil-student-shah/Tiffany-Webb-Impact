@@ -2,6 +2,23 @@
 import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Waveform from '../components/Waveform.astro';
+import mysql from 'mysql2/promise';
+
+let dbContent = {};
+try {
+  const pool = mysql.createPool({ host: 'localhost', user: 'root', password: '@rishil8124shah', database: 'tiffany_crm' });
+  const [rows] = await pool.query("SELECT section, key_name, content_value FROM website_content JOIN website_pages ON website_content.page_id = website_pages.id WHERE website_pages.slug = 'terms'");
+  rows.forEach(row => {
+    if (!dbContent[row.section]) dbContent[row.section] = {};
+    dbContent[row.section][row.key_name] = row.content_value;
+  });
+  await pool.end();
+} catch (e) {
+  console.error("DB Error in terms:", e);
+}
+
+const hero = dbContent.hero || {};
+const legal = dbContent.legal || {};
 ---
 
 <Layout title="Terms of Service | Tiffany Webb" theme="dark">
@@ -11,9 +28,9 @@ import Waveform from '../components/Waveform.astro';
       <Waveform opacity={0.04} variant="B" flipY={true} />
       <div class="spk-container" style="position: relative; z-index: 10;">
         <div class="text-center">
-          <Eyebrow className="justify-center">Legal</Eyebrow>
-          <h1 class="spk-h1">Terms of <span class="italic-accent">Service.</span></h1>
-          <p class="spk-subtitle">Last updated: August 2026</p>
+          {hero.eyebrow && <Eyebrow className="justify-center">{hero.eyebrow}</Eyebrow>}
+          <h1 class="spk-h1" set:html={hero.headline || 'Terms of <span class="italic-accent">Service.</span>'}></h1>
+          {hero.subtitle && <p class="spk-subtitle">{hero.subtitle}</p>}
         </div>
       </div>
     </section>
@@ -21,146 +38,89 @@ import Waveform from '../components/Waveform.astro';
     <section class="spk-section relative overflow-hidden" style="padding-top: 4rem; padding-bottom: 8rem; position: relative; background: radial-gradient(circle at right center, rgba(217,162,58,0.03) 0%, transparent 60%);">
       <Waveform opacity={0.03} variant="D" />
       <div class="spk-container" style="max-width: 900px; position: relative; z-index: 10;">
-        
-        <div class="legal-card prose-column">
-          <div class="prose-block">
-            <p class="intro">These Terms of Service govern your use of the website located at tiffanywebb.com and any related services provided by Tiffany Webb. By accessing our website or booking our services, you agree to abide by these Terms.</p>
-          </div>
-
-          <div class="prose-block mt-8">
-            <h3>1. Services and Bookings</h3>
-            <p>Tiffany Webb provides professional speaking, consulting, and training services focusing on public health and gambling prevention. All bookings initiated through this website are considered inquiries and do not constitute a binding contract until a formal Speaker Agreement or Consulting Contract is signed by both parties. We reserve the right to decline any speaking or consulting inquiry at our sole discretion.</p>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>2. Intellectual Property Rights</h3>
-            <p>All content, materials, keynote presentations, slide decks, frameworks, methodologies, and written articles provided by Tiffany Webb (collectively, "Materials") are the exclusive intellectual property of Tiffany Webb and are protected by applicable copyright and trademark law.</p>
-            <ul>
-              <li><strong>Presentations:</strong> Recording, broadcasting, or distributing Tiffany Webb's keynote or workshop presentations without explicit prior written consent is strictly prohibited.</li>
-              <li><strong>Website Content:</strong> You may not modify, publish, transmit, participate in the transfer or sale of, reproduce, create derivative works from, distribute, or in any way exploit any of the content on this website, in whole or in part, without our written permission.</li>
-            </ul>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>3. User Conduct</h3>
-            <p>As a condition of your use of the website, you warrant that you will not use the website for any purpose that is unlawful or prohibited by these Terms. You may not use the website in any manner which could damage, disable, overburden, or impair the website or interfere with any other party's use and enjoyment of the website.</p>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>4. Cancellation and Rescheduling</h3>
-            <p>Specific terms regarding the cancellation, rescheduling, or modification of booked speaking engagements or consulting services will be governed strictly by the individual Speaker Agreement or Consulting Contract signed between the Client and Tiffany Webb. This website does not supersede those individual contractual terms.</p>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>5. Limitations of Liability</h3>
-            <p>The information and services provided on this website are for educational and informational purposes only. Tiffany Webb is a public health educator and Community Impact Strategist. The content provided during speaking engagements or on this website does not constitute formal medical, psychiatric, or legal advice. In no event shall Tiffany Webb be liable for any indirect, incidental, special, consequential or punitive damages arising out of or relating to your use of the website or services.</p>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>6. External Links</h3>
-            <p>Our website may contain links to external sites that are not operated by us. Please be aware that we have no control over the content and policies of those sites, and cannot accept responsibility or liability for their respective privacy practices or content.</p>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>7. Changes to Terms</h3>
-            <p>We reserve the right, at our sole discretion, to modify or replace these Terms at any time. If a revision is material, we will try to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at our sole discretion.</p>
-          </div>
-          
-          <div class="prose-block mt-8">
-            <h3>8. Contact Us</h3>
-            <p>If you have any questions about these Terms, please contact us at:</p>
-            <p><a href="/book" style="color: var(--color-gold);">booking@tiffanywebb.com</a></p>
-          </div>
-        </div>
-
+        <div class="legal-card prose-column" set:html={legal.body_text || ''}></div>
       </div>
     </section>
+
   </main>
 </Layout>
 
-<style is:global>
-  .bg-ink { background: var(--ink); }
-  .spk-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 var(--sp-6);
-  }
-  .spk-section {
-    padding: 6rem 0 10rem 0;
-  }
+<style>
+  .bg-ink { background: var(--color-ink); color: var(--color-ivory); min-height: 100vh; }
+  .spk-container { width: 90%; max-width: 1200px; margin: 0 auto; }
   .text-center { text-align: center; }
-
+  .justify-center { justify-content: center; }
+  
   .spk-h1 {
-    font-family: var(--font-serif);
-    font-size: clamp(3rem, 5vw, 4rem);
-    color: var(--color-ivory);
+    font-size: clamp(3.5rem, 8vw, 6rem);
     line-height: 1.1;
-    margin-bottom: 1.5rem;
-  }
-  .spk-subtitle {
-    font-family: var(--font-mono);
-    font-size: 0.9rem;
-    color: var(--color-gold);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .prose-block {
-    margin-bottom: 3rem;
-  }
-  .prose-block h3 {
+    margin: 1rem 0 1.5rem;
+    letter-spacing: -0.02em;
     font-family: var(--font-serif);
-    font-size: 1.75rem;
     color: var(--color-ivory);
+  }
+  
+  .spk-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    line-height: 1.6;
+    color: rgba(251, 246, 234, 0.7);
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 400;
+  }
+  
+  .legal-card {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 20px;
+    padding: clamp(2rem, 5vw, 4rem);
+  }
+  
+  .prose-column {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(251, 246, 234, 0.85);
+  }
+  
+  :global(.prose-block h3) {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--color-gold);
+    margin: 2rem 0 1rem;
+    font-weight: 400;
+  }
+  
+  :global(.prose-block p) {
     margin-bottom: 1rem;
   }
-  .prose-block p {
-    font-family: var(--font-sans);
-    font-size: 1.1rem;
-    color: rgba(251, 246, 234, 0.75);
-    line-height: 1.7;
-    margin-bottom: 1.25rem;
+  
+  :global(.prose-block .intro) {
+    font-size: 1.25rem;
+    color: var(--color-ivory);
+    margin-bottom: 2rem;
   }
-  .prose-block ul {
+  
+  :global(.prose-block ul) {
     list-style: none;
-    padding: 0;
-    margin-bottom: 1.5rem;
-  }
-  .prose-block li {
-    font-family: var(--font-sans);
-    font-size: 1.1rem;
-    color: rgba(251, 246, 234, 0.75);
-    line-height: 1.7;
-    margin-bottom: 1rem;
     padding-left: 1.5rem;
+  }
+  
+  :global(.prose-block ul li) {
+    margin-bottom: 0.75rem;
     position: relative;
   }
-  .prose-block li::before {
+  
+  :global(.prose-block ul li::before) {
     content: "•";
-    position: absolute;
-    left: 0;
     color: var(--color-gold);
-    font-weight: bold;
+    position: absolute;
+    left: -1.5rem;
+    top: 0;
   }
-  .prose-block strong {
+  
+  :global(.prose-block strong) {
     color: var(--color-ivory);
-    font-weight: 500;
   }
-  .intro {
-    font-size: 1.35rem !important;
-    color: var(--color-ivory) !important;
-  }
-  .legal-card {
-    background: rgba(15, 15, 15, 0.7);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: 3rem 4rem;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-    backdrop-filter: blur(10px);
-  }
-  @media (max-width: 768px) {
-    .legal-card {
-      padding: 2rem;
-    }
-  }
+  
+  .mt-8 { margin-top: 2rem; }
 </style>

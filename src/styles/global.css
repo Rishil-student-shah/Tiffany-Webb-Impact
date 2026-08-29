@@ -56,10 +56,8 @@ main > section:first-of-type:not(.hero) {
   flex: 1;
   border-radius: 40px;
   overflow: hidden;
-  background-color: var(--color-ivory);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-  transform: translateZ(0);
-  /* Forces strict clipping of sticky/absolute children */
+  background-color: var(--color-ink);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
 
 @media (min-width: 768px) {
