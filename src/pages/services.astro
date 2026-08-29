@@ -177,6 +177,63 @@ try {
       );
     })()}
 
+    <!-- GEAR Method -->
+    {(!dbContent.gear_method || dbContent.gear_method.section_is_active !== "0") && (() => {
+      const gearContent = dbContent.gear_method || {};
+      const gearCards = dbCollections.gear_method || [
+        { title: 'Generate', subtitle: 'G', content_html: 'Build awareness and understanding. Clarify the challenge, understand the audience, and make the issue visible and relevant.' },
+        { title: 'Engage', subtitle: 'E', content_html: 'Build trust and connection. Listen, strengthen relationships, and create opportunities for meaningful participation.' },
+        { title: 'Activate', subtitle: 'A', content_html: 'Move ideas into action. Turn insight into strategies, programs, experiences, partnerships, and practical next steps.' },
+        { title: 'Resource', subtitle: 'R', content_html: 'Build the path forward. Connect people and organizations with information, relationships, services, tools, and opportunities.' }
+      ];
+      
+      const eyebrow = gearContent.eyebrow ?? "SIGNATURE METHODOLOGY";
+      const headline = gearContent.headline ?? "The GEAR Method™";
+      const standfirst = gearContent.standfirst ?? "From awareness to action. From ideas to impact.";
+      const description = gearContent.description ?? "The GEAR Method™ is my human-centered approach to helping organizations create strategies that connect with people, activate participation, and build meaningful pathways forward.";
+      const footer = gearContent.footer ?? "AWARENESS &rarr; CONNECTION &rarr; ACTION &rarr; IMPACT";
+
+      return (
+        <section id="gear" class="spk-section relative overflow-hidden" style="padding-top: 2rem;">
+          <div class="spk-container relative z-10">
+            <div class="gear-panel">
+              <div class="gear-top-row">
+                <div class="gear-left">
+                  {eyebrow && <Eyebrow className="gear-eyebrow">{eyebrow}</Eyebrow>}
+                  {headline && <h2 class="gear-h2">{headline}</h2>}
+                </div>
+                <div class="gear-right">
+                  {standfirst && <h3 class="gear-standfirst">{standfirst}</h3>}
+                  {description && <p class="gear-desc">{description}</p>}
+                </div>
+              </div>
+              
+              <div class="gear-divider"></div>
+              
+              {gearCards.length > 0 && (
+                <div class="gear-grid">
+                  {gearCards.map((card) => (
+                    <div class="gear-card">
+                      {card.subtitle && <div class="gear-letter">{card.subtitle}</div>}
+                      {card.title && <h4 class="gear-title">{card.title}</h4>}
+                      {card.content_html && <p class="gear-body">{card.content_html}</p>}
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              {footer && (
+                <div class="gear-footer-row text-center">
+                  <div class="gear-divider-bottom"></div>
+                  <p class="gear-footer-text" set:html={footer}></p>
+                </div>
+              )}
+            </div>
+          </div>
+        </section>
+      );
+    })()}
+
     <!-- 4. The Tracks (No-JS Scannable Grid) -->
     <section class="spk-section relative overflow-hidden" id="topics">
       <Waveform opacity={0.04} variant="A" />
@@ -556,6 +613,121 @@ try {
     margin: 0 auto;
     max-width: 800px;
     opacity: 0.9;
+  }
+
+  /* GEAR Method */
+  .gear-panel {
+    background: var(--color-ivory);
+    border-radius: 32px;
+    padding: 4rem 2rem;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+  @media (min-width: 992px) {
+    .gear-panel {
+      padding: 6rem;
+    }
+  }
+  .gear-top-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+  @media (min-width: 992px) {
+    .gear-top-row {
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+    }
+  }
+  .gear-eyebrow {
+    color: var(--ink) !important;
+    opacity: 0.6;
+    margin-bottom: 1rem;
+    justify-content: flex-start;
+  }
+  .gear-h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0;
+  }
+  .gear-standfirst {
+    font-family: var(--font-sans);
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--ink);
+    margin: 0 0 1rem 0;
+  }
+  .gear-desc {
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: rgba(13, 18, 16, 0.8);
+    margin: 0;
+  }
+  .gear-divider {
+    height: 1px;
+    width: 100%;
+    background: rgba(13, 18, 16, 0.1);
+    margin-bottom: 4rem;
+  }
+  .gear-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+  @media (min-width: 768px) {
+    .gear-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 992px) {
+    .gear-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+  }
+  .gear-letter {
+    font-family: var(--font-serif);
+    font-size: 4.5rem;
+    line-height: 1;
+    color: var(--color-gold);
+    margin-bottom: 1rem;
+  }
+  .gear-title {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+  }
+  .gear-body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(13, 18, 16, 0.75);
+    margin: 0;
+  }
+  .gear-footer-row {
+    padding-top: 2rem;
+  }
+  .gear-divider-bottom {
+    height: 1px;
+    width: 60px;
+    background: var(--color-gold);
+    margin: 0 auto 2rem auto;
+  }
+  .gear-footer-text {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: var(--color-gold);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0;
   }
 
   /* 4. Tracks Grid */
