@@ -16,9 +16,9 @@ const { hideJourney = false, content = {} } = Astro.props;
 
   <div class="container relative z-10">
     <div class="booking-content text-center reveal-up">
-      <Eyebrow className="eyebrow-light">Book Tiffany</Eyebrow>
-      <h2 class="section-title text-white">Bring me to your next <span class="italic-accent">conversation.</span></h2>
-      <p class="booking-sub">Tell me about your event and your audience. I review every inquiry personally.</p>
+      <Eyebrow className="eyebrow-light">WORK WITH TIFFANY</Eyebrow>
+      <h2 class="section-title text-white">Let's create impact together.</h2>
+      <p class="booking-sub">Tell me about your organization and what you're trying to change. I read every inquiry myself.</p>
     </div>
 
     <!-- 4 Step Journey Strip -->
@@ -26,19 +26,19 @@ const { hideJourney = false, content = {} } = Astro.props;
       <div class="journey-strip reveal-up">
         <div class="journey-step">
           <div class="step-num">01</div>
-          <div class="step-text">Submit your<br/>request details</div>
+          <div class="step-text">Inquiry</div>
         </div>
         <div class="journey-step">
           <div class="step-num">02</div>
-          <div class="step-text">Discovery<br/>call</div>
+          <div class="step-text">Conversation</div>
         </div>
         <div class="journey-step">
           <div class="step-num">03</div>
-          <div class="step-text">Customized<br/>proposal</div>
+          <div class="step-text">Proposal</div>
         </div>
         <div class="journey-step">
           <div class="step-num">04</div>
-          <div class="step-text">Event<br/>execution</div>
+          <div class="step-text">Delivery</div>
         </div>
       </div>
     )}
@@ -129,7 +129,7 @@ const { hideJourney = false, content = {} } = Astro.props;
         </div>
 
         <div class="form-group full-width">
-          <label for="home-details">{content.label_details || "TELL US ABOUT YOUR AUDIENCE AND GOALS"} *</label>
+          <label for="home-details">{content.label_details || "TELL ME ABOUT YOUR AUDIENCE AND GOALS"} *</label>
           <textarea id="home-details" name="details" rows="4" required placeholder="We are looking for..."></textarea>
         </div>
         
@@ -139,12 +139,12 @@ const { hideJourney = false, content = {} } = Astro.props;
         </div>
 
         <div class="form-submit text-center" style="margin-top: var(--sp-4);">
-          <button type="submit" class="submit-btn magnetic-btn">{content.btn_submit || "Submit Request &rarr;"}</button>
+          <button type="submit" class="submit-btn magnetic-btn">{content.btn_submit || "Submit Request"}</button>
         </div>
       </form>
       <div id="home-success-msg" style="display: none; text-align: center; padding: 2rem 0;" class="mt-8">
         <h3 style="color: var(--color-gold); font-family: var(--font-serif); font-size: 2.5rem; margin-bottom: 1rem;">Thank you — your request is in.</h3>
-        <p style="color: var(--color-ivory); font-size: 1.1rem; line-height: 1.5;">Tiffany personally reviews every enquiry and responds within two business days.</p>
+        <p style="color: var(--color-ivory); font-size: 1.1rem; line-height: 1.5;">I read every inquiry myself.</p>
       </div>
     </div>
   </div>
@@ -241,7 +241,7 @@ const { hideJourney = false, content = {} } = Astro.props;
         const submitBtn = form.querySelector('button[type="submit"]');
         if (submitBtn) {
             submitBtn.disabled = true;
-            submitBtn.innerHTML = "Submit Request &rarr;";
+            submitBtn.innerHTML = "Submit Request";
         }
 
         try {
@@ -273,7 +273,7 @@ const { hideJourney = false, content = {} } = Astro.props;
             alert('There was a problem submitting your request. Please try again later.');
             if (submitBtn) {
                 submitBtn.disabled = false;
-              submitBtn.innerHTML = "Submit Request &rarr;";
+              submitBtn.innerHTML = "Submit Request";
             }
           }
         } catch (error) {
@@ -281,7 +281,7 @@ const { hideJourney = false, content = {} } = Astro.props;
           alert('Could not connect to the server. Please try again later.');
           if (submitBtn) {
               submitBtn.disabled = false;
-              submitBtn.innerHTML = "Submit Request &rarr;";
+              submitBtn.innerHTML = "Submit Request";
           }
         }
       });
