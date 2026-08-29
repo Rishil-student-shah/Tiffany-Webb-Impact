@@ -5,6 +5,51 @@ import Button from '../components/Button.astro';
 import Waveform from '../components/Waveform.astro';
 import { Image } from 'astro:assets';
 import heroImg from '../assets/tiffany_hero_new.jpg';
+import mysql from 'mysql2/promise';
+
+let dbContent = {};
+let dbCollections = {};
+try {
+  const pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '@rishil8124shah',
+    database: 'tiffany_crm',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+  });
+  
+  // Fetch KV content for services page
+  const [rows] = await pool.query(`
+    SELECT section, key_name, content_value 
+    FROM website_content 
+    JOIN website_pages ON website_content.page_id = website_pages.id 
+    WHERE website_pages.slug = 'services'
+  `);
+  
+  rows.forEach(row => {
+    if (!dbContent[row.section]) dbContent[row.section] = {};
+    dbContent[row.section][row.key_name] = row.content_value;
+  });
+
+  // Fetch Collections for services page
+  const [colRows] = await pool.query(`
+    SELECT section_name, title, sort_order, subtitle, content_html, image_url, icon_svg 
+    FROM website_collections 
+    JOIN website_pages ON website_collections.page_id = website_pages.id 
+    WHERE website_pages.slug = 'services'
+    ORDER BY section_name, sort_order ASC
+  `);
+  
+  colRows.forEach(row => {
+    if (!dbCollections[row.section_name]) dbCollections[row.section_name] = [];
+    dbCollections[row.section_name].push(row);
+  });
+  await pool.end();
+} catch (e) {
+  console.error("Database connection failed for SSG, using fallbacks:", e);
+}
 ---
 
 <Layout title="Speaking & Training | Tiffany Webb" theme="dark">
@@ -69,56 +114,68 @@ import heroImg from '../assets/tiffany_hero_new.jpg';
     </section>
 
     <!-- 3. How Tiffany Helps -->
-    <section class="spk-section relative overflow-hidden">
-      <Waveform opacity={0.03} variant="B" flipX={true} />
+    {(!dbContent.how_tiffany_helps || dbContent.how_tiffany_helps.section_is_active !== "0") && (() => {
+      const hthContent = dbContent.how_tiffany_helps || {};
+      const hthCards = dbCollections.how_tiffany_helps || [
+        { title: 'Strategic Advisor', subtitle: '01 // THINK', content_html: 'I challenge familiar thinking, uncover opportunities, and help leaders make clearer decisions around growth, engagement, innovation, and impact.', image_url: '/services#strategic-advisor' },
+        { title: 'Program Architect', subtitle: '02 // BUILD', content_html: 'I turn ideas and community needs into structured programs, initiatives, experiences, partnerships, and implementation pathways.', image_url: '/services#program-architect' },
+        { title: 'Community Impact Strategist', subtitle: '03 // CONNECT', content_html: 'Connects organizational goals with community realities, strengths, needs, and voices to create people-centered, outcome-focused strategies.', image_url: '/services#community-impact-strategist' },
+        { title: 'Speaker & Facilitator', subtitle: '04 // MOVE', content_html: 'I create conversations and learning experiences that challenge assumptions, elevate thinking, encourage dialogue, and move audiences toward action.', image_url: '/services#speaker-facilitator' }
+      ];
       
-      <div class="spk-container relative z-10">
-        <div class="spk-section-header text-center">
-          <Eyebrow className="justify-center">HOW TIFFANY HELPS</Eyebrow>
-          <h2 class="spk-h2">Strategy with <span class="italic-accent">people at the center.</span></h2>
-          <p class="spk-subtitle" style="max-width: 62ch; margin: 0 auto 4rem auto;">
-            From early ideas to real-world implementation, I help leaders see opportunities differently, structure what comes next, and connect strategy with the people and communities it is meant to serve.
-          </p>
-        </div>
-        
-        <div class="helps-grid">
-          <!-- Card 1 -->
-          <a href="/services#strategic-advisor" class="helps-card glass-card">
-            <div class="helps-eyebrow">01 // THINK</div>
-            <h3 class="helps-title">Strategic Advisor</h3>
-            <p class="helps-desc">I challenge familiar thinking, uncover opportunities, and help leaders make clearer decisions around growth, engagement, innovation, and impact.</p>
-          </a>
+      const eyebrow = hthContent.eyebrow ?? "HOW TIFFANY HELPS";
+      const headlineRaw = hthContent.headline ?? "Strategy with people at the center.";
+      const intro = hthContent.intro ?? "From early ideas to real-world implementation, I help leaders see opportunities differently, structure what comes next, and connect strategy with the people and communities it is meant to serve.";
+      const quote1 = hthContent.quote_1 ?? "I don't just tell you what to do next.";
+      const quote2 = hthContent.quote_2 ?? "I help you build how you get there.";
+
+      // To keep the 'italic-accent' logic without breaking DB text, 
+      // we'll assume the last half of the sentence is accented if we split by 'with' or similar, 
+      // but for absolute safety we'll just check if it matches the fallback and apply the span, 
+      // otherwise just render it normally (or let the DB provide HTML).
+      const headlineHtml = headlineRaw === "Strategy with people at the center." 
+        ? 'Strategy with <span class="italic-accent">people at the center.</span>' 
+        : headlineRaw;
+
+      return (
+        <section class="spk-section relative overflow-hidden">
+          <Waveform opacity={0.03} variant="B" flipX={true} />
           
-          <!-- Card 2 -->
-          <a href="/services#program-architect" class="helps-card glass-card">
-            <div class="helps-eyebrow">02 // BUILD</div>
-            <h3 class="helps-title">Program Architect</h3>
-            <p class="helps-desc">I turn ideas and community needs into structured programs, initiatives, experiences, partnerships, and implementation pathways.</p>
-          </a>
-          
-          <!-- Card 3 -->
-          <a href="/services#community-impact-strategist" class="helps-card glass-card">
-            <div class="helps-eyebrow">03 // CONNECT</div>
-            <h3 class="helps-title">Community Impact Strategist</h3>
-            <p class="helps-desc">Connects organizational goals with community realities, strengths, needs, and voices to create people-centered, outcome-focused strategies.</p>
-          </a>
-          
-          <!-- Card 4 -->
-          <a href="/services#speaker-facilitator" class="helps-card glass-card">
-            <div class="helps-eyebrow">04 // MOVE</div>
-            <h3 class="helps-title">Speaker &amp; Facilitator</h3>
-            <p class="helps-desc">I create conversations and learning experiences that challenge assumptions, elevate thinking, encourage dialogue, and move audiences toward action.</p>
-          </a>
-        </div>
-        
-        <div class="helps-quote text-center">
-          <p class="quote-text">
-            "I don't just tell you what to do next.<br/>
-            <span class="text-gold">I help you build how you get there.</span>"
-          </p>
-        </div>
-      </div>
-    </section>
+          <div class="spk-container relative z-10">
+            <div class="spk-section-header text-center">
+              {eyebrow && <Eyebrow className="justify-center">{eyebrow}</Eyebrow>}
+              {headlineRaw && <h2 class="spk-h2" set:html={headlineHtml}></h2>}
+              {intro && (
+                <p class="spk-subtitle" style="max-width: 62ch; margin: 0 auto 4rem auto;">
+                  {intro}
+                </p>
+              )}
+            </div>
+            
+            {hthCards.length > 0 && (
+              <div class="helps-grid">
+                {hthCards.map((card) => (
+                  <a href={card.image_url || "#"} class="helps-card glass-card">
+                    {card.subtitle && <div class="helps-eyebrow">{card.subtitle}</div>}
+                    <h3 class="helps-title">{card.title}</h3>
+                    {card.content_html && <p class="helps-desc" set:html={card.content_html}></p>}
+                  </a>
+                ))}
+              </div>
+            )}
+            
+            {(quote1 || quote2) && (
+              <div class="helps-quote text-center">
+                <p class="quote-text">
+                  {quote1 && `"${quote1}`}<br/>
+                  {quote2 && <span class="text-gold">{quote2}"</span>}
+                </p>
+              </div>
+            )}
+          </div>
+        </section>
+      );
+    })()}
 
     <!-- 4. The Tracks (No-JS Scannable Grid) -->
     <section class="spk-section relative overflow-hidden" id="topics">
