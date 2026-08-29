@@ -71,13 +71,16 @@ const {
     </div>
 
     {isNavActive && <Nav />}
-    
+    <div class="page-wrapper">
+      <div class="page-card">
         <main id="smooth-wrapper">
           <div id="smooth-content">
             <slot />
             <Footer />
           </div>
         </main>
+      </div>
+    </div>
 
     <!-- Physics Cursor -->
     <div class="cursor-dot js-cursor-dot"></div>
