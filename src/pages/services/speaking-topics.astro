@@ -1,0 +1,54 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Eyebrow from '../../components/Eyebrow.astro';
+import Waveform from '../../components/Waveform.astro';
+---
+
+<Layout title="Speaking Topics | Tiffany Webb" theme="dark">
+  <main class="page-content bg-ink">
+    
+    <section class="spk-hero-v2 relative overflow-hidden" style="padding: 10rem 0 4rem 0; position: relative;">
+      <Waveform opacity={0.04} variant="A" flipX={true} />
+      <div class="spk-container" style="position: relative; z-index: 10;">
+        <div class="text-center">
+          <Eyebrow className="justify-center">Services</Eyebrow>
+          <h1 class="spk-h1">Speaking <span class="italic-accent">Topics.</span></h1>
+          <p class="spk-subtitle">Twenty topics across four tracks.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="spk-section relative overflow-hidden" style="padding-top: 4rem; padding-bottom: 8rem; position: relative; background: radial-gradient(circle at left center, rgba(217,162,58,0.03) 0%, transparent 60%);">
+      <Waveform opacity={0.03} variant="C" />
+      <div class="spk-container" style="max-width: 900px; position: relative; z-index: 10; text-align: center;">
+        <p style="color: var(--color-ivory); font-size: 1.2rem;">This page is ready to be populated with your filterable list of 20 topics!</p>
+      </div>
+    </section>
+
+  </main>
+</Layout>
+
+<style>
+  .bg-ink { background: var(--color-ink); color: var(--color-ivory); min-height: 100vh; }
+  .spk-container { width: 90%; max-width: 1200px; margin: 0 auto; }
+  .text-center { text-align: center; }
+  .justify-center { justify-content: center; }
+  
+  .spk-h1 {
+    font-size: clamp(3.5rem, 8vw, 6rem);
+    line-height: 1.1;
+    margin: 1rem 0 1.5rem;
+    letter-spacing: -0.02em;
+    font-family: var(--font-serif);
+    color: var(--color-ivory);
+  }
+  
+  .spk-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.3rem);
+    line-height: 1.6;
+    color: rgba(251, 246, 234, 0.7);
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 400;
+  }
+</style>
