@@ -270,8 +270,10 @@ const subtext = content.subtext || "Tell me about your organization and what you
           });
 
           if (response.ok) {
-            document.getElementById('home-success-msg').style.display = 'block';
+            const successMsg = document.getElementById('home-success-msg');
+            successMsg.style.display = 'block';
             form.style.display = 'none';
+            successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
           } else {
             alert('There was a problem submitting your request. Please try again later.');
             if (submitBtn) {
