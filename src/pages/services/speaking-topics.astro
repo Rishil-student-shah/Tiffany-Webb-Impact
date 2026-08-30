@@ -5,50 +5,635 @@ import Waveform from '../../components/Waveform.astro';
 ---
 
 <Layout title="Speaking Topics | Tiffany Webb" theme="dark">
-  <main class="page-content bg-ink">
+  <main class="page-content bg-ink" style="padding-top: 8rem;">
     
-    <section class="spk-hero-v2 relative overflow-hidden" style="padding: 10rem 0 4rem 0; position: relative;">
-      <Waveform opacity={0.04} variant="A" flipX={true} />
-      <div class="spk-container" style="position: relative; z-index: 10;">
-        <div class="text-center">
-          <Eyebrow className="justify-center">Services</Eyebrow>
-          <h1 class="spk-h1">Speaking <span class="italic-accent">Topics.</span></h1>
-          <p class="spk-subtitle">Twenty topics across four tracks.</p>
+    <!-- 4. The Tracks (No-JS Scannable Grid) -->
+    <section class="spk-section relative overflow-hidden" id="topics">
+      <Waveform opacity={0.04} variant="A" />
+      <div class="spk-container relative z-10">
+        
+        <div class="spk-section-header text-center">
+          <h2 class="spk-h2">Twenty topics. <br/><span class="italic-accent">Four tracks.</span></h2>
+          <p class="spk-subtitle">
+            Every topic below is one I actively deliver. Built for specific audiences and actionable outcomes.
+          </p>
+        </div>
+
+        <div class="spk-tracks-grid">
+          
+          <!-- Track 1 -->
+          <div class="spk-track-card">
+            <div class="track-header">
+              <h3 class="track-title">Prevention & Awareness</h3>
+              <p class="track-subtitle">For general audiences & communities</p>
+            </div>
+            <ul class="track-list">
+              <li><strong>Gambling Prevention:</strong> An accessible introduction to how gambling harm develops and what prevention looks like at community scale.</li>
+              <li><strong>Don't Bet on Your Future:</strong> Built for students. Addresses sports-betting apps and peer pressure. Non-preachy.</li>
+              <li><strong>Engaging Elected Officials:</strong> How to move prevention into policy attention.</li>
+            </ul>
+          </div>
+
+          <!-- Track 2 -->
+          <div class="spk-track-card">
+            <div class="track-header">
+              <h3 class="track-title">Treatment & Recovery</h3>
+              <p class="track-subtitle">For clinicians & frontline professionals</p>
+            </div>
+            <ul class="track-list">
+              <li><strong>Co-Occurring Disorders:</strong> Overlap with substance use and what HR/EAP teams should watch for.</li>
+              <li><strong>Harm Reduction Strategies:</strong> Meeting people where they are when they aren't ready to stop entirely.</li>
+              <li><strong>Motivational Interviewing:</strong> Hands-on training applied specifically to gambling conversations.</li>
+            </ul>
+          </div>
+
+          <!-- Track 3 -->
+          <div class="spk-track-card">
+            <div class="track-header">
+              <h3 class="track-title">Family Impact</h3>
+              <p class="track-subtitle">For those living with the impact</p>
+            </div>
+            <ul class="track-list">
+              <li><strong>Significant Others:</strong> Examines the financial, emotional, and relational impact on partners.</li>
+              <li><strong>Gambling, Violence & Trauma:</strong> The documented overlap between gambling harm, IPV, and trauma.</li>
+              <li><strong>Coping Strategies:</strong> Guidance for families—financial protection and how to have the conversation.</li>
+            </ul>
+          </div>
+
+          <!-- Track 4 -->
+          <div class="spk-track-card">
+            <div class="track-header">
+              <h3 class="track-title">Creative Engagement</h3>
+              <p class="track-subtitle">For organizations building campaigns</p>
+            </div>
+            <ul class="track-list">
+              <li><strong>Art Competitions:</strong> How to run a youth art competition as a prevention tool to drive participation.</li>
+              <li><strong>Responsible Gifting:</strong> A practical session on responsible gifting for parents regarding lottery tickets.</li>
+              <li><strong>ROSC Council Engagement:</strong> Integrating gambling prevention into a Recovery Oriented System of Care.</li>
+            </ul>
+          </div>
+
         </div>
       </div>
     </section>
 
-    <section class="spk-section relative overflow-hidden" style="padding-top: 4rem; padding-bottom: 8rem; position: relative; background: radial-gradient(circle at left center, rgba(217,162,58,0.03) 0%, transparent 60%);">
-      <Waveform opacity={0.03} variant="C" />
-      <div class="spk-container" style="max-width: 900px; position: relative; z-index: 10; text-align: center;">
-        <p style="color: var(--color-ivory); font-size: 1.2rem;">This page is ready to be populated with your filterable list of 20 topics!</p>
-      </div>
-    </section>
+    
 
   </main>
 </Layout>
 
-<style>
-  .bg-ink { background: var(--color-ink); color: var(--color-ivory); min-height: 100vh; }
-  .spk-container { width: 90%; max-width: 1200px; margin: 0 auto; }
-  .text-center { text-align: center; }
-  .justify-center { justify-content: center; }
-  
-  .spk-h1 {
-    font-size: clamp(3.5rem, 8vw, 6rem);
-    line-height: 1.1;
-    margin: 1rem 0 1.5rem;
-    letter-spacing: -0.02em;
-    font-family: var(--font-serif);
-    color: var(--color-ivory);
-  }
-  
-  .spk-subtitle {
-    font-size: clamp(1.1rem, 2vw, 1.3rem);
-    line-height: 1.6;
-    color: rgba(251, 246, 234, 0.7);
-    max-width: 600px;
+<style is:global>
+  /* Base Architecture */
+  .bg-ink { background: var(--ink); }
+  .spk-container {
+    max-width: 1200px;
     margin: 0 auto;
-    font-weight: 400;
+    padding: 0 var(--sp-6);
+    position: relative;
+    z-index: 10;
   }
-</style>
+  .spk-section {
+    padding: 8rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    position: relative;
+  }
+  .text-center { text-align: center; }
+
+  /* Typography */
+  .spk-h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 6vw, 5rem);
+    color: var(--color-ivory);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .spk-h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    color: var(--color-ivory);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+  .spk-subtitle {
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    color: rgba(251, 246, 234, 0.75);
+    line-height: 1.6;
+    max-width: 700px;
+    margin: 0 auto 3rem auto;
+  }
+  .text-gold {
+    background: none;
+    -webkit-text-fill-color: var(--color-gold);
+    color: var(--color-gold);
+  }
+
+  /* 1. Hero */
+  .spk-hero-v2 {
+    padding: 12rem 0 6rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+  .spk-hero-content {
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .spk-btn-row {
+    display: flex;
+    justify-content: center;
+  }
+  .spk-hero-visual {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .spk-hero-video-card {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 24px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(217, 162, 58, 0.3);
+    cursor: pointer;
+  }
+  .spk-video-poster {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+  }
+  .spk-hero-video-card:hover .spk-video-poster {
+    transform: scale(1.03);
+  }
+  .spk-video-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 1;
+  }
+  .spk-play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: rgba(217, 162, 58, 0.9);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+  .spk-hero-video-card:hover .spk-play-btn {
+    transform: translate(-50%, -50%) scale(1.1);
+    background: var(--color-gold);
+  }
+  .spk-play-icon {
+    width: 32px;
+    height: 32px;
+    color: var(--ink);
+    margin-left: 4px;
+  }
+
+  /* 2. Why Tiffany Bento */
+  .spk-section-header {
+    margin-bottom: 4rem;
+  }
+  .spk-bento-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  @media (min-width: 768px) {
+    .spk-bento-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    .span-2 {
+      grid-column: span 2;
+    }
+  }
+  .spk-bento-card {
+    background: rgba(20, 20, 20, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
+    padding: 3rem;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+  }
+  .spk-bento-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(217, 162, 58, 0.3);
+  }
+  .spk-card-title {
+    font-family: var(--font-serif);
+    font-size: 1.75rem;
+    color: var(--color-gold);
+    margin-bottom: 1rem;
+  }
+  .spk-card-desc {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    color: rgba(251, 246, 234, 0.8);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  /* 3. Flagship Keynote */
+  .spk-flagship-card {
+    position: relative;
+    background: radial-gradient(circle at top right, rgba(217,162,58,0.1) 0%, transparent 50%),
+                radial-gradient(circle at bottom left, rgba(217,162,58,0.05) 0%, transparent 50%),
+                rgba(15, 15, 15, 0.95);
+    border-radius: 32px;
+    padding: 6rem 2rem;
+    border: 1px solid rgba(217, 162, 58, 0.2);
+    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+  .spk-flagship-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(217, 162, 58, 0.6);
+    box-shadow: 0 40px 100px rgba(0,0,0,0.9), 0 0 60px rgba(217, 162, 58, 0.15);
+  }
+  .ambient-gold-glow {
+    position: absolute;
+    bottom: -20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    height: 50%;
+    background: radial-gradient(circle, rgba(217,162,58,0.2) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .spk-book-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: var(--color-gold);
+    color: var(--ink);
+    padding: 1rem 2.5rem;
+    border-radius: 8px;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .spk-book-btn:hover {
+    background: #FFC95C;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(217, 162, 58, 0.3);
+  }
+
+  /* 3. How Tiffany Helps */
+  .helps-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-bottom: 5rem;
+  }
+  @media (min-width: 768px) {
+    .helps-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2rem;
+    }
+  }
+  .helps-card {
+    display: block;
+    text-decoration: none;
+    padding: 3rem;
+    border-radius: 24px;
+    background: rgba(20, 20, 20, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
+  }
+  .helps-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(217, 162, 58, 0.4);
+    background: rgba(30, 28, 25, 0.6);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(217, 162, 58, 0.05);
+  }
+  .helps-eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    color: var(--color-gold);
+    margin-bottom: 1.5rem;
+  }
+  .helps-title {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--color-ivory);
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+  }
+  .helps-desc {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: rgba(251, 246, 234, 0.75);
+    margin: 0;
+  }
+  
+  .helps-quote {
+    padding-top: 2rem;
+  }
+  .quote-text {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.3;
+    color: var(--color-ivory);
+    margin: 0 auto;
+    max-width: 800px;
+    opacity: 0.9;
+  }
+
+  /* GEAR Method */
+  .gear-panel {
+    background: var(--color-ivory);
+    border-radius: 32px;
+    padding: 4rem 2rem;
+    color: var(--ink);
+    margin-bottom: 2rem;
+  }
+  @media (min-width: 992px) {
+    .gear-panel {
+      padding: 6rem;
+    }
+  }
+  .gear-top-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+  @media (min-width: 992px) {
+    .gear-top-row {
+      grid-template-columns: 1fr 1fr;
+      gap: 6rem;
+    }
+  }
+  .gear-eyebrow {
+    margin-bottom: 1rem;
+  }
+  .gear-h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 1.1;
+    margin: 0;
+    background: linear-gradient(92deg, var(--color-mustard), var(--color-coral), var(--color-berry));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .gear-standfirst {
+    font-family: var(--font-sans);
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--color-ivory);
+    margin: 0 0 1rem 0;
+  }
+  .gear-desc {
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: rgba(251, 246, 234, 0.8);
+    margin: 0;
+  }
+  .gear-divider {
+    height: 1px;
+    width: 100%;
+    background: rgba(13, 18, 16, 0.1);
+    margin-bottom: 4rem;
+  }
+  .gear-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+  @media (min-width: 768px) {
+    .gear-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (min-width: 992px) {
+    .gear-grid {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 2rem;
+    }
+  }
+  .gear-card {
+    padding: 2rem;
+    border-radius: 16px;
+    background: transparent;
+    border: 1px solid transparent;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+  }
+  .gear-card:hover {
+    background: #ffffff;
+    border: 1px solid rgba(217, 162, 58, 0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.04), 0 0 20px rgba(217, 162, 58, 0.05);
+  }
+  .gear-letter {
+    font-family: var(--font-serif);
+    font-size: 4.5rem;
+    line-height: 1;
+    color: var(--color-gold);
+    margin-bottom: 1rem;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.4s ease;
+  }
+  .gear-card:hover .gear-letter {
+    transform: scale(1.1) translateX(4px);
+    text-shadow: 0 10px 20px rgba(217, 162, 58, 0.2);
+  }
+  .gear-title {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+  }
+  .gear-card:hover .gear-title {
+    color: var(--color-gold);
+  }
+  .gear-body {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba(13, 18, 16, 0.75);
+    margin: 0;
+  }
+  .gear-footer-row {
+    padding-top: 2rem;
+  }
+  .gear-divider-bottom {
+    height: 1px;
+    width: 60px;
+    background: var(--color-gold);
+    margin: 0 auto 2rem auto;
+  }
+  .gear-footer-text {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    color: var(--color-gold);
+    text-transform: uppercase;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  /* 4. Tracks Grid */
+  .spk-tracks-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  @media (min-width: 992px) {
+    .spk-tracks-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  .spk-track-card {
+    background: rgba(15, 15, 15, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 24px;
+    padding: 3rem;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
+  }
+  .spk-track-card:hover {
+    transform: translateY(-8px);
+    border-color: rgba(217, 162, 58, 0.4);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 40px rgba(217, 162, 58, 0.05);
+  }
+  .track-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(217, 162, 58, 0.2);
+    transition: border-color 0.4s ease;
+  }
+  .spk-track-card:hover .track-header {
+    border-color: rgba(217, 162, 58, 0.5);
+  }
+  .track-title {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    color: var(--color-ivory);
+    margin-bottom: 0.5rem;
+  }
+  .track-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-gold);
+    opacity: 0.8;
+  }
+  .track-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .track-list li {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    color: rgba(251, 246, 234, 0.75);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    padding-left: 1.5rem;
+    position: relative;
+  }
+  .track-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--color-gold);
+    font-weight: bold;
+  }
+  .track-list li strong {
+    color: var(--color-ivory);
+    font-weight: 500;
+  }
+
+  /* 5. Timeline */
+  .timeline-bg {
+    background: radial-gradient(circle at left center, rgba(217,162,58,0.06) 0%, transparent 60%),
+                rgba(10, 10, 10, 0.8);
+  }
+  .spk-timeline-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4rem;
+  }
+  @media (min-width: 992px) {
+    .spk-timeline-layout {
+      grid-template-columns: 400px 1fr;
+    }
+    .timeline-left {
+      position: sticky;
+      top: 150px;
+    }
+  }
+  .spk-timeline {
+    position: relative;
+    padding-left: 3rem;
+  }
+  .spk-timeline::before {
+    content: '';
+    position: absolute;
+    top: 10px;
+    left: 0;
+    width: 2px;
+    height: calc(100% - 20px);
+    background: linear-gradient(to bottom, var(--color-gold) 0%, rgba(217,162,58,0.1) 100%);
+  }
+  .spk-time-node {
+    position: relative;
+    padding-bottom: 4rem;
+  }
+  .spk-time-node.last {
+    padding-bottom: 0;
+  }
+  .spk-time-node::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: -3rem;
+    transform: translateX(-5px);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--ink);
+    border: 2px solid var(--color-gold);
+    box-shadow: 0 0 15px rgba(217, 162, 58, 0.5);
+    transition: all 0.3s ease;
+  }
+  .spk-time-node:hover::before {
+    background: var(--color-gold);
+    transform: translateX(-5px) scale(1.3);
+  }
+  .node-title {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    color: var(--color-gold);
+    margin-bottom: 0.5rem;
+  }
+  .node-desc {
+    font-family: var(--font-sans);
+    font-size: 1.1rem;
+    color: rgba(251, 246, 234, 0.7);
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>\n
