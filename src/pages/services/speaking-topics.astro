@@ -2,87 +2,65 @@
 import Layout from '../../layouts/Layout.astro';
 import Eyebrow from '../../components/Eyebrow.astro';
 import Waveform from '../../components/Waveform.astro';
+import mysql from 'mysql2/promise';
+
+let dbContent = {};
+let dbCollections = {};
+try {
+  const pool = mysql.createPool({ host: 'localhost', user: 'root', password: '@rishil8124shah', database: 'tiffany_crm' });
+  
+  const [rows] = await pool.query("SELECT section, key_name, content_value FROM website_content JOIN website_pages ON website_content.page_id = website_pages.id WHERE website_pages.slug = 'speaking-topics'");
+  rows.forEach(row => {
+    if (!dbContent[row.section]) dbContent[row.section] = {};
+    dbContent[row.section][row.key_name] = row.content_value;
+  });
+
+  const [colRows] = await pool.query("SELECT section_name, title, subtitle, content_html, sort_order FROM website_collections JOIN website_pages ON website_collections.page_id = website_pages.id WHERE website_pages.slug = 'speaking-topics' ORDER BY sort_order ASC");
+  colRows.forEach(row => {
+    if (!dbCollections[row.section_name]) dbCollections[row.section_name] = [];
+    dbCollections[row.section_name].push(row);
+  });
+
+  await pool.end();
+} catch (e) {
+  console.error("DB Error in speaking-topics:", e);
+}
+
+const hero = dbContent.hero || {};
+const tracks = dbContent.tracks || {};
+const tracksList = dbCollections.tracks_list || [];
 ---
 
 <Layout title="Speaking Topics | Tiffany Webb" theme="dark">
   <main class="page-content bg-ink" style="padding-top: 8rem;">
     
-    <!-- 4. The Tracks (No-JS Scannable Grid) -->
     <section class="spk-section relative overflow-hidden" id="topics">
       <Waveform opacity={0.04} variant="A" />
       <div class="spk-container relative z-10">
         
         <div class="spk-section-header text-center">
-          <h2 class="spk-h2">Twenty topics. <br/><span class="italic-accent">Four tracks.</span></h2>
-          <p class="spk-subtitle">
-            Every topic below is one I actively deliver. Built for specific audiences and actionable outcomes.
-          </p>
+          {hero.eyebrow && <Eyebrow className="justify-center">{hero.eyebrow}</Eyebrow>}
+          <h2 class="spk-h2" set:html={tracks.headline || 'Twenty topics. <br/><span class="italic-accent">Four tracks.</span>'}></h2>
+          <p class="spk-subtitle" set:html={tracks.subtitle || 'Every topic below is one I actively deliver. Built for specific audiences and actionable outcomes.'}></p>
         </div>
 
         <div class="spk-tracks-grid">
-          
-          <!-- Track 1 -->
-          <div class="spk-track-card">
-            <div class="track-header">
-              <h3 class="track-title">Prevention & Awareness</h3>
-              <p class="track-subtitle">For general audiences & communities</p>
+          {tracksList.map(track => (
+            <div class="spk-track-card">
+              <div class="track-header">
+                <h3 class="track-title">{track.title}</h3>
+                <p class="track-subtitle">{track.subtitle}</p>
+              </div>
+              <div class="track-list" set:html={track.content_html}></div>
             </div>
-            <ul class="track-list">
-              <li><strong>Gambling Prevention:</strong> An accessible introduction to how gambling harm develops and what prevention looks like at community scale.</li>
-              <li><strong>Don't Bet on Your Future:</strong> Built for students. Addresses sports-betting apps and peer pressure. Non-preachy.</li>
-              <li><strong>Engaging Elected Officials:</strong> How to move prevention into policy attention.</li>
-            </ul>
-          </div>
-
-          <!-- Track 2 -->
-          <div class="spk-track-card">
-            <div class="track-header">
-              <h3 class="track-title">Treatment & Recovery</h3>
-              <p class="track-subtitle">For clinicians & frontline professionals</p>
-            </div>
-            <ul class="track-list">
-              <li><strong>Co-Occurring Disorders:</strong> Overlap with substance use and what HR/EAP teams should watch for.</li>
-              <li><strong>Harm Reduction Strategies:</strong> Meeting people where they are when they aren't ready to stop entirely.</li>
-              <li><strong>Motivational Interviewing:</strong> Hands-on training applied specifically to gambling conversations.</li>
-            </ul>
-          </div>
-
-          <!-- Track 3 -->
-          <div class="spk-track-card">
-            <div class="track-header">
-              <h3 class="track-title">Family Impact</h3>
-              <p class="track-subtitle">For those living with the impact</p>
-            </div>
-            <ul class="track-list">
-              <li><strong>Significant Others:</strong> Examines the financial, emotional, and relational impact on partners.</li>
-              <li><strong>Gambling, Violence & Trauma:</strong> The documented overlap between gambling harm, IPV, and trauma.</li>
-              <li><strong>Coping Strategies:</strong> Guidance for families—financial protection and how to have the conversation.</li>
-            </ul>
-          </div>
-
-          <!-- Track 4 -->
-          <div class="spk-track-card">
-            <div class="track-header">
-              <h3 class="track-title">Creative Engagement</h3>
-              <p class="track-subtitle">For organizations building campaigns</p>
-            </div>
-            <ul class="track-list">
-              <li><strong>Art Competitions:</strong> How to run a youth art competition as a prevention tool to drive participation.</li>
-              <li><strong>Responsible Gifting:</strong> A practical session on responsible gifting for parents regarding lottery tickets.</li>
-              <li><strong>ROSC Council Engagement:</strong> Integrating gambling prevention into a Recovery Oriented System of Care.</li>
-            </ul>
-          </div>
-
+          ))}
         </div>
       </div>
     </section>
 
-    
-
   </main>
 </Layout>
-
-<style is:global>
+\n<style is:global>
   /* Base Architecture */
   .bg-ink { background: var(--ink); }
   .spk-container {
