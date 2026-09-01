@@ -6,13 +6,28 @@ interface Props {
 const { className = '' } = Astro.props;
 ---
 
-<p class={`eyebrow text-micro ${className}`}>
+<p class={`eyebrow ${className}`}>
   <slot />
 </p>
 
 <style>
   .eyebrow {
-    color: var(--color-gold);
-    margin-bottom: var(--sp-2);
+    font-family: var(--font-mono, 'Space Mono', monospace);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-gold, #D9A23A) !important;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    line-height: 1.4;
+    margin-bottom: var(--sp-3, 0.75rem);
+    display: inline-block;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+  }
+
+  @media (max-width: 640px) {
+    .eyebrow {
+      font-size: 0.85rem;
+      letter-spacing: 0.16em;
+    }
   }
 </style>

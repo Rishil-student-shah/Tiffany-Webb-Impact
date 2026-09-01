@@ -20,7 +20,7 @@ body {
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+  overflow-x: clip;
   background-color: var(--color-ivory);
   /* Premium noise overlay applied globally */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
@@ -30,7 +30,6 @@ body {
 :root {
   --glow-gradient: radial-gradient(100% 100% at 50% -10%, #1a2622 0%, var(--color-ink) 55%);
 }
-
 
 /* If Hero is missing, push the first section down to clear the fixed Navbar */
 main > section:first-of-type:not(.hero) {
@@ -55,7 +54,7 @@ main > section:first-of-type:not(.hero) {
   position: relative;
   flex: 1;
   border-radius: 40px;
-  overflow: hidden;
+  overflow: clip;
   background-color: var(--color-ink);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
 }
@@ -155,21 +154,61 @@ button {
 .italic-accent {
   font-style: italic;
   font-weight: 400;
-  background: linear-gradient(92deg, var(--color-mustard), var(--color-coral), var(--color-berry));
+  background: linear-gradient(92deg, var(--color-mustard, #D9A23A) 0%, var(--color-coral, #E17356) 50%, var(--color-berry, #6C2D5A) 100%);
   -webkit-background-clip: text;
   background-clip: text;
+  -webkit-text-fill-color: transparent;
   color: transparent;
+  display: inline;
 }
 
 .text-micro {
   font-family: var(--font-mono);
-  font-size: var(--text-micro);
+  font-size: 0.85rem;
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
 }
 
-/* Base Motion Utilities */
-/* Scroll Animations Disabled (per user request to keep sections joint) */
+/* Universal Eyebrow & Keyline Styling (Vibrant Gold & Bold Size across ALL pages) */
+.eyebrow,
+.eyebrow-text,
+.hero-eyebrow,
+.section-eyebrow {
+  font-family: var(--font-mono, 'Space Mono', monospace) !important;
+  font-size: 0.95rem !important;
+  font-weight: 700 !important;
+  color: var(--color-gold, #D9A23A) !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  line-height: 1.4 !important;
+  display: inline-block !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* High Legibility Prose & Descriptions across Dark Sections */
+.theme-dark p,
+.theme-ink p,
+.works-prose p,
+.meet-prose p,
+.hero-subtext,
+.hero-description,
+.expertise-sub,
+.expertise-card-desc,
+.booking-sub,
+.subtitle {
+  color: var(--color-ivory, #FBF6EA) !important;
+  opacity: 0.95 !important;
+  line-height: 1.7 !important;
+}
+
+.hero-subtext strong,
+.hero-description strong,
+.meet-prose strong,
+.works-prose strong {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+}
+
 .reveal-up {
   opacity: 1;
   transform: none;
@@ -224,7 +263,6 @@ button {
 
 /* Reduced Motion Override */
 @media (prefers-reduced-motion: reduce) {
-
   *,
   *::before,
   *::after {
@@ -241,7 +279,6 @@ button {
     transform: none !important;
   }
 }
-
 
 /* Custom Physics Cursor */
 @media (pointer: fine) {
@@ -262,7 +299,6 @@ button {
 }
 
 @media (pointer: fine) {
-
   .cursor-dot,
   .cursor-ring {
     display: block;
@@ -287,11 +323,9 @@ button {
   0% {
     transform: translateY(0px) rotate(0deg);
   }
-
   50% {
     transform: translateY(-40px) rotate(10deg);
   }
-
   100% {
     transform: translateY(0px) rotate(0deg);
   }
@@ -314,7 +348,6 @@ button {
   animation: floatOrb 20s ease-in-out infinite;
   opacity: 0.4;
   pointer-events: none;
-  /* Hardware acceleration for animating background */
   will-change: transform;
   transform: translateZ(0);
   backface-visibility: hidden;
@@ -447,15 +480,10 @@ button {
   transform-origin: center;
 }
 
-.morph-card {
-  /* removed cursor: default to inherit cursor: none from body */
-}
-
 .morph-card-wrap {
   width: 100%;
   height: 100%;
   min-height: 240px;
-  /* Preserve space when card morphs away */
 }
 
 /* Expanded Card State (Modal Popup) */
@@ -476,7 +504,6 @@ button {
   display: none;
 }
 
-/* Adjust title and desc inside expanded modal */
 .morph-card.is-expanded .expertise-card-title,
 .morph-card.is-expanded .flagship-title {
   font-size: 2.25rem;
@@ -491,12 +518,10 @@ button {
   margin-bottom: 0;
 }
 
-/* Hide the click to expand button when expanded */
 .morph-card.is-expanded .card-link-expand {
   display: none !important;
 }
 
-/* Disable hover effects when expanded */
 .morph-card.is-expanded:hover {
   transform: none !important;
   background: rgba(20, 18, 14, 0.95) !important;
@@ -512,7 +537,7 @@ button {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-/* Pure Apple-Style Glassmorphism (Imported from About Page) */
+/* Pure Apple-Style Glassmorphism */
 .ultra-glass-card {
   background: rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(32px) saturate(120%);
@@ -542,12 +567,10 @@ button {
 }
 
 @keyframes float-slow {
-
   0%,
   100% {
     transform: translateY(0);
   }
-
   50% {
     transform: translateY(-10px);
   }
@@ -561,4 +584,3 @@ button {
   animation-play-state: paused;
   transform: translateY(-12px) scale(1.02);
 }
-

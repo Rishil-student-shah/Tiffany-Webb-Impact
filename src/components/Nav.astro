@@ -1,5 +1,4 @@
 ---
-import Button from './Button.astro';
 import { navLinks, navCta } from '../config/navigation.js';
 import mysql from 'mysql2/promise';
 
@@ -16,533 +15,509 @@ try {
   });
   const [rows] = await pool.query('SELECT slug FROM website_pages WHERE is_active = 1');
   activePages = rows.map(r => r.slug === 'home' ? '/' : `/${r.slug}`);
- await pool.end();
+  await pool.end();
 } catch(e) {
-  console.error(e);
+  console.error('Navbar DB Query Error:', e);
 }
 
+const currentPath = Astro.url.pathname;
 const filteredNavLinks = navLinks.filter(link => activePages.includes(link.href) || link.href.startsWith('http'));
 ---
 
-<header class="header js-header" role="banner" aria-label="Main Navigation">
-  <!-- The clickable Dynamic Island pill (only active when scrolled-down) -->
-  <div class="island-back-to-top">
-    <button class="js-island-btn" aria-label="Back to top" style="background:none; border:none; color:inherit; font:inherit; cursor:pointer; display:flex; align-items:center; padding: 0; outline: none;">
-      <span class="island-name">Tiffany Webb</span>
-    </button>
-    <button class="menu-toggle js-menu-toggle island-menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
-      <span class="hamburger"></span>
-    </button>
-  </div>
-
-  <div class="header-container">
-    <a href="/" class="logo" aria-label="Tiffany Webb Homepage">
-      <span class="logo-text">Tiffany Webb</span>
-      <span class="logo-sub"><span class="italic-accent">Community Impact Strategist</span></span>
+<header class="fixed-luxury-header js-fixed-header" role="banner" aria-label="Main Navigation">
+  <div class="header-inner">
+    <!-- Brand Logo / Wordmark -->
+    <a href="/" class="brand-logo" aria-label="Tiffany Webb Homepage">
+      <span class="brand-title">Tiffany Webb</span>
+      <span class="brand-subtitle">Community Impact Strategist</span>
     </a>
 
+    <!-- Desktop Navigation Links -->
     <nav class="nav-desktop" aria-label="Desktop Navigation">
       <ul class="nav-list">
-        {filteredNavLinks.map((link) => (
-          <li><a href={link.href} class="nav-link">{link.label}</a></li>
-        ))}
+        {filteredNavLinks.map((link) => {
+          const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+          return (
+            <li class="nav-item">
+              <a href={link.href} class={`nav-link ${isActive ? 'is-active' : ''}`}>
+                {link.label}
+              </a>
+            </li>
+          );
+        })}
       </ul>
-      <Button href={navCta.href} variant="secondary" className="nav-cta">{navCta.label}</Button>
     </nav>
 
-    <button class="menu-toggle js-menu-toggle" aria-expanded="false" aria-controls="mobile-nav" aria-label="Toggle navigation">
-      <span class="hamburger"></span>
-    </button>
-  </div>
+    <!-- Header Right Actions: CTA Button + Mobile Hamburger -->
+    <div class="header-actions">
+      <a href={navCta.href} class="nav-cta-btn">
+        {navCta.label}
+      </a>
 
-  <!-- Mobile Overlay -->
-  <nav id="mobile-nav" class="nav-mobile" aria-hidden="true" aria-label="Mobile Navigation">
-    <ul class="nav-mobile-list">
-      {filteredNavLinks.map((link) => (
-        <li><a href={link.href} class="nav-mobile-link">{link.label}</a></li>
-      ))}
-      <li class="mt-8"><Button href={navCta.href} variant="secondary">{navCta.label}</Button></li>
-    </ul>
-  </nav>
+      <button 
+        class="mobile-toggle-btn js-mobile-toggle" 
+        type="button"
+        aria-expanded="false" 
+        aria-controls="mobile-nav-drawer" 
+        aria-label="Toggle navigation menu"
+      >
+        <span class="hamburger-icon">
+          <span class="line line-1"></span>
+          <span class="line line-2"></span>
+        </span>
+      </button>
+
+      <!-- Compact Floating Dropdown Menu (Exact Dynamic Island Menu Size) -->
+      <div id="mobile-nav-drawer" class="mobile-drawer" aria-hidden="true">
+        <ul class="mobile-nav-list">
+          {filteredNavLinks.map((link) => {
+            const isActive = currentPath === link.href || (link.href !== '/' && currentPath.startsWith(link.href));
+            return (
+              <li class="mobile-nav-item">
+                <a href={link.href} class={`mobile-nav-link ${isActive ? 'is-active' : ''}`}>
+                  <span>{link.label}</span>
+                  {isActive && <span class="mobile-active-dot"></span>}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+
+        <div class="mobile-drawer-footer">
+          <a href={navCta.href} class="mobile-cta-btn">
+            {navCta.label}
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
 </header>
 
 <script>
-  const header = document.querySelector('.js-header') as HTMLElement | null;
-  const mobileNav = document.getElementById('mobile-nav');
-  const islandBtn = document.querySelector('.js-island-btn') as HTMLButtonElement | null;
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('.js-fixed-header') as HTMLElement | null;
+    const toggleBtn = document.querySelector('.js-mobile-toggle') as HTMLButtonElement | null;
+    const mobileDrawer = document.getElementById('mobile-nav-drawer');
 
-  let lastScrollY = window.scrollY;
-  let ticking = false;
-
-  // Scroll to top when clicking the dynamic island pill
-  islandBtn?.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-
-  const updateHeaderState = () => {
-    const currentScrollY = window.scrollY;
-
-    // ZONE 1: Top of page – fully transparent, full nav
-    if (currentScrollY <= 15) {
-      if (header?.classList.contains('is-scrolled-down') || header?.classList.contains('is-scrolled-up')) {
-        header?.classList.remove('is-scrolled-down', 'is-scrolled-up');
-      }
-    }
-    // ZONE 2: Scrolled past top -> Dynamic Island (always on, even when scrolling up)
-    else if (currentScrollY > 15) {
-      if (!header?.classList.contains('is-scrolled-down')) {
-        header?.classList.remove('is-scrolled-up');
-        header?.classList.add('is-scrolled-down');
-      }
-    }
-
-    lastScrollY = currentScrollY;
-    ticking = false;
-  };
-
-  window.addEventListener('scroll', () => {
-    if (!ticking) {
-      window.requestAnimationFrame(updateHeaderState);
-      ticking = true;
-    }
-  }, { passive: true });
-
-  // Initial check in case they navigated to a page scrolled down
-  updateHeaderState();
-
-  // Mobile Menu Toggles
-  const toggles = document.querySelectorAll('.js-menu-toggle');
-  toggles.forEach(toggle => {
-    toggle.addEventListener('click', () => {
-      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggles.forEach(t => t.setAttribute('aria-expanded', String(!isExpanded)));
-      mobileNav?.setAttribute('aria-hidden', String(isExpanded));
-
-      if (!isExpanded) {
-        header?.classList.add('menu-open');
-        document.body.style.overflow = 'hidden';
+    // Subtle shadow depth on scroll
+    const handleScroll = () => {
+      if (window.scrollY > 20) {
+        header?.classList.add('is-scrolled');
       } else {
-        header?.classList.remove('menu-open');
-        document.body.style.overflow = '';
+        header?.classList.remove('is-scrolled');
       }
-    });
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+
+    // Compact Dropdown Toggle
+    if (toggleBtn && mobileDrawer) {
+      const closeDrawer = () => {
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        mobileDrawer.setAttribute('aria-hidden', 'true');
+        mobileDrawer.classList.remove('is-open');
+        toggleBtn.classList.remove('is-active');
+      };
+
+      const openDrawer = () => {
+        toggleBtn.setAttribute('aria-expanded', 'true');
+        mobileDrawer.setAttribute('aria-hidden', 'false');
+        mobileDrawer.classList.add('is-open');
+        toggleBtn.classList.add('is-active');
+      };
+
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = mobileDrawer.classList.contains('is-open');
+        if (isOpen) {
+          closeDrawer();
+        } else {
+          openDrawer();
+        }
+      });
+
+      // Close when clicking any link inside dropdown
+      mobileDrawer.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          closeDrawer();
+        });
+      });
+
+      // Close when clicking anywhere outside
+      document.addEventListener('click', (e) => {
+        if (!header?.contains(e.target as Node)) {
+          closeDrawer();
+        }
+      });
+
+      // Close on Escape key
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          closeDrawer();
+        }
+      });
+    }
   });
 </script>
 
 <style>
   /* ============================================================
-     BASE HEADER — at top of page, transparent over hero
+     SOLID INTEGRATED NAVBAR (Inside Website Card, Solid Background)
   ============================================================ */
-  .header {
-    background: transparent;
-    color: var(--color-ivory);
-    position: fixed;
-    top: 32px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: calc(100% - 32px);
-    max-width: 1400px;
+  .fixed-luxury-header {
+    position: sticky;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background-color: var(--color-ink, #0D0C08);
+    border-bottom: 1px solid rgba(217, 162, 58, 0.2);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
     z-index: 1000;
-    padding: var(--sp-4) var(--sp-4);
-    border: 1px solid transparent;
-    border-radius: 0px;
-    transition: 
-      width 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-      max-width 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-      top 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-      padding 0.5s cubic-bezier(0.16, 1, 0.3, 1), 
-      background 0.4s ease,
-      border-radius 0.4s ease,
-      border-color 0.4s ease,
-      box-shadow 0.4s ease;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
   }
-  
+
   @media (min-width: 768px) {
-    .header {
-      top: 48px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: calc(100% - 96px);
-      max-width: 1400px;
-      padding: var(--sp-5) var(--sp-10);
+    .fixed-luxury-header {
+      height: 76px;
     }
   }
 
-  /* ============================================================
-     STATE: SCROLLING DOWN — Dynamic Island pill (name only)
-  ============================================================ */
-  .header.is-scrolled-down {
-    /* Exact iPhone Dynamic Island dimensions */
-    left: 50%;
-    transform: translateX(-50%);
-    max-width: 220px; /* Made longer for a sleek, non-rectangular pill shape */
-    width: 220px;
-    height: 36px;
-    top: 24px; 
-    padding: 0 var(--sp-4);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 100px; /* 100px guarantees a perfect pill shape */
-    background: #0e0c09; /* Pure dark pill */
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(217, 162, 58, 0.35);
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7), 0 0 0 0.5px rgba(217, 162, 58, 0.15);
+  .fixed-luxury-header.is-scrolled {
+    border-bottom-color: rgba(217, 162, 58, 0.35);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.7);
   }
 
-  /* Scale slightly when user hovers the pill to invite a click */
-  .header.is-scrolled-down:hover {
-    border-color: rgba(217, 162, 58, 0.65);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.8), 0 0 18px rgba(217, 162, 58, 0.15);
-  }
-
-  /* ============================================================
-     MOBILE MENU OPEN override
-  ============================================================ */
-  .header:not(.is-scrolled-down).menu-open {
-    max-width: 100% !important;
-    background: var(--color-charcoal) !important;
-    border-color: transparent !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-  }
-
-  /* ============================================================
-     DYNAMIC ISLAND BACK-TO-TOP BUTTON
-  ============================================================ */
-  .island-back-to-top {
-    /* Hidden by default — only visible in Dynamic Island mode */
-    position: absolute;
-    inset: 0;
-    width: 100%;
+  .header-inner {
+    max-width: 1360px;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 16px;
-    background: transparent;
-    border: none;
-    color: var(--color-ivory);
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s ease;
-    border-radius: inherit;
-  }
-
-  .island-menu-toggle {
-    display: block !important;
-    position: relative;
-    width: 24px;
-    height: 24px;
-  }
-
-  .header.is-scrolled-down .island-back-to-top {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .island-name {
-    font-family: var(--font-serif);
-    font-size: 0.85rem;
-    font-weight: 400;
-    letter-spacing: 0.02em;
-    white-space: nowrap;
-    line-height: 1;
-    /* Subtle gradient echo of the logo */
-    background: linear-gradient(92deg, var(--color-mustard), var(--color-ivory));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-
-  .island-arrow {
-    font-size: 0.75rem;
-    color: rgba(217, 162, 58, 0.7);
-    transition: transform 0.3s ease;
-  }
-
-  .header.is-scrolled-down:hover .island-arrow {
-    transform: translateY(-3px);
-  }
-
-  /* ============================================================
-     HEADER INNER CONTAINER
-  ============================================================ */
-  .header-container {
-    width: 100%;
-    box-sizing: border-box;
-    max-width: 1440px;
     margin: 0 auto;
+    padding: 0 1.5rem;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    transition: opacity 0.35s ease;
+    justify-content: space-between;
+    box-sizing: border-box;
+    position: relative;
   }
 
-  @media (min-width: 1024px) {
-    .header-container {
-      /* No extra padding, let the header padding handle it */
+  @media (min-width: 768px) {
+    .header-inner {
+      padding: 0 2.5rem;
     }
   }
 
-  /* Hide the normal nav row when in island mode */
-  .header.is-scrolled-down .header-container {
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  /* ============================================================
-     LOGO
-  ============================================================ */
-  .logo {
+  /* Brand Logo / Wordmark */
+  .brand-logo {
     display: flex;
     flex-direction: column;
     text-decoration: none;
-    color: inherit;
-    flex-shrink: 0;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
   }
 
-  .logo-text {
-    font-family: var(--font-serif); /* Reverted to serif */
-    font-size: 2rem; /* Adjusted size */
+  .brand-logo:hover {
+    opacity: 0.9;
+  }
+
+  .brand-title {
+    font-family: var(--font-serif, 'Fraunces', serif);
+    font-size: 1.35rem;
     font-weight: 400;
-    line-height: 1;
-    white-space: nowrap;
-    transition: font-size 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    letter-spacing: -0.01em;
+    color: var(--color-ivory, #FBF6EA);
+    line-height: 1.1;
+    transition: color 0.3s ease;
   }
 
-  /* Shrink logo text in floating bar to keep things compact */
-
-  .logo-sub {
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
-    margin-top: 4px;
-    overflow: hidden;
-    max-height: 40px;
-    opacity: 1;
-    transition: opacity 0.4s ease, max-height 0.4s ease, margin-top 0.4s ease;
+  .brand-logo:hover .brand-title {
+    color: var(--color-gold, #D9A23A);
   }
 
-  .logo-sub .italic-accent {
-    font-style: italic;
-    font-weight: 400;
-    background: linear-gradient(92deg, var(--color-mustard), var(--color-coral), var(--color-berry));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+  .brand-subtitle {
+    font-family: var(--font-mono, 'Space Mono', monospace);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-gold, #D9A23A);
+    opacity: 0.9;
+    margin-top: 2px;
   }
 
-  /* ============================================================
-     DESKTOP NAV
-  ============================================================ */
+  /* Desktop Navigation Links */
   .nav-desktop {
     display: none;
   }
 
   @media (min-width: 1024px) {
     .nav-desktop {
-      display: flex;
-      align-items: center;
-      gap: var(--sp-8);
-    }
-    .nav-list {
-      display: flex;
-      list-style: none;
-      gap: var(--sp-8);
+      display: block;
     }
   }
 
-  /* ============================================================
-     NAV LINKS — Glassmorphic pill hover
-  ============================================================ */
-  .nav-link {
-    font-family: var(--font-mono);
-    font-size: 0.875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: inherit;
-    text-decoration: none;
+  .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .nav-item {
     position: relative;
-    padding: var(--sp-2) var(--sp-4);
-    border-radius: 20px;
-    transition: color 0.35s ease;
-    z-index: 1;
   }
 
-  .nav-link::before {
+  .nav-link {
+    display: inline-block;
+    position: relative;
+    padding: 0.5rem 0.85rem;
+    font-family: var(--font-mono, 'Space Mono', monospace);
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-ivory, #FBF6EA);
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+
+  .nav-link::after {
     content: '';
     position: absolute;
-    inset: 0;
-    background: rgba(217, 162, 58, 0.12);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    border-radius: 20px;
-    z-index: -1;
-    transform: scale(0.75);
-    opacity: 0;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+    bottom: -2px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 75%;
+    height: 1.5px;
+    background: var(--color-gold, #D9A23A);
+    box-shadow: 0 0 8px rgba(217, 162, 58, 0.6);
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .nav-link:hover {
-    color: var(--color-gold);
+  .nav-link:hover, .nav-link.is-active {
+    color: var(--color-gold, #D9A23A);
   }
 
-  .nav-link:hover::before {
-    transform: scale(1);
-    opacity: 1;
+  .nav-link:hover::after, .nav-link.is-active::after {
+    transform: translateX(-50%) scaleX(1);
   }
 
-  /* ============================================================
-     HAMBURGER (mobile only)
-  ============================================================ */
-  .menu-toggle {
-    display: block;
-    width: 32px;
-    height: 32px;
+  /* Header Actions (Right) */
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     position: relative;
-    z-index: 101;
-    color: inherit;
-    background: transparent;
-    border: none;
+  }
+
+  .nav-cta-btn {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-mono, 'Space Mono', monospace);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.65rem 1.4rem;
+    border-radius: 999px;
+    background: rgba(217, 162, 58, 0.12);
+    color: var(--color-gold, #D9A23A) !important;
+    border: 1.5px solid var(--color-gold, #D9A23A);
+    text-decoration: none;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    white-space: nowrap;
+  }
+
+  @media (min-width: 640px) {
+    .nav-cta-btn {
+      display: inline-flex;
+    }
+  }
+
+  .nav-cta-btn:hover {
+    background: var(--color-gold, #D9A23A);
+    color: #080705 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(217, 162, 58, 0.4), 0 0 15px rgba(217, 162, 58, 0.25);
+  }
+
+  /* Mobile Hamburger Toggle Button */
+  .mobile-toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(217, 162, 58, 0.08);
+    border: 1px solid rgba(217, 162, 58, 0.35);
+    color: var(--color-gold, #D9A23A);
+    cursor: pointer;
+    padding: 0;
+    transition: all 0.3s ease;
   }
 
   @media (min-width: 1024px) {
-    .menu-toggle {
+    .mobile-toggle-btn {
       display: none;
     }
   }
 
-  .hamburger,
-  .hamburger::before,
-  .hamburger::after {
+  .mobile-toggle-btn:hover {
+    background: rgba(217, 162, 58, 0.2);
+    border-color: var(--color-gold, #D9A23A);
+  }
+
+  .hamburger-icon {
+    position: relative;
+    width: 18px;
+    height: 12px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .hamburger-icon .line {
     display: block;
-    width: 24px;
-    height: 1px;
-    background-color: currentColor;
-    position: absolute;
-    transition: transform 0.3s ease, top 0.3s ease, bottom 0.3s ease;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-gold, #D9A23A);
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
   }
 
-  .hamburger {
-    top: 50%;
-    left: 4px;
-    transform: translateY(-50%);
+  .mobile-toggle-btn.is-active .line-1 {
+    transform: translateY(5px) rotate(45deg);
   }
 
-  .hamburger::before {
-    content: '';
-    top: -6px;
-    left: 0;
-  }
-
-  .hamburger::after {
-    content: '';
-    bottom: -6px;
-    left: 0;
-  }
-
-  .menu-toggle[aria-expanded="true"] .hamburger {
-    background-color: transparent;
-  }
-
-  .menu-toggle[aria-expanded="true"] .hamburger::before {
-    top: 0;
-    transform: rotate(45deg);
-  }
-
-  .menu-toggle[aria-expanded="true"] .hamburger::after {
-    bottom: 0;
-    transform: rotate(-45deg);
+  .mobile-toggle-btn.is-active .line-2 {
+    transform: translateY(-5px) rotate(-45deg);
   }
 
   /* ============================================================
-     MOBILE OVERLAY / COMPACT DROPDOWN
+     COMPACT FLOATING DROPDOWN (Matches Dynamic Island Menu Size)
   ============================================================ */
-  .nav-mobile {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-color: var(--color-charcoal);
-    z-index: 99;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: var(--sp-6);
-    opacity: 0;
-    visibility: hidden; /* Fixes ARIA focus issue */
-    pointer-events: none;
-    transition: opacity 0.4s ease, visibility 0.4s ease;
-  }
-
-  /* When the header is the Dynamic Island pill, make the menu a small compact dropdown */
-  .header.is-scrolled-down .nav-mobile {
+  .mobile-drawer {
     position: absolute;
-    top: calc(100% + 12px);
-    left: 50%;
-    transform: translateX(-50%) translateY(-10px);
-    width: 220px; /* Match pill width exactly */
+    top: calc(100% + 10px);
+    right: 0;
+    width: 230px;
     height: auto;
-    border-radius: 24px;
-    padding: var(--sp-6) var(--sp-4);
+    border-radius: 20px;
+    padding: 1.25rem 1.1rem;
     background: #0e0c09;
-    border: 1px solid rgba(217, 162, 58, 0.35); /* Gold border */
-    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(217, 162, 58, 0.15);
+    border: 1px solid rgba(217, 162, 58, 0.35);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.85), 0 0 20px rgba(217, 162, 58, 0.15);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(-10px) scale(0.95);
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s ease;
+    z-index: 1001;
+    box-sizing: border-box;
   }
 
-  .nav-mobile[aria-hidden="false"] {
+  .mobile-drawer.is-open {
+    transform: translateY(0) scale(1);
     opacity: 1;
-    visibility: visible;
     pointer-events: auto;
+    visibility: visible;
   }
 
-  .header.is-scrolled-down .nav-mobile[aria-hidden="false"] {
-    transform: translateX(-50%) translateY(0);
-  }
-
-  .nav-mobile-list {
+  .mobile-nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--sp-6);
-    text-align: center;
-    list-style: none;
+    gap: 0.65rem;
   }
 
-  /* Shrink the gap inside the compact dropdown */
-  .header.is-scrolled-down .nav-mobile-list {
-    gap: var(--sp-4);
+  .mobile-nav-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding-bottom: 0.5rem;
   }
 
-  .nav-mobile-link {
-    font-family: var(--font-serif);
-    font-size: var(--text-h3);
-    color: var(--color-ivory);
-    text-decoration: none;
-    transition: color 0.3s ease;
+  .mobile-nav-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
   }
 
-  .nav-mobile-link:hover {
-    color: var(--color-gold);
-  }
-
-  /* Shrink text size inside the compact dropdown */
-  .header.is-scrolled-down .nav-mobile-link {
+  .mobile-nav-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: var(--font-serif, 'Fraunces', serif);
     font-size: 1.15rem;
-    padding: var(--sp-1) 0;
-    display: block;
+    font-weight: 400;
+    color: var(--color-ivory, #FBF6EA);
+    text-decoration: none;
+    transition: color 0.2s ease, transform 0.2s ease;
+    padding: 0.15rem 0;
   }
 
-  .mt-8 {
-    margin-top: var(--sp-8);
+  .mobile-nav-link:hover, .mobile-nav-link.is-active {
+    color: var(--color-gold, #D9A23A);
+    transform: translateX(4px);
   }
 
-  .header.is-scrolled-down .mt-8 {
-    margin-top: var(--sp-4);
+  .mobile-active-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-gold, #D9A23A);
+    box-shadow: 0 0 8px rgba(217, 162, 58, 0.8);
+  }
+
+  .mobile-drawer-footer {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(217, 162, 58, 0.2);
+  }
+
+  .mobile-cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.65rem 1rem;
+    border-radius: 999px;
+    background: var(--color-gold, #D9A23A);
+    color: #080705 !important;
+    font-family: var(--font-mono, 'Space Mono', monospace);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    box-shadow: 0 4px 15px rgba(217, 162, 58, 0.3);
+    box-sizing: border-box;
+    transition: transform 0.2s ease;
+  }
+
+  .mobile-cta-btn:active {
+    transform: scale(0.97);
+  }
+
+  /* Responsive header height on mobile */
+  @media (max-width: 640px) {
+    .fixed-luxury-header {
+      height: 64px;
+    }
+
+    .brand-title {
+      font-size: 1.15rem;
+    }
+
+    .brand-subtitle {
+      font-size: 0.58rem;
+      letter-spacing: 0.14em;
+    }
   }
 </style>
-

@@ -35,11 +35,11 @@ const items = collections.impact_band || [];
 
   .band-item {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     text-align: center;
-    gap: var(--sp-3);
+    gap: 0.75rem;
   }
 
   /* Desktop layout: 4 columns with vertical hairline dividers */
@@ -55,7 +55,7 @@ const items = collections.impact_band || [];
 
     .band-item {
       flex-direction: row;
-      gap: var(--sp-3);
+      gap: 0.75rem;
       border-right: 1px solid rgba(217, 162, 58, 0.25);
       padding: 0 var(--sp-4);
     }
@@ -67,24 +67,28 @@ const items = collections.impact_band || [];
 
   .band-icon {
     color: var(--color-gold, #D9A23A);
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
-    opacity: 0.9;
+    flex-shrink: 0;
+    margin-right: 0.25rem;
+    opacity: 0.95;
   }
   
   .band-icon :global(svg) {
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
+    display: block;
   }
 
   .band-title {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--color-gold, #D9A23A);
-    letter-spacing: 0.15em;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #F3C56E;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     line-height: 1.4;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   }
 </style>

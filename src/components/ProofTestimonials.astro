@@ -6,7 +6,10 @@ const { content = {}, collections = {} } = Astro.props;
 const testimonials = collections.proof_testimonials || [];
 
 const eyebrow = content.eyebrow ?? "CLIENT LOVE";
-const headline = content.headline ?? "Words from the room.";
+let rawHeadline = content.headline || "Words from the room.";
+let headline = rawHeadline.includes('<span') 
+  ? rawHeadline 
+  : rawHeadline.replace(/from the room\.?/i, '<span class="italic-accent">from the room.</span>');
 const description = content.description ?? "";
 ---
 
@@ -17,7 +20,7 @@ const description = content.description ?? "";
   <div class="relative z-10" style="width: 90%; max-width: 1200px; margin: 0 auto;">
     <div class="reveal-up text-center" style="margin-bottom: 5rem; max-width: 800px; margin-left: auto; margin-right: auto;">
       <div style="margin-bottom: 1rem;"><Eyebrow className="justify-center">{eyebrow}</Eyebrow></div>
-      <h2 class="section-title works-title" style="margin-bottom: 2rem; font-size: clamp(2.5rem, 4vw, 4rem);"><span class="title-grad">{headline}</span></h2>
+      <h2 class="section-title works-title" style="margin-bottom: 2rem; font-size: clamp(2.5rem, 4vw, 4rem); color: var(--color-ivory);" set:html={headline}></h2>
       {description && <p class="subtitle" style="margin: 0; line-height: 1.6; font-size: 1.1rem; color: rgba(251, 246, 234, 0.85);">{description}</p>}
     </div>
 
@@ -210,18 +213,20 @@ const description = content.description ?? "";
   }
 
   .author-name {
-    font-size: 1.1rem;
-    color: var(--color-gold);
-    font-weight: 600;
+    font-size: 1.25rem;
+    color: #F3C56E;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   }
 
   .author-role {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.88rem;
     color: var(--color-parchment);
     text-transform: uppercase;
-    letter-spacing: 0.15em;
-    opacity: 0.7;
+    letter-spacing: 0.16em;
+    font-weight: 600;
+    opacity: 0.95;
   }
 
   .slider-controls {

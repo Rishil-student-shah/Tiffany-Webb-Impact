@@ -12,8 +12,9 @@ const title2 = content.title_line_2 ?? "meaningful impact.";
 const metaText = content.meta ?? "TIFFANY WEBB";
 const subtext = content.subtext ?? "I help healthcare and <b>community leaders think bigger about impact.</b> I bring lived understanding, professional expertise, and community insight together to challenge convention, reimagine what's possible, and build bold strategies that help organizations&mdash;<b>and the people,</b> families, and communities they serve&mdash;thrive.";
 const formats = content.formats ?? "SPEAKING &middot; STRATEGY &middot; PUBLIC &amp; BEHAVIORAL HEALTH &middot; COMMUNITY ENGAGEMENT &middot; PROGRAM DEVELOPMENT";
+const frameStyle = content.hero_frame_style || 'shape-hero-arch';
 
-const showReel = true;
+const showReel = content.show_reel_btn !== "0" && content.show_reel_btn !== 0 && content.show_reel_btn !== false && content.show_reel_btn !== "false";
 ---
 
 <section class="hero theme-dark">
@@ -47,8 +48,8 @@ const showReel = true;
     </div>
     
     <div class="hero-media">
-      <div class="hero-glass-frame">
-        <div class="hero-image-mask parallax-wrap">
+      <div class={`hero-glass-frame ${frameStyle}`}>
+        <div class={`hero-image-mask parallax-wrap ${frameStyle}`}>
           <img src={content.hero_image || "/uploads/tiffany_hero_composite.jpg"} alt="Tiffany Webb" class="hero-image parallax-img" data-speed="0.15" />
         </div>
       </div>
@@ -101,8 +102,8 @@ const showReel = true;
       0
     )
     .fromTo(".hero-image", 
-      { scale: 1.2 },
-      { scale: 1.05, duration: 2, ease: "power2.out" },
+      { scale: 1.08 },
+      { scale: 1.0, duration: 1.8, ease: "power2.out" },
       0
     );
 
@@ -138,11 +139,11 @@ const showReel = true;
   .hero {
     position: relative;
     width: 100%;
-    min-height: 100vh;
+    min-height: calc(100vh - 76px);
     display: flex;
     align-items: center;
     overflow: hidden;
-    padding-top: 110px; /* Space for fixed nav */
+    padding-top: var(--sp-6, 1.5rem);
     background-color: var(--color-ink);
   }
 
@@ -158,32 +159,36 @@ const showReel = true;
 
   .hero-container {
     width: 100%;
-    max-width: 1440px;
+    max-width: 1140px;
     margin: 0 auto;
-    padding: var(--sp-12) var(--sp-6);
+    padding: var(--sp-10) var(--sp-6);
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--sp-12);
+    gap: var(--sp-8);
     position: relative;
     z-index: 2;
+    box-sizing: border-box;
   }
 
   @media (min-width: 1024px) {
     .hero-container {
-      grid-template-columns: 6fr 4fr;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
       align-items: center;
-      min-height: calc(100vh - 80px);
+      gap: 2.5rem;
+      min-height: calc(100vh - 100px);
+      padding: var(--sp-10) 1.5rem;
     }
   }
 
   .hero-content {
     max-width: 100%;
+    min-width: 0;
   }
 
   @media (min-width: 1024px) {
     .hero-content {
-      padding-left: 2vw;
-      margin-top: 40px;
+      padding-left: 0;
+      margin-top: 10px;
     }
   }
 
@@ -194,18 +199,20 @@ const showReel = true;
 
   .hero-eyebrow {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
-    letter-spacing: 0.25em;
+    font-size: 0.95rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: var(--color-gold);
+    color: var(--color-gold, #D9A23A) !important;
     display: inline-block;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
   }
 
   .hero-title {
     margin-bottom: var(--sp-4);
     font-family: var(--font-serif);
-    font-size: clamp(3.5rem, 8vw, 6.5rem);
-    line-height: 0.98;
+    font-size: clamp(2.4rem, 4.2vw, 4.2rem);
+    line-height: 1.05;
     letter-spacing: -0.01em;
     font-weight: 300;
   }
@@ -219,71 +226,83 @@ const showReel = true;
   }
 
   .hero-title-gradient {
-    background: linear-gradient(92deg, var(--color-gold), var(--color-coral));
+    font-style: italic;
+    background: linear-gradient(92deg, var(--color-mustard, #D9A23A) 0%, var(--color-coral, #E17356) 50%, var(--color-berry, #6C2D5A) 100%);
     -webkit-background-clip: text;
     background-clip: text;
+    -webkit-text-fill-color: transparent;
     color: transparent;
     font-weight: 400;
   }
 
   .hero-meta {
-    display: flex;
-    align-items: center;
-    color: var(--color-ivory);
-    margin-bottom: var(--sp-6);
-    font-size: 0.85rem;
     font-family: var(--font-mono);
-    font-weight: 600;
-    letter-spacing: 0.15em;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--color-gold, #D9A23A) !important;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
+    margin-bottom: var(--sp-4);
+    opacity: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
   }
 
-  .hero-subtext {
-    font-size: 1.125rem;
-    color: #e7e0cf;
-    margin-bottom: var(--sp-8);
-    max-width: 52ch; /* Requested by user */
-    font-weight: 400;
-    line-height: 1.66;
+  .hero-subtext,
+  .hero-description {
+    font-size: clamp(1.05rem, 1.25vw, 1.18rem);
+    color: var(--color-ivory, #FBF6EA) !important;
+    line-height: 1.7;
+    margin-bottom: var(--sp-8, 2rem);
+    max-width: 540px;
+    opacity: 0.95;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   }
-  
-  .hero-subtext b {
-    color: var(--color-ivory);
+
+  .hero-subtext strong,
+  .hero-description strong {
+    color: #ffffff !important;
     font-weight: 600;
   }
 
   .hero-ctas {
     display: flex;
-    gap: var(--sp-4);
     flex-wrap: wrap;
-    margin-bottom: var(--sp-8);
+    gap: var(--sp-4, 1rem);
+    margin-bottom: 2rem;
   }
 
   .hero-capability-strip {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--color-gold);
-    letter-spacing: 0.15em;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-gold, #D9A23A) !important;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    opacity: 0.8;
+    opacity: 1;
     line-height: 1.6;
+    margin-top: 0.5rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   }
 
   .hero-media {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
     perspective: 1000px;
+    box-sizing: border-box;
+    padding-right: 0.5rem;
   }
 
   .hero-glass-frame {
-    padding: 14px;
+    padding: 12px;
     background: rgba(20, 18, 14, 0.45);
     backdrop-filter: blur(16px) saturate(120%);
     -webkit-backdrop-filter: blur(16px) saturate(120%);
     border: 1px solid var(--color-gold); /* Thin gold border */
-    border-radius: 999px 999px 16px 16px; /* Elegant Cathedral Arch */
     box-shadow: 
       0 30px 60px rgba(0,0,0,0.5), 
       inset 0 1px 1px rgba(217,162,58,0.2),
@@ -293,6 +312,9 @@ const showReel = true;
     transform-style: preserve-3d;
     transform: translateZ(0);
     backface-visibility: hidden;
+    transition: all 0.5s ease;
+    box-sizing: border-box;
+    width: 100%;
   }
 
   @keyframes heroFloat {
@@ -303,19 +325,89 @@ const showReel = true;
 
   .hero-image-mask {
     width: 100%;
-    max-width: 440px;
-    aspect-ratio: 4 / 5;
-    border-radius: 999px 999px 12px 12px;
     overflow: hidden;
     position: relative;
     clip-path: inset(100% 0 0 0); /* for GSAP */
+    transition: all 0.5s ease;
+  }
+
+  /* 1. Cathedral Arch (Hero Default - Vertical 4:5 with Half Circle Arch Dome) */
+  .hero-glass-frame.shape-hero-arch, .hero-image-mask.shape-hero-arch {
+    border-radius: 999px 999px 16px 16px;
+    aspect-ratio: 4 / 5;
+    max-width: min(100%, 350px);
+    width: 100%;
+  }
+
+  /* 2. Wide Cinema Arch (Wide 16:9 with Half Circle Arch Dome on Top - Full Width) */
+  .hero-glass-frame.shape-landscape-arch, .hero-image-mask.shape-landscape-arch {
+    border-radius: 220px 220px 16px 16px;
+    aspect-ratio: 16 / 9;
+    max-width: min(100%, 420px);
+    width: 100%;
+  }
+
+  /* 3. Expansive Arch (3:2 with Half Circle Arch Dome on Top) */
+  .hero-glass-frame.shape-wide-arch, .hero-image-mask.shape-wide-arch {
+    border-radius: 200px 200px 16px 16px;
+    aspect-ratio: 3 / 2;
+    max-width: min(100%, 400px);
+    width: 100%;
+  }
+
+  /* 4. Square Arch Dome (Square 1:1 with Half Circle Arch Dome on Top) */
+  .hero-glass-frame.shape-square-arch, .hero-image-mask.shape-square-arch {
+    border-radius: 220px 220px 16px 16px;
+    aspect-ratio: 1 / 1;
+    max-width: min(100%, 360px);
+    width: 100%;
+  }
+
+  /* 5. Soft Editorial Arch */
+  .hero-glass-frame.shape-meet-arch, .hero-image-mask.shape-meet-arch {
+    border-radius: 280px 280px 16px 16px;
+    aspect-ratio: 3.5 / 5;
+    max-width: min(100%, 350px);
+    width: 100%;
+  }
+
+  /* 6. Modern Wide Landscape (Rectangular) */
+  .hero-glass-frame.shape-landscape, .hero-image-mask.shape-landscape {
+    border-radius: 16px;
+    aspect-ratio: 16 / 9;
+    max-width: min(100%, 420px);
+    width: 100%;
+  }
+
+  /* 7. Classic Portrait */
+  .hero-glass-frame.shape-portrait, .hero-image-mask.shape-portrait {
+    border-radius: 16px;
+    aspect-ratio: 3 / 4;
+    max-width: min(100%, 340px);
+    width: 100%;
+  }
+
+  /* 8. Luxury Square */
+  .hero-glass-frame.shape-square, .hero-image-mask.shape-square {
+    border-radius: 16px;
+    aspect-ratio: 1 / 1;
+    max-width: min(100%, 360px);
+    width: 100%;
+  }
+
+  /* 9. Adaptive / Freeform */
+  .hero-glass-frame.shape-adaptive, .hero-image-mask.shape-adaptive {
+    border-radius: 16px;
+    aspect-ratio: auto;
+    max-width: min(100%, 420px);
+    width: 100%;
   }
 
   .hero-image {
     width: 100%;
-    height: 120%;
+    height: 100%;
     object-fit: cover;
-    transform: scale(1.15); /* for GSAP */
+    display: block;
   }
 
   /* Single column on mobile is the default grid behavior */

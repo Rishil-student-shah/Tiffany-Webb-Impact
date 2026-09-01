@@ -6,7 +6,18 @@ const { content = {}, collections = {} } = Astro.props;
 const audiences = collections.who_can_benefit || collections.where_she_works || [];
 
 const eyebrow = content.eyebrow ?? "WHO CAN BENEFIT FROM TIFFANY'S WORK?";
-const headline = content.headline ?? "For leaders ready<br/>to <span class=\"italic-accent\">rethink what's</span><br/><span class=\"italic-accent\">possible.</span>";
+let headline = content.headline ?? "For leaders ready<br/>to <span class=\"italic-accent\">rethink what's possible.</span>";
+if (headline && !headline.includes('<span')) {
+  if (headline.includes("rethink")) {
+    headline = headline.replace("rethink what's possible", "<span class=\"italic-accent\">rethink what's possible.</span>").replace("rethink what's possible.", "<span class=\"italic-accent\">rethink what's possible.</span>").replace('..', '.');
+  } else {
+    const words = headline.split(' ');
+    if (words.length > 2) {
+      const mid = Math.ceil(words.length / 2);
+      headline = words.slice(0, mid).join(' ') + ' <span class="italic-accent">' + words.slice(mid).join(' ') + '</span>';
+    }
+  }
+}
 const p1 = content.body_1 ?? "Tiffany works with leaders and organizations navigating growth, change, engagement, and community impact. She brings a human-centered perspective to complex challenges—helping organizations understand the people they serve, rethink familiar approaches, and build strategies designed for meaningful, sustainable impact.";
 const p2 = content.body_2 ?? "";
 ---
@@ -47,7 +58,7 @@ const p2 = content.body_2 ?? "";
           })}
         </div>
         <div style="margin-top: 2.5rem; display: flex;">
-          <a href="/services" style="font-family: var(--font-mono); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--color-gold); text-decoration: none; border-bottom: 1px solid var(--color-gold); padding-bottom: 4px; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">How I help &rarr;</a>
+          <a href="/services" style="font-family: var(--font-mono); font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #F3C56E; text-decoration: none; border-bottom: 2px solid #F3C56E; padding-bottom: 6px; transition: opacity 0.2s; text-shadow: 0 1px 2px rgba(0,0,0,0.6);" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">How I help &rarr;</a>
         </div>
       </div>
       
@@ -129,26 +140,30 @@ const p2 = content.body_2 ?? "";
   }
 
   .audience-num {
-    color: var(--color-gold);
+    color: #F3C56E;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    letter-spacing: 0.1em;
+    font-size: 0.92rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
     display: flex;
     align-items: center;
-    gap: 0.35rem;
+    gap: 0.4rem;
     flex-shrink: 0;
-    width: 2.75rem;
-    margin-top: 0.25rem;
+    width: 3.2rem;
+    margin-top: 0.2rem;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   }
   
   .num-slash {
-    color: rgba(217, 162, 58, 0.4);
-    font-size: 0.65rem;
+    color: var(--color-gold);
+    font-size: 0.82rem;
+    font-weight: 700;
+    opacity: 0.7;
   }
 
   .audience-title {
     color: var(--color-ivory);
-    font-size: 1.35rem;
+    font-size: 1.45rem;
     font-family: var(--font-serif);
     line-height: 1.25;
     font-weight: 400;

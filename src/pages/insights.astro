@@ -24,6 +24,14 @@ try {
 }
 
 const hero = dbContent.hero || {};
+let headline = hero.headline || 'Latest <span class="italic-accent">Insights.</span>';
+if (headline && !headline.includes('<span')) {
+  const words = headline.split(' ');
+  if (words.length > 1) {
+    const mid = Math.ceil(words.length / 2);
+    headline = words.slice(0, mid).join(' ') + ' <span class="italic-accent">' + words.slice(mid).join(' ') + '</span>';
+  }
+}
 ---
 
 <Layout title="Insights & Articles | Tiffany Webb" theme="dark">
@@ -36,7 +44,7 @@ const hero = dbContent.hero || {};
       <div class="spk-container" style="position: relative; z-index: 10;">
         <div class="spk-hero-content text-center">
           {hero.eyebrow && <Eyebrow className="justify-center">{hero.eyebrow}</Eyebrow>}
-          <h1 class="spk-h1" set:html={hero.headline || 'Latest <span class="italic-accent">Insights.</span>'}></h1>
+          <h1 class="spk-h1" set:html={headline}></h1>
           {hero.subtitle && <p class="spk-subtitle">{hero.subtitle}</p>}
         </div>
       </div>

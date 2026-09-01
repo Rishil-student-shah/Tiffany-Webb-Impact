@@ -10,7 +10,10 @@ const { content = {}, collections = {} } = Astro.props;
 
 // Fallback values
 const eyebrowText = content.eyebrow || "IN THE ROOM";
-const titleHtml = content.headline || "Watch Tiffany in action.";
+let titleHtml = content.headline || "Watch Tiffany <span class=\"italic-accent\">in action.</span>";
+if (titleHtml && !titleHtml.includes('<span') && titleHtml.includes('action')) {
+  titleHtml = titleHtml.replace('in action.', '<span class="italic-accent">in action.</span>').replace('in action', '<span class="italic-accent">in action.</span>');
+}
 const description = content.description || "See how she commands the room, breaks down complex topics, and connects with audiences of all sizes. From intimate workshops to national keynotes, the message remains clear and the impact remains real.";
 
 // Process collections to resolve image paths
@@ -50,7 +53,7 @@ const resolveImage = (imgName) => {
   <div class="relative z-10" style="width: 90%; max-width: 1200px; margin: 0 auto;">
     <div class="reveal-up" style="margin-bottom: 5rem; max-width: 800px;">
       <div style="margin-bottom: 1rem;"><Eyebrow>{eyebrowText}</Eyebrow></div>
-      <h2 class="section-title works-title" style="margin-bottom: 2rem; font-size: clamp(2.5rem, 4vw, 4rem);"><span class="title-grad" set:html={titleHtml}></span></h2>
+      <h2 class="section-title works-title" style="margin-bottom: 2rem; font-size: clamp(2.5rem, 4vw, 4rem); color: var(--color-ivory);" set:html={titleHtml}></h2>
       <p class="subtitle" style="text-align: left; margin: 0; line-height: 1.6; font-size: 1.1rem; color: rgba(251, 246, 234, 0.85);">{description}</p>
     </div>
     

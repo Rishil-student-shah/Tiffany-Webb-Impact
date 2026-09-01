@@ -172,7 +172,7 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
           <div class="masonry-item vision ultra-glass-card glass-emerald stagger-item animated-card" style="animation-delay: -2s;">
             <div class="ultra-padding-wrapper">
               <Eyebrow className="eyebrow-padded">Vision</Eyebrow>
-              <h2 class="mb-6 text-2xl font-serif text-ivory">Where this is going.</h2>
+              <h2 class="mb-6 text-2xl font-serif text-ivory">Where this is <span class="italic-accent">going.</span></h2>
               <ul class="vision-list">
                 <li><strong>National speaking:</strong> Bringing prevention conversations to stages, campuses, and conferences across the country.</li>
                 <li><strong>Training & education:</strong> Equipping clinicians, educators, and frontline teams with tools that survive contact with real life.</li>
@@ -185,7 +185,7 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
           <div class="masonry-item values ultra-glass-card glass-amethyst stagger-item animated-card" style="animation-delay: -4s;">
             <div class="ultra-padding-wrapper">
               <Eyebrow className="eyebrow-padded">Values</Eyebrow>
-              <h2 class="mb-6 text-2xl font-serif text-ivory">What she works from.</h2>
+              <h2 class="mb-6 text-2xl font-serif text-ivory">What she <span class="italic-accent">works from.</span></h2>
               <ul class="values-list interactive-list">
                 <li><strong>Faith</strong> — the belief that people can change, including the ones everyone else gave up on.</li>
                 <li><strong>Family</strong> — where prevention starts, and where harm is felt first and longest.</li>
@@ -215,7 +215,7 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
           <div class="gfg-glow-ring"></div>
           <div class="gfg-inner-content">
             <Eyebrow className="gfg-eyebrow text-center justify-center">A Venture by Tiffany Webb</Eyebrow>
-            <h2 class="gfg-title text-center">GambleFreeGear</h2>
+            <h2 class="gfg-title text-center">GambleFree<span class="italic-accent">Gear</span></h2>
             <div class="gfg-divider"></div>
             <p class="gfg-subtitle text-center">Prevention you can wear. An apparel brand designed to raise awareness on gambling addiction and start conversations in the communities that need them most.</p>
             <div class="gfg-btn-wrapper">
@@ -330,8 +330,13 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
   }
 
   .inner-hero-sub {
-    color: var(--color-gold);
-    letter-spacing: 0.1em;
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #F3C56E;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   }
 
   .hero-image-wrap {

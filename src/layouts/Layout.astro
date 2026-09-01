@@ -70,10 +70,9 @@ const {
       <div class="glow-orb glow-gold"></div>
     </div>
 
-    {isNavActive && <Nav />}
-    
     <div class="page-wrapper">
       <div class="page-card">
+        {isNavActive && <Nav />}
         <main id="smooth-wrapper">
           <div id="smooth-content">
             <slot />
@@ -106,118 +105,116 @@ const {
           // Initialize GSAP ScrollTrigger
           gsap.registerPlugin(ScrollTrigger);
 
-        // Note: stagger-group, reveal-up, and scale-reveal animations are now entirely handled by the lightweight Vanilla JS intersection observers in motion.js. 
-        // This completely eliminates the GSAP "Forced Reflow" penalties reported by Lighthouse!
-
-        // 3. Physics Cursor (Desktop only)
-        const cursorDot = document.querySelector('.js-cursor-dot');
-        const cursorRing = document.querySelector('.js-cursor-ring');
-        
-        if (window.matchMedia("(pointer: fine)").matches && cursorDot && cursorRing) {
-          gsap.set(cursorDot, {xPercent: -50, yPercent: -50});
-          gsap.set(cursorRing, {xPercent: -50, yPercent: -50});
-
-          const xToDot = gsap.quickTo(cursorDot, "x", {duration: 0.1, ease: "power3"});
-          const yToDot = gsap.quickTo(cursorDot, "y", {duration: 0.1, ease: "power3"});
+          // 3. Physics Cursor (Desktop only)
+          const cursorDot = document.querySelector('.js-cursor-dot');
+          const cursorRing = document.querySelector('.js-cursor-ring');
           
-          const xToRing = gsap.quickTo(cursorRing, "x", {duration: 0.5, ease: "power3.out"});
-          const yToRing = gsap.quickTo(cursorRing, "y", {duration: 0.5, ease: "power3.out"});
+          if (window.matchMedia("(pointer: fine)").matches && cursorDot && cursorRing) {
+            gsap.set(cursorDot, {xPercent: -50, yPercent: -50});
+            gsap.set(cursorRing, {xPercent: -50, yPercent: -50});
 
-          window.addEventListener("mousemove", e => {
-            xToDot(e.clientX);
-            yToDot(e.clientY);
-            xToRing(e.clientX);
-            yToRing(e.clientY);
-          });
-
-          // Hover effects for clickable elements
-          // Using event delegation so dynamically added elements work too
-          document.addEventListener('mouseover', (e) => {
-            const target = e.target.closest('a, button, .magnetic-btn, .morph-card');
-            if (target) {
-              gsap.to(cursorRing, {scale: 1.5, borderColor: 'rgba(200, 162, 76, 1)', backgroundColor: 'rgba(200, 162, 76, 0.1)', duration: 0.3});
-            }
-          });
-          document.addEventListener('mouseout', (e) => {
-            const target = e.target.closest('a, button, .magnetic-btn, .morph-card');
-            if (target) {
-              gsap.to(cursorRing, {scale: 1, borderColor: 'rgba(200, 162, 76, 0.5)', backgroundColor: 'transparent', duration: 0.3});
-            }
-          });
-        }
-
-        // 4. Standard Modal Popup Logic
-        const morphOverlay = document.querySelector('.morph-overlay');
-        const morphContainer = document.querySelector('.morph-container');
-        const morphBackdrop = document.querySelector('.morph-backdrop');
-        const closeBtn = document.querySelector('.morph-close-btn');
-        const closeIcon = document.querySelector('.close-icon');
-
-        let activeCard = null;
-        let originalWrap = null;
-        let isAnimating = false;
-
-        document.querySelectorAll('.morph-card').forEach(card => {
-          card.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (isAnimating || activeCard) return;
-            isAnimating = true;
-            activeCard = card;
-            originalWrap = card.parentElement;
-
-            // Prepare expanded content
-            const expandedContent = card.querySelector('.card-expanded-content');
-            if(expandedContent) {
-              expandedContent.style.display = 'block';
-              expandedContent.style.opacity = '1';
-            }
-            card.classList.add('is-expanded');
+            const xToDot = gsap.quickTo(cursorDot, "x", {duration: 0.1, ease: "power3"});
+            const yToDot = gsap.quickTo(cursorDot, "y", {duration: 0.1, ease: "power3"});
             
-            // Move to global container
-            morphContainer.appendChild(card);
-            morphOverlay.classList.add('is-active');
-            
-            // Fade in modal normally
-            gsap.fromTo(card, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" });
-            
-            // Fade in backdrop
-            gsap.to(morphBackdrop, { opacity: 1, duration: 0.4 });
-            // Show close btn
-            gsap.fromTo(closeBtn, { scale: 0, opacity: 0, rotate: -90 }, { scale: 1, opacity: 1, rotate: 0, duration: 0.4, ease: "back.out(1.5)", delay: 0.2, onComplete: () => { isAnimating = false; } });
-          });
-        });
+            const xToRing = gsap.quickTo(cursorRing, "x", {duration: 0.5, ease: "power3.out"});
+            const yToRing = gsap.quickTo(cursorRing, "y", {duration: 0.5, ease: "power3.out"});
 
-        if (closeBtn) {
-          closeBtn.addEventListener('click', () => {
-            if (isAnimating || !activeCard) return;
-            isAnimating = true;
+            window.addEventListener("mousemove", e => {
+              xToDot(e.clientX);
+              yToDot(e.clientY);
+              xToRing(e.clientX);
+              yToRing(e.clientY);
+            });
 
-            // Close Animation normally
-            gsap.to(closeIcon, { rotate: 180, scale: 0.5, opacity: 0, duration: 0.3, ease: "power2.in" });
-            gsap.to(activeCard, { opacity: 0, scale: 0.95, duration: 0.3, ease: "power2.in" });
-            gsap.to(morphBackdrop, { opacity: 0, duration: 0.3, onComplete: () => {
-              // Reset DOM
-              originalWrap.appendChild(activeCard);
-              morphOverlay.classList.remove('is-active');
-              activeCard.classList.remove('is-expanded');
-              
-              // Reset inline styles from animation
-              gsap.set(activeCard, { clearProps: "opacity,scale" });
-              
-              const expandedContent = activeCard.querySelector('.card-expanded-content');
-              if(expandedContent) {
-                expandedContent.style.display = 'none';
+            // Hover effects for clickable elements - hide dot to prevent font distortion
+            document.addEventListener('mouseover', (e) => {
+              const target = e.target.closest('a, button, .magnetic-btn, .morph-card, .media-btn');
+              if (target) {
+                gsap.to(cursorDot, {opacity: 0, scale: 0, duration: 0.2});
+                gsap.to(cursorRing, {scale: 1.5, borderColor: 'rgba(217, 162, 58, 0.8)', backgroundColor: 'rgba(217, 162, 58, 0.08)', duration: 0.25});
               }
+            });
+            document.addEventListener('mouseout', (e) => {
+              const target = e.target.closest('a, button, .magnetic-btn, .morph-card, .media-btn');
+              if (target) {
+                gsap.to(cursorDot, {opacity: 1, scale: 1, duration: 0.2});
+                gsap.to(cursorRing, {scale: 1, borderColor: 'rgba(217, 162, 58, 0.4)', backgroundColor: 'transparent', duration: 0.25});
+              }
+            });
+          }
+
+          // 4. Standard Modal Popup Logic
+          const morphOverlay = document.querySelector('.morph-overlay');
+          const morphContainer = document.querySelector('.morph-container');
+          const morphBackdrop = document.querySelector('.morph-backdrop');
+          const closeBtn = document.querySelector('.morph-close-btn');
+          const closeIcon = document.querySelector('.close-icon');
+
+          let activeCard = null;
+          let originalWrap = null;
+          let isAnimating = false;
+
+          document.querySelectorAll('.morph-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+              e.preventDefault();
+              if (isAnimating || activeCard) return;
+              isAnimating = true;
+              activeCard = card;
+              originalWrap = card.parentElement;
+
+              // Prepare expanded content
+              const expandedContent = card.querySelector('.card-expanded-content');
+              if(expandedContent) {
+                expandedContent.style.display = 'block';
+                expandedContent.style.opacity = '1';
+              }
+              card.classList.add('is-expanded');
               
-              gsap.set(closeBtn, { scale: 0, opacity: 0 });
-              gsap.set(closeIcon, { rotate: 0, scale: 1, opacity: 1 });
+              // Move to global container
+              morphContainer.appendChild(card);
+              morphOverlay.classList.add('is-active');
               
-              activeCard = null;
-              originalWrap = null;
-              isAnimating = false;
-            }});
+              // Fade in modal normally
+              gsap.fromTo(card, { opacity: 0, scale: 0.95 }, { opacity: 1, scale: 1, duration: 0.4, ease: "power2.out" });
+              
+              // Fade in backdrop
+              gsap.to(morphBackdrop, { opacity: 1, duration: 0.4 });
+              // Show close btn
+              gsap.fromTo(closeBtn, { scale: 0, opacity: 0, rotate: -90 }, { scale: 1, opacity: 1, rotate: 0, duration: 0.4, ease: "back.out(1.5)", delay: 0.2, onComplete: () => { isAnimating = false; } });
+            });
           });
-        }
+
+          if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+              if (isAnimating || !activeCard) return;
+              isAnimating = true;
+
+              // Close Animation normally
+              gsap.to(closeIcon, { rotate: 180, scale: 0.5, opacity: 0, duration: 0.3, ease: "power2.in" });
+              gsap.to(activeCard, { opacity: 0, scale: 0.95, duration: 0.3, ease: "power2.in" });
+              gsap.to(morphBackdrop, { opacity: 0, duration: 0.3, onComplete: () => {
+                // Reset DOM
+                originalWrap.appendChild(activeCard);
+                morphOverlay.classList.remove('is-active');
+                activeCard.classList.remove('is-expanded');
+                
+                // Reset inline styles from animation
+                gsap.set(activeCard, { clearProps: "opacity,scale" });
+                
+                const expandedContent = activeCard.querySelector('.card-expanded-content');
+                if(expandedContent) {
+                  expandedContent.style.display = 'none';
+                }
+                
+                gsap.set(closeBtn, { scale: 0, opacity: 0 });
+                gsap.set(closeIcon, { rotate: 0, scale: 1, opacity: 1 });
+                
+                activeCard = null;
+                originalWrap = null;
+                isAnimating = false;
+              }});
+            });
+          }
         }); // End document.fonts.ready
       });
     </script>

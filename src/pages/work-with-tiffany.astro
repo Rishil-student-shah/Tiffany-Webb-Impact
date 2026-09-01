@@ -12,7 +12,7 @@ import Waveform from '../components/Waveform.astro';
       <Waveform opacity={0.15} color="#c29545" />
       <div class="container reveal-up" style="position: relative; z-index: 10;">
         <Eyebrow>Booking</Eyebrow>
-        <h1 class="inner-hero-title" style="color: var(--color-ivory);">Bring me <br><span style="background: linear-gradient(92deg, var(--color-mustard), var(--color-coral), var(--color-berry)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">to your next event.</span></h1>
+        <h1 class="inner-hero-title" style="color: var(--color-ivory);">Bring Tiffany <br><span class="italic-accent">to your next event.</span></h1>
         <p class="inner-hero-sub" style="color: rgba(253, 252, 248, 0.8);">Tell me about your audience and your goals. I review every inquiry personally.</p>
       </div>
     </section>
@@ -25,7 +25,7 @@ import Waveform from '../components/Waveform.astro';
         
         <!-- Left: Form -->
         <div class="booking-form-wrapper stagger-item" style="background: rgba(20, 18, 14, 0.45); backdrop-filter: blur(16px) saturate(120%); border: 1px solid rgba(255,255,255,0.1); border-radius: 24px; padding: var(--sp-8); box-shadow: 0 20px 50px rgba(0,0,0,0.3);">
-          <h2 style="color: white;">Send your request.</h2>
+          <h2 style="color: white;">Send your <span class="italic-accent">request.</span></h2>
           <form id="booking-form" class="booking-form mt-8">
             
             <div class="form-group">
@@ -153,17 +153,62 @@ import Waveform from '../components/Waveform.astro';
 
         <!-- Right: Process & FAQ -->
         <div class="booking-info stagger-item">
-          <!-- 6.3 Process -->
-          <div class="process-box mb-12">
-            <h3>How booking works.</h3>
-            <ol class="process-list mt-6">
-              <li><strong>Inquiry</strong> — you share your event, audience, and dates.</li>
-              <li><strong>Review</strong> — I personally review fit and availability.</li>
-              <li><strong>Discovery call</strong> — a short conversation about what you actually need.</li>
-              <li><strong>Proposal</strong> — format, content outline, and terms in writing.</li>
-              <li><strong>Preparation</strong> — content built for your specific audience.</li>
-              <li><strong>She speaks</strong> — and your audience leaves with something usable.</li>
-            </ol>
+          <!-- 6.3 Process Compact Journey Cards -->
+          <div class="process-journey-box mb-8">
+            <div class="process-header">
+              <span class="process-eyebrow">HOW IT WORKS</span>
+              <h3 class="process-h3">The Booking <span class="italic-accent">Journey.</span></h3>
+            </div>
+            
+            <div class="compact-journey-list">
+              <!-- Stage 01 -->
+              <div class="micro-step-card">
+                <span class="micro-step-num">01</span>
+                <div class="micro-step-info">
+                  <strong class="micro-step-title">Inquiry</strong> — <span class="micro-step-text">You share your event, audience, and dates.</span>
+                </div>
+              </div>
+
+              <!-- Stage 02 -->
+              <div class="micro-step-card">
+                <span class="micro-step-num">02</span>
+                <div class="micro-step-info">
+                  <strong class="micro-step-title">Review</strong> — <span class="micro-step-text">I personally review fit and availability.</span>
+                </div>
+              </div>
+
+              <!-- Stage 03 -->
+              <div class="micro-step-card">
+                <span class="micro-step-num">03</span>
+                <div class="micro-step-info">
+                  <strong class="micro-step-title">Discovery Call</strong> — <span class="micro-step-text">Short conversation about your actual goals.</span>
+                </div>
+              </div>
+
+              <!-- Stage 04 -->
+              <div class="micro-step-card">
+                <span class="micro-step-num">04</span>
+                <div class="micro-step-info">
+                  <strong class="micro-step-title">Proposal</strong> — <span class="micro-step-text">Format, outline, and terms in writing.</span>
+                </div>
+              </div>
+
+              <!-- Stage 05 -->
+              <div class="micro-step-card">
+                <span class="micro-step-num">05</span>
+                <div class="micro-step-info">
+                  <strong class="micro-step-title">Preparation</strong> — <span class="micro-step-text">Content built for your specific room.</span>
+                </div>
+              </div>
+
+              <!-- Stage 06 -->
+              <div class="micro-step-card final-step">
+                <span class="micro-step-num num-final">06</span>
+                <div class="micro-step-info">
+                  <strong class="micro-step-title">She Speaks</strong> — <span class="micro-step-text">Your audience leaves with usable strategies.</span>
+                </div>
+              </div>
+            </div>
           </div>
           
           <!-- 6.5 FAQ -->
@@ -579,34 +624,106 @@ import Waveform from '../components/Waveform.astro';
   }
 
   /* Info sidebar */
-  .process-box, .faq-box {
+  .process-journey-box, .faq-box {
     background: rgba(20, 18, 14, 0.45);
     backdrop-filter: blur(16px) saturate(120%);
     border: 1px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-    padding: var(--sp-8);
-    border-radius: 24px;
+    padding: var(--sp-6);
+    border-radius: 20px;
     color: var(--color-ivory);
   }
 
-  .process-box h3, .faq-box h3 {
-    font-size: 1.5rem;
-    color: var(--color-gold);
+  .process-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
-  .process-list {
+  .process-eyebrow {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    color: var(--color-gold, #D9A23A);
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+
+  .process-h3 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    line-height: 1.2;
+    color: var(--color-ivory, #FBF6EA);
+    margin: 0;
+  }
+
+  .compact-journey-list {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-4);
-    padding-left: var(--sp-6);
+    gap: 0.5rem;
   }
 
-  .process-list li {
-    color: rgba(253, 252, 248, 0.8);
+  .micro-step-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.55rem 0.75rem;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: all 0.2s ease;
   }
 
-  .process-list strong {
-    color: var(--color-ivory);
+  .micro-step-card:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(217, 162, 58, 0.35);
+    transform: translateX(3px);
+  }
+
+  .micro-step-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-gold, #D9A23A);
+    background: rgba(217, 162, 58, 0.12);
+    border: 1px solid rgba(217, 162, 58, 0.25);
+    padding: 0.15rem 0.45rem;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .micro-step-card.final-step {
+    border-color: rgba(225, 115, 86, 0.25);
+    background: rgba(225, 115, 86, 0.04);
+  }
+
+  .micro-step-num.num-final {
+    color: var(--color-coral, #E17356);
+    background: rgba(225, 115, 86, 0.15);
+    border-color: rgba(225, 115, 86, 0.35);
+  }
+
+  .micro-step-info {
+    font-size: 0.88rem;
+    line-height: 1.45;
+    color: rgba(251, 246, 234, 0.85);
+  }
+
+  .micro-step-title {
+    color: #ffffff;
+    font-weight: 600;
+  }
+
+  .micro-step-text {
+    color: rgba(251, 246, 234, 0.8);
+  }
+
+  .faq-box h3 {
+    font-size: 1.5rem;
+    color: var(--color-gold);
   }
 
   /* FAQ Accordion */

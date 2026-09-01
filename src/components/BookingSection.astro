@@ -9,7 +9,10 @@ interface Props {
 
 const { hideJourney = false, content = {} } = Astro.props;
 const eyebrow = content.eyebrow || "WORK WITH TIFFANY";
-const heading = content.heading || "Let's create impact together.";
+let rawHeading = content.heading || "Let's create impact together.";
+let heading = rawHeading.includes('<span')
+  ? rawHeading
+  : rawHeading.replace(/impact together\.?/i, '<span class="italic-accent">impact together.</span>');
 const subtext = content.subtext || "Tell me about your organization and what you're trying to change. I read every inquiry myself.";
 ---
 
@@ -20,7 +23,7 @@ const subtext = content.subtext || "Tell me about your organization and what you
   <div class="container relative z-10">
     <div class="booking-content text-center reveal-up">
       <Eyebrow className="eyebrow-light">{eyebrow}</Eyebrow>
-      <h2 class="section-title text-white">{heading}</h2>
+      <h2 class="section-title text-white" set:html={heading}></h2>
       <p class="booking-sub">{subtext}</p>
     </div>
 
@@ -346,14 +349,17 @@ const subtext = content.subtext || "Tell me about your organization and what you
 
   .step-num {
     font-family: var(--font-mono);
-    color: var(--color-gold);
-    font-size: 1.2rem;
+    color: #F3C56E;
+    font-size: 1.35rem;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   }
 
   .step-text {
     font-family: var(--font-sans);
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.9);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.95);
     line-height: 1.4;
   }
 

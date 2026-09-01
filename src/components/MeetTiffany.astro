@@ -1,4 +1,4 @@
-﻿---
+---
 import Waveform from './Waveform.astro';
 import Eyebrow from './Eyebrow.astro';
 import Button from './Button.astro';
@@ -8,12 +8,35 @@ const { content = {} } = Astro.props;
 
 // Fallbacks
 const eyebrow = content.eyebrow ?? "MEET TIFFANY";
-const title1 = content.title_line_1 ?? "";
-const title2 = content.title_line_2 ?? "Chicago Heart \u00D7 Louisiana Soul";
+const title1 = content.title_line_1 ?? "Chicago Heart ,";
+const title2 = content.title_line_2 ?? "Louisiana Soul";
+
+let displayTitle1 = title1;
+let displayTitle2 = title2;
+if ((!displayTitle1 || displayTitle1 === "") && displayTitle2) {
+  if (displayTitle2.includes(',')) {
+    const parts = displayTitle2.split(',');
+    displayTitle1 = parts[0] + ' ,';
+    displayTitle2 = parts.slice(1).join(',').trim();
+  } else if (displayTitle2.includes('×') || displayTitle2.includes('\u00D7') || displayTitle2.includes('&')) {
+    const parts = displayTitle2.split(/[×\u00D7&]/);
+    displayTitle1 = parts[0].trim() + ' ,';
+    displayTitle2 = parts.slice(1).join(' ').trim();
+  } else {
+    const words = displayTitle2.split(' ');
+    if (words.length > 1) {
+      const mid = Math.ceil(words.length / 2);
+      displayTitle1 = words.slice(0, mid).join(' ') + ' ';
+      displayTitle2 = words.slice(mid).join(' ');
+    }
+  }
+}
+
 const p1 = content.paragraph_1 ?? "I came to this work through behavioral health, but I stayed because I kept meeting families who had never been given language for what was happening to them.";
 const p2 = content.paragraph_2 ?? "A father who couldn't explain where the money went. A student who thought a betting app was just a game. A wife who assumed she was the only one.";
 const p3 = content.paragraph_3 ?? "Today, my work extends beyond prevention into how organizations reach people at all.";
 const btn = content.button_text ?? "More about me \u2192";
+const frameStyle = content.image_frame_style || 'shape-meet-arch';
 ---
 
 <section class="meet-tiffany theme-ink reveal-up">
@@ -23,7 +46,7 @@ const btn = content.button_text ?? "More about me \u2192";
       <div class="meet-content meet-glass-card">
         {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
         <h2 class="section-title meet-title">
-          {title1} <span class="italic-accent">{title2}</span>
+          <span style="color: var(--color-ivory);">{displayTitle1}</span> <span class="italic-accent">{displayTitle2}</span>
         </h2>
         
         <div class="meet-prose">
@@ -36,8 +59,8 @@ const btn = content.button_text ?? "More about me \u2192";
       </div>
       
       <div class="meet-image-col">
-        <div class="meet-image-glass-offset"></div>
-        <div class="meet-image-wrap">
+        <div class={`meet-image-glass-offset ${frameStyle}`}></div>
+        <div class={`meet-image-wrap ${frameStyle}`}>
           {content.image ? (
             <img src={content.image} alt="Tiffany Webb editorial portrait" class="meet-img" />
           ) : (
@@ -138,15 +161,12 @@ const btn = content.button_text ?? "More about me \u2192";
   
   .meet-image-wrap {
     width: 100%;
-    max-width: 440px;
-    aspect-ratio: 3.5/5;
-    border-radius: 300px 300px 16px 16px; /* Arch frame */
     overflow: hidden;
     position: relative;
     border: 1px solid var(--color-gold);
     z-index: 2;
     box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.5s ease;
   }
   
   .meet-image-glass-offset {
@@ -154,15 +174,54 @@ const btn = content.button_text ?? "More about me \u2192";
     top: 40px;
     left: calc(50% - 200px); 
     width: 100%;
-    max-width: 440px;
-    aspect-ratio: 3.5/5;
     background: rgba(20, 18, 14, 0.3);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 300px 300px 16px 16px; /* Echoes the arch */
     z-index: 1;
-    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s ease;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.8s ease, border-radius 0.5s ease;
+  }
+
+  /* 1. Cathedral Arch */
+  .meet-image-wrap.shape-hero-arch, .meet-image-glass-offset.shape-hero-arch {
+    border-radius: 999px 999px 16px 16px;
+    aspect-ratio: 4 / 5;
+    max-width: 440px;
+  }
+
+  /* 2. Soft Editorial Arch (Meet Tiffany Default) */
+  .meet-image-wrap.shape-meet-arch, .meet-image-glass-offset.shape-meet-arch {
+    border-radius: 300px 300px 16px 16px;
+    aspect-ratio: 3.5 / 5;
+    max-width: 440px;
+  }
+
+  /* 3. Modern Wide Landscape */
+  .meet-image-wrap.shape-landscape, .meet-image-glass-offset.shape-landscape {
+    border-radius: 20px;
+    aspect-ratio: 16 / 9;
+    max-width: 580px;
+  }
+
+  /* 4. Classic Portrait */
+  .meet-image-wrap.shape-portrait, .meet-image-glass-offset.shape-portrait {
+    border-radius: 20px;
+    aspect-ratio: 3 / 4;
+    max-width: 440px;
+  }
+
+  /* 5. Luxury Square */
+  .meet-image-wrap.shape-square, .meet-image-glass-offset.shape-square {
+    border-radius: 20px;
+    aspect-ratio: 1 / 1;
+    max-width: 460px;
+  }
+
+  /* 6. Adaptive */
+  .meet-image-wrap.shape-adaptive, .meet-image-glass-offset.shape-adaptive {
+    border-radius: 20px;
+    aspect-ratio: auto;
+    max-width: 540px;
   }
 
   @media (min-width: 1024px) {
