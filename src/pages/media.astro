@@ -60,14 +60,14 @@ const fallbackBios = [
     id: "short",
     label: "SHORT BIO",
     words: "~50 WORDS",
-    subtitle: "For Event Programs & Social Media",
+    subtitle: "For Event Programs, Printed Flyers & Social Media",
     text: "Tiffany Webb is a Chicago-born Community Impact Strategist and Public Health Speaker with over 15 years of experience in behavioral health and public health education. She brings lived insight and clinical rigor to problem gambling prevention, youth digital risk, and human-centered community health strategies across Illinois and nationally."
   },
   {
     id: "medium",
     label: "MEDIUM BIO",
     words: "~150 WORDS",
-    subtitle: "For Conference Agendas & Website Speaker Profiles",
+    subtitle: "For Conference Programs, Agendas & Website Speaker Profiles",
     text: "Tiffany Webb is a Community Impact Strategist, Public Health Educator, and Speaker specializing in problem gambling prevention, youth digital risk, and community health strategy. With over 15 years of leadership across behavioral health systems and more than 4,000 hours of frontline community outreach, Tiffany bridges the gap between clinical protocols and community trust.\n\nShe is the founder of GambleFreeGear and the creator of the GEAR Method™ (Generate, Engage, Activate, Resource). An affiliate speaker with the Illinois Council on Problem Gambling (ICPG) and an active advisor to regional ROSC coalitions, Tiffany is trusted by healthcare networks, civic leaders, and youth organizations to deliver high-impact keynotes and actionable workshops."
   },
   {
@@ -84,7 +84,7 @@ const bios = (dbCollections.bios && dbCollections.bios.length > 0)
       id: b.item_slug || (idx === 0 ? "short" : idx === 1 ? "medium" : "long"),
       label: b.title || (idx === 0 ? "SHORT BIO" : idx === 1 ? "MEDIUM BIO" : "LONG BIO"),
       words: b.badge || (idx === 0 ? "~50 WORDS" : idx === 1 ? "~150 WORDS" : "~300 WORDS"),
-      subtitle: b.subtitle || "For Event Programs & Media",
+      subtitle: b.subtitle || (idx === 0 ? "For Event Programs & Social Media" : idx === 1 ? "For Conference Agendas & Speaker Profiles" : "For Keynote Introductions & Feature Articles"),
       text: b.content_html || b.content_value || b.description || "",
       ...colorThemes[idx % colorThemes.length]
     }))
@@ -168,7 +168,7 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
       </div>
     </section>
 
-    <!-- Section 1: Approved Biographies (3 Color-Accented Grid Cards) -->
+    <!-- Section 1: Approved Biographies (Executive Tabbed Switcher) -->
     <section class="media-section relative overflow-hidden" id="approved-bios">
       <Waveform opacity={0.03} variant="B" />
       <div class="media-container relative z-10">
@@ -176,30 +176,54 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
         <div class="section-header-block reveal-up">
           <Eyebrow className="justify-center text-center">OFFICIAL BIOGRAPHIES</Eyebrow>
           <h2 class="media-h2">Approved <span class="italic-accent">biographies.</span></h2>
-          <p class="section-subtext">Select the length that best fits your program format. Click "Copy Bio" to copy the text to your clipboard.</p>
+          <p class="section-subtext">Select the length that best fits your program format. Click "Copy Bio" to copy the formatted text to your clipboard.</p>
         </div>
 
-        <div class="bios-grid stagger-group">
-          {bios.map((bio) => (
-            <div class="bio-card stagger-item" style={`border-color: ${bio.borderColor};`}>
-              <div class="bio-card-header">
-                <div class="bio-meta-left">
-                  <span class="bio-badge" style={`color: ${bio.color}; border: 1px solid ${bio.color}66; background: ${bio.bgBadge};`}>
-                    {bio.label}
-                  </span>
-                  <span class="bio-words">{bio.words}</span>
+        <!-- Centered Tab Navigation Bar -->
+        <div class="bio-tabs-nav reveal-up">
+          <button class="bio-tab-btn" data-bio-target="short" type="button">
+            <span class="tab-label">SHORT BIO</span>
+            <span class="tab-words">~50 Words</span>
+          </button>
+          <button class="bio-tab-btn active" data-bio-target="medium" type="button">
+            <span class="tab-label">MEDIUM BIO</span>
+            <span class="tab-words">~150 Words</span>
+          </button>
+          <button class="bio-tab-btn" data-bio-target="long" type="button">
+            <span class="tab-label">LONG BIO</span>
+            <span class="tab-words">~300 Words</span>
+          </button>
+        </div>
+
+        <!-- Single Luxury Executive Reader Container -->
+        <div class="bio-reader-card reveal-up">
+          {bios.map((bio, index) => (
+            <div class={`bio-panel ${index === 1 ? 'active' : 'hidden'}`} id={`bio-panel-${bio.id}`}>
+              
+              <div class="bio-reader-top">
+                <div class="bio-reader-meta">
+                  <div class="bio-badge-row">
+                    <span class="bio-badge" style={`color: ${bio.color}; border: 1px solid ${bio.color}66; background: ${bio.bgBadge};`}>
+                      {bio.label}
+                    </span>
+                    <span class="bio-words-count">{bio.words}</span>
+                  </div>
+                  <p class="bio-use-case">{bio.subtitle}</p>
                 </div>
-                <button class="copy-btn" data-copy-target={`bio-text-${bio.id}`} type="button" style={`border-color: ${bio.color}88; color: ${bio.color};`}>
-                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                  <span class="copy-text">Copy Bio</span>
+                <button class="copy-btn copy-btn-large" data-copy-target={`bio-text-${bio.id}`} type="button">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                  <span class="copy-text">Copy Bio to Clipboard</span>
                 </button>
               </div>
-
-              <p class="bio-subtitle">{bio.subtitle}</p>
               
-              <div class="bio-content-box">
-                <p id={`bio-text-${bio.id}`} class="bio-text">{bio.text}</p>
+              <div class="bio-reader-body">
+                <p id={`bio-text-${bio.id}`} class="bio-reader-text">{bio.text}</p>
               </div>
+              
+              <div class="bio-reader-footer">
+                <span class="footer-note">✓ Approved for conference programs, press releases, and editorial profiles.</span>
+              </div>
+
             </div>
           ))}
         </div>
@@ -218,11 +242,11 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
           <p class="section-subtext">Recommended verbatim script for event hosts and session moderators when introducing Tiffany to the stage.</p>
         </div>
 
-        <div class="emcee-box reveal-up" style="max-width: 920px; margin: 0 auto;">
+        <div class="emcee-box reveal-up" style="max-width: 960px; margin: 0 auto;">
           <div class="emcee-header">
             <span class="emcee-badge">VERBATIM STAGE SCRIPT (~30 SECONDS)</span>
-            <button class="copy-btn" data-copy-target="emcee-script-text" type="button" style="border-color: var(--color-gold); color: var(--color-gold);">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            <button class="copy-btn copy-btn-large" data-copy-target="emcee-script-text" type="button" style="border-color: var(--color-gold); color: var(--color-gold);">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               <span class="copy-text">Copy Script</span>
             </button>
           </div>
@@ -304,6 +328,31 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
+    // Client-Side Tab Switching Logic
+    const tabButtons = document.querySelectorAll('.bio-tab-btn');
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-bio-target');
+        
+        // Update active tab buttons
+        tabButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Show selected panel
+        document.querySelectorAll('.bio-panel').forEach(panel => {
+          panel.classList.add('hidden');
+          panel.classList.remove('active');
+        });
+        
+        const activePanel = document.getElementById(`bio-panel-${target}`);
+        if (activePanel) {
+          activePanel.classList.remove('hidden');
+          activePanel.classList.add('active');
+        }
+      });
+    });
+
+    // Copy to Clipboard Logic
     const copyButtons = document.querySelectorAll('.copy-btn');
     copyButtons.forEach(btn => {
       btn.addEventListener('click', async () => {
@@ -316,7 +365,7 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
           await navigator.clipboard.writeText(textToCopy);
           const copyTextSpan = btn.querySelector('.copy-text');
           const originalText = copyTextSpan.innerText;
-          copyTextSpan.innerText = 'Copied!';
+          copyTextSpan.innerText = 'Copied to Clipboard!';
           btn.classList.add('copied');
           
           setTimeout(() => {
@@ -407,114 +456,194 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
   }
 
   /* ---------------------------------------------------- */
-  /* 3 COLOR-ACCENTED BIO CARDS GRID                     */
+  /* TABBED BIO SWITCHER & EXECUTIVE READER CARD          */
   /* ---------------------------------------------------- */
-  .bios-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
+  .bio-tabs-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
   }
 
-  @media (min-width: 1024px) {
-    .bios-grid {
-      grid-template-columns: repeat(3, 1fr);
+  .bio-tab-btn {
+    background: rgba(20, 18, 14, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    transition: all 0.25s ease;
+  }
+
+  .bio-tab-btn .tab-label {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: rgba(251, 246, 234, 0.7);
+    transition: color 0.25s ease;
+  }
+
+  .bio-tab-btn .tab-words {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: rgba(251, 246, 234, 0.45);
+    transition: color 0.25s ease;
+  }
+
+  .bio-tab-btn:hover {
+    border-color: rgba(217, 162, 58, 0.5);
+    background: rgba(217, 162, 58, 0.08);
+  }
+
+  .bio-tab-btn.active {
+    background: rgba(217, 162, 58, 0.15);
+    border-color: var(--color-gold, #D9A23A);
+    box-shadow: 0 4px 20px rgba(217, 162, 58, 0.2);
+  }
+
+  .bio-tab-btn.active .tab-label {
+    color: var(--color-gold, #D9A23A);
+  }
+
+  .bio-tab-btn.active .tab-words {
+    color: #FBF6EA;
+  }
+
+  /* Executive Reader Card */
+  .bio-reader-card {
+    max-width: 960px;
+    margin: 0 auto;
+    background: rgba(20, 18, 14, 0.95);
+    border: 1px solid rgba(217, 162, 58, 0.35);
+    border-radius: 20px;
+    padding: 3rem 2.5rem;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55);
+  }
+
+  .bio-panel {
+    display: block;
+    animation: fadeInBio 0.3s ease-in-out;
+  }
+
+  .bio-panel.hidden {
+    display: none;
+  }
+
+  @keyframes fadeInBio {
+    from {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
     }
   }
 
-  .bio-card {
-    background: rgba(20, 18, 14, 0.9);
-    border: 1px solid;
-    border-radius: 20px;
-    padding: 2.25rem 1.85rem;
-    display: flex;
-    flex-direction: column;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-  }
-
-  .bio-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
-  }
-
-  .bio-card-header {
+  .bio-reader-top {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1rem;
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 1rem;
   }
 
-  .bio-meta-left {
+  .bio-reader-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .bio-badge-row {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
+    gap: 0.65rem;
   }
 
   .bio-badge {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
     font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    padding: 0.25rem 0.65rem;
+    padding: 0.3rem 0.75rem;
     border-radius: 6px;
   }
 
-  .bio-words {
+  .bio-words-count {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.75rem;
+    font-weight: 700;
     color: #FBF6EA;
-    font-weight: 600;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
   }
 
-  .bio-subtitle {
+  .bio-use-case {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: var(--color-gold, #D9A23A);
-    margin: 0 0 1.25rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 0.75rem;
+    margin: 0.25rem 0 0 0;
     font-weight: 600;
   }
 
-  .bio-content-box {
-    flex: 1;
+  .bio-reader-body {
+    margin-bottom: 2rem;
   }
 
-  .bio-text {
+  .bio-reader-text {
     font-family: var(--font-sans);
-    font-size: 1rem;
-    line-height: 1.75;
+    font-size: 1.15rem;
+    line-height: 1.85;
     color: #FFFFFF !important;
-    margin: 0;
     white-space: pre-line;
-    font-weight: 400;
+    margin: 0;
   }
 
-  .copy-btn {
+  .bio-reader-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    margin-top: 2rem;
+    padding-top: 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: rgba(251, 246, 234, 0.6);
+  }
+
+  .copy-btn-large {
+    padding: 0.6rem 1.25rem;
+    font-size: 0.8rem;
+    border-color: var(--color-gold, #D9A23A);
+    color: var(--color-gold, #D9A23A);
     display: inline-flex;
     align-items: center;
-    gap: 0.4rem;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid;
+    gap: 0.5rem;
+    background: rgba(217, 162, 58, 0.12);
+    border: 1px solid var(--color-gold, #D9A23A);
     font-family: var(--font-mono);
-    font-size: 0.72rem;
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 0.35rem 0.75rem;
     border-radius: 100px;
     cursor: pointer;
     transition: all 0.2s ease;
   }
 
-  .copy-btn:hover {
+  .copy-btn-large:hover {
     background: var(--color-gold, #D9A23A) !important;
     border-color: var(--color-gold, #D9A23A) !important;
     color: #0D0C08 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(217, 162, 58, 0.35);
   }
 
   .copy-btn.copied {
@@ -523,7 +652,9 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
     color: #ffffff !important;
   }
 
-  /* Emcee Box */
+  /* ---------------------------------------------------- */
+  /* EMCEE BOX                                            */
+  /* ---------------------------------------------------- */
   .emcee-box {
     background: rgba(20, 18, 14, 0.9);
     border: 1px solid rgba(217, 162, 58, 0.35);
