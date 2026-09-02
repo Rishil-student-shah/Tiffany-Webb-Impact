@@ -12,56 +12,56 @@ const subtitle = content.subtitle || content.subtext || "Same expertise, shaped 
 const fallbackFormats = [
   {
     num: "01",
-    title: "Keynote",
+    title: "Keynote Speaking",
     subtitle: "Main Stage · 45–60 Minutes",
     desc: "High-energy, narrative-driven keynote that deconstructs stigma, bridges lived understanding with clinical rigor, and inspires collective action across large audiences.",
-    tag: "01 // SIGNATURE",
-    link: "/work-with-tiffany?format=Keynote",
+    tag: "01 // KEYNOTE",
+    link: "/work-with-tiffany?format=Keynote+Speaking",
     color: "#0E6B54"
   },
   {
     num: "02",
-    title: "Conference Session",
+    title: "Conference & Breakout Sessions",
     subtitle: "Breakout & Deep Dive · 60–90 Minutes",
     desc: "Targeted educational breakout tailored to specific clinical tracks, prevention disciplines, or community health strategies with interactive Q&A.",
     tag: "02 // BREAKOUT",
-    link: "/work-with-tiffany?format=Conference+Session",
+    link: "/work-with-tiffany?format=Conference+%26+Breakout+Sessions",
     color: "#D9A23A"
   },
   {
     num: "03",
-    title: "Panel",
-    subtitle: "Panelist or Moderator · 45–75 Minutes",
-    desc: "Dynamic panelist or skilled moderator bringing frontline specificity, health equity lens, and collaborative dialogue to complex behavioral health issues.",
-    tag: "03 // DIALOGUE",
-    link: "/work-with-tiffany?format=Panel",
+    title: "Interactive Workshops",
+    subtitle: "Hands-on Cohort · Half-Day to Full-Day",
+    desc: "Interactive, skills-focused workshop built for frontline workers, healthcare teams, and community leaders with scenario practice and screening tools.",
+    tag: "03 // WORKSHOP",
+    link: "/work-with-tiffany?format=Interactive+Workshops",
     color: "#C15427"
   },
   {
     num: "04",
-    title: "School & University",
-    subtitle: "Campus-Wide · Half-Day / Full-Day",
-    desc: "Two-part structured delivery: student-focused awareness session addressing sports-betting apps and digital gaming, followed by a faculty and counselor workshop.",
-    tag: "04 // YOUTH & CAMPUS",
-    link: "/work-with-tiffany?format=School+or+University+Event",
+    title: "Professional Training",
+    subtitle: "Clinical & Frontline · Multi-Session",
+    desc: "In-depth professional development for clinicians, counselors, and social workers covering evidence-based screening protocols (NODS-CLiP), motivational interviewing, and linkage to care.",
+    tag: "04 // TRAINING",
+    link: "/work-with-tiffany?format=Professional+Training",
     color: "#6C2D5A"
   },
   {
     num: "05",
-    title: "Workshops & Training",
-    subtitle: "Clinical & Frontline · Half-Day to Multi-Day",
-    desc: "Hands-on intensive for healthcare providers, counselors, and ROSC staff covering screening protocols (NODS-CLiP), brief intervention, and linkage to care.",
-    tag: "05 // INTENSIVE",
-    link: "/work-with-tiffany?format=Workshop+or+Training",
+    title: "School, University & Youth Programs",
+    subtitle: "Campus-Wide · Half-Day / Full-Day",
+    desc: "Two-part structured delivery: student-focused awareness session addressing sports-betting apps and digital gaming risk, followed by a faculty and counselor workshop.",
+    tag: "05 // YOUTH & CAMPUS",
+    link: "/work-with-tiffany?format=School%2C+University+%26+Youth+Programs",
     color: "#0E6B54"
   },
   {
     num: "06",
-    title: "Strategic Advisory",
-    subtitle: "Executive Consulting · Multi-Session",
-    desc: "Bespoke consulting for organizations and public agencies: prevention curriculum design, community campaign architecture, and coalition alignment.",
-    tag: "06 // EXECUTIVE",
-    link: "/work-with-tiffany?format=Strategic+Consulting+or+Advisory",
+    title: "Panels & Moderated Conversations",
+    subtitle: "Panelist or Moderator · 45–75 Minutes",
+    desc: "Dynamic panelist or skilled moderator bringing frontline specificity, health equity lens, and collaborative dialogue to complex behavioral health and civic issues.",
+    tag: "06 // DIALOGUE",
+    link: "/work-with-tiffany?format=Panels+%26+Moderated+Conversations",
     color: "#D9A23A"
   }
 ];
@@ -117,10 +117,18 @@ const items = (collections.expertise && collections.expertise.length > 0)
       ))}
     </div>
 
-    <!-- Bottom Action -->
-    <div class="ways-bottom-cta reveal-up mt-12 text-center">
+    <!-- Section 4: Recommended Website Secondary Line (Folder 0.5 Standard) -->
+    <div class="secondary-services-line reveal-up" style="margin-top: 3.5rem; text-align: center; max-width: 980px; margin-left: auto; margin-right: auto; padding: 1.5rem 2rem; background: rgba(20, 18, 14, 0.6); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px;">
+      <p style="font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.8; color: rgba(251, 246, 234, 0.85); margin: 0;">
+        <strong style="color: #D9A23A; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700;">Also available for:</strong> 
+        Podcast Guest Appearances &bull; Media Interviews &bull; Webinars &bull; Staff Development &bull; Strategic Planning &bull; Coalition Building &bull; Community Consultation &bull; Community Presentations &bull; Panel Moderation &bull; Program Design &bull; Curriculum Development
+      </p>
+    </div>
+
+    <!-- Bottom Action CTA (Folder 0.5 Standard) -->
+    <div class="ways-bottom-cta reveal-up mt-10 text-center">
       <Button href="/work-with-tiffany" variant="primary" className="magnetic-btn">
-        SCHEDULE AN ALIGNMENT CALL &rarr;
+        START A CONVERSATION &rarr;
       </Button>
     </div>
 
@@ -138,15 +146,11 @@ const items = (collections.expertise && collections.expertise.length > 0)
     max-width: 800px;
     margin: 0 auto 4.5rem auto;
     text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
   }
 
   .ways-subtitle {
     font-size: 1.15rem;
-    color: rgba(251, 246, 234, 0.85);
+    color: rgba(251, 246, 234, 0.8);
     line-height: 1.6;
     margin-top: 1rem;
   }
@@ -166,24 +170,25 @@ const items = (collections.expertise && collections.expertise.length > 0)
   @media (min-width: 1024px) {
     .formats-grid {
       grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
     }
   }
 
   .format-card {
     background: rgba(20, 18, 14, 0.7);
-    border: 1px solid rgba(217, 162, 58, 0.22);
-    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
     padding: 2.25rem 2rem;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    justify-content: space-between;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
   }
 
   .format-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(217, 162, 58, 0.5);
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), 0 0 25px rgba(217, 162, 58, 0.12);
+    transform: translateY(-5px);
+    border-color: rgba(217, 162, 58, 0.4);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
   }
 
   .format-card-inner {
@@ -196,7 +201,7 @@ const items = (collections.expertise && collections.expertise.length > 0)
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1.5rem;
   }
 
   .format-num {
@@ -207,71 +212,58 @@ const items = (collections.expertise && collections.expertise.length > 0)
 
   .format-tag {
     font-family: var(--font-mono);
-    font-size: 0.7rem;
-    font-weight: 700;
+    font-size: 0.72rem;
+    color: rgba(251, 246, 234, 0.5);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: rgba(251, 246, 234, 0.7);
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.25rem 0.6rem;
-    border-radius: 6px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .format-body {
+    flex-grow: 1;
+    margin-bottom: 2rem;
   }
 
   .format-title {
     font-family: var(--font-serif);
     font-size: 1.45rem;
-    color: var(--color-ivory, #FBF6EA);
-    margin: 0 0 0.4rem 0;
+    color: #FBF6EA;
+    margin-bottom: 0.4rem;
     line-height: 1.25;
   }
 
   .format-length {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.8rem;
     color: var(--color-gold, #D9A23A);
+    margin-bottom: 1rem;
     font-weight: 600;
-    letter-spacing: 0.05em;
-    margin-bottom: 1.25rem;
   }
 
   .format-desc {
-    font-size: 0.88rem;
-    line-height: 1.6;
-    color: rgba(251, 246, 234, 0.82);
-    margin: 0 0 1.75rem 0;
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: rgba(251, 246, 234, 0.85);
   }
 
   .format-footer {
-    margin-top: auto;
     border-top: 1px solid rgba(255, 255, 255, 0.08);
     padding-top: 1.25rem;
   }
 
   .format-link {
     font-family: var(--font-mono);
-    font-size: 0.78rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-size: 0.82rem;
     color: var(--color-gold, #D9A23A);
     text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    transition: all 0.2s ease;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: padding-left 0.2s ease, color 0.2s ease;
+    display: inline-block;
   }
 
   .format-link:hover {
-    color: #ffffff;
-    transform: translateX(4px);
-  }
-
-  .ways-bottom-cta {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 3.5rem;
-    text-align: center;
+    color: #FFFFFF;
+    padding-left: 4px;
   }
 </style>
