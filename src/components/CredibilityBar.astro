@@ -2,13 +2,18 @@
 import Waveform from './Waveform.astro';
 
 const { collections = {} } = Astro.props;
-let items = collections.credibility_bar || [];
 
-// Filter out TBC and cap at 4 items
-items = items.filter(item => item.title && item.title.toUpperCase() !== 'TBC').slice(0, 4);
+const fallbackItems = [
+  { title: "15+", subtitle: "YEARS OF EXPERIENCE" },
+  { title: "50+", subtitle: "WORKSHOPS · PRESENTATIONS · ACTIVATIONS" },
+  { title: "100+", subtitle: "COMMUNITY PARTNERS & COLLABORATIONS" }
+];
+
+let items = (collections.credibility_bar && collections.credibility_bar.length > 0)
+  ? collections.credibility_bar.filter(item => item.title && item.title.toUpperCase() !== 'TBC').slice(0, 3)
+  : fallbackItems;
 ---
 
-{items.length > 0 && (
 <section class="credibility-bar theme-ink reveal-up" aria-label="Key Figures">
   <Waveform opacity={0.04} flipX={true} />
   <div class="credibility-container">
@@ -26,12 +31,11 @@ items = items.filter(item => item.title && item.title.toUpperCase() !== 'TBC').s
     ))}
   </div>
 </section>
-)}
 
 <style>
   .credibility-bar {
     position: relative;
-    padding: var(--sp-12) 0;
+    padding: 5rem 1.5rem;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
@@ -59,26 +63,28 @@ items = items.filter(item => item.title && item.title.toUpperCase() !== 'TBC').s
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 0 4vw; /* Responsive spacing */
+    padding: 0 3vw;
+    flex: 1;
   }
 
   .credibility-stat {
     font-family: var(--font-serif);
-    font-size: clamp(3.5rem, 6vw, 4.5rem); /* Large serif numeral */
-    line-height: 1;
-    margin-bottom: var(--sp-3);
-    color: var(--color-ivory); 
+    font-size: clamp(2.8rem, 5vw, 4rem);
+    line-height: 1.05;
+    margin-bottom: 0.6rem;
+    color: var(--color-ivory, #FBF6EA);
+    font-weight: 300;
   }
 
   .credibility-label {
     font-family: var(--font-mono);
-    font-size: 0.92rem;
+    font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: #F3C56E;
+    color: #D9A23A;
     line-height: 1.4;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+    max-width: 280px;
   }
 
   .credibility-divider {
@@ -91,7 +97,7 @@ items = items.filter(item => item.title && item.title.toUpperCase() !== 'TBC').s
   @media (min-width: 768px) {
     .credibility-divider {
       width: 1px;
-      height: 80px;
+      height: 70px;
       align-self: center;
     }
   }

@@ -27,7 +27,10 @@ const items = (collections.impact_band && collections.impact_band.length > 0)
 <style>
   .impact-band {
     width: 100%;
-    padding: var(--sp-8) var(--sp-4);
+    background: #181712;
+    border-top: 1px solid rgba(217, 162, 58, 0.2);
+    border-bottom: 1px solid rgba(217, 162, 58, 0.2);
+    padding: 2.25rem 1.5rem;
     position: relative;
     z-index: 10;
   }
@@ -52,7 +55,7 @@ const items = (collections.impact_band && collections.impact_band.length > 0)
   /* Desktop layout: 4 columns with vertical hairline dividers */
   @media (min-width: 1024px) {
     .impact-band {
-      padding: var(--sp-6) var(--sp-4);
+      padding: 2.25rem 1.5rem;
     }
     
     .band-container {
