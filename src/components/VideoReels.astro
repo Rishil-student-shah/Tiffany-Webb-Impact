@@ -51,10 +51,10 @@ const resolveImage = (imgName) => {
   <Waveform opacity={0.04} variant="B" flipY={true} />
   
   <div class="relative z-10" style="width: 90%; max-width: 1200px; margin: 0 auto;">
-    <div class="reveal-up" style="margin-bottom: 5rem; max-width: 800px;">
-      <div style="margin-bottom: 1rem;"><Eyebrow>{eyebrowText}</Eyebrow></div>
-      <h2 class="section-title works-title" style="margin-bottom: 2rem; font-size: clamp(2.5rem, 4vw, 4rem); color: var(--color-ivory);" set:html={titleHtml}></h2>
-      <p class="subtitle" style="text-align: left; margin: 0; line-height: 1.6; font-size: 1.1rem; color: rgba(251, 246, 234, 0.85);">{description}</p>
+    <div class="reveal-up text-center" style="margin: 0 auto 5rem auto; max-width: 800px; text-align: center; display: flex; flex-direction: column; align-items: center;">
+      <div style="margin-bottom: 1rem; width: 100%; text-align: center;"><Eyebrow className="justify-center text-center">{eyebrowText}</Eyebrow></div>
+      <h2 class="section-title works-title" style="margin-bottom: 2rem; font-size: clamp(2.5rem, 4vw, 4rem); color: var(--color-ivory); text-align: center;" set:html={titleHtml}></h2>
+      <p class="subtitle" style="text-align: center; margin: 0 auto; line-height: 1.6; font-size: 1.1rem; color: rgba(251, 246, 234, 0.85);">{description}</p>
     </div>
     
     <div class="videos-grid stagger-group">

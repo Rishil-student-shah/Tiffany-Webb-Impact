@@ -24,6 +24,14 @@ const { className = '' } = Astro.props;
     text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
   }
 
+  .eyebrow.justify-center,
+  .eyebrow.text-center {
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
   @media (max-width: 640px) {
     .eyebrow {
       font-size: 0.85rem;
