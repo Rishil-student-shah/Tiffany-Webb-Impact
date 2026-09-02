@@ -168,64 +168,92 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
       </div>
     </section>
 
-    <!-- Section 1: Approved Biographies (Executive Tabbed Switcher) -->
+    <!-- Section 1: Approved Biographies (Fail-Safe Executive Tabbed Reader) -->
     <section class="media-section relative overflow-hidden" id="approved-bios">
       <Waveform opacity={0.03} variant="B" />
-      <div class="media-container relative z-10">
+      <div class="media-container relative z-10" style="max-width: 1000px; margin: 0 auto; padding: 0 1.5rem;">
         
-        <div class="section-header-block reveal-up">
+        <!-- Section Header -->
+        <div class="section-header-block reveal-up" style="text-align: center; margin-bottom: 3rem;">
           <Eyebrow className="justify-center text-center">OFFICIAL BIOGRAPHIES</Eyebrow>
-          <h2 class="media-h2">Approved <span class="italic-accent">biographies.</span></h2>
-          <p class="section-subtext">Select the length that best fits your program format. Click "Copy Bio" to copy the formatted text to your clipboard.</p>
+          <h2 class="media-h2" style="font-family: var(--font-serif); font-size: clamp(2.2rem, 4vw, 3.4rem); color: #FBF6EA; margin: 0.5rem 0 1rem 0;">
+            Approved <span class="italic-accent">biographies.</span>
+          </h2>
+          <p class="section-subtext" style="font-size: 1.15rem; color: rgba(251, 246, 234, 0.85); max-width: 680px; margin: 0 auto;">
+            Select the length that best fits your program format. Click "Copy Bio" to copy the formatted text directly to your clipboard.
+          </p>
         </div>
 
-        <!-- Centered Tab Navigation Bar -->
-        <div class="bio-tabs-nav reveal-up">
-          <button class="bio-tab-btn" data-bio-target="short" type="button">
-            <span class="tab-label">SHORT BIO</span>
-            <span class="tab-words">~50 Words</span>
+        <!-- Luxury Gold Pill Tabs -->
+        <div class="bio-tabs-container" style="display: flex; justify-content: center; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap;">
+          <button class="bio-tab-pill" data-bio-target="short" type="button" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.75rem; border-radius: 9999px; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.25s ease; background: #1A1713; color: #FBF6EA; border: 1px solid rgba(255, 255, 255, 0.2);">
+            <span>SHORT BIO</span>
+            <span style="opacity: 0.5; font-size: 0.75rem;">(~50w)</span>
           </button>
-          <button class="bio-tab-btn active" data-bio-target="medium" type="button">
-            <span class="tab-label">MEDIUM BIO</span>
-            <span class="tab-words">~150 Words</span>
+          
+          <button class="bio-tab-pill active-tab" data-bio-target="medium" type="button" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.75rem; border-radius: 9999px; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.25s ease; background: #D9A23A; color: #0D0C08; border: 1px solid #D9A23A; box-shadow: 0 4px 20px rgba(217, 162, 58, 0.3);">
+            <span>MEDIUM BIO</span>
+            <span style="font-size: 0.75rem; font-weight: 800;">(~150w)</span>
           </button>
-          <button class="bio-tab-btn" data-bio-target="long" type="button">
-            <span class="tab-label">LONG BIO</span>
-            <span class="tab-words">~300 Words</span>
+          
+          <button class="bio-tab-pill" data-bio-target="long" type="button" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.85rem 1.75rem; border-radius: 9999px; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; cursor: pointer; transition: all 0.25s ease; background: #1A1713; color: #FBF6EA; border: 1px solid rgba(255, 255, 255, 0.2);">
+            <span>LONG BIO</span>
+            <span style="opacity: 0.5; font-size: 0.75rem;">(~300w)</span>
           </button>
         </div>
 
-        <!-- Single Luxury Executive Reader Container -->
-        <div class="bio-reader-card reveal-up">
-          {bios.map((bio, index) => (
-            <div class={`bio-panel ${index === 1 ? 'active' : 'hidden'}`} id={`bio-panel-${bio.id}`}>
-              
-              <div class="bio-reader-top">
-                <div class="bio-reader-meta">
-                  <div class="bio-badge-row">
-                    <span class="bio-badge" style={`color: ${bio.color}; border: 1px solid ${bio.color}66; background: ${bio.bgBadge};`}>
-                      {bio.label}
-                    </span>
-                    <span class="bio-words-count">{bio.words}</span>
+        <!-- Single Executive Reader Card (Strict Inline Display Guard) -->
+        <div class="bio-reader-card" style="background: #14120E; border: 1px solid rgba(217, 162, 58, 0.4); border-radius: 24px; padding: 3.25rem 2.75rem; box-shadow: 0 25px 50px rgba(0,0,0,0.6); position: relative;">
+          
+          {bios.map((bio, index) => {
+            // Default to Medium Bio (index 1) active on load
+            const isDefault = (bio.id === "medium" || index === 1);
+            return (
+              <div 
+                class="bio-panel" 
+                id={`bio-panel-${bio.id}`} 
+                style={isDefault ? "display: block;" : "display: none;"}
+              >
+                <!-- Card Top: Meta & Copy Button -->
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid rgba(255, 255, 255, 0.12); padding-bottom: 1.75rem; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
+                  <div>
+                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
+                      <span style="font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 0.85rem; border-radius: 6px; background: rgba(217, 162, 58, 0.18); color: #D9A23A; border: 1px solid rgba(217, 162, 58, 0.4);">
+                        {bio.label}
+                      </span>
+                      <span style="font-family: var(--font-mono); font-size: 0.78rem; color: #FBF6EA; opacity: 0.8; font-weight: 600;">
+                        {bio.words}
+                      </span>
+                    </div>
+                    <p style="font-family: var(--font-mono); font-size: 0.88rem; color: #D9A23A; margin: 0; font-weight: 600;">
+                      {bio.subtitle}
+                    </p>
                   </div>
-                  <p class="bio-use-case">{bio.subtitle}</p>
+                  <button 
+                    class="copy-btn copy-bio-btn" 
+                    data-copy-target={`bio-text-${bio.id}`} 
+                    type="button" 
+                    style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(217, 162, 58, 0.15); border: 1px solid #D9A23A; color: #D9A23A; padding: 0.65rem 1.35rem; border-radius: 9999px; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease;"
+                  >
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <span class="copy-text">Copy Bio to Clipboard</span>
+                  </button>
                 </div>
-                <button class="copy-btn copy-btn-large" data-copy-target={`bio-text-${bio.id}`} type="button">
-                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                  <span class="copy-text">Copy Bio to Clipboard</span>
-                </button>
-              </div>
-              
-              <div class="bio-reader-body">
-                <p id={`bio-text-${bio.id}`} class="bio-reader-text">{bio.text}</p>
-              </div>
-              
-              <div class="bio-reader-footer">
-                <span class="footer-note">✓ Approved for conference programs, press releases, and editorial profiles.</span>
-              </div>
 
-            </div>
-          ))}
+                <!-- Card Body: Bio Text -->
+                <div style="min-height: 180px;">
+                  <p id={`bio-text-${bio.id}`} style="font-family: var(--font-sans); font-size: 1.15rem; line-height: 1.85; color: #FFFFFF !important; margin: 0; white-space: pre-line; font-weight: 400;">
+                    {bio.text}
+                  </p>
+                </div>
+
+                <!-- Card Footer: Verification Tag -->
+                <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); margin-top: 2.25rem; padding-top: 1.25rem; font-family: var(--font-mono); font-size: 0.8rem; color: rgba(251, 246, 234, 0.55);">
+                  ✓ Approved for conference programs, press releases, website speaker profiles, and printed event marketing.
+                </div>
+              </div>
+            );
+          })}
         </div>
 
       </div>
@@ -328,49 +356,59 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
-    // Client-Side Tab Switching Logic
-    const tabButtons = document.querySelectorAll('.bio-tab-btn');
+    const tabButtons = document.querySelectorAll('.bio-tab-pill');
+    const panels = document.querySelectorAll('.bio-panel');
+
     tabButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         const target = btn.getAttribute('data-bio-target');
         
-        // Update active tab buttons
-        tabButtons.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        
-        // Show selected panel
-        document.querySelectorAll('.bio-panel').forEach(panel => {
-          panel.classList.add('hidden');
-          panel.classList.remove('active');
+        // 1. Update button styles
+        tabButtons.forEach(b => {
+          b.style.background = '#1A1713';
+          b.style.color = '#FBF6EA';
+          b.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+          b.style.boxShadow = 'none';
         });
-        
+        btn.style.background = '#D9A23A';
+        btn.style.color = '#0D0C08';
+        btn.style.borderColor = '#D9A23A';
+        btn.style.boxShadow = '0 4px 20px rgba(217, 162, 58, 0.3)';
+
+        // 2. Direct DOM show/hide
+        panels.forEach(p => {
+          p.style.display = 'none';
+        });
+
         const activePanel = document.getElementById(`bio-panel-${target}`);
         if (activePanel) {
-          activePanel.classList.remove('hidden');
-          activePanel.classList.add('active');
+          activePanel.style.display = 'block';
         }
       });
     });
 
-    // Copy to Clipboard Logic
-    const copyButtons = document.querySelectorAll('.copy-btn');
-    copyButtons.forEach(btn => {
+    // Copy button handler
+    document.querySelectorAll('.copy-btn').forEach(btn => {
       btn.addEventListener('click', async () => {
         const targetId = btn.getAttribute('data-copy-target');
         const targetEl = document.getElementById(targetId);
         if (!targetEl) return;
 
-        const textToCopy = targetEl.innerText.replace(/^"|"$/g, '').trim();
+        const textToCopy = targetEl.innerText.trim();
         try {
           await navigator.clipboard.writeText(textToCopy);
           const copyTextSpan = btn.querySelector('.copy-text');
           const originalText = copyTextSpan.innerText;
           copyTextSpan.innerText = 'Copied to Clipboard!';
-          btn.classList.add('copied');
+          btn.style.background = '#0E6B54';
+          btn.style.color = '#FFFFFF';
+          btn.style.borderColor = '#0E6B54';
           
           setTimeout(() => {
             copyTextSpan.innerText = originalText;
-            btn.classList.remove('copied');
+            btn.style.background = 'rgba(217, 162, 58, 0.15)';
+            btn.style.color = '#D9A23A';
+            btn.style.borderColor = '#D9A23A';
           }, 2500);
         } catch (err) {
           console.error('Failed to copy text:', err);
@@ -455,185 +493,21 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
     margin: 0 auto 1.5rem auto;
   }
 
-  /* ---------------------------------------------------- */
-  /* TABBED BIO SWITCHER & EXECUTIVE READER CARD          */
-  /* ---------------------------------------------------- */
-  .bio-tabs-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.75rem;
-    margin-bottom: 2.5rem;
-    flex-wrap: wrap;
-  }
-
-  .bio-tab-btn {
-    background: rgba(20, 18, 14, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 0.75rem 1.5rem;
-    border-radius: 12px;
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.25rem;
-    transition: all 0.25s ease;
-  }
-
-  .bio-tab-btn .tab-label {
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    color: rgba(251, 246, 234, 0.7);
-    transition: color 0.25s ease;
-  }
-
-  .bio-tab-btn .tab-words {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: rgba(251, 246, 234, 0.45);
-    transition: color 0.25s ease;
-  }
-
-  .bio-tab-btn:hover {
-    border-color: rgba(217, 162, 58, 0.5);
-    background: rgba(217, 162, 58, 0.08);
-  }
-
-  .bio-tab-btn.active {
-    background: rgba(217, 162, 58, 0.15);
-    border-color: var(--color-gold, #D9A23A);
-    box-shadow: 0 4px 20px rgba(217, 162, 58, 0.2);
-  }
-
-  .bio-tab-btn.active .tab-label {
-    color: var(--color-gold, #D9A23A);
-  }
-
-  .bio-tab-btn.active .tab-words {
-    color: #FBF6EA;
-  }
-
-  /* Executive Reader Card */
-  .bio-reader-card {
-    max-width: 960px;
-    margin: 0 auto;
-    background: rgba(20, 18, 14, 0.95);
-    border: 1px solid rgba(217, 162, 58, 0.35);
-    border-radius: 20px;
-    padding: 3rem 2.5rem;
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.55);
-  }
-
-  .bio-panel {
-    display: block;
-    animation: fadeInBio 0.3s ease-in-out;
-  }
-
-  .bio-panel.hidden {
-    display: none;
-  }
-
-  @keyframes fadeInBio {
-    from {
-      opacity: 0;
-      transform: translateY(6px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .bio-reader-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 1.5rem;
-    margin-bottom: 2rem;
-    flex-wrap: wrap;
-    gap: 1rem;
-  }
-
-  .bio-reader-meta {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .bio-badge-row {
-    display: flex;
-    align-items: center;
-    gap: 0.65rem;
-  }
-
-  .bio-badge {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 800;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    padding: 0.3rem 0.75rem;
-    border-radius: 6px;
-  }
-
-  .bio-words-count {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 700;
-    color: #FBF6EA;
-    background: rgba(255, 255, 255, 0.08);
-    padding: 0.25rem 0.6rem;
-    border-radius: 6px;
-  }
-
-  .bio-use-case {
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    color: var(--color-gold, #D9A23A);
-    margin: 0.25rem 0 0 0;
-    font-weight: 600;
-  }
-
-  .bio-reader-body {
-    margin-bottom: 2rem;
-  }
-
-  .bio-reader-text {
-    font-family: var(--font-sans);
-    font-size: 1.15rem;
-    line-height: 1.85;
-    color: #FFFFFF !important;
-    white-space: pre-line;
-    margin: 0;
-  }
-
-  .bio-reader-footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    margin-top: 2rem;
-    padding-top: 1.25rem;
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: rgba(251, 246, 234, 0.6);
-  }
-
   .copy-btn-large {
-    padding: 0.6rem 1.25rem;
+    padding: 0.65rem 1.35rem;
     font-size: 0.8rem;
     border-color: var(--color-gold, #D9A23A);
     color: var(--color-gold, #D9A23A);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    background: rgba(217, 162, 58, 0.12);
+    background: rgba(217, 162, 58, 0.15);
     border: 1px solid var(--color-gold, #D9A23A);
     font-family: var(--font-mono);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    border-radius: 100px;
+    border-radius: 9999px;
     cursor: pointer;
     transition: all 0.2s ease;
   }
@@ -644,12 +518,6 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
     color: #0D0C08 !important;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(217, 162, 58, 0.35);
-  }
-
-  .copy-btn.copied {
-    background: #0E6B54 !important;
-    border-color: #0E6B54 !important;
-    color: #ffffff !important;
   }
 
   /* ---------------------------------------------------- */
