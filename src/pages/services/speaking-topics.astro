@@ -2,613 +2,538 @@
 import Layout from '../../layouts/Layout.astro';
 import Eyebrow from '../../components/Eyebrow.astro';
 import Waveform from '../../components/Waveform.astro';
+import Button from '../../components/Button.astro';
 import mysql from 'mysql2/promise';
 
-let dbContent = {};
-let dbCollections = {};
-try {
-  const pool = mysql.createPool({ host: 'localhost', user: 'root', password: '@rishil8124shah', database: 'tiffany_crm' });
+let topics = [];
+let error = null;
+
+// Fallback list of all 21 topics if database is unavailable
+const fallbackTopics = [
+  { track_id: 1, track_name: "Prevention, Gambling & Emerging Risk", topic_number: 1, title: "Gambling Prevention & Community Awareness", subtitle: "Early Warning Signs & Proactive Frameworks", format_badge: "Keynote / Breakout", description: "An accessible, evidence-based introduction to how gambling harm develops at community scale, identifying early warning signs before crisis.", target_audience: "General Public, Healthcare Systems, Prevention Coalitions" },
+  { track_id: 1, track_name: "Prevention, Gambling & Emerging Risk", topic_number: 2, title: "From Fun to Crisis: Gambling Prevention & Education", subtitle: "Clinical Escalation & Healthcare Intervention", format_badge: "Keynote / Breakout", description: "Understanding the rapid escalation from recreational gambling to severe disorder, equipping clinical and frontline teams with proactive prevention protocols.", target_audience: "Healthcare Systems & Clinical Teams" },
+  { track_id: 1, track_name: "Prevention, Gambling & Emerging Risk", topic_number: 3, title: "Don't Bet on Your Future (Youth Focus)", subtitle: "Digital Gambling, Sports Betting & Esports", format_badge: "Workshop / Assembly", description: "Addresses sports-betting apps, digital micro-transactions, gaming crossover, and peer dynamics without lecturing or judgment.", target_audience: "Students, Youth Groups, Educators & Coaches" },
+  { track_id: 1, track_name: "Prevention, Gambling & Emerging Risk", topic_number: 4, title: "Problem Gambling Awareness Month (PGAM)", subtitle: "Signature Campaigns for National Moments", format_badge: "Campaign Keynote", description: "A ready-to-deliver signature session for national awareness campaigns, driving sustained civic engagement and stigma reduction.", target_audience: "Community Stakeholders & Advocacy Partners" },
+  { track_id: 1, track_name: "Prevention, Gambling & Emerging Risk", topic_number: 5, title: "National Screening Day & Protocols", subtitle: "Integrating Validated Screens in Health Settings", format_badge: "Clinical Workshop", description: "Practical toolkits for embedding 3-question screening (NODS-CLiP) into primary care workflows and electronic health records.", target_audience: "Community Health Centers, Clinics & Hospitals" },
   
-  const [rows] = await pool.query("SELECT section, key_name, content_value FROM website_content JOIN website_pages ON website_content.page_id = website_pages.id WHERE website_pages.slug = 'speaking-topics'");
-  rows.forEach(row => {
-    if (!dbContent[row.section]) dbContent[row.section] = {};
-    dbContent[row.section][row.key_name] = row.content_value;
+  { track_id: 2, track_name: "Community Engagement & Outreach", topic_number: 6, title: "The 8 Touchpoints to Engagement", subtitle: "Frontline Framework for Hard-to-Reach Communities", format_badge: "Strategy Workshop", description: "A proprietary framework for activating hard-to-reach populations, building lasting grassroots trust, and moving community voice into action.", target_audience: "ROSC Councils, Coalitions & Community Organizers" },
+  { track_id: 2, track_name: "Community Engagement & Outreach", topic_number: 7, title: "Outreach: Engaging Elected Officials & Resolutions", subtitle: "Moving Prevention into Civic Policy Attention", format_badge: "Policy Workshop", description: "How to build sustainable partnerships with civic leaders, draft impactful municipal resolutions, and secure dedicated public health resources.", target_audience: "Civic Leaders, Municipalities & Policy Makers" },
+  { track_id: 2, track_name: "Community Engagement & Outreach", topic_number: 8, title: "Faith Communities as Frontline Prevention Partners", subtitle: "Mobilizing Pastoral Networks & Stigma-Free Sanctuaries", format_badge: "Interactive Forum", description: "Mobilizing faith institutions to provide safe, stigma-free havens and early referral connections for impacted families.", target_audience: "Faith Leaders, Pastoral Counselors & Ministry Teams" },
+  { track_id: 2, track_name: "Community Engagement & Outreach", topic_number: 9, title: "Culturally Grounded Stigma Reduction in Communities of Color", subtitle: "Health Equity & Culturally Fluent Public Health", format_badge: "Keynote / Workshop", description: "Overcoming historical healthcare distrust and cultural barriers to deliver interventions that authentically resonate with diverse populations.", target_audience: "Grassroots Leaders & Health Equity Advocates" },
+  { track_id: 2, track_name: "Community Engagement & Outreach", topic_number: 10, title: "Creative Arts & Youth Prevention: Beyond the Brochure", subtitle: "Creative Expression as a Preventive Shield", format_badge: "Interactive Workshop", description: "Leveraging creative arts contests, storytelling, and digital media to engage youth in prevention without standard lectures.", target_audience: "Schools, Art Educators & Youth Organizations" },
+
+  { track_id: 3, track_name: "Human-Centered Systems & Services", topic_number: 11, title: "Gambling & Co-Occurring Disorders: SUD & Workplace", subtitle: "Clinical Overlap & Workplace Risk Management", format_badge: "Professional Training", description: "Clinical overlap between gambling harm, substance use disorders, and workplace risk indicators, facilitating early EAP interventions.", target_audience: "Behavioral Health Professionals & HR/EAPs" },
+  { track_id: 3, track_name: "Human-Centered Systems & Services", topic_number: 12, title: "The G.E.A.R. Model: From Awareness to Referral", subtitle: "System Architecture & Implementation Pathways", format_badge: "Executive Advisory / Training", description: "Operationalizing Tiffany's GEAR Method™ (Generate, Engage, Activate, Resource) to build seamless screening-to-referral ecosystems.", target_audience: "System Architects, Health Networks & Agencies" },
+  { track_id: 3, track_name: "Human-Centered Systems & Services", topic_number: 13, title: "The Changing Face of Gambling Addiction", subtitle: "Mobile Apps, Micro-Betting & Demographic Shifts", format_badge: "Keynote / Training", description: "Analyzing how mobile sportsbook apps and algorithmic gambling transformed addiction onset speed, demographics, and clinical presentation.", target_audience: "Treatment Providers & Healthcare Leadership" },
+  { track_id: 3, track_name: "Human-Centered Systems & Services", topic_number: 14, title: "Gambling & Suicide: Clinical Interventions", subtitle: "Lethality Assessment & Acute Crisis Management", format_badge: "Clinical Intensive", description: "Clinically grounded guidance on the elevated suicide risk in gambling disorder, lethality screening, and emergency crisis protocols.", target_audience: "Mental Health Clinicians & Crisis Intervention Teams" },
+  { track_id: 3, track_name: "Human-Centered Systems & Services", topic_number: 15, title: "Resources & Self-Exclusion Systems", subtitle: "Voluntary Exclusions, Regulatory Toolkits & Limitations", format_badge: "Professional Seminar", description: "Navigating state and venue self-exclusion frameworks, analyzing their limitations, and embedding them into holistic family recovery plans.", target_audience: "Treatment Providers & Regulatory Agencies" },
+  { track_id: 3, track_name: "Human-Centered Systems & Services", topic_number: 16, title: "Harm Reduction Strategies for Problem Gambling", subtitle: "Pragmatic Steps for Financial & Emotional Safeguards", format_badge: "Clinical Workshop", description: "Pragmatic harm-reduction approaches: financial safeguards, limit-setting tools, and risk mitigation when individuals are not ready for total abstinence.", target_audience: "Harm Reduction Advocates & Outreach Specialists" },
+
+  { track_id: 4, track_name: "Purpose, Leadership & Youth Impact", topic_number: 17, title: "Motivational Interviewing in Gambling Conversations", subtitle: "Frontline Dialogue Tools for Overcoming Resistance", format_badge: "Skills Lab", description: "Hands-on practice applying motivational interviewing to gambling disclosures, resolving ambivalence, and guiding client-led change.", target_audience: "Counselors, Case Managers & Social Workers" },
+  { track_id: 4, track_name: "Purpose, Leadership & Youth Impact", topic_number: 18, title: "The Hidden Toll: Impact on Significant Others & Families", subtitle: "Family Systems, Secondary Trauma & Boundary Setting", format_badge: "Keynote / Workshop", description: "Addressing the emotional, financial, and relational trauma carried by spouses and loved ones living with hidden addiction.", target_audience: "Families, Support Groups & Marriage Therapists" },
+  { track_id: 4, track_name: "Purpose, Leadership & Youth Impact", topic_number: 19, title: "Break the Silence: Prevention Begins with a Conversation", subtitle: "Tiffany's Signature Flagship Keynote Experience", format_badge: "Flagship Keynote", description: "Tiffany's signature flagship keynote on transforming hidden harm into collective action, deconstructing stigma, and inspiring systemic change.", target_audience: "Conferences, All Audiences & Leadership", is_flagship: 1 },
+  { track_id: 4, track_name: "Purpose, Leadership & Youth Impact", topic_number: 20, title: "Healthy Gaming & Sports: Youth Digital Safeguards", subtitle: "Resilience, Digital Well-being & Athletic Leadership", format_badge: "Youth Program / Workshop", description: "Empowering students and young athletes to navigate modern digital gaming, sports betting advertisements, and peer pressures with resilience.", target_audience: "Schools & Youth Organizations" },
+  { track_id: 4, track_name: "Purpose, Leadership & Youth Impact", topic_number: 21, title: "GambleFreeGear: Turning Awareness into Daily Culture", subtitle: "Wearable Advocacy & Cultural Normalization", format_badge: "Keynote / Innovation Talk", description: "The story and strategy behind wearable advocacy: how apparel turns prevention into an everyday cultural conversation before crisis strikes.", target_audience: "Social Entrepreneurs, Coalitions & Advocates" }
+];
+
+try {
+  const pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '@rishil8124shah',
+    database: 'tiffany_crm',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
   });
 
-  const [colRows] = await pool.query("SELECT section_name, title, subtitle, content_html, sort_order FROM website_collections JOIN website_pages ON website_collections.page_id = website_pages.id WHERE website_pages.slug = 'speaking-topics' ORDER BY sort_order ASC");
-  colRows.forEach(row => {
-    if (!dbCollections[row.section_name]) dbCollections[row.section_name] = [];
-    dbCollections[row.section_name].push(row);
-  });
+  const [rows] = await pool.query(`
+    SELECT * FROM speaking_topics 
+    WHERE is_active = 1 
+    ORDER BY track_id ASC, topic_number ASC
+  `);
 
+  if (rows && rows.length > 0) {
+    topics = rows;
+  } else {
+    topics = fallbackTopics;
+  }
   await pool.end();
 } catch (e) {
-  console.error("DB Error in speaking-topics:", e);
+  console.error("Database connection failed for speaking-topics, using verified fallback list:", e);
+  topics = fallbackTopics;
 }
 
-const hero = dbContent.hero || {};
-const tracks = dbContent.tracks || {};
-const tracksList = dbCollections.tracks_list || [];
+// Track configuration definitions
+const trackConfig = [
+  { id: 1, filterKey: "prevention", label: "Prevention", name: "Prevention, Gambling & Emerging Risk", color: "#0E6B54" },
+  { id: 2, filterKey: "outreach", label: "Outreach", name: "Community Engagement & Outreach", color: "#D9A23A" },
+  { id: 3, filterKey: "systems", label: "Systems", name: "Human-Centered Systems & Services", color: "#C15427" },
+  { id: 4, filterKey: "youth", label: "Youth & Leadership", name: "Purpose, Leadership & Youth Impact", color: "#6C2D5A" }
+];
+
+const getTrackColor = (trackId) => {
+  switch (trackId) {
+    case 1: return "#0E6B54";
+    case 2: return "#D9A23A";
+    case 3: return "#C15427";
+    case 4: return "#6C2D5A";
+    default: return "#D9A23A";
+  }
+};
+
+const getTrackKey = (trackId) => {
+  switch (trackId) {
+    case 1: return "prevention";
+    case 2: return "outreach";
+    case 3: return "systems";
+    case 4: return "youth";
+    default: return "all";
+  }
+};
 ---
 
-<Layout title="Speaking Topics | Tiffany Webb" theme="dark">
-  <main class="page-content bg-ink" style="padding-top: 8rem;">
+<Layout title="Speaking Topics Catalog | Tiffany Webb" theme="dark">
+  <main class="page-content bg-ink" style="padding-top: 6rem; padding-bottom: 8rem;">
     
-    <section class="spk-section relative overflow-hidden" id="topics">
-      <Waveform opacity={0.04} variant="A" />
-      <div class="spk-container relative z-10">
-        
-        <div class="spk-section-header text-center">
-          {hero.eyebrow && <Eyebrow className="justify-center">{hero.eyebrow}</Eyebrow>}
-          <h2 class="spk-h2" set:html={tracks.headline || 'Twenty topics. <br/><span class="italic-accent">Four tracks.</span>'}></h2>
-          <p class="spk-subtitle" set:html={tracks.subtitle || 'Every topic below is one I actively deliver. Built for specific audiences and actionable outcomes.'}></p>
+    <!-- Hero Header -->
+    <section class="spk-hero relative overflow-hidden" style="padding: 5rem 0 3rem 0;">
+      <Waveform opacity={0.05} variant="B" flipY={true} />
+      <div class="spk-container relative z-10 text-center">
+        <div class="reveal-up">
+          <Eyebrow className="justify-center">SPEAKING & FACILITATION CATALOG</Eyebrow>
+          <h1 class="spk-title mt-4">
+            Twenty-one topics. <br/><span class="italic-accent">Four signature tracks.</span>
+          </h1>
+          <p class="spk-subtitle mx-auto mt-4">
+            Every session below is actively delivered by Tiffany Webb — built for specific audiences, evidence-grounded, and designed for immediate Monday-morning application.
+          </p>
         </div>
 
-        <div class="spk-tracks-grid">
-          {tracksList.map(track => (
-            <div class="spk-track-card">
-              <div class="track-header">
-                <h3 class="track-title">{track.title}</h3>
-                <p class="track-subtitle">{track.subtitle}</p>
-              </div>
-              <div class="track-list" set:html={track.content_html}></div>
-            </div>
-          ))}
+        <!-- Interactive Track Filter Navigation -->
+        <div class="filter-bar reveal-up mt-10">
+          <button class="filter-btn active" data-filter="all">All Topics (21)</button>
+          <button class="filter-btn" data-filter="prevention">Prevention (5)</button>
+          <button class="filter-btn" data-filter="outreach">Outreach (5)</button>
+          <button class="filter-btn" data-filter="systems">Systems (6)</button>
+          <button class="filter-btn" data-filter="youth">Youth & Leadership (5)</button>
         </div>
+      </div>
+    </section>
+
+    <!-- Topics Grid by Track -->
+    <section class="spk-catalog-section relative">
+      <div class="spk-container relative z-10">
+        
+        {trackConfig.map(track => {
+          const trackTopics = topics.filter(t => t.track_id === track.id);
+          return (
+            <div class="track-group-section mt-16" data-track-section={track.filterKey}>
+              
+              <!-- Track Header Banner -->
+              <div class="track-section-header mb-8">
+                <div class="track-header-left">
+                  <span class="track-pill" style={`background: ${track.color}22; color: ${track.color}; border: 1px solid ${track.color}55;`}>
+                    TRACK 0{track.id}
+                  </span>
+                  <h2 class="track-section-title">{track.name}</h2>
+                </div>
+                <span class="track-count">{trackTopics.length} Topics</span>
+              </div>
+
+              <!-- Cards Grid -->
+              <div class="topics-grid">
+                {trackTopics.map(topic => {
+                  const numStr = (topic.topic_number || "").toString().padStart(2, '0');
+                  const topicSlug = encodeURIComponent(topic.title);
+                  const trackKey = getTrackKey(topic.track_id);
+                  const trackColor = getTrackColor(topic.track_id);
+
+                  return (
+                    <div class="topic-card ultra-glass-card stagger-item" data-track={trackKey} data-topic-num={topic.topic_number}>
+                      <div class="topic-card-inner">
+                        
+                        <!-- Top Meta Header -->
+                        <div class="topic-top-meta">
+                          <div class="topic-num-wrap">
+                            <span class="topic-num" style={`color: ${trackColor};`}>#{numStr}</span>
+                            {topic.is_flagship ? (
+                              <span class="flagship-badge">★ FLAGSHIP KEYNOTE</span>
+                            ) : null}
+                          </div>
+                          {topic.format_badge && (
+                            <span class="badge-format">{topic.format_badge}</span>
+                          )}
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="topic-body">
+                          <h3 class="topic-title">{topic.title}</h3>
+                          
+                          {topic.target_audience && (
+                            <div class="topic-audience-wrap">
+                              <span class="audience-label">Audience:</span>
+                              <span class="audience-text">{topic.target_audience}</span>
+                            </div>
+                          )}
+
+                          <p class="topic-desc">{topic.description}</p>
+                        </div>
+
+                        <!-- Card Footer Action -->
+                        <div class="topic-footer">
+                          <a href={`/work-with-tiffany?topic=${topicSlug}`} class="book-topic-btn">
+                            Book This Topic &rarr;
+                          </a>
+                        </div>
+
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+
+            </div>
+          );
+        })}
+
+        <!-- Bottom CTA Box -->
+        <div class="catalog-bottom-cta ultra-glass-card mt-20 text-center reveal-up">
+          <h3 class="cta-title">Need a customized keynote or specific training format?</h3>
+          <p class="cta-subtitle">Tiffany works directly with executive committees and conference chairs to tailor sessions to your specific objectives.</p>
+          <div class="mt-6">
+            <Button href="/work-with-tiffany" variant="primary" className="magnetic-btn">START A CONVERSATION &rarr;</Button>
+          </div>
+        </div>
+
       </div>
     </section>
 
   </main>
 </Layout>
-\n<style is:global>
-  /* Base Architecture */
-  .bg-ink { background: var(--ink); }
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const cards = document.querySelectorAll('.topic-card');
+    const trackSections = document.querySelectorAll('.track-group-section');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+
+        // Update active state on buttons
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+
+        // Filter cards and sections
+        if (filter === 'all') {
+          cards.forEach(card => card.style.display = 'flex');
+          trackSections.forEach(section => section.style.display = 'block');
+        } else {
+          trackSections.forEach(section => {
+            const sectionTrack = section.getAttribute('data-track-section');
+            if (sectionTrack === filter) {
+              section.style.display = 'block';
+            } else {
+              section.style.display = 'none';
+            }
+          });
+
+          cards.forEach(card => {
+            const cardTrack = card.getAttribute('data-track');
+            if (cardTrack === filter) {
+              card.style.display = 'flex';
+            } else {
+              card.style.display = 'none';
+            }
+          });
+        }
+      });
+    });
+  });
+</script>
+
+<style>
   .spk-container {
-    max-width: 1200px;
+    max-width: 1240px;
     margin: 0 auto;
-    padding: 0 var(--sp-6);
-    position: relative;
-    z-index: 10;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
   }
-  .spk-section {
-    padding: 8rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    position: relative;
-  }
-  .text-center { text-align: center; }
 
-  /* Typography */
-  .spk-h1 {
+  .spk-title {
     font-family: var(--font-serif);
-    font-size: clamp(3rem, 6vw, 5rem);
-    color: var(--color-ivory);
+    font-size: clamp(2.4rem, 4.5vw, 4rem);
+    color: var(--color-ivory, #FBF6EA);
     line-height: 1.1;
-    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
   }
-  .spk-h2 {
-    font-family: var(--font-serif);
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    color: var(--color-ivory);
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
+
+  .spk-title :global(.italic-accent) {
+    font-style: italic;
+    background: linear-gradient(92deg, #D9A23A 0%, #E17356 50%, #6C2D5A 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    display: inline;
   }
+
   .spk-subtitle {
-    font-family: var(--font-sans);
     font-size: 1.15rem;
-    color: rgba(251, 246, 234, 0.75);
     line-height: 1.6;
-    max-width: 700px;
-    margin: 0 auto 3rem auto;
-  }
-  .text-gold {
-    background: none;
-    -webkit-text-fill-color: var(--color-gold);
-    color: var(--color-gold);
+    color: rgba(251, 246, 234, 0.85);
+    max-width: 780px;
   }
 
-  /* 1. Hero */
-  .spk-hero-v2 {
-    padding: 12rem 0 6rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  /* Filter Navigation */
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
   }
-  .spk-hero-content {
-    margin-bottom: 4rem;
+
+  .filter-btn {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: rgba(251, 246, 234, 0.8);
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.25rem;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .filter-btn:hover {
+    background: rgba(217, 162, 58, 0.15);
+    border-color: rgba(217, 162, 58, 0.4);
+    color: var(--color-gold, #D9A23A);
+    transform: translateY(-1px);
+  }
+
+  .filter-btn.active {
+    background: var(--color-gold, #D9A23A);
+    border-color: var(--color-gold, #D9A23A);
+    color: #0D0C08;
+    box-shadow: 0 4px 15px rgba(217, 162, 58, 0.35);
+  }
+
+  /* Track Group Section */
+  .track-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 1rem;
+  }
+
+  .track-header-left {
     display: flex;
     flex-direction: column;
-    align-items: center;
-  }
-  .spk-btn-row {
-    display: flex;
-    justify-content: center;
-  }
-  .spk-hero-visual {
-    max-width: 900px;
-    margin: 0 auto;
-  }
-  .spk-hero-video-card {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    border-radius: 24px;
-    overflow: hidden;
-    background: #000;
-    box-shadow: 0 40px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(217, 162, 58, 0.3);
-    cursor: pointer;
-  }
-  .spk-video-poster {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.8s ease;
-  }
-  .spk-hero-video-card:hover .spk-video-poster {
-    transform: scale(1.03);
-  }
-  .spk-video-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.3);
-    z-index: 1;
-  }
-  .spk-play-btn {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: rgba(217, 162, 58, 0.9);
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    z-index: 2;
-    transition: transform 0.3s ease, background 0.3s ease;
-  }
-  .spk-hero-video-card:hover .spk-play-btn {
-    transform: translate(-50%, -50%) scale(1.1);
-    background: var(--color-gold);
-  }
-  .spk-play-icon {
-    width: 32px;
-    height: 32px;
-    color: var(--ink);
-    margin-left: 4px;
+    gap: 0.5rem;
   }
 
-  /* 2. Why Tiffany Bento */
-  .spk-section-header {
-    margin-bottom: 4rem;
-  }
-  .spk-bento-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-  @media (min-width: 768px) {
-    .spk-bento-grid {
-      grid-template-columns: repeat(3, 1fr);
-    }
-    .span-2 {
-      grid-column: span 2;
-    }
-  }
-  .spk-bento-card {
-    background: rgba(20, 20, 20, 0.6);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 24px;
-    padding: 3rem;
-    transition: transform 0.3s ease, border-color 0.3s ease;
-  }
-  .spk-bento-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(217, 162, 58, 0.3);
-  }
-  .spk-card-title {
-    font-family: var(--font-serif);
-    font-size: 1.75rem;
-    color: var(--color-gold);
-    margin-bottom: 1rem;
-  }
-  .spk-card-desc {
-    font-family: var(--font-sans);
-    font-size: 1.05rem;
-    color: rgba(251, 246, 234, 0.8);
-    line-height: 1.6;
-    margin: 0;
-  }
-
-  /* 3. Flagship Keynote */
-  .spk-flagship-card {
-    position: relative;
-    background: radial-gradient(circle at top right, rgba(217,162,58,0.1) 0%, transparent 50%),
-                radial-gradient(circle at bottom left, rgba(217,162,58,0.05) 0%, transparent 50%),
-                rgba(15, 15, 15, 0.95);
-    border-radius: 32px;
-    padding: 6rem 2rem;
-    border: 1px solid rgba(217, 162, 58, 0.2);
-    box-shadow: 0 30px 80px rgba(0,0,0,0.8);
-    overflow: hidden;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-  }
-  .spk-flagship-card:hover {
-    transform: translateY(-10px);
-    border-color: rgba(217, 162, 58, 0.6);
-    box-shadow: 0 40px 100px rgba(0,0,0,0.9), 0 0 60px rgba(217, 162, 58, 0.15);
-  }
-  .ambient-gold-glow {
-    position: absolute;
-    bottom: -20%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80%;
-    height: 50%;
-    background: radial-gradient(circle, rgba(217,162,58,0.2) 0%, transparent 60%);
-    pointer-events: none;
-    z-index: 0;
-  }
-  .spk-book-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.75rem;
-    background: var(--color-gold);
-    color: var(--ink);
-    padding: 1rem 2.5rem;
-    border-radius: 8px;
+  .track-pill {
     font-family: var(--font-mono);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 1rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-  }
-  .spk-book-btn:hover {
-    background: #FFC95C;
-    transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(217, 162, 58, 0.3);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    padding: 0.25rem 0.65rem;
+    border-radius: 6px;
+    display: inline-block;
+    width: fit-content;
   }
 
-  /* 3. How Tiffany Helps */
-  .helps-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    margin-bottom: 5rem;
-  }
-  @media (min-width: 768px) {
-    .helps-grid {
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2rem;
-    }
-  }
-  .helps-card {
-    display: block;
-    text-decoration: none;
-    padding: 3rem;
-    border-radius: 24px;
-    background: rgba(20, 20, 20, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease, background 0.4s ease;
-  }
-  .helps-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(217, 162, 58, 0.4);
-    background: rgba(30, 28, 25, 0.6);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5), 0 0 40px rgba(217, 162, 58, 0.05);
-  }
-  .helps-eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-    color: var(--color-gold);
-    margin-bottom: 1.5rem;
-  }
-  .helps-title {
+  .track-section-title {
     font-family: var(--font-serif);
-    font-size: 1.8rem;
-    color: var(--color-ivory);
-    margin-bottom: 1rem;
-    transition: color 0.3s ease;
-  }
-  .helps-desc {
-    font-family: var(--font-sans);
-    font-size: 1.05rem;
-    line-height: 1.6;
-    color: rgba(251, 246, 234, 0.75);
-    margin: 0;
-  }
-  
-  .helps-quote {
-    padding-top: 2rem;
-  }
-  .quote-text {
-    font-family: var(--font-serif);
-    font-size: clamp(2rem, 4vw, 3rem);
-    line-height: 1.3;
-    color: var(--color-ivory);
-    margin: 0 auto;
-    max-width: 800px;
-    opacity: 0.9;
-  }
-
-  /* GEAR Method */
-  .gear-panel {
-    background: var(--color-ivory);
-    border-radius: 32px;
-    padding: 4rem 2rem;
-    color: var(--ink);
-    margin-bottom: 2rem;
-  }
-  @media (min-width: 992px) {
-    .gear-panel {
-      padding: 6rem;
-    }
-  }
-  .gear-top-row {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    margin-bottom: 4rem;
-  }
-  @media (min-width: 992px) {
-    .gear-top-row {
-      grid-template-columns: 1fr 1fr;
-      gap: 6rem;
-    }
-  }
-  .gear-eyebrow {
-    margin-bottom: 1rem;
-  }
-  .gear-h2 {
-    font-family: var(--font-serif);
-    font-size: clamp(3rem, 5vw, 4.5rem);
-    line-height: 1.1;
-    margin: 0;
+    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
     color: var(--color-ivory, #FBF6EA);
-  }
-  .gear-standfirst {
-    font-family: var(--font-sans);
-    font-size: 1.35rem;
-    font-weight: 600;
-    line-height: 1.4;
-    color: var(--color-ivory);
-    margin: 0 0 1rem 0;
-  }
-  .gear-desc {
-    font-family: var(--font-sans);
-    font-size: 1.15rem;
-    line-height: 1.6;
-    color: rgba(251, 246, 234, 0.8);
     margin: 0;
   }
-  .gear-divider {
-    height: 1px;
-    width: 100%;
-    background: rgba(13, 18, 16, 0.1);
-    margin-bottom: 4rem;
-  }
-  .gear-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-    margin-bottom: 4rem;
-  }
-  @media (min-width: 768px) {
-    .gear-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-  @media (min-width: 992px) {
-    .gear-grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
-    }
-  }
-  .gear-card {
-    padding: 2rem;
-    border-radius: 16px;
-    background: transparent;
-    border: 1px solid transparent;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    cursor: default;
-  }
-  .gear-card:hover {
-    background: #ffffff;
-    border: 1px solid rgba(217, 162, 58, 0.2);
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.04), 0 0 20px rgba(217, 162, 58, 0.05);
-  }
-  .gear-letter {
-    font-family: var(--font-serif);
-    font-size: 4.5rem;
-    line-height: 1;
-    color: var(--color-gold);
-    margin-bottom: 1rem;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.4s ease;
-  }
-  .gear-card:hover .gear-letter {
-    transform: scale(1.1) translateX(4px);
-    text-shadow: 0 10px 20px rgba(217, 162, 58, 0.2);
-  }
-  .gear-title {
-    font-family: var(--font-serif);
-    font-size: 1.8rem;
-    color: var(--ink);
-    margin-bottom: 1rem;
-    transition: color 0.3s ease;
-  }
-  .gear-card:hover .gear-title {
-    color: var(--color-gold);
-  }
-  .gear-body {
-    font-family: var(--font-sans);
-    font-size: 1rem;
-    line-height: 1.6;
-    color: rgba(13, 18, 16, 0.75);
-    margin: 0;
-  }
-  .gear-footer-row {
-    padding-top: 2rem;
-  }
-  .gear-divider-bottom {
-    height: 1px;
-    width: 60px;
-    background: var(--color-gold);
-    margin: 0 auto 2rem auto;
-  }
-  .gear-footer-text {
+
+  .track-count {
     font-family: var(--font-mono);
     font-size: 0.85rem;
-    letter-spacing: 0.15em;
-    color: var(--color-gold);
-    text-transform: uppercase;
-    font-weight: 600;
-    margin: 0;
-  }
-
-  /* 4. Tracks Grid */
-  .spk-tracks-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-  }
-  @media (min-width: 992px) {
-    .spk-tracks-grid {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-  .spk-track-card {
-    background: rgba(15, 15, 15, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: 3rem;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-  }
-  .spk-track-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(217, 162, 58, 0.4);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 40px rgba(217, 162, 58, 0.05);
-  }
-  .track-header {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(217, 162, 58, 0.2);
-    transition: border-color 0.4s ease;
-  }
-  .spk-track-card:hover .track-header {
-    border-color: rgba(217, 162, 58, 0.5);
-  }
-  .track-title {
-    font-family: var(--font-serif);
-    font-size: 2rem;
-    color: var(--color-ivory);
-    margin-bottom: 0.5rem;
-  }
-  .track-subtitle {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    text-transform: uppercase;
+    color: rgba(251, 246, 234, 0.6);
     letter-spacing: 0.1em;
-    color: var(--color-gold);
-    opacity: 0.8;
-  }
-  .track-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  .track-list li {
-    font-family: var(--font-sans);
-    font-size: 1.05rem;
-    color: rgba(251, 246, 234, 0.75);
-    line-height: 1.6;
-    margin-bottom: 1.25rem;
-    padding-left: 1.5rem;
-    position: relative;
-  }
-  .track-list li::before {
-    content: "•";
-    position: absolute;
-    left: 0;
-    color: var(--color-gold);
-    font-weight: bold;
-  }
-  .track-list li strong {
-    color: var(--color-ivory);
-    font-weight: 500;
   }
 
-  /* 5. Timeline */
-  .timeline-bg {
-    background: radial-gradient(circle at left center, rgba(217,162,58,0.06) 0%, transparent 60%),
-                rgba(10, 10, 10, 0.8);
-  }
-  .spk-timeline-layout {
+  /* Topics Grid */
+  .topics-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
   }
-  @media (min-width: 992px) {
-    .spk-timeline-layout {
-      grid-template-columns: 400px 1fr;
-    }
-    .timeline-left {
-      position: sticky;
-      top: 150px;
+
+  @media (min-width: 640px) {
+    .topics-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
-  .spk-timeline {
+
+  @media (min-width: 1024px) {
+    .topics-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .topic-card {
+    background: rgba(20, 18, 14, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 18px;
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-sizing: border-box;
     position: relative;
-    padding-left: 3rem;
+    overflow: hidden;
   }
-  .spk-timeline::before {
-    content: '';
-    position: absolute;
-    top: 10px;
-    left: 0;
-    width: 2px;
-    height: calc(100% - 20px);
-    background: linear-gradient(to bottom, var(--color-gold) 0%, rgba(217,162,58,0.1) 100%);
+
+  .topic-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(217, 162, 58, 0.35);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(217, 162, 58, 0.06);
   }
-  .spk-time-node {
-    position: relative;
-    padding-bottom: 4rem;
+
+  .topic-card-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
   }
-  .spk-time-node.last {
-    padding-bottom: 0;
+
+  .topic-top-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 0.5rem;
   }
-  .spk-time-node::before {
-    content: '';
-    position: absolute;
-    top: 8px;
-    left: -3rem;
-    transform: translateX(-5px);
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: var(--ink);
-    border: 2px solid var(--color-gold);
-    box-shadow: 0 0 15px rgba(217, 162, 58, 0.5);
-    transition: all 0.3s ease;
+
+  .topic-num-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
   }
-  .spk-time-node:hover::before {
-    background: var(--color-gold);
-    transform: translateX(-5px) scale(1.3);
-  }
-  .node-title {
-    font-family: var(--font-serif);
-    font-size: 1.5rem;
-    color: var(--color-gold);
-    margin-bottom: 0.5rem;
-  }
-  .node-desc {
-    font-family: var(--font-sans);
+
+  .topic-num {
+    font-family: var(--font-mono);
     font-size: 1.1rem;
-    color: rgba(251, 246, 234, 0.7);
-    line-height: 1.6;
-    margin: 0;
+    font-weight: 700;
   }
-</style>\n
+
+  .flagship-badge {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    background: rgba(217, 162, 58, 0.2);
+    border: 1px solid rgba(217, 162, 58, 0.4);
+    color: var(--color-gold, #D9A23A);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+  }
+
+  .badge-format {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: rgba(251, 246, 234, 0.7);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.2rem 0.55rem;
+    border-radius: 6px;
+    white-space: nowrap;
+  }
+
+  .topic-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-ivory, #FBF6EA);
+    line-height: 1.3;
+    margin: 0 0 0.85rem 0;
+  }
+
+  .topic-audience-wrap {
+    margin-bottom: 0.85rem;
+    font-size: 0.82rem;
+    line-height: 1.4;
+  }
+
+  .audience-label {
+    font-family: var(--font-mono);
+    color: var(--color-gold, #D9A23A);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    margin-right: 0.35rem;
+  }
+
+  .audience-text {
+    color: rgba(251, 246, 234, 0.75);
+  }
+
+  .topic-desc {
+    font-size: 0.9rem;
+    line-height: 1.55;
+    color: rgba(251, 246, 234, 0.8);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .topic-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1rem;
+    margin-top: auto;
+  }
+
+  .book-topic-btn {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gold, #D9A23A);
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .book-topic-btn:hover {
+    opacity: 0.85;
+    transform: translateX(4px);
+  }
+
+  /* Bottom CTA */
+  .catalog-bottom-cta {
+    background: radial-gradient(circle at 50% 0%, rgba(217, 162, 58, 0.12) 0%, rgba(13, 12, 8, 0.9) 80%);
+    border: 1px solid rgba(217, 162, 58, 0.3);
+    border-radius: 24px;
+    padding: 3.5rem 2rem;
+  }
+
+  .cta-title {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    color: var(--color-ivory, #FBF6EA);
+    margin: 0 0 1rem 0;
+  }
+
+  .cta-subtitle {
+    font-size: 1.05rem;
+    color: rgba(251, 246, 234, 0.8);
+    max-width: 650px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+</style>
