@@ -4,7 +4,6 @@ import mysql from 'mysql2/promise';
 
 let dbContent = {};
 let activeSocials = [];
-let activePages = [];
 
 try {
   const pool = mysql.createPool({
@@ -13,8 +12,7 @@ try {
     password: '@rishil8124shah',
     database: 'tiffany_crm',
     waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
+    connectionLimit: 10
   });
 
   const [contentRows] = await pool.query(`SELECT key_name, content_value FROM website_content WHERE section = 'footer'`);
@@ -22,224 +20,149 @@ try {
     dbContent[row.key_name] = row.content_value;
   });
 
-   
-  const [socialToggleRows] = await pool.query("SELECT content_value FROM website_content WHERE section = 'social_links' AND key_name = 'section_is_active'");
-  let isSocialActive = true;
-  if (socialToggleRows.length > 0) {
-    isSocialActive = socialToggleRows[0].content_value !== '0';
-  }
+  const [socialRows] = await pool.query(`SELECT title, subtitle FROM website_collections WHERE section_name = 'social_links' AND is_active = 1 ORDER BY sort_order ASC`);
+  activeSocials = socialRows.map(row => ({ platform: row.title, url: row.subtitle })).filter(link => link.url);
 
-  if (isSocialActive) {
-    const [socialRows] = await pool.query(`SELECT title, subtitle FROM website_collections WHERE section_name = 'social_links' ORDER BY sort_order ASC`);
-    activeSocials = socialRows.map(row => ({ platform: row.title, url: row.subtitle })).filter(link => link.url);
-  }
-
-  
-  const [pageRows] = await pool.query('SELECT slug FROM website_pages WHERE is_active = 1');
-  activePages = pageRows.map(r => r.slug === 'home' ? '/' : `/${r.slug}`);
-
- await pool.end();
+  await pool.end();
 } catch(e) {
   console.error("Footer DB Error:", e);
 }
 
-const quote = dbContent.quote || '"Every conversation is an opportunity to plant a seed of hope, strengthen a community, and inspire meaningful change."';
+const quote = dbContent.quote || '“Every conversation is an opportunity to plant a seed of hope, strengthen a community, and inspire meaningful change.”';
 const valuesLine = dbContent.values_line || 'FAITH. FAMILY. COMMUNITY. PURPOSE. IMPACT.';
-const endorsement = dbContent.endorsement || 'I\'m also the founder of GambleFreeGear ?" purpose-driven apparel raising awareness of gambling harm.';
-const col1Title = dbContent.col1_title || 'EXPLORE';
-const col2Title = dbContent.col2_title || 'CONNECT';
-const col3Title = dbContent.col3_title || 'CONTACT';
-const col4Title = dbContent.col4_title || 'NEWSLETTER';
 const contactEmail = dbContent.contact_email || 'booking@tiffanywebbimpact.com';
-const contactLocation = dbContent.contact_location || 'Chicago, IL &middot; Available nationally';
-const newsletterPlaceholder = dbContent.newsletter_placeholder || 'Email address';
-const newsletterBtn = dbContent.newsletter_btn || 'JOIN';
+const contactLocation = 'Chicago, IL &middot; Available Nationwide &middot; Select International Opportunities';
 const year = new Date().getFullYear();
 ---
 
-{dbContent.section_is_active !== '0' && (
-<footer class="site-footer theme-ink relative" style="overflow: hidden; padding-top: 4rem; background: var(--color-ink); border-top: 1px solid rgba(255,255,255,0.05);">
+<footer class="site-footer theme-ink relative" style="overflow: hidden; padding: 5rem 0 2rem 0; background: var(--color-ink, #0D0C08); border-top: 1px solid rgba(255,255,255,0.06);">
   <Waveform opacity={0.04} variant="C" />
 
-  <div class="container relative z-10" style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 2rem;">
+  <div class="container relative z-10" style="width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
     
-    {/* Top Band: Quote and Values */}
+    <!-- Top Band: Quote and Values Line (Section 12.1) -->
     <div style="text-align: center; margin-bottom: 4rem;">
-      <p style="font-family: var(--font-serif); font-size: clamp(1.4rem, 3vw, 1.8rem); font-style: italic; color: var(--color-ivory); max-width: 800px; margin: 0 auto; line-height: 1.4; font-weight: 300;">
+      <p style="font-family: var(--font-serif); font-size: clamp(1.35rem, 2.8vw, 1.8rem); font-style: italic; color: #FBF6EA; max-width: 820px; margin: 0 auto; line-height: 1.5; font-weight: 300;">
         {quote}
       </p>
-      <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-gold); letter-spacing: 0.25em; text-transform: uppercase; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 1.5rem; padding-top: 1.5rem;">
+      <div style="font-family: var(--font-mono); font-size: 0.85rem; color: #D9A23A; font-weight: 700; letter-spacing: 0.25em; text-transform: uppercase; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 1.75rem; padding-top: 1.5rem;">
         {valuesLine}
       </div>
     </div>
 
-    {/* Four Columns Grid */}
-    <div class="footer-grid">
+    <!-- 4-Column Grid: Navigation, Contact, Social, Audience (Section 12.11) -->
+    <div class="footer-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2.5rem; margin-bottom: 4rem;">
       
-      {/* Col 1: EXPLORE */}
+      <!-- Col 1: EXPLORE -->
       <div>
-        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ivory); margin-bottom: 1.5rem;">{col1Title}</h4>
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
-            {activePages.includes('/') && <li><a href="/" class="footer-link">Home</a></li>}
-            {activePages.includes('/about') && <li><a href="/about" class="footer-link">About</a></li>}
-            {activePages.includes('/services') && <li><a href="/services" class="footer-link">Services</a></li>}
-            {activePages.includes('/impact') && <li><a href="/impact" class="footer-link">Impact</a></li>}
-            {activePages.includes('/media') && <li><a href="/media" class="footer-link">Media</a></li>}
-            {activePages.includes('/insights') && <li><a href="/insights" class="footer-link">Insights</a></li>}
-          </ul>
-      </div>
-
-      {/* Col 2: CONNECT */}
-      <div>
-        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ivory); margin-bottom: 1.5rem;">{col2Title}</h4>
-        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.75rem;">
-          {activeSocials.length > 0 ? (
-            activeSocials.map(social => (
-              <li><a href={social.url} target="_blank" rel="noopener noreferrer" class="footer-link">{social.platform}</a></li>
-            ))
-          ) : (
-            <li><span style="color: rgba(255,255,255,0.45);">No active channels</span></li>
-          )}
+        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: #FBF6EA; margin-bottom: 1.25rem;">EXPLORE</h4>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 0.65rem;">
+          <li><a href="/about" class="footer-link">About Tiffany</a></li>
+          <li><a href="/services/speaking-topics" class="footer-link">Speaking Topics (20)</a></li>
+          <li><a href="/services" class="footer-link">Ways to Work With Her</a></li>
+          <li><a href="/impact" class="footer-link">Events & Impact</a></li>
+          <li><a href="/media" class="footer-link">Press Kit & Media Assets</a></li>
+          <li><a href="/work-with-tiffany" class="footer-link text-gold" style="color: #D9A23A; font-weight: 600;">Start a Conversation &rarr;</a></li>
         </ul>
       </div>
 
-      {/* Col 3: CONTACT */}
+      <!-- Col 2: CONNECT -->
       <div>
-        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ivory); margin-bottom: 1.5rem;">{col3Title}</h4>
-        <div style="font-family: var(--font-sans); font-size: 0.95rem; color: rgba(255,255,255,0.65); line-height: 1.8;">
-          <p><a href="mailto:booking@tiffanywebbimpact.com" class="footer-link" href={`mailto:${contactEmail}`} class="footer-link">{contactEmail}</a></p>
-          <p style="margin-top: 1rem; color: rgba(255,255,255,0.45); line-height: 1.5;" set:html={contactLocation}></p>
+        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: #FBF6EA; margin-bottom: 1.25rem;">CONNECT</h4>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+          <p style="margin: 0;">
+            <a href={`mailto:${contactEmail}`} class="footer-link" style="color: #D9A23A; font-weight: 600;">{contactEmail}</a>
+          </p>
+          <p style="margin: 0.5rem 0 0 0; font-size: 0.88rem; color: rgba(251, 246, 234, 0.6); line-height: 1.5;" set:html={contactLocation}></p>
+          
+          <div style="margin-top: 1rem;">
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: rgba(251,246,234,0.5); text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 0.5rem;">Verified Channels</span>
+            <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 0.75rem;">
+              {activeSocials.length > 0 ? (
+                activeSocials.map(social => (
+                  <li><a href={social.url} target="_blank" rel="noopener noreferrer" class="footer-link">{social.platform}</a></li>
+                ))
+              ) : (
+                <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="footer-link">LinkedIn</a></li>
+              )}
+            </ul>
+          </div>
         </div>
       </div>
 
-      {/* Col 4: NEWSLETTER */}
-      <div>
-        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--color-ivory); margin-bottom: 1.5rem;">{col4Title}</h4>
-        <form style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem;" onsubmit="event.preventDefault();">
-          <input type="email" placeholder={newsletterPlaceholder} required class="newsletter-input" />
-          <button type="submit" class="newsletter-btn">{newsletterBtn}</button>
+      <!-- Col 3 & 4 (Span 2): STAY CONNECTED TO THE WORK (Section 12.8) -->
+      <div class="footer-col-span-2">
+        <h4 style="font-family: var(--font-mono); font-size: 0.85rem; letter-spacing: 0.15em; text-transform: uppercase; color: #FBF6EA; margin-bottom: 0.5rem;">
+          STAY CONNECTED TO THE WORK
+        </h4>
+        <p style="font-size: 0.92rem; color: rgba(251, 246, 234, 0.75); line-height: 1.5; margin: 0 0 1.25rem 0; max-width: 480px;">
+          Ideas, field insights, new resources, speaking updates, community stories, GambleFreeGear projects, and what's next.
+        </p>
+        
+        <form class="newsletter-form" action="/api/newsletter" method="POST" style="display: flex; gap: 0.5rem; max-width: 480px; flex-wrap: wrap;" onsubmit="event.preventDefault();">
+          <input 
+            type="email" 
+            name="email" 
+            placeholder="Enter your email address..." 
+            required 
+            style="flex: 1; min-width: 220px; background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255, 255, 255, 0.15); border-radius: 8px; padding: 0.75rem 1rem; color: #FBF6EA; font-family: var(--font-sans); font-size: 0.95rem; outline: none;"
+          />
+          <button 
+            type="submit" 
+            style="background: #D9A23A; color: #0D0C08; border: none; border-radius: 8px; padding: 0.75rem 1.35rem; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease;"
+          >
+            Stay Connected
+          </button>
         </form>
+        <span style="font-size: 0.75rem; color: rgba(251, 246, 234, 0.45); display: block; margin-top: 0.5rem;">
+          Periodic updates only. Zero spam. Unsubscribe anytime.
+        </span>
       </div>
 
     </div>
 
-    {/* Endorsement Line */}
-    <div style="text-align: center; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1);">
-      <a href="https://gamblefreegear.com" target="_blank" rel="noopener noreferrer" style="color: #D9A23A; text-decoration: underline; text-underline-offset: 4px; font-family: var(--font-mono); font-size: 0.88rem;">
-        Founder of GambleFreeGear &rarr;
+    <!-- Section 12.4: GambleFreeGear Founder Band -->
+    <div style="background: rgba(20, 18, 14, 0.7); border: 1px solid rgba(217, 162, 58, 0.25); border-radius: 14px; padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem;">
+      <p style="margin: 0; font-size: 0.95rem; color: rgba(251, 246, 234, 0.85); line-height: 1.5; max-width: 760px;">
+        Tiffany is the founder of <strong style="color: #FBF6EA;">GambleFreeGear™</strong>, a prevention-driven platform using apparel, creativity, community engagement, and conversation to raise awareness of gambling-related harm.
+      </p>
+      <a href="https://gamblefreegear.com" target="_blank" rel="noopener noreferrer" style="color: #D9A23A; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 4px;">
+        Explore GambleFreeGear &rarr;
       </a>
     </div>
 
-    {/* Bottom Rule */}
-    <div style="margin-top: 3rem; padding-bottom: 2rem; display: flex; flex-direction: row; justify-content: space-between; align-items: center; font-family: var(--font-sans); font-size: 0.85rem; color: rgba(255,255,255,0.45); width: 100%; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 1.5rem;">
-      <span>&copy; {year} Tiffany Webb</span>
-      <div style="display: flex; gap: 1rem; align-items: center;">
-        <a href="/privacy" style="color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.3s ease;">Privacy Policy</a>
+    <!-- Bottom Legal Bar (Section 12.11) -->
+    <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 2rem; font-family: var(--font-sans); font-size: 0.85rem; color: rgba(251, 246, 234, 0.5);">
+      <span>&copy; {year} Tiffany Webb. All rights reserved.</span>
+      <div style="display: flex; gap: 1.25rem; align-items: center;">
+        <a href="/privacy" class="footer-link">Privacy Policy</a>
         <span>&middot;</span>
-        <a href="/terms" style="color: rgba(255,255,255,0.45); text-decoration: none; transition: color 0.3s ease;">Terms of Use</a>
+        <a href="/terms" class="footer-link">Terms of Use</a>
+        <span>&middot;</span>
+        <a href="/accessibility" class="footer-link">Accessibility</a>
       </div>
     </div>
 
   </div>
 </footer>
-)}
 
 <style>
-  .footer-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
-  }
-
-  @media (min-width: 640px) {
-    .footer-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .footer-grid {
-      grid-template-columns: repeat(4, 1fr);
-      gap: 2rem;
+  @media (min-width: 768px) {
+    .footer-col-span-2 {
+      grid-column: span 2;
     }
   }
 
   .footer-link {
     font-family: var(--font-sans);
-    font-size: 0.95rem;
-    color: rgba(255,255,255,0.65);
+    font-size: 0.92rem;
+    color: rgba(251, 246, 234, 0.7);
     text-decoration: none;
-    transition: color 0.3s ease;
+    transition: all 0.2s ease;
   }
 
   .footer-link:hover {
-    color: var(--color-gold);
-  }
-
-  .gold-link {
-    color: var(--color-gold);
-    text-decoration: none;
-    transition: opacity 0.3s ease;
-  }
-
-  .gold-link:hover {
-    opacity: 0.8;
-  }
-
-  .newsletter-input {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 4px;
-    color: var(--color-ivory);
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    transition: all 0.3s ease;
-  }
-
-  .newsletter-input:focus {
-    outline: none;
-    border-color: var(--color-gold);
-    background: rgba(255,255,255,0.06);
-  }
-
-  .newsletter-btn {
-    width: 100%;
-    padding: 0.8rem 1rem;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--color-ivory);
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .newsletter-btn:hover {
-    background: var(--color-gold);
-    color: var(--color-ink);
-    border-color: var(--color-gold);
-  }
-
-  .bottom-rule {
-    margin-top: 3rem;
-    padding-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-    font-size: 0.85rem;
-    color: rgba(255,255,255,0.45);
-  }
-
-  @media (min-width: 768px) {
-    .bottom-rule {
-      flex-direction: row;
-    }
+    color: var(--color-gold, #D9A23A);
+    padding-left: 2px;
   }
 </style>
