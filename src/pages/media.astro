@@ -50,9 +50,9 @@ try {
 }
 
 const colorThemes = [
-  { color: "#6C2D5A", borderColor: "rgba(108, 45, 90, 0.45)", bgBadge: "rgba(108, 45, 90, 0.18)" },
-  { color: "#D9A23A", borderColor: "rgba(217, 162, 58, 0.45)", bgBadge: "rgba(217, 162, 58, 0.18)" },
-  { color: "#0E6B54", borderColor: "rgba(14, 107, 84, 0.45)", bgBadge: "rgba(14, 107, 84, 0.18)" }
+  { color: "#6C2D5A", borderColor: "rgba(108, 45, 90, 0.5)", bgBadge: "rgba(108, 45, 90, 0.2)" },
+  { color: "#D9A23A", borderColor: "rgba(217, 162, 58, 0.5)", bgBadge: "rgba(217, 162, 58, 0.2)" },
+  { color: "#0E6B54", borderColor: "rgba(14, 107, 84, 0.5)", bgBadge: "rgba(14, 107, 84, 0.2)" }
 ];
 
 const fallbackBios = [
@@ -95,6 +95,13 @@ const bios = (dbCollections.bios && dbCollections.bios.length > 0)
 
 const emceeScript = dbContent.intro_script?.script_text || `Please welcome Tiffany Webb — Community Impact Strategist, Public Health Educator, and founder of GambleFreeGear. With over 15 years of experience across behavioral health and community systems, Tiffany helps healthcare networks, schools, and civic leaders reimagine prevention and build human-centered strategies that last. Please join me in welcoming Tiffany Webb!`;
 
+const downloadColors = [
+  { color: "#D9A23A", borderColor: "rgba(217, 162, 58, 0.45)", bgBadge: "rgba(217, 162, 58, 0.18)" },
+  { color: "#6C2D5A", borderColor: "rgba(108, 45, 90, 0.55)", bgBadge: "rgba(108, 45, 90, 0.22)" },
+  { color: "#0E6B54", borderColor: "rgba(14, 107, 84, 0.55)", bgBadge: "rgba(14, 107, 84, 0.22)" },
+  { color: "#C15427", borderColor: "rgba(193, 84, 39, 0.55)", bgBadge: "rgba(193, 84, 39, 0.22)" }
+];
+
 const fallbackDownloads = [
   {
     title: "Speaker One-Sheet PDF",
@@ -127,14 +134,18 @@ const fallbackDownloads = [
 ];
 
 const downloads = (dbCollections.downloads && dbCollections.downloads.length > 0)
-  ? dbCollections.downloads.map((d) => ({
+  ? dbCollections.downloads.map((d, idx) => ({
       title: d.title,
       tag: d.badge || d.subtitle || "PRESS ASSET",
       desc: d.content_html || d.description || d.content_value || "",
       link: d.link_url || "/downloads/Tiffany_Webb_Media_Kit.zip",
-      btnText: "Download &darr;"
+      btnText: "Download &darr;",
+      ...downloadColors[idx % downloadColors.length]
     }))
-  : fallbackDownloads;
+  : fallbackDownloads.map((d, idx) => ({
+      ...d,
+      ...downloadColors[idx % downloadColors.length]
+    }));
 
 const eyebrow = dbContent.hero?.eyebrow ?? "PRESS KIT & MEDIA ASSETS";
 let headline = dbContent.hero?.headline ?? 'Official speaker <span class="italic-accent">press kit.</span>';
@@ -149,10 +160,10 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
       <Waveform opacity={0.06} variant="A" flipX={true} />
       
       <div class="media-container relative z-10 text-center">
-        <div class="reveal-up text-center mx-auto" style="max-width: 860px; display: flex; flex-direction: column; align-items: center;">
+        <div class="section-header-block reveal-up" style="max-width: 860px; margin-bottom: 0;">
           <Eyebrow className="justify-center text-center">{eyebrow}</Eyebrow>
-          <h1 class="media-h1 mt-4 text-center" set:html={headline}></h1>
-          <p class="media-subtitle mx-auto mt-6 text-center">{subtitle}</p>
+          <h1 class="media-h1" set:html={headline}></h1>
+          <p class="media-subtitle">{subtitle}</p>
         </div>
       </div>
     </section>
@@ -162,10 +173,10 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
       <Waveform opacity={0.03} variant="B" />
       <div class="media-container relative z-10">
         
-        <div class="reveal-up text-center mb-14 mx-auto" style="max-width: 800px; display: flex; flex-direction: column; align-items: center;">
+        <div class="section-header-block reveal-up">
           <Eyebrow className="justify-center text-center">OFFICIAL BIOGRAPHIES</Eyebrow>
-          <h2 class="media-h2 mt-4 text-center">Approved <span class="italic-accent">biographies.</span></h2>
-          <p class="section-subtext mt-4 text-center">Select the length that best fits your program format. Click "Copy Bio" to copy the text to your clipboard.</p>
+          <h2 class="media-h2">Approved <span class="italic-accent">biographies.</span></h2>
+          <p class="section-subtext">Select the length that best fits your program format. Click "Copy Bio" to copy the text to your clipboard.</p>
         </div>
 
         <div class="bios-grid stagger-group">
@@ -201,16 +212,16 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
       <Waveform opacity={0.04} variant="C" flipY={true} />
       <div class="media-container relative z-10">
         
-        <div class="reveal-up text-center mb-12 mx-auto" style="max-width: 800px; display: flex; flex-direction: column; align-items: center;">
+        <div class="section-header-block reveal-up">
           <Eyebrow className="justify-center text-center">STAGE INTRODUCTION</Eyebrow>
-          <h2 class="media-h2 mt-4 text-center">Emcee introduction <span class="italic-accent">script.</span></h2>
-          <p class="section-subtext mt-4 text-center">Recommended verbatim script for event hosts and session moderators when introducing Tiffany to the stage.</p>
+          <h2 class="media-h2">Emcee introduction <span class="italic-accent">script.</span></h2>
+          <p class="section-subtext">Recommended verbatim script for event hosts and session moderators when introducing Tiffany to the stage.</p>
         </div>
 
         <div class="emcee-box reveal-up" style="max-width: 920px; margin: 0 auto;">
           <div class="emcee-header">
             <span class="emcee-badge">VERBATIM STAGE SCRIPT (~30 SECONDS)</span>
-            <button class="copy-btn" data-copy-target="emcee-script-text" type="button">
+            <button class="copy-btn" data-copy-target="emcee-script-text" type="button" style="border-color: var(--color-gold); color: var(--color-gold);">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
               <span class="copy-text">Copy Script</span>
             </button>
@@ -224,25 +235,30 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
       </div>
     </section>
 
-    <!-- Section 3: Downloadable Speaker Assets -->
+    <!-- Section 3: Downloadable Speaker Assets (4 Color-Accented Cards) -->
     <section class="media-section relative overflow-hidden" id="downloads">
       <Waveform opacity={0.03} variant="A" />
-      <div class="media-container relative z-10">
+      <div class="media-container relative z-10" style="max-width: 1200px; margin: 0 auto;">
         
-        <div class="reveal-up text-center mb-14 mx-auto" style="max-width: 800px; display: flex; flex-direction: column; align-items: center;">
+        <div class="section-header-block reveal-up">
           <Eyebrow className="justify-center text-center">MEDIA ASSETS & DOWNLOADS</Eyebrow>
-          <h2 class="media-h2 mt-4 text-center">High-resolution <span class="italic-accent">downloads.</span></h2>
-          <p class="section-subtext mt-4 text-center">Official photography, one-sheets, and comprehensive brand materials for media publications and event marketing.</p>
+          <h2 class="media-h2">High-resolution <span class="italic-accent">downloads.</span></h2>
+          <p class="section-subtext">Official photography, one-sheets, and comprehensive brand materials for media publications and event marketing.</p>
         </div>
 
         <div class="downloads-grid stagger-group">
           {downloads.map((item) => (
-            <div class="download-card stagger-item">
-              <span class="download-tag">{item.tag}</span>
-              <h3 class="download-title">{item.title}</h3>
-              <p class="download-desc">{item.desc}</p>
+            <div class="download-card stagger-item" style={`border-color: ${item.borderColor};`}>
+              <div class="download-card-top">
+                <span class="download-tag" style={`color: ${item.color}; border: 1px solid ${item.color}66; background: ${item.bgBadge};`}>
+                  {item.tag}
+                </span>
+                <h3 class="download-title">{item.title}</h3>
+                <p class="download-desc">{item.desc}</p>
+              </div>
+
               <div class="download-action">
-                <a href={item.link} class="download-btn" download>
+                <a href={item.link} class="download-btn" style={`color: ${item.color}; border: 1px solid ${item.color}66; background: ${item.color}15;`} download>
                   <span set:html={item.btnText}></span>
                 </a>
               </div>
@@ -258,19 +274,19 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
       <Waveform opacity={0.06} variant="B" />
       
       <div class="media-container relative z-10 text-center" style="max-width: 880px; margin: 0 auto; padding: 5rem 1.5rem;">
-        <div class="reveal-up text-center mx-auto" style="display: flex; flex-direction: column; align-items: center;">
+        <div class="section-header-block reveal-up" style="margin-bottom: 2rem;">
           <Eyebrow className="justify-center text-center">MEDIA & PODCAST APPEARANCES</Eyebrow>
-          <h2 class="media-h2 mt-4 text-center">
+          <h2 class="media-h2">
             Host Tiffany on your <span class="italic-accent">broadcast or podcast.</span>
           </h2>
-          <p class="section-subtext mx-auto mt-6 text-center">
+          <p class="section-subtext">
             Tiffany is available for television, radio, print, and podcast interviews discussing problem gambling prevention, youth digital health, and community health strategy.
           </p>
-          <div class="mt-8">
-            <Button href="/work-with-tiffany?inquiry=media" variant="primary" className="magnetic-btn">
-              Request a Media Interview or Podcast Appearance &rarr;
-            </Button>
-          </div>
+        </div>
+        <div>
+          <Button href="/work-with-tiffany?inquiry=media" variant="primary" className="magnetic-btn">
+            Request a Media Interview or Podcast Appearance &rarr;
+          </Button>
         </div>
       </div>
     </section>
@@ -329,21 +345,35 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
   }
 
   .media-section {
-    padding: 6rem 0;
+    padding: 6.5rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .media-inquiry-banner {
-    padding: 2rem 0;
+    padding: 3rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     background: radial-gradient(circle at 50% 50%, rgba(217, 162, 58, 0.1) 0%, rgba(13, 12, 8, 1) 80%);
+  }
+
+  /* ---------------------------------------------------- */
+  /* PROPERLY SPACED CENTERED SECTION HEADERS             */
+  /* ---------------------------------------------------- */
+  .section-header-block {
+    max-width: 820px;
+    margin: 0 auto 4rem auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1.25rem;
   }
 
   .media-h1 {
     font-family: var(--font-serif);
     font-size: clamp(2.8rem, 5.5vw, 4.8rem);
     color: var(--color-ivory, #FBF6EA);
-    line-height: 1.1;
+    line-height: 1.15;
     margin: 0;
     text-align: center;
   }
@@ -367,9 +397,9 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
   }
 
   .section-subtext {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: #FBF6EA;
-    line-height: 1.6;
+    line-height: 1.65;
     text-align: center;
     max-width: 720px;
     margin: 0 auto;
@@ -529,7 +559,9 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
     font-style: italic;
   }
 
-  /* Downloads Grid */
+  /* ---------------------------------------------------- */
+  /* 4 COLOR-ACCENTED DOWNLOADS GRID                      */
+  /* ---------------------------------------------------- */
   .downloads-grid {
     display: grid;
     grid-template-columns: 1fr;
@@ -549,68 +581,75 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
   }
 
   .download-card {
-    background: rgba(20, 18, 14, 0.85);
-    border: 1px solid rgba(217, 162, 58, 0.25);
-    border-radius: 18px;
-    padding: 2rem 1.5rem;
+    background: rgba(20, 18, 14, 0.9);
+    border: 1px solid;
+    border-radius: 20px;
+    padding: 2.25rem 1.65rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: all 0.3s ease;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.45);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
   }
 
   .download-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(217, 162, 58, 0.6);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
   }
 
   .download-tag {
     font-family: var(--font-mono);
-    font-size: 0.68rem;
-    font-weight: 700;
+    font-size: 0.7rem;
+    font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-gold, #D9A23A);
-    display: block;
-    margin-bottom: 0.75rem;
+    display: inline-block;
+    padding: 0.3rem 0.65rem;
+    border-radius: 6px;
+    margin-bottom: 1.25rem;
   }
 
   .download-title {
     font-family: var(--font-serif);
-    font-size: 1.3rem;
-    color: var(--color-ivory, #FBF6EA);
-    margin: 0 0 0.6rem 0;
-    line-height: 1.3;
+    font-size: 1.35rem;
+    color: #FFFFFF !important;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.25;
+    font-weight: 400;
   }
 
   .download-desc {
-    font-size: 0.9rem;
-    line-height: 1.55;
-    color: #E2D9C8;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #E2D9C8 !important;
     margin: 0 0 1.5rem 0;
   }
 
   .download-action {
     margin-top: auto;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding-top: 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 1.25rem;
   }
 
   .download-btn {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
+    font-size: 0.78rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: var(--color-gold, #D9A23A);
     text-decoration: none;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
     transition: all 0.2s ease;
   }
 
   .download-btn:hover {
-    color: #ffffff;
-    transform: translateX(4px);
+    background: #FFFFFF !important;
+    color: #0D0C08 !important;
+    border-color: #FFFFFF !important;
   }
 </style>
