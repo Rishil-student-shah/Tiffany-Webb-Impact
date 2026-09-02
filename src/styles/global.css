@@ -169,7 +169,7 @@ button {
   letter-spacing: 0.12em;
 }
 
-/* Universal Eyebrow & Keyline Styling (Vibrant Gold & Bold Size across ALL pages) */
+/* Universal Eyebrow Styling */
 .eyebrow,
 .eyebrow-text,
 .hero-eyebrow,
@@ -181,8 +181,21 @@ button {
   letter-spacing: 0.2em !important;
   text-transform: uppercase !important;
   line-height: 1.4 !important;
-  display: inline-block !important;
+  display: inline-block;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7) !important;
+}
+
+/* Centered Eyebrow Override (In Middle) */
+.eyebrow.text-center,
+.eyebrow.justify-center,
+.text-center .eyebrow,
+.section-header-block .eyebrow,
+.spk-section-header .eyebrow {
+  display: block !important;
+  text-align: center !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  width: fit-content !important;
 }
 
 /* High Legibility Prose & Descriptions across Dark Sections */
