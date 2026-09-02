@@ -232,8 +232,7 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
                   <button 
                     class="copy-btn copy-bio-btn" 
                     data-copy-target={`bio-text-${bio.id}`} 
-                    type="button" 
-                    style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(217, 162, 58, 0.15); border: 1px solid #D9A23A; color: #D9A23A; padding: 0.65rem 1.35rem; border-radius: 9999px; font-family: var(--font-mono); font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease;"
+                    type="button"
                   >
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
                     <span class="copy-text">Copy Bio to Clipboard</span>
@@ -400,15 +399,11 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
           const copyTextSpan = btn.querySelector('.copy-text');
           const originalText = copyTextSpan.innerText;
           copyTextSpan.innerText = 'Copied to Clipboard!';
-          btn.style.background = '#0E6B54';
-          btn.style.color = '#FFFFFF';
-          btn.style.borderColor = '#0E6B54';
+          btn.classList.add('copied');
           
           setTimeout(() => {
             copyTextSpan.innerText = originalText;
-            btn.style.background = 'rgba(217, 162, 58, 0.15)';
-            btn.style.color = '#D9A23A';
-            btn.style.borderColor = '#D9A23A';
+            btn.classList.remove('copied');
           }, 2500);
         } catch (err) {
           console.error('Failed to copy text:', err);
@@ -493,6 +488,10 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
     margin: 0 auto 1.5rem auto;
   }
 
+  /* ---------------------------------------------------- */
+  /* COPY BUTTON HOVER & INTERACTION                      */
+  /* ---------------------------------------------------- */
+  .copy-bio-btn,
   .copy-btn-large {
     padding: 0.65rem 1.35rem;
     font-size: 0.8rem;
@@ -500,24 +499,57 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
     color: var(--color-gold, #D9A23A);
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
-    background: rgba(217, 162, 58, 0.15);
-    border: 1px solid var(--color-gold, #D9A23A);
+    gap: 0.55rem;
+    background: rgba(217, 162, 58, 0.12);
+    border: 1.5px solid var(--color-gold, #D9A23A);
     font-family: var(--font-mono);
     font-weight: 700;
     letter-spacing: 0.08em;
     text-transform: uppercase;
     border-radius: 9999px;
     cursor: pointer;
-    transition: all 0.2s ease;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
   }
 
+  .copy-bio-btn svg,
+  .copy-btn-large svg {
+    color: var(--color-gold, #D9A23A);
+    transition: transform 0.25s ease, color 0.25s ease;
+  }
+
+  .copy-bio-btn:hover,
   .copy-btn-large:hover {
     background: var(--color-gold, #D9A23A) !important;
     border-color: var(--color-gold, #D9A23A) !important;
     color: #0D0C08 !important;
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(217, 162, 58, 0.35);
+    box-shadow: 0 6px 20px rgba(217, 162, 58, 0.4);
+  }
+
+  .copy-bio-btn:hover svg,
+  .copy-btn-large:hover svg {
+    color: #0D0C08 !important;
+    transform: scale(1.15);
+  }
+
+  .copy-bio-btn:active,
+  .copy-btn-large:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(217, 162, 58, 0.3);
+  }
+
+  .copy-bio-btn.copied,
+  .copy-btn-large.copied {
+    background: #0E6B54 !important;
+    border-color: #0E6B54 !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 4px 15px rgba(14, 107, 84, 0.4);
+  }
+
+  .copy-bio-btn.copied svg,
+  .copy-btn-large.copied svg {
+    color: #FFFFFF !important;
   }
 
   /* ---------------------------------------------------- */
