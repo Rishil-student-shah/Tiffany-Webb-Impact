@@ -2,6 +2,11 @@
 import Eyebrow from '../Eyebrow.astro';
 import Waveform from '../Waveform.astro';
 import Button from '../Button.astro';
+
+const { content = {} } = Astro.props;
+const eyebrow = content.eyebrow || "EVENTS & IMPACT";
+let headline = content.headline || 'Where frontline experience <br/><span class="italic-accent">creates documented impact.</span>';
+const subtitle = content.subtitle || "From conference rooms to community spaces, this page documents where Tiffany has brought the conversation, who the work was designed to reach, and the impact that followed.";
 ---
 
 <section class="impact-hero theme-ink relative overflow-hidden" id="impact-overview">
@@ -9,14 +14,11 @@ import Button from '../Button.astro';
   <Waveform opacity={0.08} color="var(--color-gold)" />
   
   <div class="container relative z-10" style="max-width: 1200px; margin: 0 auto; padding: 6rem 1.5rem 4rem 1.5rem;">
-    <div class="hero-content text-center reveal-up" style="max-width: 900px; margin: 0 auto;">
-      <Eyebrow className="justify-center">EVENTS & IMPACT</Eyebrow>
-      <h1 class="hero-title mt-4">
-        Where frontline experience <br/>
-        <span class="italic-accent">creates documented impact.</span>
-      </h1>
-      <p class="hero-subtext mx-auto mt-6">
-        From conference rooms to community spaces, this page documents where Tiffany has brought the conversation, who the work was designed to reach, and the impact that followed.
+    <div class="hero-content text-center reveal-up" style="max-width: 900px; margin: 0 auto; text-align: center; display: flex; flex-direction: column; align-items: center;">
+      <Eyebrow className="justify-center text-center">{eyebrow}</Eyebrow>
+      <h1 class="hero-title mt-4 text-center" set:html={headline}></h1>
+      <p class="hero-subtext mx-auto mt-6 text-center">
+        {subtitle}
       </p>
       <div class="hero-ctas mt-8">
         <Button href="#past-engagements" variant="primary" className="magnetic-btn">View Documented Engagements &rarr;</Button>
@@ -34,12 +36,22 @@ import Button from '../Button.astro';
     background: radial-gradient(circle at 50% 10%, rgba(217, 162, 58, 0.12) 0%, rgba(13, 12, 8, 1) 70%);
   }
 
+  .hero-content {
+    text-align: center;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   .hero-title {
     font-family: var(--font-serif);
     font-size: clamp(2.6rem, 5vw, 4.5rem);
     color: var(--color-ivory, #FBF6EA);
     line-height: 1.15;
     margin: 0;
+    text-align: center;
   }
 
   .hero-subtext {
@@ -47,6 +59,8 @@ import Button from '../Button.astro';
     color: rgba(251, 246, 234, 0.85);
     line-height: 1.65;
     max-width: 780px;
+    text-align: center;
+    margin: 0 auto;
   }
 
   .hero-ctas {

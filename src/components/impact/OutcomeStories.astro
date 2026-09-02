@@ -62,12 +62,10 @@ const stories = (collections.outcome_stories && collections.outcome_stories.leng
   <div class="container relative z-10" style="max-width: 1200px; margin: 0 auto; padding: 6rem 1.5rem;">
     
     <!-- Section Header -->
-    <div class="reveal-up text-center mb-16" style="max-width: 840px; margin-left: auto; margin-right: auto;">
-      <Eyebrow className="justify-center">FEATURED IMPACT STORIES</Eyebrow>
-      <h2 class="section-title mt-4" style="color: var(--color-ivory);">
-        Documented change <span class="italic-accent">in the field.</span>
-      </h2>
-      <p class="subtitle mt-4" style="font-size: 1.15rem; color: rgba(251, 246, 234, 0.85); line-height: 1.6;">
+    <div class="reveal-up text-center mb-16 outcome-header" style="max-width: 840px; margin-left: auto; margin-right: auto; text-align: center; display: flex; flex-direction: column; align-items: center;">
+      <Eyebrow className="justify-center text-center">FEATURED IMPACT STORIES</Eyebrow>
+      <h2 class="section-title mt-4 text-center" style="color: var(--color-ivory);" set:html={`Documented change <span class="italic-accent">in the field.</span>`}></h2>
+      <p class="subtitle mt-4 text-center" style="font-size: 1.15rem; color: rgba(251, 246, 234, 0.85); line-height: 1.6; text-align: center; margin: 0 auto;">
         Real engagements, verified reach, and concrete community outcomes across Illinois.
       </p>
     </div>
@@ -89,39 +87,32 @@ const stories = (collections.outcome_stories && collections.outcome_stories.leng
             <h3 class="story-title">{story.title}</h3>
             <p class="story-partner">{story.partner} &bull; {story.dateLoc}</p>
 
-            <!-- 3-Block Content -->
-            <div class="story-content-blocks">
-              <div class="content-block">
-                <span class="block-heading">THE CHALLENGE</span>
-                <p class="block-body">{story.situation}</p>
+            <!-- 3-Part Deep Breakdown -->
+            <div class="story-breakdown">
+              <div class="breakdown-block">
+                <span class="block-label">THE CHALLENGE</span>
+                <p class="block-text">{story.situation}</p>
               </div>
 
-              <div class="content-block">
-                <span class="block-heading">THE ACTIVATION</span>
-                <p class="block-body">{story.action}</p>
+              <div class="breakdown-block">
+                <span class="block-label">THE INTERVENTION</span>
+                <p class="block-text">{story.action}</p>
               </div>
 
-              <div class="content-block outcome-accent-block">
-                <span class="block-heading" style="color: var(--color-gold);">DOCUMENTED OUTCOME</span>
-                <p class="block-body font-medium">{story.outcome}</p>
+              <div class="breakdown-block outcome-block">
+                <span class="block-label">DOCUMENTED OUTCOME</span>
+                <p class="block-text font-semibold">{story.outcome}</p>
               </div>
             </div>
 
-            <!-- Quote -->
-            <blockquote class="story-quote">
-              <p>"{story.quote}"</p>
-            </blockquote>
+            <!-- Authentic Attendee Quote -->
+            <div class="story-quote-box">
+              <p class="quote-text">"{story.quote}"</p>
+            </div>
 
           </div>
         </div>
       ))}
-    </div>
-
-    <!-- Fallback Notice -->
-    <div class="fallback-banner ultra-glass-card mt-12 text-center reveal-up">
-      <p class="fallback-text">
-        <span class="text-gold font-bold">Additional verified impact stories documenting soon.</span> All case studies published on this page represent real documented activations with host organization consent.
-      </p>
     </div>
 
   </div>
@@ -131,6 +122,16 @@ const stories = (collections.outcome_stories && collections.outcome_stories.leng
   .outcome-stories {
     padding: 2rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .outcome-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .stories-grid {
@@ -149,18 +150,17 @@ const stories = (collections.outcome_stories && collections.outcome_stories.leng
     background: rgba(20, 18, 14, 0.7);
     border: 1px solid rgba(217, 162, 58, 0.22);
     border-radius: 24px;
-    padding: 2.5rem;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    padding: 2.5rem 2rem;
+    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
   }
 
   .story-meta-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 0.75rem;
     margin-bottom: 1.25rem;
   }
 
@@ -168,7 +168,7 @@ const stories = (collections.outcome_stories && collections.outcome_stories.leng
     font-family: var(--font-mono);
     font-size: 0.72rem;
     font-weight: 700;
-    letter-spacing: 0.12em;
+    letter-spacing: 0.1em;
     text-transform: uppercase;
     padding: 0.3rem 0.75rem;
     border-radius: 100px;
@@ -184,80 +184,69 @@ const stories = (collections.outcome_stories && collections.outcome_stories.leng
 
   .story-title {
     font-family: var(--font-serif);
-    font-size: 1.6rem;
+    font-size: 1.65rem;
+    line-height: 1.25;
     color: var(--color-ivory, #FBF6EA);
     margin: 0 0 0.5rem 0;
-    line-height: 1.25;
   }
 
   .story-partner {
     font-family: var(--font-mono);
     font-size: 0.78rem;
-    color: rgba(251, 246, 234, 0.7);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 1.75rem;
+    color: rgba(251, 246, 234, 0.65);
+    margin: 0 0 2rem 0;
+    letter-spacing: 0.05em;
   }
 
-  .story-content-blocks {
+  .story-breakdown {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    margin-bottom: 1.75rem;
+    margin-bottom: 2rem;
   }
 
-  .content-block {
-    background: rgba(255, 255, 255, 0.02);
-    border-left: 2px solid rgba(217, 162, 58, 0.3);
-    padding: 0.75rem 1rem;
-    border-radius: 0 8px 8px 0;
+  .breakdown-block {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 12px;
+    padding: 1.25rem;
   }
 
-  .outcome-accent-block {
-    border-left-color: var(--color-gold, #D9A23A);
+  .outcome-block {
     background: rgba(217, 162, 58, 0.06);
+    border-color: rgba(217, 162, 58, 0.25);
   }
 
-  .block-heading {
+  .block-label {
     display: block;
     font-family: var(--font-mono);
     font-size: 0.68rem;
     font-weight: 700;
-    letter-spacing: 0.14em;
-    color: rgba(251, 246, 234, 0.6);
-    margin-bottom: 0.3rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gold, #D9A23A);
+    margin-bottom: 0.4rem;
   }
 
-  .block-body {
+  .block-text {
     font-size: 0.88rem;
-    line-height: 1.55;
+    line-height: 1.6;
     color: rgba(251, 246, 234, 0.85);
     margin: 0;
   }
 
-  .story-quote {
-    margin: auto 0 0 0;
-    padding-top: 1.5rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  .story-quote-box {
+    border-left: 2px solid var(--color-gold, #D9A23A);
+    padding-left: 1.25rem;
+    margin-top: auto;
+  }
+
+  .quote-text {
     font-family: var(--font-serif);
-    font-style: italic;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     line-height: 1.5;
     color: var(--color-ivory, #FBF6EA);
-  }
-
-  .fallback-banner {
-    padding: 1.5rem 2rem;
-    border-radius: 16px;
-    background: rgba(20, 18, 14, 0.5);
-    border: 1px dashed rgba(217, 162, 58, 0.3);
-    margin-top: 3.5rem;
-  }
-
-  .fallback-text {
-    font-size: 0.92rem;
-    color: rgba(251, 246, 234, 0.75);
+    font-style: italic;
     margin: 0;
-    line-height: 1.6;
   }
 </style>

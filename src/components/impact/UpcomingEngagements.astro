@@ -2,6 +2,11 @@
 import Eyebrow from '../Eyebrow.astro';
 import Waveform from '../Waveform.astro';
 import Button from '../Button.astro';
+
+const { content = {} } = Astro.props;
+const eyebrow = content.eyebrow || "UPCOMING SCHEDULE";
+let headline = content.headline || 'New engagement dates will be announced <br/><span class="italic-accent">as they are confirmed.</span>';
+const subtext = content.subtext || "Tiffany is currently accepting invitations for keynotes, workshops, and coalition engagements for 2026 / 2027.";
 ---
 
 <section class="upcoming-section theme-ink relative overflow-hidden" id="upcoming-engagements">
@@ -14,15 +19,12 @@ import Button from '../Button.astro';
         <span class="status-badge">ANNOUNCING SOON</span>
       </div>
 
-      <Eyebrow className="justify-center">UPCOMING SCHEDULE</Eyebrow>
+      <Eyebrow className="justify-center text-center">{eyebrow}</Eyebrow>
       
-      <h2 class="status-headline mt-4">
-        New engagement dates will be announced <br/>
-        <span class="italic-accent">as they are confirmed.</span>
-      </h2>
+      <h2 class="status-headline mt-4 text-center" set:html={headline}></h2>
       
-      <p class="status-subtext mx-auto mt-6">
-        Tiffany is currently accepting invitations for keynotes, workshops, and coalition engagements for 2026 / 2027.
+      <p class="status-subtext mx-auto mt-6 text-center">
+        {subtext}
       </p>
 
       <div class="status-action mt-8">
@@ -47,6 +49,11 @@ import Button from '../Button.astro';
     border-radius: 24px;
     padding: 4rem 2.5rem;
     box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .status-badge {
@@ -58,23 +65,31 @@ import Button from '../Button.astro';
     color: var(--color-gold, #D9A23A);
     background: rgba(217, 162, 58, 0.12);
     border: 1px solid rgba(217, 162, 58, 0.35);
-    padding: 0.4rem 1rem;
+    padding: 0.35rem 0.9rem;
     border-radius: 100px;
     display: inline-block;
   }
 
   .status-headline {
     font-family: var(--font-serif);
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
     color: var(--color-ivory, #FBF6EA);
     line-height: 1.25;
     margin: 0;
+    text-align: center;
   }
 
   .status-subtext {
     font-size: 1.15rem;
+    color: rgba(251, 246, 234, 0.85);
     line-height: 1.6;
-    color: rgba(251, 246, 234, 0.8);
-    max-width: 680px;
+    max-width: 650px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .status-action {
+    display: flex;
+    justify-content: center;
   }
 </style>

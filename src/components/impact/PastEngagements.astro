@@ -88,12 +88,12 @@ const pastEngagements = (collections.past_engagements && collections.past_engage
   <div class="container relative z-10" style="max-width: 1200px; margin: 0 auto; padding: 6rem 1.5rem;">
     
     <!-- Section Header -->
-    <div class="reveal-up text-center mb-16" style="max-width: 800px; margin-left: auto; margin-right: auto;">
-      <Eyebrow className="justify-center">ENGAGEMENT ARCHIVE</Eyebrow>
-      <h2 class="section-title mt-4" style="color: var(--color-ivory);">
+    <div class="reveal-up text-center mb-16 archive-header" style="max-width: 800px; margin-left: auto; margin-right: auto; text-align: center; display: flex; flex-direction: column; align-items: center;">
+      <Eyebrow className="justify-center text-center">ENGAGEMENT ARCHIVE</Eyebrow>
+      <h2 class="section-title mt-4 text-center" style="color: var(--color-ivory);">
         Verified event <span class="italic-accent">track record.</span>
       </h2>
-      <p class="subtitle mt-4" style="font-size: 1.15rem; color: rgba(251, 246, 234, 0.85); line-height: 1.6;">
+      <p class="subtitle mt-4 text-center" style="font-size: 1.15rem; color: rgba(251, 246, 234, 0.85); line-height: 1.6; text-align: center; margin: 0 auto;">
         Real stages, summits, and community coalition forums from Tiffany's master impact tracker.
       </p>
     </div>
@@ -142,6 +142,16 @@ const pastEngagements = (collections.past_engagements && collections.past_engage
   .past-engagements {
     padding: 2rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .archive-header {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .engagements-grid {

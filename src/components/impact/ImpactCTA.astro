@@ -2,24 +2,28 @@
 import Eyebrow from '../Eyebrow.astro';
 import Button from '../Button.astro';
 import Waveform from '../Waveform.astro';
+
+const { content = {} } = Astro.props;
+const eyebrow = content.eyebrow || "BRING TIFFANY IN";
+let headline = content.headline || 'Bring documented impact to your <br/><span class="italic-accent">organization.</span>';
+const subtitle = content.subtitle || "Check availability and request a custom keynote, training session, or strategic community engagement tailored to your specific goals.";
+const btnText = content.button_text || "Start a Conversation \u2192";
+const btnUrl = content.button_url || "/work-with-tiffany";
 ---
 
 <section class="impact-cta-section theme-ink relative overflow-hidden" style="padding: 7rem 0;">
   <Waveform opacity={0.06} variant="B" />
   
   <div class="container relative z-10 text-center" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
-    <div class="reveal-up">
-      <Eyebrow className="justify-center">BRING TIFFANY IN</Eyebrow>
-      <h2 class="cta-headline mt-4">
-        Bring documented impact to your <br/>
-        <span class="italic-accent">organization.</span>
-      </h2>
-      <p class="cta-subtitle mx-auto mt-6">
-        Check availability and request a custom keynote, training session, or strategic community engagement tailored to your specific goals.
+    <div class="reveal-up cta-header-content text-center" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; margin: 0 auto;">
+      <Eyebrow className="justify-center text-center">{eyebrow}</Eyebrow>
+      <h2 class="cta-headline mt-4 text-center" set:html={headline}></h2>
+      <p class="cta-subtitle mx-auto mt-6 text-center">
+        {subtitle}
       </p>
       <div class="cta-action mt-8">
-        <Button href="/work-with-tiffany" variant="primary" className="magnetic-btn">
-          Start a Conversation &rarr;
+        <Button href={btnUrl} variant="primary" className="magnetic-btn">
+          {btnText}
         </Button>
       </div>
     </div>
@@ -32,12 +36,22 @@ import Waveform from '../Waveform.astro';
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
+  .cta-header-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+  }
+
   .cta-headline {
     font-family: var(--font-serif);
     font-size: clamp(2.4rem, 4.5vw, 3.8rem);
     color: var(--color-ivory, #FBF6EA);
     line-height: 1.2;
     margin: 0;
+    text-align: center;
   }
 
   .cta-subtitle {
@@ -45,5 +59,12 @@ import Waveform from '../Waveform.astro';
     line-height: 1.6;
     color: rgba(251, 246, 234, 0.85);
     max-width: 680px;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .cta-action {
+    display: flex;
+    justify-content: center;
   }
 </style>
