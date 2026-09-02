@@ -1,37 +1,49 @@
 ---
+import Eyebrow from '../Eyebrow.astro';
+import Button from '../Button.astro';
+import Waveform from '../Waveform.astro';
 ---
 
-<section class="impact-cta section-pad theme-ink text-center">
-  <div class="container stagger-group">
-    <div class="text-center mx-auto stagger-item" style="max-width: 800px;">
-      <h2 class="cta-title text-center">Ready to bring this impact to your community?</h2>
-    </div>
-    <p class="cta-sub stagger-item mt-6 mx-auto" style="max-width: 600px;">
-      Check availability and request a custom proposal for your next event, training, or clinical intensive.
-    </p>
-    <div class="stagger-item mt-8">
-      <a href="/book" class="btn btn-primary">Request Booking</a>
+<section class="impact-cta-section theme-ink relative overflow-hidden" style="padding: 7rem 0;">
+  <Waveform opacity={0.06} variant="B" />
+  
+  <div class="container relative z-10 text-center" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
+    <div class="reveal-up">
+      <Eyebrow className="justify-center">BRING TIFFANY IN</Eyebrow>
+      <h2 class="cta-headline mt-4">
+        Bring documented impact to your <br/>
+        <span class="italic-accent">organization.</span>
+      </h2>
+      <p class="cta-subtitle mx-auto mt-6">
+        Check availability and request a custom keynote, training session, or strategic community engagement tailored to your specific goals.
+      </p>
+      <div class="cta-action mt-8">
+        <Button href="/work-with-tiffany" variant="primary" className="magnetic-btn">
+          Start a Conversation &rarr;
+        </Button>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .impact-cta {
-    background: var(--ink);
-    padding: var(--sp-24) 0;
+  .impact-cta-section {
+    background: radial-gradient(circle at 50% 50%, rgba(217, 162, 58, 0.1) 0%, rgba(13, 12, 8, 1) 80%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  .cta-title {
-    font-size: clamp(2rem, 4vw, 3rem);
+  .cta-headline {
     font-family: var(--font-serif);
-    color: var(--color-ivory);
+    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
+    color: var(--color-ivory, #FBF6EA);
     line-height: 1.2;
+    margin: 0;
   }
 
-  .cta-sub {
-    font-family: var(--font-sans);
-    font-size: 1.15rem;
-    color: rgba(255, 255, 255, 0.7);
+  .cta-subtitle {
+    font-size: 1.18rem;
     line-height: 1.6;
+    color: rgba(251, 246, 234, 0.85);
+    max-width: 680px;
   }
 </style>

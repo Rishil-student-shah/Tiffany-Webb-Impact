@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Waveform from '../components/Waveform.astro';
+import PageNavigation from '../components/PageNavigation.astro';
 ---
 
 <Layout title="Book Tiffany | Tiffany Webb" description="Ready to bring Tiffany Webb to your next event? Submit a booking inquiry today." theme="secondary">
@@ -142,6 +143,21 @@ import Waveform from '../components/Waveform.astro';
             <div class="form-group full-width mt-4">
               <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Speaking Request &rarr;</button>
             </div>
+
+            <!-- Trust Assurance -->
+            <div class="trust-assurance mt-4 text-center">
+              <p style="font-family: var(--font-mono); font-size: 0.78rem; color: rgba(251, 246, 234, 0.7); letter-spacing: 0.05em; margin: 0;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-gold)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: inline-block; vertical-align: middle; margin-right: 4px;"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                Tiffany's team reviews all speaking and strategic inquiries within 24–48 business hours.
+              </p>
+            </div>
+
+            <!-- Committee Helper Card -->
+            <div class="committee-helper-card mt-6" style="background: rgba(217, 162, 58, 0.08); border: 1px solid rgba(217, 162, 58, 0.25); border-radius: 12px; padding: 1rem 1.25rem; text-align: center;">
+              <p style="font-size: 0.85rem; color: var(--color-ivory); margin: 0;">
+                Presenting to a committee or board? <a href="/media" style="color: var(--color-gold); font-weight: 600; text-decoration: underline;">Download the Speaker One-Sheet first &rarr;</a>
+              </p>
+            </div>
             
           </form>
           
@@ -260,6 +276,16 @@ import Waveform from '../components/Waveform.astro';
         
       </div>
     </section>
+
+    <!-- Footer Navigation Loop -->
+    <PageNavigation 
+      prevLink="/services/speaking-topics" 
+      prevLabel="Explore Speaking Topics" 
+      secondaryLink="/impact" 
+      secondaryLabel="View Impact & Event Track Record" 
+      nextLink="/" 
+      nextLabel="Return to Home" 
+    />
 
   </main>
 </Layout>

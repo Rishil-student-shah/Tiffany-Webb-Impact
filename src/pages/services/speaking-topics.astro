@@ -3,6 +3,7 @@ import Layout from '../../layouts/Layout.astro';
 import Eyebrow from '../../components/Eyebrow.astro';
 import Waveform from '../../components/Waveform.astro';
 import Button from '../../components/Button.astro';
+import PageNavigation from '../../components/PageNavigation.astro';
 import mysql from 'mysql2/promise';
 
 let topics = [];
@@ -208,6 +209,14 @@ const getTrackKey = (trackId) => {
 
       </div>
     </section>
+
+    <!-- Footer Navigation Loop -->
+    <PageNavigation 
+      prevLink="/services" 
+      prevLabel="Explore Services & GEAR Method™" 
+      nextLink="/impact" 
+      nextLabel="See Real-World Engagements & Impact" 
+    />
 
   </main>
 </Layout>

@@ -2,179 +2,79 @@
 import Eyebrow from '../Eyebrow.astro';
 import Waveform from '../Waveform.astro';
 import Button from '../Button.astro';
-
-const upcomingEvents = [
-  {
-    date: "AUG 2026",
-    name: "Youth Creative Arts Prevention & Resource Fair",
-    location: "Chicago, IL",
-    type: "Community Expo",
-    desc: "Interactive youth creative arts showcase, resource distribution, and community-wide problem gambling prevention screening.",
-    bgStart: "#5A4614",
-    bgEnd: "#1E190A",
-    border: "rgba(200, 162, 76, 0.45)"
-  },
-  {
-    date: "FALL 2026",
-    name: "Statewide Behavioral Health & Public Health Tour",
-    location: "Springfield & Chicago, IL",
-    type: "Keynote & Advisory",
-    desc: "Multi-city executive keynote and frontline healthcare clinical training on screening integration and community health equity.",
-    bgStart: "#0A2B1A",
-    bgEnd: "#050F0A",
-    border: "rgba(14, 107, 84, 0.45)"
-  }
-];
 ---
 
-<section class="upcoming section-pad theme-ink relative overflow-hidden" id="upcoming-stages">
-  <Waveform opacity={0.05} variant="B" flipX={true} />
+<section class="upcoming-section theme-ink relative overflow-hidden" id="upcoming-engagements">
+  <Waveform opacity={0.04} variant="B" flipX={true} />
   
-  <div class="container stagger-group relative z-10" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
-    <div class="upcoming-header stagger-item">
-      <Eyebrow className="text-center justify-center">Upcoming</Eyebrow>
-      <h2 class="section-title text-center">Confirmed <span class="italic-accent">Engagements</span></h2>
-      <p class="upcoming-desc">Where Tiffany is bringing keynotes, trainings, and community prevention initiatives next.</p>
-    </div>
+  <div class="container relative z-10" style="max-width: 1000px; margin: 0 auto; padding: 5rem 1.5rem;">
     
-    <div class="upcoming-grid stagger-item">
-      {upcomingEvents.map((ev) => (
-        <div class="upcoming-card" style={`--bg-start: ${ev.bgStart}; --bg-end: ${ev.bgEnd}; --card-border: ${ev.border};`}>
-          <div class="card-inner">
-            <div class="card-top">
-              <span class="card-date">{ev.date}</span>
-              <span class="card-type">{ev.type}</span>
-            </div>
-            <h3 class="card-name">{ev.name}</h3>
-            <p class="card-desc">{ev.desc}</p>
-            <div class="card-bottom">
-              <div class="card-location">
-                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                <span>{ev.location}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      ))}
+    <div class="upcoming-status-card ultra-glass-card text-center reveal-up">
+      <div class="badge-wrap mb-6">
+        <span class="status-badge">ANNOUNCING SOON</span>
+      </div>
+
+      <Eyebrow className="justify-center">UPCOMING SCHEDULE</Eyebrow>
+      
+      <h2 class="status-headline mt-4">
+        New engagement dates will be announced <br/>
+        <span class="italic-accent">as they are confirmed.</span>
+      </h2>
+      
+      <p class="status-subtext mx-auto mt-6">
+        Tiffany is currently accepting invitations for keynotes, workshops, and coalition engagements for 2026 / 2027.
+      </p>
+
+      <div class="status-action mt-8">
+        <Button href="/work-with-tiffany" variant="primary" className="magnetic-btn">
+          Inquire for Your Event Date &rarr;
+        </Button>
+      </div>
     </div>
-    
-    <div class="upcoming-cta stagger-item">
-      <Button href="/work-with-tiffany" variant="primary" className="magnetic-btn">BRING TIFFANY TO YOUR EVENT &rarr;</Button>
-    </div>
+
   </div>
 </section>
 
 <style>
-  .upcoming {
-    padding: var(--sp-24) 0;
-    position: relative;
-    overflow: hidden;
+  .upcoming-section {
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  .upcoming-header {
-    max-width: 700px;
-    margin: 0 auto 3.5rem;
-    text-align: center;
+  .upcoming-status-card {
+    background: radial-gradient(circle at 50% 0%, rgba(217, 162, 58, 0.1) 0%, rgba(20, 18, 14, 0.85) 80%);
+    border: 1px solid rgba(217, 162, 58, 0.25);
+    border-radius: 24px;
+    padding: 4rem 2.5rem;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
   }
 
-  .upcoming-desc {
-    font-size: 1.1rem;
-    color: rgba(251, 246, 234, 0.85);
-    line-height: 1.6;
-    margin-top: 1rem;
-  }
-
-  .upcoming-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-8);
-    margin-bottom: 3.5rem;
-  }
-
-  @media (min-width: 768px) {
-    .upcoming-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .upcoming-card {
-    border-radius: 20px;
-    background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
-    border: 1px solid var(--card-border);
-    padding: 2.25rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  }
-
-  .upcoming-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 20px rgba(217, 162, 58, 0.1);
-  }
-
-  .card-inner {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    justify-content: space-between;
-  }
-
-  .card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 1.25rem;
-  }
-
-  .card-date {
+  .status-badge {
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.75rem;
     font-weight: 700;
-    color: var(--color-gold, #D9A23A);
-    letter-spacing: 0.1em;
-  }
-
-  .card-type {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(255,255,255,0.12);
-    padding: 0.25rem 0.6rem;
-    border-radius: 6px;
-    color: rgba(251, 246, 234, 0.9);
+    letter-spacing: 0.14em;
     text-transform: uppercase;
-  }
-
-  .card-name {
-    font-family: var(--font-serif);
-    font-size: 1.4rem;
-    line-height: 1.25;
-    color: var(--color-ivory, #FBF6EA);
-    margin: 0 0 0.75rem 0;
-  }
-
-  .card-desc {
-    font-size: 0.92rem;
-    line-height: 1.55;
-    color: rgba(251, 246, 234, 0.85);
-    margin: 0 0 1.5rem 0;
-  }
-
-  .card-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding-top: 1rem;
-    margin-top: auto;
-  }
-
-  .card-location {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.85rem;
     color: var(--color-gold, #D9A23A);
-    font-family: var(--font-mono);
+    background: rgba(217, 162, 58, 0.12);
+    border: 1px solid rgba(217, 162, 58, 0.35);
+    padding: 0.4rem 1rem;
+    border-radius: 100px;
+    display: inline-block;
   }
 
-  .upcoming-cta {
-    text-align: center;
+  .status-headline {
+    font-family: var(--font-serif);
+    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+    color: var(--color-ivory, #FBF6EA);
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .status-subtext {
+    font-size: 1.15rem;
+    line-height: 1.6;
+    color: rgba(251, 246, 234, 0.8);
+    max-width: 680px;
   }
 </style>

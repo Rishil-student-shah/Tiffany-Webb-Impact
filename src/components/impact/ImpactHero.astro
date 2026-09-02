@@ -4,267 +4,55 @@ import Waveform from '../Waveform.astro';
 import Button from '../Button.astro';
 ---
 
-<section class="impact-hero theme-ink">
+<section class="impact-hero theme-ink relative overflow-hidden" id="impact-overview">
   <div class="hero-bg-glow"></div>
-  <Waveform opacity={0.12} color="var(--color-gold)" />
+  <Waveform opacity={0.08} color="var(--color-gold)" />
   
-  <div class="container relative z-10">
-    <div class="hero-grid">
-      
-      <!-- Left Column: Text Content -->
-      <div class="hero-content">
-        <div class="hero-eyebrow-wrap">
-          <Eyebrow>Impact & Reach</Eyebrow>
-        </div>
-        <h1 class="hero-title">
-          <span class="hero-title-line">Why the</span>
-          <span class="hero-title-line italic-accent">work travels.</span>
-        </h1>
-        <p class="hero-subtext">
-          True prevention isn't bound by geography. It's bound by the universal need for cultural fluency, frontline truth, and strategies that actually connect.
-        </p>
-        <div class="hero-ctas">
-          <Button href="#engagements-directory" variant="primary" className="magnetic-btn">View Engagements</Button>
-          <Button href="/book" variant="secondary" className="magnetic-btn">Book Tiffany</Button>
-        </div>
+  <div class="container relative z-10" style="max-width: 1200px; margin: 0 auto; padding: 6rem 1.5rem 4rem 1.5rem;">
+    <div class="hero-content text-center reveal-up" style="max-width: 900px; margin: 0 auto;">
+      <Eyebrow className="justify-center">EVENTS & IMPACT</Eyebrow>
+      <h1 class="hero-title mt-4">
+        Where frontline experience <br/>
+        <span class="italic-accent">creates documented impact.</span>
+      </h1>
+      <p class="hero-subtext mx-auto mt-6">
+        From conference rooms to community spaces, this page documents where Tiffany has brought the conversation, who the work was designed to reach, and the impact that followed.
+      </p>
+      <div class="hero-ctas mt-8">
+        <Button href="#past-engagements" variant="primary" className="magnetic-btn">View Documented Engagements &rarr;</Button>
+        <Button href="/work-with-tiffany" variant="secondary" className="magnetic-btn">Work With Tiffany</Button>
       </div>
-
-      <!-- Right Column: Bento Stats -->
-      <div class="hero-stats-bento">
-        <div class="stat-bento-card stat-1">
-          <div>
-            <div class="stat-value">120+</div>
-            <div class="stat-label">Engagements</div>
-          </div>
-          <div class="stat-desc">Keynotes, workshops, and intensive clinical trainings.</div>
-        </div>
-        
-        <div class="stat-bento-card stat-2">
-          <div>
-            <div class="stat-value">40+</div>
-            <div class="stat-label">Organizations</div>
-          </div>
-          <div class="stat-desc">Schools, healthcare systems, and nonprofits.</div>
-        </div>
-        
-        <div class="stat-bento-card stat-3">
-          <div>
-            <div class="stat-value">15k+</div>
-            <div class="stat-label">Audiences</div>
-          </div>
-          <div class="stat-desc">Students, parents, and clinical professionals.</div>
-        </div>
-        
-        <div class="stat-bento-card stat-4">
-          <div>
-            <div class="stat-value">6</div>
-            <div class="stat-label">States</div>
-          </div>
-          <div class="stat-desc">Targeted regional impact across the Midwest.</div>
-        </div>
-      </div>
-      
     </div>
   </div>
 </section>
 
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    if (typeof gsap === "undefined") return;
-
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-
-    // Ensure elements start hidden for clean animation
-    gsap.set([".hero-title-line", ".hero-subtext", ".hero-ctas", ".stat-bento-card"], { opacity: 0 });
-
-    tl.fromTo(".hero-eyebrow-wrap", 
-      { opacity: 0, x: -30 },
-      { opacity: 1, x: 0, duration: 1 }
-    )
-    .fromTo(".hero-title-line", 
-      { y: 80, opacity: 0, rotation: 3 },
-      { y: 0, opacity: 1, rotation: 0, duration: 1.2, stagger: 0.15 },
-      "-=0.6"
-    )
-    .fromTo(".hero-subtext", 
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 1 },
-      "-=0.6"
-    )
-    .fromTo(".hero-ctas .magnetic-btn", 
-      { opacity: 0, y: 20 },
-      { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 },
-      "-=0.6"
-    )
-    .fromTo(".stat-bento-card", 
-      { opacity: 0, y: 40, scale: 0.95 },
-      { opacity: 1, y: 0, scale: 1, duration: 1, stagger: 0.1 },
-      "-=1"
-    );
-  });
-</script>
-
 <style>
   .impact-hero {
     position: relative;
-    padding: 160px 0 var(--sp-24);
-    background: var(--ink);
-    min-height: 95vh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-  }
-
-  .hero-bg-glow {
-    position: absolute;
-    top: -20%;
-    right: -10%;
-    width: 70%;
-    height: 100%;
-    background: radial-gradient(circle, rgba(217, 162, 58, 0.12) 0%, transparent 60%);
-    z-index: 1;
-    pointer-events: none;
-  }
-
-  .hero-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: var(--sp-12);
-    align-items: center;
-  }
-
-  @media (min-width: 1024px) {
-    .hero-grid {
-      grid-template-columns: 1fr 1fr;
-      gap: var(--sp-16);
-      padding: 0 4rem;
-    }
-  }
-
-  @media (min-width: 1440px) {
-    .hero-grid {
-      padding: 0 6rem;
-    }
-  }
-
-  /* --- Text Content --- */
-  .hero-content {
-    position: relative;
-    z-index: 10;
-  }
-
-  .hero-eyebrow-wrap {
-    margin-bottom: var(--sp-6);
+    padding: 3rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: radial-gradient(circle at 50% 10%, rgba(217, 162, 58, 0.12) 0%, rgba(13, 12, 8, 1) 70%);
   }
 
   .hero-title {
-    font-size: clamp(3.5rem, 6.5vw, 6rem);
     font-family: var(--font-serif);
-    color: var(--color-ivory);
-    line-height: 1.05;
-    margin: 0 0 var(--sp-8);
-    letter-spacing: -0.02em;
-  }
-
-  .hero-title-line {
-    display: block;
-    will-change: transform, opacity;
-  }
-
-  .text-gold {
-    color: var(--color-gold);
+    font-size: clamp(2.6rem, 5vw, 4.5rem);
+    color: var(--color-ivory, #FBF6EA);
+    line-height: 1.15;
+    margin: 0;
   }
 
   .hero-subtext {
-    font-size: clamp(1.15rem, 2vw, 1.35rem);
-    color: rgba(255, 255, 255, 0.8);
-    line-height: 1.6;
-    max-width: 540px;
-    margin-bottom: var(--sp-10);
-    font-family: var(--font-sans);
+    font-size: clamp(1.1rem, 1.8vw, 1.3rem);
+    color: rgba(251, 246, 234, 0.85);
+    line-height: 1.65;
+    max-width: 780px;
   }
 
   .hero-ctas {
     display: flex;
-    gap: var(--sp-4);
+    justify-content: center;
+    gap: 1.25rem;
     flex-wrap: wrap;
-  }
-
-  /* --- Bento Stats --- */
-  .hero-stats-bento {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: var(--sp-4);
-    position: relative;
-    z-index: 10;
-  }
-
-  .stat-bento-card {
-    padding: var(--sp-6) var(--sp-6);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 180px;
-    border-radius: var(--radius-xl);
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    transition: transform 0.4s ease, border-color 0.4s ease, background 0.4s ease;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  }
-
-  .stat-bento-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(217, 162, 58, 0.3);
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  /* Specific card sizing to make it true bento style */
-  .stat-1 {
-    grid-column: span 2;
-    background: linear-gradient(135deg, rgba(217, 162, 58, 0.1) 0%, rgba(0,0,0,0) 100%);
-    border: 1px solid rgba(217, 162, 58, 0.2);
-  }
-
-  .stat-1:hover {
-    background: linear-gradient(135deg, rgba(217, 162, 58, 0.15) 0%, rgba(0,0,0,0) 100%);
-    border-color: rgba(217, 162, 58, 0.4);
-  }
-
-  .stat-value {
-    font-family: var(--font-serif);
-    font-size: clamp(2.5rem, 4vw, 3.5rem);
-    color: var(--color-ivory);
-    line-height: 1;
-    margin-bottom: var(--sp-2);
-  }
-
-  .stat-1 .stat-value {
-    color: var(--color-gold);
-    font-size: clamp(3.5rem, 5vw, 4.5rem);
-  }
-
-  .stat-label {
-    font-family: var(--font-mono);
-    font-size: 0.92rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.16em;
-    color: #F3C56E;
-    margin-bottom: var(--sp-4);
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-  }
-
-  .stat-1 .stat-label {
-    color: #F3C56E;
-  }
-
-  .stat-desc {
-    font-family: var(--font-sans);
-    font-size: 0.95rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.5;
-    margin-top: auto;
   }
 </style>

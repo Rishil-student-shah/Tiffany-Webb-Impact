@@ -1,0 +1,147 @@
+---
+import Eyebrow from '../Eyebrow.astro';
+import Waveform from '../Waveform.astro';
+
+const levels = [
+  {
+    level: "01",
+    label: "REACH",
+    subtitle: "Who was in the room",
+    desc: "Direct multi-generational engagement reaching youth, student athletes, parents, clinical directors, ROSC coalition leaders, and frontline public health educators.",
+    tags: ["Youth & Athletes", "Clinical Teams", "ROSC Councils", "Families & Parents"],
+    color: "#0E6B54",
+    borderColor: "rgba(14, 107, 84, 0.45)"
+  },
+  {
+    level: "02",
+    label: "ACTIVITY",
+    subtitle: "What they received",
+    desc: "Interactive prevention passports, validated NODS-CLiP clinical screening toolkits, culturally fluent dialogue, and custom frontline training modules.",
+    tags: ["Prevention Passports", "Screening Protocols", "Live Q&A Forums", "Staff Toolkits"],
+    color: "#D9A23A",
+    borderColor: "rgba(217, 162, 58, 0.45)"
+  },
+  {
+    level: "03",
+    label: "RESULT / FOLLOW-UP",
+    subtitle: "Documented outcomes",
+    desc: "Direct clinical care linkage, permanent prevention curricula integration, cross-system coalition alignment, and actionable Monday-morning protocols.",
+    tags: ["Care Linkage", "Policy Resolutions", "Curriculum Adoption", "System Alignment"],
+    color: "#C15427",
+    borderColor: "rgba(193, 84, 39, 0.45)"
+  }
+];
+---
+
+<section class="evidence-model-section theme-ink relative overflow-hidden" id="evidence-model">
+  <Waveform opacity={0.03} variant="A" />
+
+  <div class="container relative z-10" style="max-width: 1200px; margin: 0 auto; padding: 6rem 1.5rem;">
+    
+    <div class="reveal-up text-center mb-16" style="max-width: 840px; margin-left: auto; margin-right: auto;">
+      <Eyebrow className="justify-center">3-LEVEL IMPACT FRAMEWORK</Eyebrow>
+      <h2 class="section-title mt-4" style="color: var(--color-ivory);">
+        How we measure <span class="italic-accent">meaningful impact.</span>
+      </h2>
+      <p class="subtitle mt-4" style="font-size: 1.15rem; color: rgba(251, 246, 234, 0.85); line-height: 1.6;">
+        Every speaking session, training, and strategic engagement is structured around three transparent tiers of accountability.
+      </p>
+    </div>
+
+    <div class="levels-grid stagger-group">
+      {levels.map((lvl) => (
+        <div class="level-card ultra-glass-card stagger-item" style={`border-color: ${lvl.borderColor};`}>
+          <div class="level-top">
+            <span class="level-num" style={`color: ${lvl.color};`}>{lvl.level} //</span>
+            <span class="level-badge" style={`color: ${lvl.color};`}>{lvl.label}</span>
+          </div>
+
+          <h3 class="level-title">{lvl.subtitle}</h3>
+          <p class="level-desc">{lvl.desc}</p>
+
+          <div class="level-tags">
+            {lvl.tags.map(t => (
+              <span class="tag-pill">{t}</span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .evidence-model-section {
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .levels-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  @media (min-width: 768px) {
+    .levels-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .level-card {
+    background: rgba(20, 18, 14, 0.75);
+    border: 1px solid;
+    border-radius: 20px;
+    padding: 2.25rem 2rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  }
+
+  .level-top {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    margin-bottom: 1rem;
+  }
+
+  .level-title {
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    color: var(--color-ivory, #FBF6EA);
+    margin: 0 0 0.75rem 0;
+    line-height: 1.25;
+  }
+
+  .level-desc {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(251, 246, 234, 0.8);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .level-tags {
+    margin-top: auto;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1rem;
+  }
+
+  .tag-pill {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: rgba(251, 246, 234, 0.75);
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.25rem 0.55rem;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+</style>

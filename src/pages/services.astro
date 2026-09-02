@@ -4,6 +4,7 @@ import Eyebrow from '../components/Eyebrow.astro';
 import Button from '../components/Button.astro';
 import Waveform from '../components/Waveform.astro';
 import PartnershipFramework from '../components/PartnershipFramework.astro';
+import PageNavigation from '../components/PageNavigation.astro';
 import { Image } from 'astro:assets';
 import heroImg from '../assets/tiffany_hero_new.jpg';
 import mysql from 'mysql2/promise';
@@ -273,6 +274,32 @@ try {
         </div>
       </div>
     </section>
+
+    <!-- Speaking Catalog Gateway Card -->
+    <section class="spk-section relative overflow-hidden" style="padding: 6rem 0; background: radial-gradient(circle at 50% 0%, rgba(217, 162, 58, 0.08) 0%, rgba(13, 12, 8, 0.95) 75%);">
+      <div class="spk-container relative z-10 text-center">
+        <div class="reveal-up" style="max-width: 800px; margin: 0 auto;">
+          <Eyebrow className="justify-center">SPEAKING PORTFOLIO</Eyebrow>
+          <h2 class="spk-h2 mt-4">Explore all 20 <span class="italic-accent">signature topics.</span></h2>
+          <p class="spk-subtitle mx-auto mt-4" style="margin-bottom: 2.5rem;">
+            Keynotes, clinical workshops, and youth prevention sessions organized by track and audience.
+          </p>
+          <div>
+            <Button href="/services/speaking-topics" variant="primary" className="magnetic-btn">
+              VIEW 20-TOPIC SPEAKING CATALOG &rarr;
+            </Button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer Navigation Loop -->
+    <PageNavigation 
+      prevLink="/about" 
+      prevLabel="Read Tiffany's Story & Heritage" 
+      nextLink="/impact" 
+      nextLabel="See Real-World Engagements & Impact" 
+    />
 
   </main>
 </Layout>

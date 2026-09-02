@@ -1,28 +1,46 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ImpactHero from '../components/impact/ImpactHero.astro';
-import UpcomingEngagements from '../components/impact/UpcomingEngagements.astro';
-import PastEngagements from '../components/impact/PastEngagements.astro';
 import OutcomeStories from '../components/impact/OutcomeStories.astro';
-import ImpactPartners from '../components/impact/ImpactPartners.astro';
-import PartnershipFramework from '../components/PartnershipFramework.astro';
-import ImpactGallery from '../components/impact/ImpactGallery.astro';
+import PastEngagements from '../components/impact/PastEngagements.astro';
+import UpcomingEngagements from '../components/impact/UpcomingEngagements.astro';
+import ImpactEvidenceModel from '../components/impact/ImpactEvidenceModel.astro';
 import EngagementJourney from '../components/impact/EngagementJourney.astro';
-import BookingSection from '../components/BookingSection.astro';
+import ImpactCTA from '../components/impact/ImpactCTA.astro';
+import PageNavigation from '../components/PageNavigation.astro';
 ---
 
-<Layout title="Community Impact | Tiffany Webb" theme="secondary">
+<Layout title="Community Impact & Documented Engagements | Tiffany Webb" theme="secondary">
   <main class="page-content">
     
+    <!-- 01. Introduction Hero -->
     <ImpactHero />
-    <UpcomingEngagements />
-    <PastEngagements />
+
+    <!-- 02. Featured Impact Stories -->
     <OutcomeStories />
-    <PartnershipFramework />
-    <ImpactPartners />
-    <ImpactGallery />
+
+    <!-- 03. Past Engagement Archive (4 Verified Events) -->
+    <PastEngagements />
+
+    <!-- 04. Upcoming Engagements Status -->
+    <UpcomingEngagements />
+
+    <!-- 05. 3-Level Evidence Model (Reach · Activity · Result) -->
+    <ImpactEvidenceModel />
+
+    <!-- 06. The Engagement Journey (5-Step Process) -->
     <EngagementJourney />
-    <BookingSection hideJourney={true} />
+
+    <!-- 07. Booking CTA Banner -->
+    <ImpactCTA />
+
+    <!-- Footer Navigation Loop -->
+    <PageNavigation 
+      prevLink="/services" 
+      prevLabel="Explore Services & GEAR Method™" 
+      nextLink="/media" 
+      nextLabel="Download Press Kit & Speaker Assets" 
+    />
     
   </main>
 </Layout>

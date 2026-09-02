@@ -1,0 +1,141 @@
+---
+interface Props {
+  prevLink?: string;
+  prevLabel?: string;
+  nextLink?: string;
+  nextLabel?: string;
+  secondaryLink?: string;
+  secondaryLabel?: string;
+}
+
+const {
+  prevLink,
+  prevLabel,
+  nextLink,
+  nextLabel,
+  secondaryLink,
+  secondaryLabel
+} = Astro.props;
+---
+
+<nav class="page-nav-section theme-ink" aria-label="Page Navigation">
+  <div class="page-nav-container">
+    
+    <!-- Previous Link -->
+    <div class="nav-col nav-prev">
+      {prevLink && prevLabel && (
+        <a href={prevLink} class="nav-card glass-card">
+          <span class="nav-direction">&larr; PREVIOUS</span>
+          <span class="nav-title">{prevLabel}</span>
+        </a>
+      )}
+    </div>
+
+    <!-- Secondary / Extra Link if provided -->
+    {secondaryLink && secondaryLabel && (
+      <div class="nav-col nav-secondary">
+        <a href={secondaryLink} class="nav-card glass-card">
+          <span class="nav-direction">EXPLORE</span>
+          <span class="nav-title">{secondaryLabel}</span>
+        </a>
+      </div>
+    )}
+
+    <!-- Next Link -->
+    <div class="nav-col nav-next">
+      {nextLink && nextLabel && (
+        <a href={nextLink} class="nav-card glass-card">
+          <span class="nav-direction">NEXT &rarr;</span>
+          <span class="nav-title">{nextLabel}</span>
+        </a>
+      )}
+    </div>
+
+  </div>
+</nav>
+
+<style>
+  .page-nav-section {
+    padding: 4.5rem 0 6rem 0;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: #0D0C08;
+  }
+
+  .page-nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .nav-col {
+    flex: 1 1 300px;
+    display: flex;
+  }
+
+  .nav-next {
+    justify-content: flex-end;
+  }
+
+  .nav-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    background: rgba(20, 18, 14, 0.6);
+    border: 1px solid rgba(217, 162, 58, 0.2);
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .nav-prev .nav-card {
+    text-align: left;
+  }
+
+  .nav-next .nav-card {
+    text-align: right;
+  }
+
+  .nav-secondary .nav-card {
+    text-align: center;
+  }
+
+  .nav-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(217, 162, 58, 0.5);
+    background: rgba(217, 162, 58, 0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(217, 162, 58, 0.15);
+  }
+
+  .nav-direction {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--color-gold, #D9A23A);
+    text-transform: uppercase;
+  }
+
+  .nav-title {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    color: var(--color-ivory, #FBF6EA);
+    font-weight: 500;
+    line-height: 1.3;
+  }
+
+  @media (max-width: 640px) {
+    .nav-next .nav-card {
+      text-align: left;
+    }
+  }
+</style>

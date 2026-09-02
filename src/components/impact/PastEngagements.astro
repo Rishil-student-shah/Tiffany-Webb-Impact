@@ -5,310 +5,238 @@ import Waveform from '../Waveform.astro';
 const pastEngagements = [
   {
     year: "2026",
-    format: "Keynote",
-    audience: "Statewide Prevention Professionals",
-    name: "ICPG Conference: Outreach Best Practices",
-    host: "Illinois Council on Problem Gambling",
-    city: "Springfield, IL",
-    size: "350+ Attendees",
-    substance: "Keynote and session delivery on grassroots engagement, health equity in problem gambling prevention, and cross-system linkage.",
-    bgStart: "#5A4614",
-    bgEnd: "#1E190A",
-    border: "rgba(200, 162, 76, 0.45)"
+    date: "August 18, 2026",
+    format: "Community Expo",
+    audience: "Youth & Families",
+    name: "Youth Creative Arts Prevention & Resource Fair",
+    host: "Blocks 2 Cities + GambleFreeGear",
+    city: "Chicago, IL",
+    reach: "67 Total Reach",
+    substance: "Youth creative arts exhibition, vision board activation, and signature Prevention Passport screening journey connecting youth and parents with care partners.",
+    color: "#6C2D5A",
+    borderColor: "rgba(108, 45, 90, 0.45)"
   },
   {
     year: "2026",
-    format: "Workshop",
-    audience: "Community Activation",
+    date: "June 05, 2026",
+    format: "Conference Breakout",
+    audience: "Statewide Prevention Professionals",
+    name: "ICPG Statewide Conference: Outreach Best Practices",
+    host: "Illinois Council on Problem Gambling",
+    city: "Springfield, IL",
+    reach: "350+ Attendees",
+    substance: "Master breakout session on grassroots outreach strategy, health equity frameworks in problem gambling prevention, and cross-system linkage.",
+    color: "#D9A23A",
+    borderColor: "rgba(217, 162, 58, 0.45)"
+  },
+  {
+    year: "2026",
+    date: "July 02, 2026",
+    format: "Community Activation",
+    audience: "Community Leaders & Families",
     name: "Women Connection Summit",
     host: "Women Connection Network",
     city: "Chicago, IL",
-    size: "600+ Attendees",
-    substance: "Empowering women leaders and families to break the silence surrounding hidden behavioral addictions and build emotional wellness.",
-    bgStart: "#5A2C18",
-    bgEnd: "#1E0F0A",
-    border: "rgba(193, 84, 39, 0.45)"
+    reach: "600+ Attendees",
+    substance: "Empowering women leaders, educators, and families to address hidden behavioral addictions and build resilient community support structures.",
+    color: "#C15427",
+    borderColor: "rgba(193, 84, 39, 0.45)"
   },
   {
     year: "2026",
-    format: "Facilitation",
+    date: "2026",
+    format: "Coalition Facilitation",
     audience: "ROSC & Care Linkage",
     name: "TEEH Foundation ROSC Council",
     host: "TEEH Foundation",
     city: "South Suburban Chicago, IL",
-    size: "250+ Attendees",
-    substance: "Strategic council facilitation integrating problem gambling prevention directly into local Recovery Oriented Systems of Care.",
-    bgStart: "#0A2B1A",
-    bgEnd: "#050F0A",
-    border: "rgba(14, 107, 84, 0.45)"
-  },
-  {
-    year: "2026",
-    format: "Community Expo",
-    audience: "Youth & Families",
-    name: "Youth Creative Arts Prevention & Resource Fair",
-    host: "Community Arts & Health Collaborative",
-    city: "Chicago, IL",
-    size: "67 Direct Reach",
-    substance: "Youth creative arts exhibition and interactive community prevention resource fair connecting youth and families with vital screening tools.",
-    bgStart: "#4A1E31",
-    bgEnd: "#190A0F",
-    border: "rgba(108, 45, 90, 0.45)"
+    reach: "250+ Attendees",
+    substance: "Strategic council facilitation embedding problem gambling prevention and screening workflows directly into local Recovery Oriented Systems of Care.",
+    color: "#0E6B54",
+    borderColor: "rgba(14, 107, 84, 0.45)"
   }
 ];
 ---
 
-<section class="past-engagements section-pad theme-ink relative overflow-hidden" id="engagements-directory">
-  <Waveform opacity={0.05} variant="A" flipY={true} />
+<section class="past-engagements theme-ink relative overflow-hidden" id="past-engagements">
+  <Waveform opacity={0.04} variant="A" flipY={true} />
   
-  <div class="container stagger-group relative z-10">
-    <div class="past-header stagger-item">
-      <Eyebrow className="text-center justify-center">Directory</Eyebrow>
-      <h2 class="section-title text-center">Documented <span class="italic-accent">Engagements</span></h2>
-      <p class="past-desc">Real stages, summits, and community coalition forums from Tiffany's master impact record.</p>
-    </div>
+  <div class="container relative z-10" style="max-width: 1200px; margin: 0 auto; padding: 6rem 1.5rem;">
     
-    <div class="filters-wrapper stagger-item">
-      <div class="filter-pills" id="engagement-filters">
-        <button class="pill active" data-filter="All">All</button>
-        <button class="pill" data-filter="Keynote">Keynotes</button>
-        <button class="pill" data-filter="Workshop">Workshops</button>
-        <button class="pill" data-filter="Facilitation">Facilitation</button>
-        <button class="pill" data-filter="Community Expo">Community Expo</button>
-      </div>
+    <!-- Section Header -->
+    <div class="reveal-up text-center mb-16" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+      <Eyebrow className="justify-center">ENGAGEMENT ARCHIVE</Eyebrow>
+      <h2 class="section-title mt-4" style="color: var(--color-ivory);">
+        Verified event <span class="italic-accent">track record.</span>
+      </h2>
+      <p class="subtitle mt-4" style="font-size: 1.15rem; color: rgba(251, 246, 234, 0.85); line-height: 1.6;">
+        Real stages, summits, and community coalition forums from Tiffany's master impact tracker.
+      </p>
     </div>
 
-    <div class="bento-grid stagger-item" id="engagement-grid">
+    <!-- 4 Verified Event Cards Grid -->
+    <div class="engagements-grid stagger-group">
       {pastEngagements.map((event) => (
-        <div class="bento-card" data-format={event.format} style={`--bg-start: ${event.bgStart}; --bg-end: ${event.bgEnd}; --card-border: ${event.border};`}>
-          <div class="card-inner">
-            <div class="card-header">
-              <span class="event-year">{event.year}</span>
-              <span class="event-badge">{event.format}</span>
-            </div>
+        <div class="event-card ultra-glass-card stagger-item" style={`border-color: ${event.borderColor};`}>
+          <div class="event-card-inner">
             
-            <div class="card-body">
-              <h3 class="event-name">{event.name}</h3>
-              <p class="event-host">
-                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="host-icon"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                {event.host} <span class="city-dot">•</span> {event.city}
+            <div class="event-card-top">
+              <span class="event-date-pill">{event.date}</span>
+              <span class="event-format-badge" style={`color: ${event.color}; border: 1px solid ${event.color}66; background: ${event.color}15;`}>
+                {event.format}
+              </span>
+            </div>
+
+            <div class="event-card-body">
+              <h3 class="event-title">{event.name}</h3>
+              <p class="event-host-loc">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color: var(--color-gold);"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                <span>{event.host}</span> &bull; <span>{event.city}</span>
               </p>
-            </div>
-            
-            <div class="card-footer">
               <p class="event-substance">{event.substance}</p>
-              <div class="card-meta">
-                <span class="meta-tag audience-tag">{event.audience}</span>
-                <span class="meta-tag size-tag">{event.size}</span>
+            </div>
+
+            <div class="event-card-footer">
+              <div class="reach-metric">
+                <span class="reach-label">DOCUMENTED REACH</span>
+                <span class="reach-value">{event.reach}</span>
+              </div>
+              <div class="audience-badge">
+                <span>{event.audience}</span>
               </div>
             </div>
+
           </div>
         </div>
       ))}
     </div>
+
   </div>
 </section>
 
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const pills = document.querySelectorAll('#engagement-filters .pill');
-    const cards = document.querySelectorAll('#engagement-grid .bento-card');
-
-    pills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        pills.forEach(p => p.classList.remove('active'));
-        pill.classList.add('active');
-
-        const filter = pill.getAttribute('data-filter');
-
-        cards.forEach(card => {
-          if (filter === 'All' || card.getAttribute('data-format') === filter) {
-            card.style.display = 'block';
-            card.style.opacity = '1';
-            card.style.transform = 'translateY(0)';
-          } else {
-            card.style.display = 'none';
-          }
-        });
-      });
-    });
-  });
-</script>
-
 <style>
   .past-engagements {
-    padding: var(--sp-24) 0;
-    position: relative;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
-  .past-header {
-    max-width: 700px;
-    margin: 0 auto 3rem;
-    text-align: center;
-  }
-
-  .past-desc {
-    font-size: 1.1rem;
-    color: rgba(251, 246, 234, 0.85);
-    line-height: 1.6;
-    margin-top: 1rem;
-  }
-
-  .filters-wrapper {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 3.5rem;
-  }
-
-  .filter-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 0.5rem;
-    border-radius: 100px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .pill {
-    background: transparent;
-    border: none;
-    color: rgba(251, 246, 234, 0.7);
-    padding: 0.5rem 1.25rem;
-    border-radius: 100px;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.25s ease;
-  }
-
-  .pill:hover {
-    color: var(--color-gold, #D9A23A);
-    background: rgba(255, 255, 255, 0.05);
-  }
-
-  .pill.active {
-    background: var(--color-gold, #D9A23A);
-    color: #0D0C08;
-    box-shadow: 0 2px 10px rgba(217, 162, 58, 0.35);
-  }
-
-  .bento-grid {
+  .engagements-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.75rem;
+    gap: 2rem;
   }
 
   @media (min-width: 768px) {
-    .bento-grid {
+    .engagements-grid {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  .bento-card {
+  .event-card {
+    background: rgba(20, 18, 14, 0.7);
+    border: 1px solid;
     border-radius: 20px;
-    background: linear-gradient(135deg, var(--bg-start) 0%, var(--bg-end) 100%);
-    border: 1px solid var(--card-border);
     padding: 2rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  }
-
-  .bento-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(217, 162, 58, 0.1);
-  }
-
-  .card-inner {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
     display: flex;
     flex-direction: column;
-    height: 100%;
     justify-content: space-between;
   }
 
-  .card-header {
+  .event-card-top {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.25rem;
   }
 
-  .event-year {
+  .event-date-pill {
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: 0.75rem;
     font-weight: 700;
     color: var(--color-gold, #D9A23A);
+    letter-spacing: 0.08em;
   }
 
-  .event-badge {
+  .event-format-badge {
     font-family: var(--font-mono);
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 0.25rem 0.6rem;
-    border-radius: 6px;
-    color: rgba(251, 246, 234, 0.9);
+    padding: 0.25rem 0.65rem;
+    border-radius: 100px;
   }
 
-  .event-name {
+  .event-title {
     font-family: var(--font-serif);
     font-size: 1.35rem;
-    line-height: 1.25;
+    line-height: 1.3;
     color: var(--color-ivory, #FBF6EA);
     margin: 0 0 0.5rem 0;
   }
 
-  .event-host {
-    font-size: 0.88rem;
-    color: rgba(251, 246, 234, 0.75);
+  .event-host-loc {
     display: flex;
     align-items: center;
     gap: 0.4rem;
-    margin-bottom: 1.25rem;
-  }
-
-  .host-icon {
-    color: var(--color-gold, #D9A23A);
-  }
-
-  .city-dot {
-    color: var(--color-gold, #D9A23A);
-  }
-
-  .card-footer {
-    border-top: 1px solid rgba(255, 255, 255, 0.08);
-    padding-top: 1rem;
-    margin-top: auto;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: rgba(251, 246, 234, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
   }
 
   .event-substance {
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     line-height: 1.55;
     color: rgba(251, 246, 234, 0.85);
-    margin: 0 0 1rem 0;
+    margin: 0 0 1.5rem 0;
   }
 
-  .card-meta {
+  .event-card-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1rem;
+    margin-top: auto;
     display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.75rem;
   }
 
-  .meta-tag {
+  .reach-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .reach-label {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: rgba(251, 246, 234, 0.5);
+  }
+
+  .reach-value {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-gold, #D9A23A);
+  }
+
+  .audience-badge {
     font-family: var(--font-mono);
     font-size: 0.72rem;
-    padding: 0.25rem 0.55rem;
-    border-radius: 4px;
-    background: rgba(0, 0, 0, 0.4);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    color: rgba(251, 246, 234, 0.8);
+    color: rgba(251, 246, 234, 0.75);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.3rem 0.6rem;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
   }
 </style>

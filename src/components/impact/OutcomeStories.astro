@@ -4,469 +4,241 @@ import Waveform from '../Waveform.astro';
 import { Image } from 'astro:assets';
 import thumb1 from '../../assets/thumb_1.jpg';
 import thumb2 from '../../assets/thumb_2.jpg';
-import thumb3 from '../../assets/thumb_3.jpg';
 
 const stories = [
   {
-    title: "The Silent Epidemic in High School Athletics",
-    situation: "A suburban school district noticed an uptick in sports betting among student athletes, but coaches and counselors felt unequipped to address it without alienating students.",
-    action: "Tiffany delivered a targeted assembly for athletes, followed by a 2-hour intensive workshop for the coaching staff, framing gambling through the lens of performance.",
-    outcome: "The athletic department integrated a permanent gambling awareness module into their seasonal kickoff, and 12 students self-referred to counseling.",
-    quote: "Tiffany didn't lecture them. She spoke their language. It was the first time I saw our athletes actually listen to a presentation on addiction.",
+    tag: "YOUTH & COMMUNITY PREVENTION",
+    badge: "EVENT SPOTLIGHT",
+    title: "Youth Creative Arts Prevention & Resource Fair",
+    partner: "Blocks 2 Cities + GambleFreeGear",
+    reach: "67 Total Reach · Multi-Gen Attendees",
+    dateLoc: "August 2026 · Chicago, IL",
+    situation: "Grassroots youth and community families navigating emerging digital risks, mobile sports wagering exposure, and social media pressures without structured community screening or relatable prevention tools.",
+    action: "Tiffany co-led a high-engagement prevention activation featuring the signature Prevention Passport, youth-led panel discussion, creative arts vision board session, and direct linkage to local care partners.",
+    outcome: "67 youth, parents, and community members completed the interactive Prevention Passport screening journey, connecting families to care resources and establishing an ongoing youth prevention pipeline.",
+    quote: "Tiffany brought a format the kids actually connected with. The Prevention Passport turned an intimidating public health conversation into an engaging, empowering experience.",
     thumb: thumb1,
-    bgStart: 'rgba(26, 42, 32, 0.6)', // Forest Green
-    bgEnd: 'rgba(10, 21, 16, 0.4)'
+    color: "#0E6B54"
   },
   {
-    title: "Closing the Gap in Clinical Protocols",
-    situation: "A regional healthcare system was successfully screening for substance use, but their intake process completely missed behavioral addictions, leaving gambling harm undiagnosed.",
-    action: "Through a half-day clinical training, Tiffany walked their frontline workers through the hidden signs of gambling disorder, and how to adapt existing screening tools.",
-    outcome: "The system updated their standard intake protocols across 4 clinics, leading to a 300% increase in identified gambling risk factors within the first quarter.",
-    quote: "She completely shifted our clinical perspective. We were looking right past a massive community health issue because we didn't know the right questions to ask.",
+    tag: "STATEWIDE PROFESSIONAL EDUCATION",
+    badge: "CONFERENCE BREAKOUT",
+    title: "ICPG Statewide Conference: Outreach Best Practices",
+    partner: "Illinois Council on Problem Gambling",
+    reach: "350+ Statewide Prevention Professionals",
+    dateLoc: "June 2026 · Springfield, IL",
+    situation: "Clinical providers and public health educators across Illinois needed evidence-based, culturally grounded frameworks to reach historically underserved communities and bridge clinical screening protocols with frontline trust.",
+    action: "Tiffany delivered an intensive master breakout session on multicultural outreach strategy, actionable touchpoint architecture, and operationalizing the GEAR Method™ in clinical and community settings.",
+    outcome: "Equipped statewide prevention leaders with practical engagement playbooks and NODS-CLiP brief intervention protocols implemented across regional healthcare and ROSC networks.",
+    quote: "One of the most practical, human-centered sessions at our conference. Tiffany bridges frontline reality with professional rigor in a way that stays with you long after the event.",
     thumb: thumb2,
-    bgStart: 'rgba(42, 26, 16, 0.6)', // Burnt Orange
-    bgEnd: 'rgba(26, 10, 5, 0.4)'
-  },
-  {
-    title: "Empowering Community Coalitions",
-    situation: "A neighborhood health collaborative wanted to launch a prevention campaign, but felt disconnected from the realities of modern mobile betting and youth culture.",
-    action: "Tiffany facilitated a strategic planning forum, bringing together public health officials, parents, and community leaders to map out culturally fluent intervention points.",
-    outcome: "The collaborative secured state funding for a peer-to-peer education program designed entirely around the framework Tiffany helped them build.",
-    quote: "She brings evidence, but more importantly, she brings empathy. She helped us build a strategy that actually reflects the people we serve.",
-    thumb: thumb3,
-    bgStart: 'rgba(26, 21, 37, 0.6)', // Amethyst/Berry
-    bgEnd: 'rgba(15, 10, 21, 0.4)'
+    color: "#D9A23A"
   }
 ];
 ---
 
-<section class="outcome-stories theme-ink relative overflow-hidden">
+<section class="outcome-stories theme-ink relative overflow-hidden" id="impact-stories">
   <Waveform opacity={0.05} variant="C" />
 
-  <div class="container relative z-10">
-    <div style="max-width: 800px; margin: 0 auto; margin-bottom: 4rem; display: flex; flex-direction: column; align-items: center; text-align: center;">
-      <Eyebrow className="text-center justify-center">Outcomes</Eyebrow>
-      <h2 class="section-title text-center" style="text-align: center; margin-left: auto; margin-right: auto;">What change <br/><span class="italic-accent">looks like.</span></h2>
+  <div class="container relative z-10" style="max-width: 1200px; margin: 0 auto; padding: 6rem 1.5rem;">
+    
+    <!-- Section Header -->
+    <div class="reveal-up text-center mb-16" style="max-width: 840px; margin-left: auto; margin-right: auto;">
+      <Eyebrow className="justify-center">FEATURED IMPACT STORIES</Eyebrow>
+      <h2 class="section-title mt-4" style="color: var(--color-ivory);">
+        Documented change <span class="italic-accent">in the field.</span>
+      </h2>
+      <p class="subtitle mt-4" style="font-size: 1.15rem; color: rgba(251, 246, 234, 0.85); line-height: 1.6;">
+        Real engagements, verified reach, and concrete community outcomes across Illinois.
+      </p>
     </div>
 
-    <div class="outcomes-carousel-wrap">
-      
-      <!-- Prev Button -->
-      <button class="nav-btn prev-btn" aria-label="Previous Outcome">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-      </button>
+    <!-- Stories Grid -->
+    <div class="stories-grid stagger-group">
+      {stories.map((story, i) => (
+        <div class="story-card ultra-glass-card stagger-item">
+          <div class="story-inner">
+            
+            <!-- Header Meta -->
+            <div class="story-meta-header">
+              <span class="story-badge" style={`color: ${story.color}; border-color: ${story.color}55; background: ${story.color}18;`}>
+                {story.badge}
+              </span>
+              <span class="story-reach">{story.reach}</span>
+            </div>
 
-      <div class="carousel-viewport">
-        <div class="carousel-track">
-          {stories.map((story, i) => (
-            <div class="carousel-slide">
-              <div class="story-bento gfg-style-card">
-                <div class="story-bento-inner">
-                  
-                  <!-- Left: Text Content -->
-                  <div class="story-text-col">
-                    <div class="story-header">
-                      <span class="story-index-badge">0{i + 1}</span>
-                      <h3 class="story-title">{story.title}</h3>
-                    </div>
-                    
-                    <div class="story-blocks">
-                      <div class="story-block">
-                        <h4 class="block-label">The Situation</h4>
-                        <p class="block-text">{story.situation}</p>
-                      </div>
-                      
-                      <div class="story-block outcome-block">
-                        <h4 class="block-label text-gold">What Changed</h4>
-                        <p class="block-text text-white">{story.outcome}</p>
-                      </div>
-                    </div>
-                    
-                    <blockquote class="story-quote">"{story.quote}"</blockquote>
-                  </div>
-                  
-                  <!-- Right: Video Reel -->
-                  <div class="story-video-col">
-                    <div class="reel-video-card">
-                      <div class="reel-video-inner">
-                        <Image src={story.thumb} alt={`Video for ${story.title}`} class="reel-thumb-img" />
-                        <div class="reel-play-overlay">
-                          <div class="reel-play-button">
-                            <svg viewBox="0 0 24 24" width="32" height="32" fill="var(--color-ivory)"><path d="M8 5v14l11-7z"/></svg>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="reel-video-info">
-                        <p class="reel-video-meta">Watch Video {i + 1}</p>
-                        <h3 class="reel-video-title">See the impact in action</h3>
-                      </div>
-                    </div>
-                  </div>
-                  
-                </div>
+            <h3 class="story-title">{story.title}</h3>
+            <p class="story-partner">{story.partner} &bull; {story.dateLoc}</p>
+
+            <!-- 3-Block Content -->
+            <div class="story-content-blocks">
+              <div class="content-block">
+                <span class="block-heading">THE CHALLENGE</span>
+                <p class="block-body">{story.situation}</p>
+              </div>
+
+              <div class="content-block">
+                <span class="block-heading">THE ACTIVATION</span>
+                <p class="block-body">{story.action}</p>
+              </div>
+
+              <div class="content-block outcome-accent-block">
+                <span class="block-heading" style="color: var(--color-gold);">DOCUMENTED OUTCOME</span>
+                <p class="block-body font-medium">{story.outcome}</p>
               </div>
             </div>
-          ))}
-        </div>
-      </div>
 
-      <!-- Next Button -->
-      <button class="nav-btn next-btn" aria-label="Next Outcome">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-      </button>
-      
-    </div>
-    
-    <!-- Carousel Dots -->
-    <div class="carousel-dots" style="margin-top: var(--sp-16);">
-      {stories.map((_, i) => (
-        <button class={`dot ${i === 0 ? 'active' : ''}`} data-index={i} aria-label={`Go to slide ${i + 1}`}></button>
+            <!-- Quote -->
+            <blockquote class="story-quote">
+              <p>"{story.quote}"</p>
+            </blockquote>
+
+          </div>
+        </div>
       ))}
+    </div>
+
+    <!-- Fallback Notice -->
+    <div class="fallback-banner ultra-glass-card mt-12 text-center reveal-up">
+      <p class="fallback-text">
+        <span class="text-gold font-bold">Additional verified impact stories documenting soon.</span> All case studies published on this page represent real documented activations with host organization consent.
+      </p>
     </div>
 
   </div>
 </section>
 
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", () => {
-    const track = document.querySelector('.carousel-track');
-    const slides = document.querySelectorAll('.carousel-slide');
-    const nextBtn = document.querySelector('.next-btn');
-    const prevBtn = document.querySelector('.prev-btn');
-    const dots = document.querySelectorAll('.dot');
-    
-    if(!track || !slides.length) return;
-
-    let currentIndex = 0;
-    const totalSlides = slides.length;
-
-    function goToSlide(index) {
-      if (index < 0) index = totalSlides - 1;
-      if (index >= totalSlides) index = 0;
-      
-      currentIndex = index;
-      const offset = currentIndex * -100;
-      track.style.transform = `translateX(${offset}%)`;
-      
-      // Update dots
-      dots.forEach(dot => dot.classList.remove('active'));
-      if(dots[currentIndex]) dots[currentIndex].classList.add('active');
-    }
-
-    nextBtn?.addEventListener('click', () => goToSlide(currentIndex + 1));
-    prevBtn?.addEventListener('click', () => goToSlide(currentIndex - 1));
-    
-    dots.forEach((dot, index) => {
-      dot.addEventListener('click', () => goToSlide(index));
-    });
-  });
-</script>
-
 <style>
   .outcome-stories {
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 2rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    position: relative;
-    overflow: hidden;
-    padding: var(--sp-24) 0;
   }
 
-  /* Carousel Layout */
-  .outcomes-carousel-wrap {
-    display: flex;
-    align-items: center;
-    gap: var(--sp-6);
-    max-width: 1200px;
-    margin: 0 auto;
-    position: relative;
-  }
-
-  .carousel-viewport {
-    flex: 1;
-    overflow: hidden;
-    border-radius: var(--radius-2xl);
-    mask-image: linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%);
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 2%, black 98%, transparent 100%);
-  }
-
-  .carousel-track {
-    display: flex;
-    transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-    width: 100%;
-  }
-
-  .carousel-slide {
-    flex: 0 0 100%;
-    width: 100%;
-    padding: 0 10px; /* Slight buffer so shadow isn't clipped by mask */
-  }
-
-  /* Bento Card Layout - GambleFreeGear Style */
-  .gfg-style-card {
-    position: relative;
-    border-radius: 40px;
-    padding: 2px; /* For gradient border effect */
-    background: linear-gradient(135deg, rgba(217, 162, 58, 0.5), rgba(217, 162, 58, 0.05), transparent 60%);
-    box-shadow: 0 40px 100px rgba(0,0,0,0.8), 0 0 40px rgba(217, 162, 58, 0.1);
-  }
-
-  .story-bento-inner {
-    background: rgba(10, 8, 7, 0.95); /* Extremely dark inner */
-    backdrop-filter: blur(40px);
-    -webkit-backdrop-filter: blur(40px);
-    border-radius: 38px;
-    padding: var(--sp-8);
-    position: relative;
-    overflow: hidden;
-    z-index: 2;
+  .stories-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: var(--sp-8);
-    height: 100%;
+    gap: 2.5rem;
   }
 
-  /* Inner Glow */
-  .story-bento-inner::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: radial-gradient(circle at top right, rgba(217, 162, 58, 0.15), transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-  }
-  
-  .story-text-col, .story-video-col {
-    position: relative;
-    z-index: 2;
-  }
-
-  @media (min-width: 992px) {
-    .story-bento-inner {
-      grid-template-columns: 1.1fr 0.9fr;
-      gap: var(--sp-12);
-      padding: var(--sp-12);
-      align-items: center;
+  @media (min-width: 900px) {
+    .stories-grid {
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
-  /* Left Side: Text */
-  .story-text-col {
+  .story-card {
+    background: rgba(20, 18, 14, 0.7);
+    border: 1px solid rgba(217, 162, 58, 0.22);
+    border-radius: 24px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
   }
 
-  .story-header { margin-bottom: var(--sp-6); }
+  .story-meta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+  }
 
-  .story-index-badge {
+  .story-badge {
     font-family: var(--font-mono);
-    font-size: 1.25rem;
-    color: var(--color-gold);
-    display: block;
-    margin-bottom: var(--sp-3);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 0.3rem 0.75rem;
+    border-radius: 100px;
+    border: 1px solid;
+  }
+
+  .story-reach {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-gold, #D9A23A);
+    font-weight: 600;
   }
 
   .story-title {
     font-family: var(--font-serif);
-    font-size: clamp(2rem, 3vw, 2.5rem);
-    color: var(--color-ivory);
-    line-height: 1.15;
-    letter-spacing: -0.02em;
+    font-size: 1.6rem;
+    color: var(--color-ivory, #FBF6EA);
+    margin: 0 0 0.5rem 0;
+    line-height: 1.25;
   }
 
-  .story-blocks {
+  .story-partner {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: rgba(251, 246, 234, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 1.75rem;
+  }
+
+  .story-content-blocks {
     display: flex;
     flex-direction: column;
-    gap: var(--sp-6);
-    margin-bottom: var(--sp-8);
+    gap: 1.25rem;
+    margin-bottom: 1.75rem;
   }
 
-  .block-label {
+  .content-block {
+    background: rgba(255, 255, 255, 0.02);
+    border-left: 2px solid rgba(217, 162, 58, 0.3);
+    padding: 0.75rem 1rem;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .outcome-accent-block {
+    border-left-color: var(--color-gold, #D9A23A);
+    background: rgba(217, 162, 58, 0.06);
+  }
+
+  .block-heading {
+    display: block;
     font-family: var(--font-mono);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: rgba(255, 255, 255, 0.4);
-    margin-bottom: var(--sp-2);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: rgba(251, 246, 234, 0.6);
+    margin-bottom: 0.3rem;
   }
 
-  .block-label.text-gold { color: var(--color-gold); }
-
-  .block-text {
-    font-family: var(--font-sans);
-    font-size: 1.05rem;
-    color: rgba(255, 255, 255, 0.7);
-    line-height: 1.6;
+  .block-body {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: rgba(251, 246, 234, 0.85);
     margin: 0;
-  }
-
-  .block-text.text-white {
-    color: var(--color-ivory);
-    font-weight: 500;
-  }
-
-  .outcome-block {
-    background: rgba(217, 162, 58, 0.05);
-    padding: var(--sp-5);
-    border-radius: var(--radius-lg);
-    border-left: 2px solid var(--color-gold);
   }
 
   .story-quote {
+    margin: auto 0 0 0;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
     font-family: var(--font-serif);
-    font-size: 1.15rem;
     font-style: italic;
-    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: var(--color-ivory, #FBF6EA);
+  }
+
+  .fallback-banner {
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    background: rgba(20, 18, 14, 0.5);
+    border: 1px dashed rgba(217, 162, 58, 0.3);
+    margin-top: 3.5rem;
+  }
+
+  .fallback-text {
+    font-size: 0.92rem;
+    color: rgba(251, 246, 234, 0.75);
+    margin: 0;
     line-height: 1.6;
-    margin: 0;
-    border-top: 1px solid rgba(255,255,255,0.05);
-    padding-top: var(--sp-6);
-  }
-
-  /* Right Side: Video */
-  .story-video-col {
-    width: 100%;
-  }
-
-  .reel-video-card {
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    transition: transform 0.4s ease;
-  }
-
-  .reel-video-card:hover {
-    transform: translateY(-5px);
-  }
-
-  .reel-video-inner {
-    position: relative;
-    border-radius: var(--radius-xl);
-    overflow: hidden;
-    aspect-ratio: 4/3;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  }
-
-  .reel-thumb-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.8s ease;
-  }
-
-  .reel-video-card:hover .reel-thumb-img {
-    transform: scale(1.05);
-  }
-
-  .reel-play-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.4s ease;
-  }
-
-  .reel-video-card:hover .reel-play-overlay {
-    background: rgba(0,0,0,0.4);
-  }
-
-  .reel-play-button {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    background: rgba(217, 162, 58, 0.9);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), background 0.4s ease;
-    padding-left: 5px; /* Visual center for play icon */
-  }
-
-  .reel-video-card:hover .reel-play-button {
-    transform: scale(1.1);
-    background: var(--color-gold);
-  }
-
-  .reel-video-info {
-    margin-top: var(--sp-4);
-    text-align: center;
-  }
-
-  .reel-video-title {
-    font-family: var(--font-serif);
-    font-size: 1.25rem;
-    color: var(--color-ivory);
-    margin: 0;
-    transition: color 0.3s ease;
-  }
-
-  .reel-video-card:hover .reel-video-title {
-    color: var(--color-gold);
-  }
-
-  .reel-video-meta {
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-gold);
-    margin-bottom: 4px;
-  }
-
-  /* Navigation Buttons */
-  .nav-btn {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    color: var(--color-ivory);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: all 0.3s ease;
-  }
-
-  .nav-btn:hover {
-    background: rgba(217, 162, 58, 0.1);
-    border-color: var(--color-gold);
-    color: var(--color-gold);
-  }
-
-  .nav-btn svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  /* Dots */
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    margin-top: var(--sp-10);
-  }
-
-  .dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-
-  .dot.active {
-    background: var(--color-gold);
-    transform: scale(1.2);
   }
 </style>

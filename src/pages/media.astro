@@ -2,187 +2,513 @@
 import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Waveform from '../components/Waveform.astro';
+import Button from '../components/Button.astro';
+import PageNavigation from '../components/PageNavigation.astro';
+import { Image } from 'astro:assets';
+import headshotImg from '../assets/tiffany_hero_new.jpg';
+
+const bios = [
+  {
+    id: "short",
+    label: "SHORT BIO",
+    words: "~50 WORDS",
+    subtitle: "For Event Programs & Social Media",
+    text: "Tiffany Webb is a Chicago-born Community Impact Strategist and Public Health Speaker with over 15 years of experience in behavioral health and public health education. She brings lived insight and clinical rigor to problem gambling prevention, youth digital risk, and human-centered community health strategies across Illinois and nationally."
+  },
+  {
+    id: "medium",
+    label: "MEDIUM BIO",
+    words: "~150 WORDS",
+    subtitle: "For Conference Agendas & Website Speaker Profiles",
+    text: "Tiffany Webb is a Community Impact Strategist, Public Health Educator, and Speaker specializing in problem gambling prevention, youth digital risk, and community health strategy. With over 15 years of leadership across behavioral health systems and more than 4,000 hours of frontline community outreach, Tiffany bridges the gap between clinical protocols and community trust. She is the founder of GambleFreeGear and the creator of the GEAR Method™ (Generate, Engage, Activate, Resource). An affiliate speaker with the Illinois Council on Problem Gambling (ICPG) and an active advisor to regional ROSC coalitions, Tiffany is trusted by healthcare networks, civic leaders, and youth organizations to deliver high-impact keynotes and actionable workshops."
+  },
+  {
+    id: "long",
+    label: "LONG BIO",
+    words: "~300 WORDS",
+    subtitle: "For Keynote Introductions, Press Releases & Feature Articles",
+    text: "Tiffany Webb is a Community Impact Strategist, Public Health Educator, and Speaker dedicated to transforming how organizations, healthcare systems, and communities address behavioral addiction, emerging digital risks, and public health equity. Raised by her grandmother and a close village of family in Chicago with deep Louisiana roots, Tiffany learned early that true community support requires showing up with empathy, consistency, and respect.\n\nOver the past 15 years, Tiffany has worked across healthcare networks, municipal health agencies, and grassroots recovery coalitions. With more than 4,000 hours of frontline outreach, she specializes in identifying hidden behavioral addictions—including mobile sports wagering and youth digital gaming—that traditional intake protocols often overlook.\n\nShe is the creator of the GEAR Method™ (Generate, Engage, Activate, Resource), a proprietary four-phase framework that helps institutions move from passive awareness to sustainable community action. Tiffany is also the founder of GambleFreeGear, a mission-driven awareness enterprise providing wearable advocacy and educational resources.\n\nAn affiliate speaker with the Illinois Council on Problem Gambling (ICPG) and a trusted facilitator for Recovery Oriented Systems of Care (ROSC) councils, Tiffany delivers evidence-based, emotionally resonant keynotes, clinical trainings, and executive advisory sessions across the country."
+  }
+];
+
+const emceeScript = `Please welcome Tiffany Webb — Community Impact Strategist, Public Health Educator, and founder of GambleFreeGear. With over 15 years of experience across behavioral health and community systems, Tiffany helps healthcare networks, schools, and civic leaders reimagine prevention and build human-centered strategies that last. Please join me in welcoming Tiffany Webb!`;
+
+const downloads = [
+  {
+    title: "Speaker One-Sheet PDF",
+    tag: "FOR EVENT ORGANIZERS",
+    desc: "Single-page executive overview of signature topics, speaking formats, and organizer credentials. Perfect for committee review.",
+    link: "/downloads/Tiffany_Webb_Speaker_One_Sheet.pdf",
+    btnText: "Download One-Sheet &darr;"
+  },
+  {
+    title: "Official Headshot (Print Resolution)",
+    tag: "HIGH-RES 300 DPI · CMYK",
+    desc: "Approved print-quality photography for conference booklets, printed programs, and event banners.",
+    link: "/uploads/tiffany_headshot_print.jpg",
+    btnText: "Download Print Image &darr;"
+  },
+  {
+    title: "Official Headshot (Digital / Web)",
+    tag: "WEB READY · RGB",
+    desc: "Optimized web-ready portrait for social media promotion, event landing pages, and slide decks.",
+    link: "/uploads/tiffany_headshot_web.jpg",
+    btnText: "Download Web Image &darr;"
+  },
+  {
+    title: "Media & Brand Kit (ZIP)",
+    tag: "COMPLETE ASSET PACK",
+    desc: "All approved bios, introduction script, logos, and photography in one convenient download package.",
+    link: "/downloads/Tiffany_Webb_Media_Kit.zip",
+    btnText: "Download Media Kit (ZIP) &darr;"
+  }
+];
 ---
 
-<Layout title="Press Kits | Tiffany Webb" theme="dark">
+<Layout title="Press Kit & Media Assets | Tiffany Webb" description="Official press kit, approved speaker bios, stage introduction script, and high-resolution headshots for Tiffany Webb." theme="dark">
   <main class="page-content bg-ink">
     
-    <!-- Hero -->
-    <section class="spk-hero-v2 relative overflow-hidden" style="position: relative;">
-      <Waveform opacity={0.05} variant="A" flipX={true} />
+    <!-- Hero Header -->
+    <section class="media-hero-section relative overflow-hidden">
+      <Waveform opacity={0.06} variant="A" flipX={true} />
       
-      <div class="spk-container" style="position: relative; z-index: 10;">
-        <div class="spk-hero-content text-center">
-          <Eyebrow className="justify-center">Media & Press</Eyebrow>
-          <h1 class="spk-h1">Official <span class="italic-accent">Press Kits.</span></h1>
-          <p class="spk-subtitle">
-            Downloadable assets, one-sheets, and capability decks for event organizers, journalists, and partners.
+      <div class="media-container relative z-10 text-center">
+        <div class="reveal-up" style="max-width: 860px; margin: 0 auto;">
+          <Eyebrow className="justify-center">PRESS KIT & MEDIA ASSETS</Eyebrow>
+          <h1 class="media-h1 mt-4">
+            Official speaker <span class="italic-accent">press kit.</span>
+          </h1>
+          <p class="media-subtitle mx-auto mt-6">
+            Approved bios, high-resolution photography, stage introduction script, and promotional assets for conference chairs, event organizers, and journalists.
           </p>
         </div>
       </div>
     </section>
 
-    <!-- Downloads Grid -->
-    <section class="spk-section relative overflow-hidden" style="padding-top: 2rem; position: relative;">
-      <Waveform opacity={0.04} variant="B" flipY={true} />
-      <div class="spk-container" style="position: relative; z-index: 10;">
+    <!-- Section 1: Approved Bios with One-Click Copy -->
+    <section class="media-section relative overflow-hidden" id="approved-bios">
+      <Waveform opacity={0.03} variant="B" />
+      <div class="media-container relative z-10">
         
-        <div class="spk-tracks-grid" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
+        <div class="reveal-up text-center mb-14" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+          <Eyebrow className="justify-center">OFFICIAL BIOGRAPHIES</Eyebrow>
+          <h2 class="media-h2 mt-4">Approved <span class="italic-accent">biographies.</span></h2>
+          <p class="section-subtext mt-4">Select the length that best fits your program format. Click "Copy Bio" to copy the text to your clipboard.</p>
+        </div>
+
+        <div class="bios-grid stagger-group">
+          {bios.map((bio) => (
+            <div class="bio-card ultra-glass-card stagger-item">
+              <div class="bio-card-header">
+                <div>
+                  <span class="bio-badge">{bio.label}</span>
+                  <span class="bio-words">{bio.words}</span>
+                </div>
+                <button class="copy-btn" data-copy-target={`bio-text-${bio.id}`} type="button">
+                  <span class="copy-text">Copy Bio</span>
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                </button>
+              </div>
+
+              <p class="bio-subtitle">{bio.subtitle}</p>
+              
+              <div class="bio-content-box">
+                <p id={`bio-text-${bio.id}`} class="bio-text" style="white-space: pre-line;">{bio.text}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 2: Stage Emcee Introduction Script -->
+    <section class="media-section relative overflow-hidden" id="emcee-script" style="background: rgba(18, 16, 12, 0.75);">
+      <Waveform opacity={0.04} variant="C" flipY={true} />
+      <div class="media-container relative z-10">
+        
+        <div class="reveal-up text-center mb-12" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+          <Eyebrow className="justify-center">STAGE INTRODUCTION</Eyebrow>
+          <h2 class="media-h2 mt-4">Emcee introduction <span class="italic-accent">script.</span></h2>
+          <p class="section-subtext mt-4">Recommended verbatim script for event hosts and session moderators when introducing Tiffany to the stage.</p>
+        </div>
+
+        <div class="emcee-box ultra-glass-card reveal-up" style="max-width: 920px; margin: 0 auto;">
+          <div class="emcee-header">
+            <span class="emcee-badge">VERBATIM STAGE SCRIPT (~30 SECONDS)</span>
+            <button class="copy-btn" data-copy-target="emcee-script-text" type="button">
+              <span class="copy-text">Copy Script</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+            </button>
+          </div>
           
-          <!-- Kit 1: One Sheet -->
-          <div class="spk-track-card flex-col">
-            <div class="track-header">
-              <h3 class="track-title">Speaker One-Sheet</h3>
-              <p class="track-subtitle">For Event Organizers</p>
-            </div>
-            <p class="text-gray mb-8" style="color: rgba(251, 246, 234, 0.7); line-height: 1.6; margin-bottom: 2rem;">
-              A single-page overview of Tiffany's signature keynotes, core topics, and professional background. Perfect for sharing with your committee or board.
-            </p>
-            <div class="mt-auto">
-              <a href="#" class="download-btn">Download PDF &darr;</a>
-            </div>
-          </div>
+          <blockquote class="emcee-quote">
+            <p id="emcee-script-text">"{emceeScript}"</p>
+          </blockquote>
+        </div>
 
-          <!-- Kit 2: Media Kit -->
-          <div class="spk-track-card flex-col">
-            <div class="track-header">
-              <h3 class="track-title">Media Kit</h3>
-              <p class="track-subtitle">For Journalists & Press</p>
-            </div>
-            <p class="text-gray mb-8" style="color: rgba(251, 246, 234, 0.7); line-height: 1.6; margin-bottom: 2rem;">
-              Includes official high-resolution headshots, approved short and long bios, and brand assets for features and interviews.
-            </p>
-            <div class="mt-auto">
-              <a href="#" class="download-btn">Download ZIP &darr;</a>
-            </div>
-          </div>
+      </div>
+    </section>
 
-          <!-- Kit 3: Capability Kit -->
-          <div class="spk-track-card flex-col">
-            <div class="track-header">
-              <h3 class="track-title">Capability Kit</h3>
-              <p class="track-subtitle">For Corporate & Healthcare</p>
-            </div>
-            <p class="text-gray mb-8" style="color: rgba(251, 246, 234, 0.7); line-height: 1.6; margin-bottom: 2rem;">
-              A detailed prospectus of consulting services, clinical training capabilities, and specialized organizational workshops.
-            </p>
-            <div class="mt-auto">
-              <a href="#" class="download-btn">Download PDF &darr;</a>
-            </div>
-          </div>
+    <!-- Section 3: Downloadable Speaker Assets -->
+    <section class="media-section relative overflow-hidden" id="downloads">
+      <Waveform opacity={0.03} variant="A" />
+      <div class="media-container relative z-10">
+        
+        <div class="reveal-up text-center mb-14" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+          <Eyebrow className="justify-center">MEDIA ASSETS & DOWNLOADS</Eyebrow>
+          <h2 class="media-h2 mt-4">High-resolution <span class="italic-accent">downloads.</span></h2>
+          <p class="section-subtext mt-4">Official photography, one-sheets, and comprehensive brand materials for media publications and event marketing.</p>
+        </div>
 
+        <div class="downloads-grid stagger-group">
+          {downloads.map((item) => (
+            <div class="download-card ultra-glass-card stagger-item">
+              <span class="download-tag">{item.tag}</span>
+              <h3 class="download-title">{item.title}</h3>
+              <p class="download-desc">{item.desc}</p>
+              <div class="download-action">
+                <a href={item.link} class="download-btn" download>
+                  <span set:html={item.btnText}></span>
+                </a>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Section 4: Media & Podcast Interview Inquiry Banner -->
+    <section class="media-inquiry-banner relative overflow-hidden">
+      <Waveform opacity={0.06} variant="B" />
+      
+      <div class="media-container relative z-10 text-center" style="max-width: 880px; margin: 0 auto; padding: 5rem 1.5rem;">
+        <div class="reveal-up">
+          <Eyebrow className="justify-center">MEDIA & PODCAST APPEARANCES</Eyebrow>
+          <h2 class="media-h2 mt-4">
+            Host Tiffany on your <span class="italic-accent">broadcast or podcast.</span>
+          </h2>
+          <p class="section-subtext mx-auto mt-6">
+            Tiffany is available for television, radio, print, and podcast interviews discussing problem gambling prevention, youth digital health, and community health strategy.
+          </p>
+          <div class="mt-8">
+            <Button href="/work-with-tiffany?inquiry=media" variant="primary" className="magnetic-btn">
+              Request a Media Interview or Podcast Appearance &rarr;
+            </Button>
+          </div>
         </div>
       </div>
     </section>
 
+    <!-- Footer Navigation Loop -->
+    <PageNavigation 
+      prevLink="/about" 
+      prevLabel="About Tiffany" 
+      nextLink="/work-with-tiffany" 
+      nextLabel="Book Tiffany for an Event" 
+    />
+
   </main>
 </Layout>
 
-<style is:global>
-  .bg-ink { background: var(--ink); }
-  .spk-container {
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const copyButtons = document.querySelectorAll('.copy-btn');
+    copyButtons.forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const targetId = btn.getAttribute('data-copy-target');
+        const targetEl = document.getElementById(targetId);
+        if (!targetEl) return;
+
+        const textToCopy = targetEl.innerText.replace(/^"|"$/g, '');
+        try {
+          await navigator.clipboard.writeText(textToCopy);
+          const copyTextSpan = btn.querySelector('.copy-text');
+          const originalText = copyTextSpan.innerText;
+          copyTextSpan.innerText = 'Copied!';
+          btn.classList.add('copied');
+          
+          setTimeout(() => {
+            copyTextSpan.innerText = originalText;
+            btn.classList.remove('copied');
+          }, 2500);
+        } catch (err) {
+          console.error('Failed to copy text:', err);
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .media-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 var(--sp-6);
+    padding: 0 1.5rem;
   }
-  .spk-section {
-    padding: 8rem 0;
+
+  .media-hero-section {
+    padding: 10rem 0 5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: radial-gradient(circle at 50% 0%, rgba(217, 162, 58, 0.12) 0%, rgba(13, 12, 8, 1) 75%);
+  }
+
+  .media-section {
+    padding: 6rem 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
-  .text-center { text-align: center; }
-  .flex-col {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-  }
-  .mt-auto { margin-top: auto; }
 
-  .spk-h1 {
-    font-family: var(--font-serif);
-    font-size: clamp(3rem, 6vw, 5rem);
-    color: var(--color-ivory);
-    line-height: 1.1;
-    margin-bottom: 1.5rem;
+  .media-inquiry-banner {
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    background: radial-gradient(circle at 50% 50%, rgba(217, 162, 58, 0.1) 0%, rgba(13, 12, 8, 1) 80%);
   }
-  .spk-subtitle {
-    font-family: var(--font-sans);
-    font-size: 1.15rem;
+
+  .media-h1 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+    color: var(--color-ivory, #FBF6EA);
+    line-height: 1.1;
+    margin: 0;
+  }
+
+  .media-h2 {
+    font-family: var(--font-serif);
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    color: var(--color-ivory, #FBF6EA);
+    line-height: 1.2;
+    margin: 0;
+  }
+
+  .media-subtitle {
+    font-size: 1.2rem;
+    color: rgba(251, 246, 234, 0.85);
+    line-height: 1.65;
+    max-width: 760px;
+  }
+
+  .section-subtext {
+    font-size: 1.1rem;
     color: rgba(251, 246, 234, 0.75);
     line-height: 1.6;
-    max-width: 700px;
-    margin: 0 auto 3rem auto;
   }
 
-  .spk-hero-v2 {
-    padding: 12rem 0 4rem 0;
-  }
-  .spk-hero-content {
-    margin-bottom: 2rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  /* Grid & Cards */
-  .spk-tracks-grid {
+  /* Bios Grid */
+  .bios-grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: 2rem;
   }
-  .spk-track-card {
-    background: rgba(15, 15, 15, 0.8);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 24px;
-    padding: 3rem;
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s ease, box-shadow 0.4s ease;
-  }
-  .spk-track-card:hover {
-    transform: translateY(-8px);
-    border-color: rgba(217, 162, 58, 0.4);
-    box-shadow: 0 20px 50px rgba(0,0,0,0.6), 0 0 40px rgba(217, 162, 58, 0.05);
-  }
-  .track-header {
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(217, 162, 58, 0.2);
-    transition: border-color 0.4s ease;
-  }
-  .spk-track-card:hover .track-header {
-    border-color: rgba(217, 162, 58, 0.5);
-  }
-  .track-title {
-    font-family: var(--font-serif);
-    font-size: 2rem;
-    color: var(--color-ivory);
-    margin-bottom: 0.5rem;
-  }
-  .track-subtitle {
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--color-gold);
-    opacity: 0.8;
+
+  @media (min-width: 1024px) {
+    .bios-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
   }
 
-  /* Buttons */
-  .download-btn {
-    display: inline-block;
-    padding: 0.75rem 1.5rem;
-    background: transparent;
-    border: 1px solid rgba(217, 162, 58, 0.5);
-    color: var(--color-gold);
+  .bio-card {
+    background: rgba(20, 18, 14, 0.75);
+    border: 1px solid rgba(217, 162, 58, 0.22);
+    border-radius: 20px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  }
+
+  .bio-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.85rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .bio-badge {
     font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-gold, #D9A23A);
+    margin-right: 0.5rem;
+  }
+
+  .bio-words {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    color: rgba(251, 246, 234, 0.5);
+  }
+
+  .bio-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: rgba(251, 246, 234, 0.65);
+    margin: 0 0 1.25rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 0.75rem;
+  }
+
+  .bio-content-box {
+    margin-top: auto;
+  }
+
+  .bio-text {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: rgba(251, 246, 234, 0.88);
+    margin: 0;
+  }
+
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: rgba(217, 162, 58, 0.1);
+    border: 1px solid rgba(217, 162, 58, 0.3);
+    color: var(--color-gold, #D9A23A);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-size: 0.85rem;
-    border-radius: 6px;
-    text-decoration: none;
+    padding: 0.35rem 0.75rem;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .copy-btn:hover {
+    background: var(--color-gold, #D9A23A);
+    color: #0D0C08;
+  }
+
+  .copy-btn.copied {
+    background: #0E6B54;
+    border-color: #0E6B54;
+    color: #ffffff;
+  }
+
+  /* Emcee Box */
+  .emcee-box {
+    background: rgba(20, 18, 14, 0.85);
+    border: 1px solid rgba(217, 162, 58, 0.3);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  }
+
+  .emcee-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding-bottom: 1rem;
+  }
+
+  .emcee-badge {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-gold, #D9A23A);
+  }
+
+  .emcee-quote {
+    font-family: var(--font-serif);
+    font-size: clamp(1.15rem, 2vw, 1.45rem);
+    line-height: 1.55;
+    color: var(--color-ivory, #FBF6EA);
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* Downloads Grid */
+  .downloads-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .downloads-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .downloads-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .download-card {
+    background: rgba(20, 18, 14, 0.7);
+    border: 1px solid rgba(217, 162, 58, 0.22);
+    border-radius: 18px;
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     transition: all 0.3s ease;
   }
+
+  .download-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(217, 162, 58, 0.5);
+  }
+
+  .download-tag {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-gold, #D9A23A);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .download-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    color: var(--color-ivory, #FBF6EA);
+    margin: 0 0 0.6rem 0;
+    line-height: 1.3;
+  }
+
+  .download-desc {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: rgba(251, 246, 234, 0.75);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .download-action {
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1rem;
+  }
+
+  .download-btn {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-gold, #D9A23A);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s ease;
+  }
+
   .download-btn:hover {
-    background: rgba(217, 162, 58, 0.1);
-    border-color: var(--color-gold);
-    color: #fff;
+    color: #ffffff;
+    transform: translateX(3px);
   }
 </style>

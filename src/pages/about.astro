@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Waveform from '../components/Waveform.astro';
 import Button from '../components/Button.astro';
+import PageNavigation from '../components/PageNavigation.astro';
 import { Image } from 'astro:assets';
 import aboutImg from '../assets/tiffany_about_new.jpg';
 ---
@@ -250,6 +251,14 @@ import aboutImg from '../assets/tiffany_about_new.jpg';
 
       </div>
     </section>
+
+    <!-- Footer Navigation Loop -->
+    <PageNavigation 
+      prevLink="/" 
+      prevLabel="Return to Home" 
+      nextLink="/services" 
+      nextLabel="Explore Services & GEAR Method™" 
+    />
 
   </main>
 </Layout>
