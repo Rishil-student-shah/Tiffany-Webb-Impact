@@ -22,7 +22,7 @@ const audiences = (collections.who_can_benefit && collections.who_can_benefit.le
     : fallbackAudiences;
 
 const eyebrow = content.eyebrow ?? "WHO CAN BENEFIT FROM TIFFANY'S WORK?";
-let headline = content.headline ?? "For leaders ready<br/>to <span class=\"italic-accent\">rethink what's possible.</span>";
+let headline = content.headline ?? "For leaders ready to <span class=\"italic-accent\">rethink what's possible.</span>";
 if (headline && !headline.includes('<span')) {
   if (headline.includes("rethink")) {
     headline = headline.replace("rethink what's possible", "<span class=\"italic-accent\">rethink what's possible.</span>").replace("rethink what's possible.", "<span class=\"italic-accent\">rethink what's possible.</span>").replace('..', '.');
@@ -38,104 +38,85 @@ const p1 = content.body_1 ?? "Tiffany works with leaders and organizations navig
 const p2 = content.body_2 ?? "";
 ---
 
-<section id="where-she-works" class="where-works section-pad theme-ink relative" style="padding-top: 6rem; padding-bottom: 6rem; overflow: hidden;">
+<section id="where-she-works" class="where-works section-pad theme-ink relative" style="padding-top: 7rem; padding-bottom: 7rem; overflow: hidden;">
   <!-- Waveform placed softly behind -->
   <Waveform opacity={0.03} variant="B" flipY={true} />
   
-  <!-- Changed to container-narrow to force massive gaps on the left and right sides of the screen -->
-  <div class="container-narrow relative z-10">
-    <div class="works-grid">
+  <div class="container relative z-10" style="max-width: 1200px; margin: 0 auto; padding: 0 1.5rem;">
+    
+    <!-- Centered Header Section -->
+    <div class="works-header reveal-up text-center">
+      <Eyebrow className="justify-center text-center">{eyebrow}</Eyebrow>
       
-      <!-- Left Column: Copy -->
-      <div class="works-content reveal-up" style="padding-left: 5vw; padding-right: 2rem;">
-        <div style="margin-bottom: 1.5rem;">
-          <Eyebrow>{eyebrow}</Eyebrow>
-        </div>
-        
-        <h2 class="section-title works-title" style="font-size: clamp(2.2rem, 3.5vw, 3.5rem); line-height: 1.1; margin-bottom: 2rem; letter-spacing: -0.01em;" set:html={headline}></h2>
-        
-        <div class="works-prose">
-          {p1 && <p>{p1}</p>}
-          {p2 && <p>{p2}</p>}
-        </div>
-      </div>
+      <h2 class="section-title works-title text-center" set:html={headline}></h2>
       
-      <!-- Right Column: Audiences -->
-      <div class="works-audiences reveal-up" style="transition-delay: 0.1s;">
-        <div class="audience-list">
-          {audiences.map((aud, index) => {
-            const num = (index + 1).toString().padStart(2, '0');
-            return (
-              <div class="audience-item" style="padding: 1.75rem 0;">
-                <div class="audience-num">{num} <span class="num-slash">//</span></div>
-                <div class="audience-title" style="font-size: 1.35rem; font-family: var(--font-serif); line-height: 1.25;">{aud.title}</div>
-              </div>
-            );
-          })}
-        </div>
-        <div style="margin-top: 2.5rem; display: flex;">
-          <a href="/services" style="font-family: var(--font-mono); font-size: 0.95rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.14em; color: #F3C56E; text-decoration: none; border-bottom: 2px solid #F3C56E; padding-bottom: 6px; transition: opacity 0.2s; text-shadow: 0 1px 2px rgba(0,0,0,0.6);" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">How I help &rarr;</a>
-        </div>
-      </div>
-      
+      <p class="works-subtitle text-center mx-auto">
+        {p1}
+      </p>
+      {p2 && <p class="works-subtitle text-center mx-auto mt-3">{p2}</p>}
     </div>
+    
+    <!-- 8 Audiences 2-Column Balanced Grid -->
+    <div class="works-audiences reveal-up" style="transition-delay: 0.1s; margin-top: 4rem;">
+      <div class="audience-list">
+        {audiences.map((aud, index) => {
+          const num = (index + 1).toString().padStart(2, '0');
+          return (
+            <div class="audience-item">
+              <div class="audience-num">{num} <span class="num-slash">//</span></div>
+              <div class="audience-title">{aud.title}</div>
+            </div>
+          );
+        })}
+      </div>
+      
+      <div class="works-bottom-action text-center">
+        <a href="/services" class="how-i-help-link">How I help &rarr;</a>
+      </div>
+    </div>
+    
   </div>
 </section>
 
 <style>
-  .works-grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 3rem;
+  .works-header {
+    max-width: 860px;
+    margin: 0 auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
-  /* Desktop layout */
-  @media (min-width: 1024px) {
-    .works-grid {
-      /* Pushes left column to be slightly narrower than right column */
-      grid-template-columns: 0.9fr 1.1fr;
-      /* Small gap in the middle, since we want the huge gap on the outside */
-      gap: 3rem;
-      align-items: center;
-    }
-  }
-
-  /* Left Column */
   .works-title {
-    /* Adjusted font size to match container-narrow safely */
-    font-size: clamp(2.2rem, 3.5vw, 3.5rem); 
-    line-height: 1.1; 
-    margin-bottom: 2rem; 
-    letter-spacing: -0.01em;
+    font-size: clamp(2.4rem, 4vw, 3.8rem);
+    line-height: 1.15;
+    margin-top: 1rem;
+    margin-bottom: 1.5rem;
+    color: var(--color-ivory, #FBF6EA);
+    text-align: center;
   }
 
-  .works-prose {
-    max-width: 40ch;
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
+  .works-subtitle {
+    font-size: 1.15rem;
+    color: rgba(251, 246, 234, 0.85);
+    line-height: 1.65;
+    max-width: 780px;
+    text-align: center;
+    margin: 0 auto;
   }
 
-  .works-prose p {
-    font-size: 1.05rem;
-    color: rgba(251, 246, 234, 0.75);
-    line-height: 1.6;
-    font-weight: 400;
-  }
-
-  /* Right Column (Audiences) */
-  .works-audiences {
-    display: flex;
-    flex-direction: column;
-  }
-
+  /* Audiences Grid */
   .audience-list {
     display: grid;
     grid-template-columns: 1fr;
-    column-gap: 2rem;
+    gap: 1rem 3.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
   }
 
-  @media (min-width: 640px) {
+  @media (min-width: 768px) {
     .audience-list {
       grid-template-columns: 1fr 1fr;
     }
@@ -143,16 +124,11 @@ const p2 = content.body_2 ?? "";
 
   .audience-item {
     display: flex;
-    align-items: flex-start;
-    gap: 0.75rem;
-    padding: 1.75rem 0;
-    border-bottom: 1px solid rgba(255,255,255,0.06);
-  }
-
-  @media (min-width: 640px) {
-    .audience-item:nth-last-child(-n+2) {
-      border-bottom: none;
-    }
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    transition: border-color 0.25s ease;
   }
 
   .audience-num {
@@ -165,8 +141,6 @@ const p2 = content.body_2 ?? "";
     align-items: center;
     gap: 0.4rem;
     flex-shrink: 0;
-    width: 3.2rem;
-    margin-top: 0.2rem;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
   }
   
@@ -179,28 +153,43 @@ const p2 = content.body_2 ?? "";
 
   .audience-title {
     color: var(--color-ivory);
-    font-size: 1.45rem;
+    font-size: 1.35rem;
     font-family: var(--font-serif);
-    line-height: 1.25;
+    line-height: 1.3;
     font-weight: 400;
-  }
-
-  /* Interactive Hover Effects */
-  .audience-title {
     transition: color 0.25s ease, transform 0.25s ease;
-  }
-  
-  .audience-item {
-    transition: border-color 0.25s ease;
   }
 
   .audience-item:hover .audience-title {
     color: var(--color-gold);
     transform: translateX(4px);
   }
-  
-  .audience-item:hover .num-slash {
-    color: var(--color-gold);
+
+  .works-bottom-action {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 3.5rem;
+  }
+
+  .how-i-help-link {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: #F3C56E;
+    text-decoration: none;
+    border-bottom: 2px solid #F3C56E;
+    padding-bottom: 6px;
+    transition: opacity 0.2s, transform 0.2s;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.6);
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .how-i-help-link:hover {
     opacity: 0.8;
+    transform: translateY(-1px);
   }
 </style>
