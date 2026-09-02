@@ -3,6 +3,7 @@ import Layout from '../layouts/Layout.astro';
 import Eyebrow from '../components/Eyebrow.astro';
 import Button from '../components/Button.astro';
 import Waveform from '../components/Waveform.astro';
+import PartnershipFramework from '../components/PartnershipFramework.astro';
 import { Image } from 'astro:assets';
 import heroImg from '../assets/tiffany_hero_new.jpg';
 import mysql from 'mysql2/promise';
@@ -235,6 +236,9 @@ try {
         </section>
       );
     })()}
+
+    <!-- 0.7 Partnership Framework -->
+    <PartnershipFramework />
 
     <!-- 5. Timeline -->
     <section class="spk-section relative overflow-hidden timeline-bg">

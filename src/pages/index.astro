@@ -86,8 +86,8 @@ try {
 		<!-- 08. Events & Impact Carousel -->
 		{(!dbContent.events || dbContent.events.section_is_active !== "0") && <EventsImpact content={dbContent.events || {}} collections={dbCollections} />}
 		
-		<!-- 09. Proof & Testimonials -->
-		{(!dbContent.proof_testimonials || dbContent.proof_testimonials.section_is_active !== "0") && <ProofTestimonials content={dbContent.proof_testimonials || {}} collections={dbCollections} />}
+		<!-- 09. Proof & Testimonials (CRM Toggleable) -->
+		{dbContent.proof_testimonials?.section_is_active === "1" && <ProofTestimonials content={dbContent.proof_testimonials || {}} collections={dbCollections} />}
 		
 		<!-- 10. Watch The Reel (CRM Toggleable) -->
 		{(!dbContent.video_reels || dbContent.video_reels.section_is_active !== "0") && <VideoReels content={dbContent.video_reels || {}} collections={dbCollections} />}

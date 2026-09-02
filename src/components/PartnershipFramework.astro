@@ -1,0 +1,223 @@
+---
+import Eyebrow from './Eyebrow.astro';
+import Waveform from './Waveform.astro';
+import Button from './Button.astro';
+
+const { 
+  eyebrow = "COLLABORATIVE PARTNERSHIP",
+  headline = 'More Than a Speaker. <span class="italic-accent">A Collaborative Partner.</span>',
+  subtitle = "From one conversation to long-term strategy, Tiffany works alongside organizations to create stronger prevention, engagement, and community impact."
+} = Astro.props;
+
+const pillars = [
+  {
+    num: "01 // SPEAK",
+    action: "Engage & Educate",
+    desc: "Keynotes, Conference Sessions, Workshops, Panels, and Expert Moderation that inspire action and break down stigma.",
+    items: ["Keynotes & Plenaries", "Conference Sessions", "Interactive Workshops", "Panel Participation", "Discussion Moderation"],
+    color: "#0E6B54"
+  },
+  {
+    num: "02 // PARTNER",
+    action: "Connect & Activate",
+    desc: "Resource tables, community health & resource fairs, ROSC coalition engagement, and grassroots activation.",
+    items: ["Resource Tables & Fairs", "Health & Wellness Expos", "ROSC Coalition Activation", "Community Listening Sessions", "Multicultural Outreach"],
+    color: "#D9A23A"
+  },
+  {
+    num: "03 // STRATEGIZE",
+    action: "Plan & Build",
+    desc: "Strategic planning, community engagement strategy, prevention program architecture, and multi-agency alignment.",
+    items: ["Strategic Advisory", "Community Engagement Plans", "Program Architecture", "Screening Workflow Design", "Coalition Alignment"],
+    color: "#C15427"
+  },
+  {
+    num: "04 // STRENGTHEN",
+    action: "Build Capacity & Sustainability",
+    desc: "Staff development, technical assistance, capacity building, and long-term organizational sustainability.",
+    items: ["Staff & Clinician Training", "Technical Assistance", "Capacity Building", "Curriculum Development", "Evaluation & Measurement"],
+    color: "#6C2D5A"
+  }
+];
+---
+
+<section class="partnership-framework-section theme-ink relative overflow-hidden" id="partnership-framework">
+  <Waveform opacity={0.03} variant="B" flipY={true} />
+  
+  <div class="container relative z-10" style="max-width: 1240px; margin: 0 auto; padding: 0 1.5rem;">
+    
+    <!-- Section Header -->
+    <div class="pf-header reveal-up text-center">
+      {eyebrow && <Eyebrow className="justify-center">{eyebrow}</Eyebrow>}
+      {headline && <h2 class="section-title" set:html={headline}></h2>}
+      {subtitle && <p class="pf-subtitle">{subtitle}</p>}
+    </div>
+
+    <!-- 4 Pillars Grid -->
+    <div class="pf-grid stagger-group mt-12">
+      {pillars.map((pillar) => (
+        <div class="pf-card ultra-glass-card stagger-item">
+          <div class="pf-card-inner">
+            <div class="pf-card-top">
+              <span class="pf-pillar-num" style={`color: ${pillar.color};`}>{pillar.num}</span>
+              <h3 class="pf-pillar-action">{pillar.action}</h3>
+              <p class="pf-pillar-desc">{pillar.desc}</p>
+            </div>
+
+            <div class="pf-card-bottom">
+              <span class="pf-scope-label">CORE SCOPE:</span>
+              <ul class="pf-items-list">
+                {pillar.items.map((item) => (
+                  <li class="pf-item">
+                    <svg class="pf-check-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom Action -->
+    <div class="pf-bottom-cta reveal-up mt-14 text-center">
+      <Button href="/work-with-tiffany" variant="primary" className="magnetic-btn">
+        START A COLLABORATION &rarr;
+      </Button>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .partnership-framework-section {
+    padding: 7rem 0;
+    position: relative;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .pf-header {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .pf-subtitle {
+    font-size: 1.15rem;
+    color: rgba(251, 246, 234, 0.85);
+    line-height: 1.6;
+    margin-top: 1rem;
+  }
+
+  .pf-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .pf-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .pf-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+
+  .pf-card {
+    background: rgba(20, 18, 14, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 2rem 1.75rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box;
+  }
+
+  .pf-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(217, 162, 58, 0.35);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 20px rgba(217, 162, 58, 0.06);
+  }
+
+  .pf-card-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+  }
+
+  .pf-pillar-num {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+
+  .pf-pillar-action {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--color-ivory, #FBF6EA);
+    margin: 0 0 0.75rem 0;
+    line-height: 1.25;
+  }
+
+  .pf-pillar-desc {
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: rgba(251, 246, 234, 0.8);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .pf-card-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1.25rem;
+    margin-top: auto;
+  }
+
+  .pf-scope-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    color: var(--color-gold, #D9A23A);
+    display: block;
+    margin-bottom: 0.75rem;
+  }
+
+  .pf-items-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .pf-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.82rem;
+    line-height: 1.4;
+    color: rgba(251, 246, 234, 0.75);
+  }
+
+  .pf-check-icon {
+    width: 13px;
+    height: 13px;
+    color: var(--color-gold, #D9A23A);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+</style>
