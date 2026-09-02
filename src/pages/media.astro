@@ -214,40 +214,44 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
                 id={`bio-panel-${bio.id}`} 
                 style={isDefault ? "display: block;" : "display: none;"}
               >
-                <!-- Card Top: Meta & Copy Button -->
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 1px solid rgba(255, 255, 255, 0.12); padding-bottom: 1.75rem; margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;">
-                  <div>
-                    <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.5rem;">
-                      <span style="font-family: var(--font-mono); font-size: 0.78rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; padding: 0.35rem 0.85rem; border-radius: 6px; background: rgba(217, 162, 58, 0.18); color: #D9A23A; border: 1px solid rgba(217, 162, 58, 0.4);">
+                <!-- Card Top: Centered Meta & Centered Copy Button -->
+                <div class="bio-card-top-header" style="display: flex; flex-direction: column; align-items: center; text-align: center; border-bottom: 1px solid rgba(255, 255, 255, 0.12); padding-bottom: 2rem; margin-bottom: 2.25rem; gap: 1.25rem;">
+                  <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+                    <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem;">
+                      <span style="font-family: var(--font-mono); font-size: 0.8rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; padding: 0.35rem 0.95rem; border-radius: 6px; background: rgba(217, 162, 58, 0.18); color: #D9A23A; border: 1px solid rgba(217, 162, 58, 0.4);">
                         {bio.label}
                       </span>
-                      <span style="font-family: var(--font-mono); font-size: 0.78rem; color: #FBF6EA; opacity: 0.8; font-weight: 600;">
+                      <span style="font-family: var(--font-mono); font-size: 0.8rem; color: #FBF6EA; opacity: 0.85; font-weight: 600;">
                         {bio.words}
                       </span>
                     </div>
-                    <p style="font-family: var(--font-mono); font-size: 0.88rem; color: #D9A23A; margin: 0; font-weight: 600;">
+                    <p style="font-family: var(--font-mono); font-size: 0.9rem; color: #D9A23A; margin: 0; font-weight: 600;">
                       {bio.subtitle}
                     </p>
                   </div>
-                  <button 
-                    class="copy-btn copy-bio-btn" 
-                    data-copy-target={`bio-text-${bio.id}`} 
-                    type="button"
-                  >
-                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    <span class="copy-text">Copy Bio to Clipboard</span>
-                  </button>
+
+                  <!-- Centered Copy Button with Luxury Hover State -->
+                  <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
+                    <button 
+                      class="copy-btn copy-bio-btn" 
+                      data-copy-target={`bio-text-${bio.id}`} 
+                      type="button"
+                    >
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                      <span class="copy-text">Copy Bio to Clipboard</span>
+                    </button>
+                  </div>
                 </div>
 
                 <!-- Card Body: Bio Text -->
-                <div style="min-height: 180px;">
-                  <p id={`bio-text-${bio.id}`} style="font-family: var(--font-sans); font-size: 1.15rem; line-height: 1.85; color: #FFFFFF !important; margin: 0; white-space: pre-line; font-weight: 400;">
+                <div style="min-height: 160px; max-width: 880px; margin: 0 auto;">
+                  <p id={`bio-text-${bio.id}`} style="font-family: var(--font-sans); font-size: 1.15rem; line-height: 1.85; color: #FFFFFF !important; margin: 0; white-space: pre-line; font-weight: 400; text-align: left;">
                     {bio.text}
                   </p>
                 </div>
 
                 <!-- Card Footer: Verification Tag -->
-                <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); margin-top: 2.25rem; padding-top: 1.25rem; font-family: var(--font-mono); font-size: 0.8rem; color: rgba(251, 246, 234, 0.55);">
+                <div style="border-top: 1px solid rgba(255, 255, 255, 0.08); margin-top: 2.25rem; padding-top: 1.5rem; text-align: center; font-family: var(--font-mono); font-size: 0.82rem; color: rgba(251, 246, 234, 0.6);">
                   ✓ Approved for conference programs, press releases, website speaker profiles, and printed event marketing.
                 </div>
               </div>
@@ -325,7 +329,7 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
       <Waveform opacity={0.06} variant="B" />
       
       <div class="media-container relative z-10 text-center" style="max-width: 880px; margin: 0 auto; padding: 5rem 1.5rem;">
-        <div class="section-header-block reveal-up" style="margin-bottom: 2rem;">
+        <div class="section-header-block reveal-up" style="margin-bottom: 2.5rem;">
           <Eyebrow className="justify-center text-center">MEDIA & PODCAST APPEARANCES</Eyebrow>
           <h2 class="media-h2">
             Host Tiffany on your <span class="italic-accent">broadcast or podcast.</span>
@@ -334,7 +338,7 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
             Tiffany is available for television, radio, print, and podcast interviews discussing problem gambling prevention, youth digital health, and community health strategy.
           </p>
         </div>
-        <div>
+        <div style="display: flex; justify-content: center; align-items: center; width: 100%;">
           <Button href="/work-with-tiffany?inquiry=media" variant="primary" className="magnetic-btn">
             Request a Media Interview or Podcast Appearance &rarr;
           </Button>
@@ -493,50 +497,52 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
   /* ---------------------------------------------------- */
   .copy-bio-btn,
   .copy-btn-large {
-    padding: 0.65rem 1.35rem;
-    font-size: 0.8rem;
-    border-color: var(--color-gold, #D9A23A);
-    color: var(--color-gold, #D9A23A);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.55rem;
-    background: rgba(217, 162, 58, 0.12);
-    border: 1.5px solid var(--color-gold, #D9A23A);
-    font-family: var(--font-mono);
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    border-radius: 9999px;
-    cursor: pointer;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    padding: 0.8rem 2rem !important;
+    font-size: 0.85rem !important;
+    border: 2px solid var(--color-gold, #D9A23A) !important;
+    background: var(--color-gold, #D9A23A) !important;
+    color: #0D0C08 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.6rem !important;
+    font-family: var(--font-mono, monospace) !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.08em !important;
+    text-transform: uppercase !important;
+    border-radius: 9999px !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 20px rgba(217, 162, 58, 0.35) !important;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   }
 
   .copy-bio-btn svg,
   .copy-btn-large svg {
-    color: var(--color-gold, #D9A23A);
-    transition: transform 0.25s ease, color 0.25s ease;
+    color: #0D0C08 !important;
+    stroke: #0D0C08 !important;
+    transition: transform 0.25s ease !important;
   }
 
   .copy-bio-btn:hover,
   .copy-btn-large:hover {
-    background: var(--color-gold, #D9A23A) !important;
-    border-color: var(--color-gold, #D9A23A) !important;
+    background: #FBF6EA !important;
+    border-color: #FBF6EA !important;
     color: #0D0C08 !important;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(217, 162, 58, 0.4);
+    transform: translateY(-3px) scale(1.02) !important;
+    box-shadow: 0 8px 30px rgba(217, 162, 58, 0.55) !important;
   }
 
   .copy-bio-btn:hover svg,
   .copy-btn-large:hover svg {
     color: #0D0C08 !important;
-    transform: scale(1.15);
+    stroke: #0D0C08 !important;
+    transform: scale(1.15) !important;
   }
 
   .copy-bio-btn:active,
   .copy-btn-large:active {
-    transform: translateY(0);
-    box-shadow: 0 2px 8px rgba(217, 162, 58, 0.3);
+    transform: translateY(0) scale(0.98) !important;
+    box-shadow: 0 2px 10px rgba(217, 162, 58, 0.3) !important;
   }
 
   .copy-bio-btn.copied,
@@ -544,12 +550,13 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
     background: #0E6B54 !important;
     border-color: #0E6B54 !important;
     color: #FFFFFF !important;
-    box-shadow: 0 4px 15px rgba(14, 107, 84, 0.4);
+    box-shadow: 0 6px 25px rgba(14, 107, 84, 0.5) !important;
   }
 
   .copy-bio-btn.copied svg,
   .copy-btn-large.copied svg {
     color: #FFFFFF !important;
+    stroke: #FFFFFF !important;
   }
 
   /* ---------------------------------------------------- */

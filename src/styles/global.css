@@ -140,6 +140,78 @@ button {
   cursor: pointer;
 }
 
+/* Universal Copy Button Styling */
+.copy-bio-btn,
+.copy-btn-large,
+.copy-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.6rem !important;
+  background: #D9A23A !important;
+  border: 2px solid #D9A23A !important;
+  color: #0D0C08 !important;
+  padding: 0.85rem 2rem !important;
+  border-radius: 9999px !important;
+  font-family: var(--font-mono, monospace) !important;
+  font-size: 0.85rem !important;
+  font-weight: 800 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 20px rgba(217, 162, 58, 0.35) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.copy-bio-btn svg,
+.copy-btn-large svg,
+.copy-btn svg {
+  color: #0D0C08 !important;
+  stroke: #0D0C08 !important;
+  transition: transform 0.25s ease !important;
+}
+
+.copy-bio-btn:hover,
+.copy-btn-large:hover,
+.copy-btn:hover {
+  background: #FBF6EA !important;
+  border-color: #FBF6EA !important;
+  color: #0D0C08 !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 8px 30px rgba(217, 162, 58, 0.55) !important;
+}
+
+.copy-bio-btn:hover svg,
+.copy-btn-large:hover svg,
+.copy-btn:hover svg {
+  color: #0D0C08 !important;
+  stroke: #0D0C08 !important;
+  transform: scale(1.15) !important;
+}
+
+.copy-bio-btn:active,
+.copy-btn-large:active,
+.copy-btn:active {
+  transform: translateY(0) scale(0.98) !important;
+  box-shadow: 0 2px 10px rgba(217, 162, 58, 0.3) !important;
+}
+
+.copy-bio-btn.copied,
+.copy-btn-large.copied,
+.copy-btn.copied {
+  background: #0E6B54 !important;
+  border-color: #0E6B54 !important;
+  color: #FFFFFF !important;
+  box-shadow: 0 6px 25px rgba(14, 107, 84, 0.5) !important;
+}
+
+.copy-bio-btn.copied svg,
+.copy-btn-large.copied svg,
+.copy-btn.copied svg {
+  color: #FFFFFF !important;
+  stroke: #FFFFFF !important;
+}
+
 /* Typography Utilities */
 .section-title {
   font-family: var(--font-serif);
