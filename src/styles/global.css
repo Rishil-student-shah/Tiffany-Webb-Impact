@@ -669,3 +669,59 @@ button {
   animation-play-state: paused;
   transform: translateY(-12px) scale(1.02);
 }
+
+/* ---------------------------------------------------- */
+/* UNIVERSAL WAVEFORM STACKING & CONTENT LAYER GUARDS   */
+/* ---------------------------------------------------- */
+
+/* 1. Missing Utility Classes (Tailwind Polyfill) */
+.relative {
+  position: relative !important;
+}
+.z-0 { z-index: 0 !important; }
+.z-1 { z-index: 1 !important; }
+.z-2 { z-index: 2 !important; }
+.z-10 { z-index: 10 !important; }
+.z-20 { z-index: 20 !important; }
+
+/* 2. Waveforms are ALWAYS forced to background layer (Z-Index 0) */
+.waveform-container,
+.hero-waveform {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: 0 !important;
+  pointer-events: none !important;
+}
+
+/* 3. All Content Containers & Text ALWAYS sit in front (Z-Index 2+) */
+.container,
+.hero-container,
+.media-container,
+.services-container,
+.impact-container,
+.page-container,
+.section-content,
+.hero-content,
+.section-header-block,
+.formats-grid,
+.bios-grid,
+.downloads-grid,
+.bio-reader-card,
+.emcee-box,
+.cta-card {
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* 4. Isolate section stacking contexts */
+section,
+.media-section,
+.impact-hero,
+.ways-to-work-section,
+.site-footer {
+  isolation: isolate;
+}
+
