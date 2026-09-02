@@ -2,6 +2,8 @@
 import Waveform from './Waveform.astro';
 import Eyebrow from './Eyebrow.astro';
 
+const { content = {}, collections = {} } = Astro.props;
+
 const fallbackAudiences = [
   { title: "Healthcare Leaders & Clinical Networks" },
   { title: "Municipal Agencies & Public Health Departments" },
