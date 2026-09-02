@@ -5,72 +5,56 @@ import Waveform from '../Waveform.astro';
 
 const { content = {} } = Astro.props;
 const eyebrow = content.eyebrow || "BRING TIFFANY IN";
-let headline = content.headline || 'Bring documented impact to <br/>your <span class="italic-accent">organization.</span>';
+let rawHeadline = content.headline || 'Bring documented impact to your <span class="italic-accent">organization.</span>';
+// If headline doesn't have line break, format it gracefully
+let headline = rawHeadline.includes('<br') 
+  ? rawHeadline 
+  : rawHeadline.replace(/to your/i, 'to your<br/>');
+
 const subtitle = content.subtitle || "Check availability and request a custom keynote, training session, or strategic community engagement tailored to your specific goals.";
 const btnText = content.button_text || "START A CONVERSATION \u2192";
 const btnUrl = content.button_url || "/work-with-tiffany";
 ---
 
-<section class="impact-cta-section theme-ink relative overflow-hidden">
+<section class="impact-cta-section theme-ink relative overflow-hidden" style="padding: 9.5rem 0; border-top: 1px solid rgba(255, 255, 255, 0.05); border-bottom: 1px solid rgba(255, 255, 255, 0.05); background: radial-gradient(circle at 50% 50%, rgba(217, 162, 58, 0.12) 0%, rgba(13, 12, 8, 1) 75%);">
   <Waveform opacity={0.06} variant="B" />
   
-  <div class="container relative z-10 text-center" style="max-width: 900px; margin: 0 auto; padding: 0 1.5rem;">
-    <div class="section-header-block reveal-up text-center">
-      <Eyebrow className="justify-center text-center">{eyebrow}</Eyebrow>
-      <h2 class="cta-headline text-center" set:html={headline}></h2>
-      <p class="cta-subtitle text-center">
+  <div class="container relative z-10 text-center" style="max-width: 960px; margin: 0 auto; padding: 0 1.5rem;">
+    <div class="reveal-up text-center" style="max-width: 860px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+      
+      <!-- 1. Gold Eyebrow with Generous Bottom Margin -->
+      <div style="margin-bottom: 2.25rem; display: flex; justify-content: center; width: 100%;">
+        <Eyebrow className="justify-center text-center">{eyebrow}</Eyebrow>
+      </div>
+      
+      <!-- 2. Section Headline with Generous Bottom Margin -->
+      <h2 
+        class="cta-headline text-center" 
+        style="font-family: var(--font-serif); font-size: clamp(2.5rem, 5vw, 4.2rem); color: #FBF6EA; line-height: 1.25; margin: 0 0 2.25rem 0; text-align: center;"
+        set:html={headline}
+      ></h2>
+      
+      <!-- 3. Section Subtitle with Generous Bottom Margin -->
+      <p 
+        class="cta-subtitle text-center" 
+        style="font-family: var(--font-sans); font-size: 1.2rem; line-height: 1.8; color: rgba(251, 246, 234, 0.85); max-width: 720px; margin: 0 auto 3.25rem auto; text-align: center;"
+      >
         {subtitle}
       </p>
-      <div class="cta-action">
-        <Button href={btnUrl} variant="primary" className="magnetic-btn">
+      
+      <!-- 4. Centered Magnetic Action Button -->
+      <div class="cta-action" style="display: flex; justify-content: center; align-items: center; width: 100%;">
+        <Button href={btnUrl} variant="primary" className="magnetic-btn" style="padding: 1.15rem 2.75rem; font-size: 0.95rem; font-weight: 800; letter-spacing: 0.08em;">
           {btnText}
         </Button>
       </div>
+
     </div>
   </div>
 </section>
 
-<style>
-  .impact-cta-section {
-    padding: 8rem 0;
-    background: radial-gradient(circle at 50% 50%, rgba(217, 162, 58, 0.12) 0%, rgba(13, 12, 8, 1) 80%);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    position: relative;
-  }
-
-  .section-header-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    margin: 0 auto;
-    gap: 1.75rem;
-    max-width: 840px;
-  }
-
-  .cta-headline {
-    font-family: var(--font-serif);
-    font-size: clamp(2.4rem, 4.5vw, 3.8rem);
-    color: var(--color-ivory, #FBF6EA);
-    line-height: 1.25;
-    margin: 0.25rem 0;
-    text-align: center;
-  }
-
-  .cta-subtitle {
-    font-size: 1.18rem;
-    line-height: 1.7;
-    color: rgba(251, 246, 234, 0.85);
-    max-width: 680px;
-    text-align: center;
-    margin: 0 auto;
-  }
-
-  .cta-action {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    margin-top: 0.75rem;
+<style is:global>
+  .impact-cta-section .eyebrow {
+    margin-bottom: 0 !important;
   }
 </style>
