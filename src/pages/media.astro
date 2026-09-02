@@ -52,22 +52,28 @@ try {
 const fallbackBios = [
   {
     id: "short",
+    num: "01",
     label: "SHORT BIO",
     words: "~50 WORDS",
-    subtitle: "For Event Programs & Social Media",
+    isPopular: false,
+    subtitle: "For Event Programs, Printed Flyers & Social Media",
     text: "Tiffany Webb is a Chicago-born Community Impact Strategist and Public Health Speaker with over 15 years of experience in behavioral health and public health education. She brings lived insight and clinical rigor to problem gambling prevention, youth digital risk, and human-centered community health strategies across Illinois and nationally."
   },
   {
     id: "medium",
+    num: "02",
     label: "MEDIUM BIO",
     words: "~150 WORDS",
-    subtitle: "For Conference Agendas & Website Speaker Profiles",
+    isPopular: true,
+    subtitle: "For Conference Programs, Agendas & Website Speaker Profiles",
     text: "Tiffany Webb is a Community Impact Strategist, Public Health Educator, and Speaker specializing in problem gambling prevention, youth digital risk, and community health strategy. With over 15 years of leadership across behavioral health systems and more than 4,000 hours of frontline community outreach, Tiffany bridges the gap between clinical protocols and community trust.\n\nShe is the founder of GambleFreeGear and the creator of the GEAR Method™ (Generate, Engage, Activate, Resource). An affiliate speaker with the Illinois Council on Problem Gambling (ICPG) and an active advisor to regional ROSC coalitions, Tiffany is trusted by healthcare networks, civic leaders, and youth organizations to deliver high-impact keynotes and actionable workshops."
   },
   {
     id: "long",
+    num: "03",
     label: "LONG BIO",
     words: "~300 WORDS",
+    isPopular: false,
     subtitle: "For Keynote Introductions, Press Releases & Feature Articles",
     text: "Tiffany Webb is a Community Impact Strategist, Public Health Educator, and Speaker dedicated to transforming how organizations, healthcare systems, and communities address behavioral addiction, emerging digital risks, and public health equity. Raised by her grandmother and a close village of family in Chicago with deep Louisiana roots, Tiffany learned early that true community support requires showing up with empathy, consistency, and respect.\n\nOver the past 15 years, Tiffany has worked across healthcare networks, municipal health agencies, and grassroots recovery coalitions. With more than 4,000 hours of frontline outreach, she specializes in identifying hidden behavioral addictions—including mobile sports wagering and youth digital gaming—that traditional intake protocols often overlook.\n\nShe is the creator of the GEAR Method™ (Generate, Engage, Activate, Resource), a proprietary four-phase framework that helps institutions move from passive awareness to sustainable community action. Tiffany is also the founder of GambleFreeGear, a mission-driven awareness enterprise providing wearable advocacy and educational resources.\n\nAn affiliate speaker with the Illinois Council on Problem Gambling (ICPG) and a trusted facilitator for Recovery Oriented Systems of Care (ROSC) councils, Tiffany delivers evidence-based, emotionally resonant keynotes, clinical trainings, and executive advisory sessions across the country."
   }
@@ -76,8 +82,10 @@ const fallbackBios = [
 const bios = (dbCollections.bios && dbCollections.bios.length > 0)
   ? dbCollections.bios.map((b, idx) => ({
       id: b.item_slug || (idx === 0 ? "short" : idx === 1 ? "medium" : "long"),
+      num: "0" + (idx + 1),
       label: b.title || (idx === 0 ? "SHORT BIO" : idx === 1 ? "MEDIUM BIO" : "LONG BIO"),
       words: b.badge || (idx === 0 ? "~50 WORDS" : idx === 1 ? "~150 WORDS" : "~300 WORDS"),
+      isPopular: idx === 1,
       subtitle: b.subtitle || (idx === 0 ? "For Event Programs & Social Media" : idx === 1 ? "For Conference Agendas & Speaker Profiles" : "For Keynote Introductions & Feature Articles"),
       text: b.content_html || b.content_value || b.description || ""
     }))
@@ -147,57 +155,71 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
       </div>
     </section>
 
-    <!-- Section 1: Approved Biographies (Clean Stacked High-Contrast Cards) -->
+    <!-- Section 1: Dribbble-Grade Executive Biographies Showcase -->
     <section class="media-section relative overflow-hidden" id="approved-bios">
       <Waveform opacity={0.03} variant="B" />
-      <div class="media-container relative z-10" style="max-width: 1040px; margin: 0 auto;">
+      <div class="media-container relative z-10" style="max-width: 1100px; margin: 0 auto;">
         
-        <div class="reveal-up text-center mb-14 mx-auto" style="max-width: 800px; display: flex; flex-direction: column; align-items: center;">
+        <!-- Header -->
+        <div class="reveal-up text-center mb-16 mx-auto" style="max-width: 820px; display: flex; flex-direction: column; align-items: center;">
           <Eyebrow className="justify-center text-center">OFFICIAL BIOGRAPHIES</Eyebrow>
           <h2 class="media-h2 mt-4 text-center">Approved <span class="italic-accent">biographies.</span></h2>
-          <p class="section-subtext mt-4 text-center">Select the length that best fits your program format. Click "Copy Bio" on any card to copy the text to your clipboard.</p>
+          <p class="section-subtext mt-4 text-center">Select the exact length required for your program format. Click "Copy Bio" on any card for instant verbatim text.</p>
         </div>
 
-        <!-- 3 High-Contrast Bio Cards Stack -->
-        <div class="bios-stack stagger-group">
+        <!-- High-Contrast Dribbble-Style Bio Cards Stack -->
+        <div class="dribbble-bios-stack">
           {bios.map((bio) => (
-            <div class="bio-card-clean ultra-glass-card stagger-item">
+            <article class={`dribbble-bio-card ${bio.isPopular ? 'featured-card' : ''}`}>
               
-              <!-- Card Top Header -->
-              <div class="bio-header-row">
-                <div class="bio-title-group">
-                  <div class="bio-pills">
-                    <span class="bio-pill-gold">{bio.label}</span>
-                    <span class="bio-pill-count">{bio.words}</span>
+              <!-- Card Top Bar -->
+              <div class="dribbble-bio-header">
+                <div class="header-left-cluster">
+                  <span class="bio-num-tag">{bio.num}</span>
+                  <div class="bio-meta-wrap">
+                    <div class="bio-pills-row">
+                      <span class="pill-badge-gold">{bio.label}</span>
+                      <span class="pill-badge-words">{bio.words}</span>
+                      {bio.isPopular && <span class="pill-badge-popular">★ MOST REQUESTED</span>}
+                    </div>
+                    <h3 class="bio-purpose-heading">{bio.subtitle}</h3>
                   </div>
-                  <h3 class="bio-purpose-title">{bio.subtitle}</h3>
                 </div>
 
-                <button class="copy-btn-bright" data-copy-target={`bio-text-${bio.id}`} type="button">
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                  <span class="copy-text">Copy Bio</span>
-                </button>
+                <div class="header-right-action">
+                  <button class="dribbble-copy-btn" data-copy-target={`bio-text-${bio.id}`} type="button">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span class="btn-label">Copy Bio</span>
+                  </button>
+                </div>
               </div>
 
-              <!-- Card Body: Bright Crisp Ivory White Text -->
-              <div class="bio-body-prose">
-                <div id={`bio-text-${bio.id}`} class="bio-formatted-text">
-                  {bio.text.split('\n\n').map((paragraph) => (
-                    <p>{paragraph}</p>
+              <!-- High-Contrast Pure White Editorial Body -->
+              <div class="dribbble-bio-body">
+                <div id={`bio-text-${bio.id}`} class="bio-text-content">
+                  {bio.text.split('\n\n').map((para) => (
+                    <p>{para}</p>
                   ))}
                 </div>
               </div>
 
-              <!-- Card Bottom Bar -->
-              <div class="bio-bottom-bar">
-                <span class="bio-verified-tag">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color: var(--color-gold);"><polyline points="20 6 9 17 4 12"></polyline></svg>
-                  <span>Official Verbatim Text &bull; Approved for Public Programs</span>
-                </span>
-                <span class="bio-id-tag">LENGTH: {bio.words}</span>
+              <!-- Card Bottom Utility Bar -->
+              <div class="dribbble-bio-footer">
+                <div class="footer-left-status">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#D9A23A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polyline points="20 6 9 17 4 12"></polyline>
+                  </svg>
+                  <span class="status-txt">Verbatim Approved Text &bull; No Prior Authorization Needed</span>
+                </div>
+                <div class="footer-right-count">
+                  <span>FORMAT: {bio.words}</span>
+                </div>
               </div>
 
-            </div>
+            </article>
           ))}
         </div>
 
@@ -205,9 +227,9 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
     </section>
 
     <!-- Section 2: Stage Emcee Introduction Script -->
-    <section class="media-section relative overflow-hidden" id="emcee-script" style="background: rgba(18, 16, 12, 0.75);">
+    <section class="media-section relative overflow-hidden" id="emcee-script" style="background: #110F0B;">
       <Waveform opacity={0.04} variant="C" flipY={true} />
-      <div class="media-container relative z-10" style="max-width: 1040px; margin: 0 auto;">
+      <div class="media-container relative z-10" style="max-width: 1100px; margin: 0 auto;">
         
         <div class="reveal-up text-center mb-12 mx-auto" style="max-width: 800px; display: flex; flex-direction: column; align-items: center;">
           <Eyebrow className="justify-center text-center">STAGE INTRODUCTION</Eyebrow>
@@ -215,16 +237,19 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
           <p class="section-subtext mt-4 text-center">Recommended verbatim script for event hosts and session moderators when introducing Tiffany to the stage.</p>
         </div>
 
-        <div class="emcee-box ultra-glass-card reveal-up" style="max-width: 960px; margin: 0 auto;">
-          <div class="emcee-header">
-            <span class="emcee-badge">VERBATIM STAGE SCRIPT (~30 SECONDS)</span>
-            <button class="copy-btn-bright" data-copy-target="emcee-script-text" type="button">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-              <span class="copy-text">Copy Script</span>
+        <div class="dribbble-emcee-card">
+          <div class="emcee-top-row">
+            <span class="emcee-tag-badge">VERBATIM STAGE SCRIPT (~30 SECONDS)</span>
+            <button class="dribbble-copy-btn" data-copy-target="emcee-script-text" type="button">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+              </svg>
+              <span class="btn-label">Copy Script</span>
             </button>
           </div>
           
-          <blockquote class="emcee-quote">
+          <blockquote class="emcee-quote-box">
             <p id="emcee-script-text">"{emceeScript}"</p>
           </blockquote>
         </div>
@@ -235,7 +260,7 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
     <!-- Section 3: Downloadable Speaker Assets -->
     <section class="media-section relative overflow-hidden" id="downloads">
       <Waveform opacity={0.03} variant="A" />
-      <div class="media-container relative z-10">
+      <div class="media-container relative z-10" style="max-width: 1100px; margin: 0 auto;">
         
         <div class="reveal-up text-center mb-14 mx-auto" style="max-width: 800px; display: flex; flex-direction: column; align-items: center;">
           <Eyebrow className="justify-center text-center">MEDIA ASSETS & DOWNLOADS</Eyebrow>
@@ -243,14 +268,14 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
           <p class="section-subtext mt-4 text-center">Official photography, one-sheets, and comprehensive brand materials for media publications and event marketing.</p>
         </div>
 
-        <div class="downloads-grid stagger-group">
+        <div class="downloads-grid-dribbble">
           {downloads.map((item) => (
-            <div class="download-card ultra-glass-card stagger-item">
-              <span class="download-tag">{item.tag}</span>
-              <h3 class="download-title">{item.title}</h3>
-              <p class="download-desc">{item.desc}</p>
-              <div class="download-action">
-                <a href={item.link} class="download-btn" download>
+            <div class="download-item-card">
+              <span class="download-tag-pill">{item.tag}</span>
+              <h3 class="download-item-title">{item.title}</h3>
+              <p class="download-item-desc">{item.desc}</p>
+              <div class="download-action-wrap">
+                <a href={item.link} class="download-cta-btn" download>
                   <span set:html={item.btnText}></span>
                 </a>
               </div>
@@ -296,9 +321,8 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
-    // Copy to Clipboard Logic with Visual Feedback
-    const copyButtons = document.querySelectorAll('.copy-btn-bright');
-    copyButtons.forEach(btn => {
+    const copyBtns = document.querySelectorAll('.dribbble-copy-btn');
+    copyBtns.forEach(btn => {
       btn.addEventListener('click', async () => {
         const targetId = btn.getAttribute('data-copy-target');
         const targetEl = document.getElementById(targetId);
@@ -307,17 +331,17 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
         const textToCopy = targetEl.innerText.replace(/^"|"$/g, '').trim();
         try {
           await navigator.clipboard.writeText(textToCopy);
-          const copyTextSpan = btn.querySelector('.copy-text');
-          const originalText = copyTextSpan.innerText;
-          copyTextSpan.innerText = 'Copied!';
-          btn.classList.add('copied');
+          const label = btn.querySelector('.btn-label');
+          const original = label.innerText;
+          label.innerText = 'Copied!';
+          btn.classList.add('copied-state');
           
           setTimeout(() => {
-            copyTextSpan.innerText = originalText;
-            btn.classList.remove('copied');
+            label.innerText = original;
+            btn.classList.remove('copied-state');
           }, 2500);
         } catch (err) {
-          console.error('Failed to copy text:', err);
+          console.error('Failed to copy:', err);
         }
       });
     });
@@ -333,25 +357,25 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
 
   .media-hero-section {
     padding: 10rem 0 5rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    background: radial-gradient(circle at 50% 0%, rgba(217, 162, 58, 0.12) 0%, rgba(13, 12, 8, 1) 75%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: radial-gradient(circle at 50% 0%, rgba(217, 162, 58, 0.15) 0%, rgba(13, 12, 8, 1) 75%);
   }
 
   .media-section {
-    padding: 6rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    padding: 6.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
 
   .media-inquiry-banner {
-    padding: 2rem 0;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    background: radial-gradient(circle at 50% 50%, rgba(217, 162, 58, 0.1) 0%, rgba(13, 12, 8, 1) 80%);
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    background: radial-gradient(circle at 50% 50%, rgba(217, 162, 58, 0.12) 0%, rgba(13, 12, 8, 1) 80%);
   }
 
   .media-h1 {
     font-family: var(--font-serif);
     font-size: clamp(2.8rem, 5.5vw, 4.8rem);
-    color: var(--color-ivory, #FBF6EA);
+    color: #FBF6EA !important;
     line-height: 1.1;
     margin: 0;
     text-align: center;
@@ -360,7 +384,7 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
   .media-h2 {
     font-family: var(--font-serif);
     font-size: clamp(2.2rem, 4vw, 3.4rem);
-    color: var(--color-ivory, #FBF6EA);
+    color: #FBF6EA !important;
     line-height: 1.2;
     margin: 0;
     text-align: center;
@@ -368,7 +392,7 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
 
   .media-subtitle {
     font-size: 1.2rem;
-    color: rgba(251, 246, 234, 0.9);
+    color: #E2D9C8 !important;
     line-height: 1.65;
     max-width: 760px;
     text-align: center;
@@ -377,106 +401,192 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
 
   .section-subtext {
     font-size: 1.15rem;
-    color: rgba(251, 246, 234, 0.85);
+    color: #D6CCA9 !important;
     line-height: 1.6;
     text-align: center;
     max-width: 720px;
     margin: 0 auto;
   }
 
-  /* 3 High-Contrast Bio Cards Stack */
-  .bios-stack {
+  /* ---------------------------------------------------- */
+  /* DRIBBBLE-GRADE BIO CARDS STACK                        */
+  /* ---------------------------------------------------- */
+  .dribbble-bios-stack {
     display: flex;
     flex-direction: column;
     gap: 2.5rem;
   }
 
-  .bio-card-clean {
-    background: #14120E;
+  .dribbble-bio-card {
+    background: #17140F;
     border: 1px solid rgba(217, 162, 58, 0.35);
-    border-radius: 22px;
-    padding: 2.75rem 2.5rem;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, border-color 0.3s ease;
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+    position: relative;
+    transition: transform 0.25s ease, border-color 0.25s ease;
   }
 
-  .bio-card-clean:hover {
-    border-color: rgba(217, 162, 58, 0.6);
-    transform: translateY(-3px);
+  .dribbble-bio-card:hover {
+    border-color: #D9A23A;
+    transform: translateY(-2px);
   }
 
-  .bio-header-row {
+  .dribbble-bio-card.featured-card {
+    background: linear-gradient(180deg, #1C1812 0%, #14120E 100%);
+    border: 1.5px solid rgba(217, 162, 58, 0.65);
+    box-shadow: 0 20px 50px rgba(217, 162, 58, 0.12), 0 10px 30px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Header Row */
+  .dribbble-bio-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    align-items: flex-start;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     padding-bottom: 1.5rem;
     margin-bottom: 1.75rem;
     flex-wrap: wrap;
-    gap: 1rem;
+    gap: 1.25rem;
   }
 
-  .bio-title-group {
+  .header-left-cluster {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+
+  .bio-num-tag {
+    font-family: var(--font-mono);
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #D9A23A;
+    line-height: 1;
+    padding-top: 0.2rem;
+  }
+
+  .bio-meta-wrap {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
   }
 
-  .bio-pills {
+  .bio-pills-row {
     display: flex;
     align-items: center;
-    gap: 0.65rem;
+    gap: 0.6rem;
+    flex-wrap: wrap;
   }
 
-  .bio-pill-gold {
+  .pill-badge-gold {
     font-family: var(--font-mono);
-    font-size: 0.82rem;
+    font-size: 0.8rem;
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #0D0C08;
+    color: #0D0C08 !important;
     background: #D9A23A;
     padding: 0.35rem 0.85rem;
     border-radius: 6px;
   }
 
-  .bio-pill-count {
+  .pill-badge-words {
     font-family: var(--font-mono);
     font-size: 0.78rem;
     font-weight: 700;
-    color: #FBF6EA;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.12);
-    padding: 0.3rem 0.75rem;
+    color: #FFFFFF !important;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 0.3rem 0.7rem;
     border-radius: 6px;
   }
 
-  .bio-purpose-title {
+  .pill-badge-popular {
     font-family: var(--font-mono);
-    font-size: 0.88rem;
-    color: #D9A23A;
-    margin: 0;
-    font-weight: 600;
-    letter-spacing: 0.04em;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    color: #D9A23A !important;
+    background: rgba(217, 162, 58, 0.15);
+    border: 1px solid rgba(217, 162, 58, 0.4);
+    padding: 0.3rem 0.65rem;
+    border-radius: 6px;
   }
 
-  .bio-body-prose {
+  .bio-purpose-heading {
+    font-family: var(--font-sans);
+    font-size: 1.05rem;
+    color: #F3C56E !important;
+    margin: 0;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  /* Copy Button */
+  .dribbble-copy-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    background: rgba(217, 162, 58, 0.12);
+    border: 1.5px solid #D9A23A;
+    color: #FFFFFF !important;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 0.6rem 1.3rem;
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .dribbble-copy-btn svg {
+    color: #D9A23A;
+  }
+
+  .dribbble-copy-btn:hover {
+    background: #D9A23A;
+    color: #0D0C08 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(217, 162, 58, 0.4);
+  }
+
+  .dribbble-copy-btn:hover svg {
+    color: #0D0C08;
+  }
+
+  .dribbble-copy-btn.copied-state {
+    background: #0E6B54 !important;
+    border-color: #0E6B54 !important;
+    color: #FFFFFF !important;
+  }
+
+  .dribbble-copy-btn.copied-state svg {
+    color: #FFFFFF !important;
+  }
+
+  /* Body Prose Typography */
+  .dribbble-bio-body {
     margin-bottom: 2rem;
   }
 
-  .bio-formatted-text p {
+  .bio-text-content p {
     font-family: var(--font-sans);
     font-size: 1.15rem;
     line-height: 1.85;
-    color: #FFFFFF;
-    margin: 0 0 1.35rem 0;
+    color: #FFFFFF !important;
+    margin: 0 0 1.4rem 0;
+    font-weight: 400;
   }
 
-  .bio-formatted-text p:last-child {
+  .bio-text-content p:last-child {
     margin-bottom: 0;
   }
 
-  .bio-bottom-bar {
+  /* Footer Bar */
+  .dribbble-bio-footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -486,187 +596,151 @@ const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution pho
     gap: 0.75rem;
   }
 
-  .bio-verified-tag {
+  .footer-left-status {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.8rem;
-    color: rgba(251, 246, 234, 0.75);
+    gap: 0.55rem;
   }
 
-  .bio-id-tag {
+  .status-txt {
     font-family: var(--font-mono);
-    font-size: 0.75rem;
+    font-size: 0.8rem;
+    color: #CFC5B0 !important;
+    font-weight: 500;
+  }
+
+  .footer-right-count {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
     font-weight: 700;
-    color: var(--color-gold, #D9A23A);
+    color: #D9A23A !important;
     letter-spacing: 0.1em;
   }
 
-  /* Bright Action Buttons */
-  .copy-btn-bright {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    background: rgba(217, 162, 58, 0.15);
-    border: 1px solid #D9A23A;
-    color: #FBF6EA;
-    font-family: var(--font-mono);
-    font-size: 0.82rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 0.55rem 1.2rem;
-    border-radius: 100px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  .copy-btn-bright svg {
-    color: #D9A23A;
-    transition: color 0.2s ease;
-  }
-
-  .copy-btn-bright:hover {
-    background: #D9A23A;
-    color: #0D0C08;
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(217, 162, 58, 0.35);
-  }
-
-  .copy-btn-bright:hover svg {
-    color: #0D0C08;
-  }
-
-  .copy-btn-bright.copied {
-    background: #0E6B54;
-    border-color: #0E6B54;
-    color: #ffffff;
-  }
-
-  .copy-btn-bright.copied svg {
-    color: #ffffff;
-  }
-
-  /* Emcee Box */
-  .emcee-box {
-    background: #14120E;
+  /* ---------------------------------------------------- */
+  /* EMCEE CARD                                           */
+  /* ---------------------------------------------------- */
+  .dribbble-emcee-card {
+    background: #17140F;
     border: 1px solid rgba(217, 162, 58, 0.35);
-    border-radius: 22px;
+    border-radius: 20px;
     padding: 2.75rem;
-    box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
   }
 
-  .emcee-header {
+  .emcee-top-row {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
     padding-bottom: 1.25rem;
+    margin-bottom: 1.75rem;
+    flex-wrap: wrap;
+    gap: 1rem;
   }
 
-  .emcee-badge {
+  .emcee-tag-badge {
     font-family: var(--font-mono);
     font-size: 0.82rem;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.12em;
-    color: var(--color-gold, #D9A23A);
+    color: #D9A23A !important;
   }
 
-  .emcee-quote {
+  .emcee-quote-box p {
     font-family: var(--font-serif);
     font-size: clamp(1.25rem, 2.2vw, 1.65rem);
     line-height: 1.65;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
     margin: 0;
     font-style: italic;
   }
 
-  /* Downloads Grid */
-  .downloads-grid {
+  /* ---------------------------------------------------- */
+  /* DOWNLOADS GRID                                       */
+  /* ---------------------------------------------------- */
+  .downloads-grid-dribbble {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.75rem;
   }
 
   @media (min-width: 640px) {
-    .downloads-grid {
+    .downloads-grid-dribbble {
       grid-template-columns: repeat(2, 1fr);
     }
   }
 
   @media (min-width: 1024px) {
-    .downloads-grid {
+    .downloads-grid-dribbble {
       grid-template-columns: repeat(4, 1fr);
     }
   }
 
-  .download-card {
-    background: #14120E;
+  .download-item-card {
+    background: #17140F;
     border: 1px solid rgba(217, 162, 58, 0.3);
-    border-radius: 20px;
+    border-radius: 18px;
     padding: 2.25rem 1.75rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    transition: all 0.3s ease;
+    transition: transform 0.25s ease, border-color 0.25s ease;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
   }
 
-  .download-card:hover {
+  .download-item-card:hover {
     transform: translateY(-4px);
-    border-color: rgba(217, 162, 58, 0.6);
+    border-color: #D9A23A;
   }
 
-  .download-tag {
+  .download-tag-pill {
     font-family: var(--font-mono);
     font-size: 0.7rem;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-gold, #D9A23A);
+    color: #D9A23A !important;
     display: block;
     margin-bottom: 0.75rem;
   }
 
-  .download-title {
+  .download-item-title {
     font-family: var(--font-serif);
     font-size: 1.35rem;
-    color: var(--color-ivory, #FBF6EA);
+    color: #FBF6EA !important;
     margin: 0 0 0.6rem 0;
     line-height: 1.3;
   }
 
-  .download-desc {
-    font-size: 0.9rem;
+  .download-item-desc {
+    font-size: 0.92rem;
     line-height: 1.6;
-    color: rgba(251, 246, 234, 0.85);
+    color: #D6CCA9 !important;
     margin: 0 0 1.5rem 0;
   }
 
-  .download-action {
+  .download-action-wrap {
     margin-top: auto;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     padding-top: 1.25rem;
   }
 
-  .download-btn {
+  .download-cta-btn {
     font-family: var(--font-mono);
     font-size: 0.82rem;
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-gold, #D9A23A);
+    color: #D9A23A !important;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     transition: all 0.2s ease;
   }
 
-  .download-btn:hover {
-    color: #ffffff;
+  .download-cta-btn:hover {
+    color: #FFFFFF !important;
     transform: translateX(4px);
   }
 </style>
