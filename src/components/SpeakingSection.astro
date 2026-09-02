@@ -7,11 +7,12 @@ const eyebrow = content.eyebrow ?? "SPEAKING TRACKS";
 let headline = content.headline ?? 'What she <span class="italic-accent">speaks about.</span>';
 const subtext = content.subtext ?? "Twenty topics across four tracks — practical enough to use on Monday, human enough that the room stays with her.";
 
-// 4 Tracks Definition with Organizer Booking Matrix
+// 4 Tracks Definition with Organizer Booking Matrix and Direct Track Links
 const tracks = [
   {
     num: "01",
     id: "prevention-risk",
+    trackParam: "prevention",
     name: "Prevention, Gambling & Emerging Risk",
     color: "#0E6B54",
     borderColor: "rgba(14, 107, 84, 0.45)",
@@ -22,11 +23,13 @@ const tracks = [
     matrixAudience: "Healthcare Systems",
     matrixFormat: "Keynote / Breakout",
     matrixTopic: "#2 From Fun to Crisis: Gambling Prevention & Education",
-    ctaLink: "/work-with-tiffany?topic=From+Fun+to+Crisis"
+    catalogLink: "/services/speaking-topics?track=prevention",
+    ctaLink: "/work-with-tiffany?topic=From+Fun+to+Crisis&track=Prevention%2C+Gambling+%26+Emerging+Risk&audience=Healthcare+Systems"
   },
   {
     num: "02",
     id: "community-outreach",
+    trackParam: "outreach",
     name: "Community Engagement & Outreach",
     color: "#D9A23A",
     borderColor: "rgba(217, 162, 58, 0.45)",
@@ -37,11 +40,13 @@ const tracks = [
     matrixAudience: "ROSC & Coalitions",
     matrixFormat: "Strategy Workshop",
     matrixTopic: "#6 The 8 Touchpoints to Engagement",
-    ctaLink: "/work-with-tiffany?topic=The+8+Touchpoints+to+Engagement"
+    catalogLink: "/services/speaking-topics?track=outreach",
+    ctaLink: "/work-with-tiffany?topic=The+8+Touchpoints+to+Engagement&track=Community+Engagement+%26+Outreach&audience=ROSC+%26+Coalitions"
   },
   {
     num: "03",
     id: "human-systems",
+    trackParam: "systems",
     name: "Human-Centered Systems & Services",
     color: "#C15427",
     borderColor: "rgba(193, 84, 39, 0.45)",
@@ -52,11 +57,13 @@ const tracks = [
     matrixAudience: "System Architects",
     matrixFormat: "Advisory",
     matrixTopic: "#12 The G.E.A.R. Model: From Awareness to Referral",
-    ctaLink: "/work-with-tiffany?topic=The+GEAR+Model"
+    catalogLink: "/services/speaking-topics?track=systems",
+    ctaLink: "/work-with-tiffany?topic=The+GEAR+Model&track=Human-Centered+Systems+%26+Services&audience=System+Architects"
   },
   {
     num: "04",
     id: "youth-leadership",
+    trackParam: "youth",
     name: "Purpose, Leadership & Youth Impact",
     color: "#6C2D5A",
     borderColor: "rgba(108, 45, 90, 0.5)",
@@ -67,7 +74,8 @@ const tracks = [
     matrixAudience: "Schools & Youth Organizations",
     matrixFormat: "Youth Program / Workshop",
     matrixTopic: "Healthy Gaming & Sports",
-    ctaLink: "/work-with-tiffany?topic=healthy-gaming-sports"
+    catalogLink: "/services/speaking-topics?track=youth",
+    ctaLink: "/work-with-tiffany?topic=healthy-gaming-sports&track=Purpose%2C+Leadership+%26+Youth+Impact&audience=Schools+%26+Youth+Organizations"
   }
 ];
 ---
@@ -104,10 +112,9 @@ const tracks = [
                   <p class="track-desc">{track.desc}</p>
                 </div>
                 <div class="card-footer">
-                  <span class="flip-hint">
-                    <span>ORGANIZER MATRIX</span>
-                    <span class="flip-icon">↻</span>
-                  </span>
+                  <a href={track.catalogLink} class="explore-track-btn" onclick="event.stopPropagation();">
+                    Explore Track Topics &rarr;
+                  </a>
                 </div>
               </div>
 
@@ -137,7 +144,7 @@ const tracks = [
                 </div>
 
                 <div class="back-footer">
-                  <a href={track.ctaLink} class="btn-start-conv">
+                  <a href={track.ctaLink} class="btn-start-conv" onclick="event.stopPropagation();">
                     Start a Conversation &rarr;
                   </a>
                 </div>
@@ -152,7 +159,7 @@ const tracks = [
     <!-- Footer Action -->
     <div class="speaking-footer reveal-up mt-14 text-center">
       <a href="/services/speaking-topics" class="explore-all-link">
-        VIEW ALL 21 SIGNATURE SPEAKING TOPICS &rarr;
+        VIEW ALL 20 SIGNATURE SPEAKING TOPICS &rarr;
       </a>
     </div>
 
@@ -308,19 +315,23 @@ const tracks = [
     padding-top: 0.85rem;
   }
 
-  .flip-hint {
+  .explore-track-btn {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     font-weight: 700;
-    letter-spacing: 0.15em;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     color: var(--color-gold, #D9A23A);
-    display: flex;
+    text-decoration: none;
+    display: inline-flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 0.4rem;
+    transition: opacity 0.2s ease, transform 0.2s ease;
   }
 
-  .flip-icon {
-    font-size: 1.1rem;
+  .explore-track-btn:hover {
+    opacity: 0.85;
+    transform: translateX(3px);
   }
 
   /* Back Face (Organizer Matrix) */

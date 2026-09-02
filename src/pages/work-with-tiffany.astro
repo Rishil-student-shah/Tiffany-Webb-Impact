@@ -264,7 +264,7 @@ import Waveform from '../components/Waveform.astro';
   </main>
 </Layout>
 
-<script>
+<script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
     // FAQ Accordion
     const faqTriggers = document.querySelectorAll('.faq-trigger');
@@ -346,10 +346,58 @@ import Waveform from '../components/Waveform.astro';
 
     initCCPicker('book-cc-btn', 'book-cc-dropdown', 'book-cc-search', 'book-cc-list', 'country_code', 'phone');
 
-    // Set min date to today so users can't pick past dates
-    const dateInput = document.getElementById('date');
-    if (dateInput) {
-      dateInput.min = new Date().toISOString().split('T')[0];
+    // Auto-populate from URL query params (topic, track, audience, format, type)
+    const urlParams = new URLSearchParams(window.location.search);
+    const topicParam = urlParams.get('topic');
+    const trackParam = urlParams.get('track');
+    const audienceParam = urlParams.get('audience');
+    const formatParam = urlParams.get('format');
+    const typeParam = urlParams.get('type');
+
+    const topicSelect = document.getElementById('topic');
+    const messageInput = document.getElementById('message');
+    const eventTypeSelect = document.getElementById('event_type_select');
+    const customEventWrapper = document.getElementById('custom_event_wrapper');
+    const eventTypeInput = document.getElementById('event_type');
+
+    if (topicParam) {
+      if (topicSelect) {
+        let found = false;
+        Array.from(topicSelect.options).forEach(opt => {
+          if (opt.value.toLowerCase() === topicParam.toLowerCase() || opt.text.toLowerCase().includes(topicParam.toLowerCase())) {
+            opt.selected = true;
+            found = true;
+          }
+        });
+        if (!found) {
+          const newOpt = new Option(topicParam, topicParam, true, true);
+          topicSelect.add(newOpt, 1);
+        }
+      }
+      if (messageInput && !messageInput.value) {
+        let note = `Interested in topic: "${topicParam}"`;
+        if (trackParam) note += `\nTrack: ${trackParam}`;
+        if (audienceParam) note += `\nTarget Audience: ${audienceParam}`;
+        messageInput.value = note;
+      }
+    }
+
+    if (formatParam || typeParam) {
+      const targetType = formatParam || typeParam;
+      if (eventTypeSelect) {
+        let found = false;
+        Array.from(eventTypeSelect.options).forEach(opt => {
+          if (opt.value.toLowerCase().includes(targetType.toLowerCase())) {
+            opt.selected = true;
+            found = true;
+          }
+        });
+        if (!found && customEventWrapper && eventTypeInput) {
+          eventTypeSelect.value = 'Other';
+          customEventWrapper.style.display = 'block';
+          eventTypeInput.value = targetType;
+        }
+      }
     }
 
     // Form Submission to CRM

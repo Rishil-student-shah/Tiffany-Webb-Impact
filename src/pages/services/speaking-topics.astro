@@ -182,7 +182,7 @@ const getTrackKey = (trackId) => {
 
                         <!-- Card Footer Action -->
                         <div class="topic-footer">
-                          <a href={`/work-with-tiffany?topic=${topicSlug}`} class="book-topic-btn">
+                          <a href={`/work-with-tiffany?topic=${encodeURIComponent(topic.title)}&track=${encodeURIComponent(topic.track_name)}&audience=${encodeURIComponent(topic.target_audience || '')}`} class="book-topic-btn">
                             Book This Topic &rarr;
                           </a>
                         </div>
@@ -218,39 +218,61 @@ const getTrackKey = (trackId) => {
     const cards = document.querySelectorAll('.topic-card');
     const trackSections = document.querySelectorAll('.track-group-section');
 
+    function applyFilter(filter) {
+      filterBtns.forEach(b => {
+        if (b.getAttribute('data-filter') === filter) {
+          b.classList.add('active');
+        } else {
+          b.classList.remove('active');
+        }
+      });
+
+      if (filter === 'all') {
+        cards.forEach(card => card.style.display = 'flex');
+        trackSections.forEach(section => section.style.display = 'block');
+      } else {
+        trackSections.forEach(section => {
+          const sectionTrack = section.getAttribute('data-track-section');
+          if (sectionTrack === filter) {
+            section.style.display = 'block';
+          } else {
+            section.style.display = 'none';
+          }
+        });
+
+        cards.forEach(card => {
+          const cardTrack = card.getAttribute('data-track');
+          if (cardTrack === filter) {
+            card.style.display = 'flex';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      }
+    }
+
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const filter = btn.getAttribute('data-filter');
-
-        // Update active state on buttons
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        // Filter cards and sections
+        applyFilter(filter);
+        
+        // Update URL query parameter cleanly without reload
+        const url = new URL(window.location);
         if (filter === 'all') {
-          cards.forEach(card => card.style.display = 'flex');
-          trackSections.forEach(section => section.style.display = 'block');
+          url.searchParams.delete('track');
         } else {
-          trackSections.forEach(section => {
-            const sectionTrack = section.getAttribute('data-track-section');
-            if (sectionTrack === filter) {
-              section.style.display = 'block';
-            } else {
-              section.style.display = 'none';
-            }
-          });
-
-          cards.forEach(card => {
-            const cardTrack = card.getAttribute('data-track');
-            if (cardTrack === filter) {
-              card.style.display = 'flex';
-            } else {
-              card.style.display = 'none';
-            }
-          });
+          url.searchParams.set('track', filter);
         }
+        window.history.replaceState({}, '', url);
       });
     });
+
+    // Check URL search parameters on page load
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialTrack = urlParams.get('track');
+    if (initialTrack) {
+      applyFilter(initialTrack.toLowerCase());
+    }
   });
 </script>
 
