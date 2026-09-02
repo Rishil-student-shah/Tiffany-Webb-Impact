@@ -239,7 +239,12 @@ try {
     })()}
 
     <!-- 0.7 Partnership Framework -->
-    <PartnershipFramework />
+    <PartnershipFramework 
+      eyebrow={dbContent.partnership_framework?.eyebrow}
+      headline={dbContent.partnership_framework?.headline}
+      subtitle={dbContent.partnership_framework?.subtitle}
+      collections={dbCollections} 
+    />
 
     <!-- 5. Timeline -->
     <section class="spk-section relative overflow-hidden timeline-bg">

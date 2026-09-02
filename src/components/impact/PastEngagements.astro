@@ -2,7 +2,9 @@
 import Eyebrow from '../Eyebrow.astro';
 import Waveform from '../Waveform.astro';
 
-const pastEngagements = [
+const { collections = {} } = Astro.props;
+
+const fallbackEngagements = [
   {
     year: "2026",
     date: "August 18, 2026",
@@ -56,6 +58,28 @@ const pastEngagements = [
     borderColor: "rgba(14, 107, 84, 0.45)"
   }
 ];
+
+const colors = [
+  { color: "#6C2D5A", borderColor: "rgba(108, 45, 90, 0.45)" },
+  { color: "#D9A23A", borderColor: "rgba(217, 162, 58, 0.45)" },
+  { color: "#C15427", borderColor: "rgba(193, 84, 39, 0.45)" },
+  { color: "#0E6B54", borderColor: "rgba(14, 107, 84, 0.45)" }
+];
+
+const pastEngagements = (collections.past_engagements && collections.past_engagements.length > 0)
+  ? collections.past_engagements.map((c, idx) => ({
+      year: "2026",
+      date: c.subtitle && c.subtitle.includes('·') ? c.subtitle.split('·')[1]?.trim() || "2026" : "2026",
+      format: c.badge || "Engagement",
+      audience: c.badge || "Community Stakeholders",
+      name: c.title,
+      host: c.subtitle && c.subtitle.includes('·') ? c.subtitle.split('·')[0]?.trim() || c.subtitle : (c.subtitle || "Host Organization"),
+      city: "Illinois",
+      reach: c.image_url || "Verified Reach",
+      substance: c.content_html || c.description || c.content_value || "",
+      ...colors[idx % colors.length]
+    }))
+  : fallbackEngagements;
 ---
 
 <section class="past-engagements theme-ink relative overflow-hidden" id="past-engagements">

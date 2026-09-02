@@ -2,8 +2,22 @@
 import Waveform from './Waveform.astro';
 import Eyebrow from './Eyebrow.astro';
 
-const { content = {}, collections = {} } = Astro.props;
-const audiences = collections.who_can_benefit || collections.where_she_works || [];
+const fallbackAudiences = [
+  { title: "Healthcare Leaders & Clinical Networks" },
+  { title: "Municipal Agencies & Public Health Departments" },
+  { title: "ROSC Councils & Recovery Coalitions" },
+  { title: "Colleges, Universities & Athletic Programs" },
+  { title: "Faith-Based Networks & Community Nonprofits" },
+  { title: "Corporate HR & Employee Assistance Programs (EAPs)" },
+  { title: "Youth Organizations, Schools & District Leadership" },
+  { title: "Policy Makers & Prevention Coalitions" }
+];
+
+const audiences = (collections.who_can_benefit && collections.who_can_benefit.length > 0)
+  ? collections.who_can_benefit
+  : (collections.where_she_works && collections.where_she_works.length > 0)
+    ? collections.where_she_works
+    : fallbackAudiences;
 
 const eyebrow = content.eyebrow ?? "WHO CAN BENEFIT FROM TIFFANY'S WORK?";
 let headline = content.headline ?? "For leaders ready<br/>to <span class=\"italic-accent\">rethink what's possible.</span>";

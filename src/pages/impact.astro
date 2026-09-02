@@ -8,31 +8,75 @@ import ImpactEvidenceModel from '../components/impact/ImpactEvidenceModel.astro'
 import EngagementJourney from '../components/impact/EngagementJourney.astro';
 import ImpactCTA from '../components/impact/ImpactCTA.astro';
 import PageNavigation from '../components/PageNavigation.astro';
+import mysql from 'mysql2/promise';
+
+let dbContent = {};
+let dbCollections = {};
+
+try {
+  const pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '@rishil8124shah',
+    database: 'tiffany_crm',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+  });
+
+  const [rows] = await pool.query(`
+    SELECT section, key_name, content_value 
+    FROM website_content 
+    JOIN website_pages ON website_content.page_id = website_pages.id 
+    WHERE website_pages.slug = 'impact'
+  `);
+  
+  rows.forEach(row => {
+    if (!dbContent[row.section]) dbContent[row.section] = {};
+    dbContent[row.section][row.key_name] = row.content_value;
+  });
+
+  const [colRows] = await pool.query(`
+    SELECT id, section_name, item_slug, title, sort_order, subtitle, badge, content_html, link_url, image_url, icon_svg 
+    FROM website_collections 
+    JOIN website_pages ON website_collections.page_id = website_pages.id 
+    WHERE website_pages.slug = 'impact'
+    ORDER BY section_name, sort_order ASC
+  `);
+  
+  colRows.forEach(row => {
+    if (!dbCollections[row.section_name]) dbCollections[row.section_name] = [];
+    dbCollections[row.section_name].push(row);
+  });
+  await pool.end();
+} catch (e) {
+  console.error("Database connection failed for impact page, using fallbacks:", e);
+}
 ---
 
 <Layout title="Community Impact & Documented Engagements | Tiffany Webb" theme="secondary">
   <main class="page-content">
     
     <!-- 01. Introduction Hero -->
-    <ImpactHero />
+    <ImpactHero content={dbContent.hero} />
 
     <!-- 02. Featured Impact Stories -->
-    <OutcomeStories />
+    <OutcomeStories content={dbContent.stories} collections={dbCollections} />
 
     <!-- 03. Past Engagement Archive (4 Verified Events) -->
-    <PastEngagements />
+    <PastEngagements content={dbContent.engagements} collections={dbCollections} />
 
     <!-- 04. Upcoming Engagements Status -->
-    <UpcomingEngagements />
+    <UpcomingEngagements content={dbContent.upcoming} />
 
     <!-- 05. 3-Level Evidence Model (Reach · Activity · Result) -->
-    <ImpactEvidenceModel />
+    <ImpactEvidenceModel content={dbContent.evidence_model} />
 
     <!-- 06. The Engagement Journey (5-Step Process) -->
-    <EngagementJourney />
+    <EngagementJourney content={dbContent.journey} />
 
     <!-- 07. Booking CTA Banner -->
-    <ImpactCTA />
+    <ImpactCTA content={dbContent.cta} />
 
     <!-- Footer Navigation Loop -->
     <PageNavigation 

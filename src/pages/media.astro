@@ -4,10 +4,52 @@ import Eyebrow from '../components/Eyebrow.astro';
 import Waveform from '../components/Waveform.astro';
 import Button from '../components/Button.astro';
 import PageNavigation from '../components/PageNavigation.astro';
-import { Image } from 'astro:assets';
-import headshotImg from '../assets/tiffany_hero_new.jpg';
+import mysql from 'mysql2/promise';
 
-const bios = [
+let dbContent = {};
+let dbCollections = {};
+
+try {
+  const pool = mysql.createPool({
+    host: 'localhost',
+    user: 'root',
+    password: '@rishil8124shah',
+    database: 'tiffany_crm',
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+  });
+
+  const [rows] = await pool.query(`
+    SELECT section, key_name, content_value 
+    FROM website_content 
+    JOIN website_pages ON website_content.page_id = website_pages.id 
+    WHERE website_pages.slug = 'media'
+  `);
+  
+  rows.forEach(row => {
+    if (!dbContent[row.section]) dbContent[row.section] = {};
+    dbContent[row.section][row.key_name] = row.content_value;
+  });
+
+  const [colRows] = await pool.query(`
+    SELECT id, section_name, item_slug, title, sort_order, subtitle, badge, content_html, link_url, image_url, icon_svg 
+    FROM website_collections 
+    JOIN website_pages ON website_collections.page_id = website_pages.id 
+    WHERE website_pages.slug = 'media'
+    ORDER BY section_name, sort_order ASC
+  `);
+  
+  colRows.forEach(row => {
+    if (!dbCollections[row.section_name]) dbCollections[row.section_name] = [];
+    dbCollections[row.section_name].push(row);
+  });
+  await pool.end();
+} catch (e) {
+  console.error("Database connection failed for media page, using fallbacks:", e);
+}
+
+const fallbackBios = [
   {
     id: "short",
     label: "SHORT BIO",
@@ -31,9 +73,19 @@ const bios = [
   }
 ];
 
-const emceeScript = `Please welcome Tiffany Webb — Community Impact Strategist, Public Health Educator, and founder of GambleFreeGear. With over 15 years of experience across behavioral health and community systems, Tiffany helps healthcare networks, schools, and civic leaders reimagine prevention and build human-centered strategies that last. Please join me in welcoming Tiffany Webb!`;
+const bios = (dbCollections.bios && dbCollections.bios.length > 0)
+  ? dbCollections.bios.map((b, idx) => ({
+      id: b.item_slug || (idx === 0 ? "short" : idx === 1 ? "medium" : "long"),
+      label: b.title || (idx === 0 ? "SHORT BIO" : idx === 1 ? "MEDIUM BIO" : "LONG BIO"),
+      words: b.badge || (idx === 0 ? "~50 WORDS" : idx === 1 ? "~150 WORDS" : "~300 WORDS"),
+      subtitle: b.subtitle || "For Event Programs & Media",
+      text: b.content_html || b.content_value || b.description || ""
+    }))
+  : fallbackBios;
 
-const downloads = [
+const emceeScript = dbContent.intro_script?.script_text || `Please welcome Tiffany Webb — Community Impact Strategist, Public Health Educator, and founder of GambleFreeGear. With over 15 years of experience across behavioral health and community systems, Tiffany helps healthcare networks, schools, and civic leaders reimagine prevention and build human-centered strategies that last. Please join me in welcoming Tiffany Webb!`;
+
+const fallbackDownloads = [
   {
     title: "Speaker One-Sheet PDF",
     tag: "FOR EVENT ORGANIZERS",
@@ -63,6 +115,20 @@ const downloads = [
     btnText: "Download Media Kit (ZIP) &darr;"
   }
 ];
+
+const downloads = (dbCollections.downloads && dbCollections.downloads.length > 0)
+  ? dbCollections.downloads.map((d) => ({
+      title: d.title,
+      tag: d.badge || d.subtitle || "PRESS ASSET",
+      desc: d.content_html || d.description || d.content_value || "",
+      link: d.link_url || "/downloads/Tiffany_Webb_Media_Kit.zip",
+      btnText: "Download &darr;"
+    }))
+  : fallbackDownloads;
+
+const eyebrow = dbContent.hero?.eyebrow ?? "PRESS KIT & MEDIA ASSETS";
+let headline = dbContent.hero?.headline ?? 'Official speaker <span class="italic-accent">press kit.</span>';
+const subtitle = dbContent.hero?.subtitle ?? "Approved bios, high-resolution photography, stage introduction script, and promotional assets for conference chairs, event organizers, and journalists.";
 ---
 
 <Layout title="Press Kit & Media Assets | Tiffany Webb" description="Official press kit, approved speaker bios, stage introduction script, and high-resolution headshots for Tiffany Webb." theme="dark">
@@ -74,13 +140,9 @@ const downloads = [
       
       <div class="media-container relative z-10 text-center">
         <div class="reveal-up" style="max-width: 860px; margin: 0 auto;">
-          <Eyebrow className="justify-center">PRESS KIT & MEDIA ASSETS</Eyebrow>
-          <h1 class="media-h1 mt-4">
-            Official speaker <span class="italic-accent">press kit.</span>
-          </h1>
-          <p class="media-subtitle mx-auto mt-6">
-            Approved bios, high-resolution photography, stage introduction script, and promotional assets for conference chairs, event organizers, and journalists.
-          </p>
+          <Eyebrow className="justify-center">{eyebrow}</Eyebrow>
+          <h1 class="media-h1 mt-4" set:html={headline}></h1>
+          <p class="media-subtitle mx-auto mt-6">{subtitle}</p>
         </div>
       </div>
     </section>
@@ -509,6 +571,6 @@ const downloads = [
 
   .download-btn:hover {
     color: #ffffff;
-    transform: translateX(3px);
+    transform: translateX(4px);
   }
 </style>

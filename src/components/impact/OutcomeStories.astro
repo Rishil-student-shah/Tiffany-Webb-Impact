@@ -5,7 +5,9 @@ import { Image } from 'astro:assets';
 import thumb1 from '../../assets/thumb_1.jpg';
 import thumb2 from '../../assets/thumb_2.jpg';
 
-const stories = [
+const { collections = {} } = Astro.props;
+
+const fallbackStories = [
   {
     tag: "YOUTH & COMMUNITY PREVENTION",
     badge: "EVENT SPOTLIGHT",
@@ -35,6 +37,23 @@ const stories = [
     color: "#D9A23A"
   }
 ];
+
+const stories = (collections.outcome_stories && collections.outcome_stories.length > 0)
+  ? collections.outcome_stories.map((c, idx) => ({
+      tag: c.badge || "VERIFIED CASE STUDY",
+      badge: c.badge || "CASE STUDY",
+      title: c.title,
+      partner: c.subtitle || "Partner Organization",
+      reach: c.image_url || "Verified Reach",
+      dateLoc: c.subtitle || "Illinois",
+      situation: (c.content_html || "").split('<br/><br/>')[0] || "Community context and challenge.",
+      action: (c.content_html || "").split('<br/><br/>')[1] || "Tiffany's strategic intervention and keynote activation.",
+      outcome: (c.content_html || "").split('<br/><br/>')[2] || "Documented community outcome.",
+      quote: "Tiffany bridges frontline reality with professional rigor in a way that stays with you long after the event.",
+      thumb: idx === 0 ? thumb1 : thumb2,
+      color: idx === 0 ? "#0E6B54" : "#D9A23A"
+    }))
+  : fallbackStories;
 ---
 
 <section class="outcome-stories theme-ink relative overflow-hidden" id="impact-stories">
