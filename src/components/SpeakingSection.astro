@@ -1,15 +1,11 @@
 ---
 import Waveform from './Waveform.astro';
 import Eyebrow from './Eyebrow.astro';
-import Button from './Button.astro';
 
 const { content = {}, collections = {} } = Astro.props;
-const eyebrow = content.eyebrow ?? "SPEAKING & FACILITATION";
-let headline = content.headline ?? 'Conversations that <span class="italic-accent">create change.</span>';
-const subtext = content.subtext ?? "Twenty-one signature topics across four tracks — practical enough to use on Monday, human enough that the room stays with her.";
-
-const flagshipTitle = content.flagship_title ?? "Break the Silence: Prevention Begins with a Conversation";
-const flagshipDesc = content.flagship_desc ?? "Tiffany's signature opening keynote that sets the foundation for modern community health and problem gambling prevention. A high-impact, narrative-driven experience that deconstructs stigma, bridges lived understanding with clinical rigor, and equips every leader in the room to initiate transformative conversations.";
+const eyebrow = content.eyebrow ?? "SPEAKING TRACKS";
+let headline = content.headline ?? 'What she <span class="italic-accent">speaks about.</span>';
+const subtext = content.subtext ?? "Twenty topics across four tracks — practical enough to use on Monday, human enough that the room stays with her.";
 
 // 4 Tracks Definition with Organizer Booking Matrix
 const tracks = [
@@ -76,10 +72,10 @@ const tracks = [
 ];
 ---
 
-<section class="speaking-section section-pad theme-ink relative overflow-hidden" id="speaking-tracks">
+<section class="speaking-section theme-ink relative overflow-hidden" id="speaking-tracks">
   <Waveform opacity={0.04} flipY={true} />
   
-  <div class="container relative z-10" style="max-width: 1240px; margin: 0 auto; padding: 0 1.5rem;">
+  <div class="container relative z-10" style="max-width: 1240px; margin: 0 auto;">
     
     <!-- Section Header -->
     <div class="speaking-header reveal-up">
@@ -88,31 +84,8 @@ const tracks = [
       {subtext && <p class="speaking-sub">{subtext}</p>}
     </div>
 
-    <!-- Flagship Keynote Showcase Box -->
-    <div class="flagship-card glass-obsidian reveal-up">
-      <div class="flagship-badge">
-        <span class="badge-dot"></span> FLAGSHIP KEYNOTE
-      </div>
-      <div class="flagship-grid">
-        <div class="flagship-content">
-          <h3 class="flagship-title">{flagshipTitle}</h3>
-          <p class="flagship-desc">{flagshipDesc}</p>
-          <div class="flagship-meta">
-            <span class="meta-tag">🎯 All Audiences & Leadership</span>
-            <span class="meta-tag">⏱️ 45–60 Mins</span>
-            <span class="meta-tag">✨ High-Impact Opening / Closing</span>
-          </div>
-        </div>
-        <div class="flagship-cta">
-          <Button href="/work-with-tiffany?topic=Break+the+Silence" variant="primary" className="magnetic-btn">
-            BOOK THIS KEYNOTE →
-          </Button>
-        </div>
-      </div>
-    </div>
-
     <!-- Interactive 3D Flip Cards Grid (Organizer Booking Matrix) -->
-    <div class="tracks-grid stagger-group mt-12">
+    <div class="tracks-grid stagger-group">
       {tracks.map((track) => (
         <div class="flip-card-wrapper stagger-item" data-track-id={track.id}>
           <div class="flip-card" onclick="this.classList.toggle('is-flipped')">
@@ -177,7 +150,7 @@ const tracks = [
     </div>
 
     <!-- Footer Action -->
-    <div class="speaking-footer reveal-up mt-12 text-center">
+    <div class="speaking-footer reveal-up mt-14 text-center">
       <a href="/services/speaking-topics" class="explore-all-link">
         VIEW ALL 21 SIGNATURE SPEAKING TOPICS &rarr;
       </a>
@@ -188,8 +161,9 @@ const tracks = [
 
 <style>
   .speaking-section {
-    padding: 7rem 0;
+    padding: 7rem 1.5rem;
     position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
   }
 
   .speaking-header {
@@ -203,87 +177,6 @@ const tracks = [
     color: rgba(251, 246, 234, 0.85);
     line-height: 1.6;
     margin-top: 1rem;
-  }
-
-  /* Flagship Keynote Banner */
-  .flagship-card {
-    background: radial-gradient(circle at 0% 0%, rgba(217, 162, 58, 0.15) 0%, rgba(13, 12, 8, 0.95) 70%);
-    border: 1px solid rgba(217, 162, 58, 0.35);
-    border-radius: 24px;
-    padding: 2.5rem;
-    position: relative;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(217, 162, 58, 0.08);
-  }
-
-  .flagship-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    color: var(--color-gold, #D9A23A);
-    background: rgba(217, 162, 58, 0.12);
-    border: 1px solid rgba(217, 162, 58, 0.3);
-    padding: 0.35rem 0.85rem;
-    border-radius: 100px;
-    margin-bottom: 1.25rem;
-  }
-
-  .badge-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--color-gold, #D9A23A);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--color-gold);
-  }
-
-  .flagship-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  @media (min-width: 900px) {
-    .flagship-grid {
-      flex-direction: row;
-      align-items: center;
-      justify-content: space-between;
-      gap: 3rem;
-    }
-  }
-
-  .flagship-title {
-    font-family: var(--font-serif);
-    font-size: clamp(1.6rem, 2.5vw, 2.2rem);
-    color: var(--color-ivory, #FBF6EA);
-    margin: 0 0 0.75rem 0;
-    line-height: 1.2;
-  }
-
-  .flagship-desc {
-    font-size: 1rem;
-    line-height: 1.6;
-    color: rgba(251, 246, 234, 0.85);
-    margin: 0 0 1.25rem 0;
-    max-width: 720px;
-  }
-
-  .flagship-meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-  }
-
-  .meta-tag {
-    font-family: var(--font-mono);
-    font-size: 0.78rem;
-    color: rgba(251, 246, 234, 0.75);
-    background: rgba(255, 255, 255, 0.04);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 0.3rem 0.65rem;
-    border-radius: 6px;
   }
 
   /* 3D Flip Card Grid */
@@ -337,7 +230,7 @@ const tracks = [
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     border-radius: 20px;
-    background: rgba(20, 18, 14, 0.7);
+    background: rgba(20, 18, 14, 0.75);
     backdrop-filter: blur(16px);
     border: 1px solid;
     padding: 1.75rem;

@@ -1,7 +1,247 @@
 ---
-import SpeakingSection from './SpeakingSection.astro';
+import Eyebrow from './Eyebrow.astro';
+import Waveform from './Waveform.astro';
+import Button from './Button.astro';
 
-const props = Astro.props;
+const { content = {}, collections = {} } = Astro.props;
+
+const eyebrow = content.eyebrow ?? "HOW TO WORK WITH HER";
+let headline = content.headline ?? 'Six ways to <span class="italic-accent">bring her in.</span>';
+const subtitle = content.subtitle || content.subtext || "Same expertise, shaped to fit your event — from a main-stage keynote to a full-day training.";
+
+const formats = [
+  {
+    num: "01",
+    title: "Keynote",
+    subtitle: "Main Stage · 45–60 Minutes",
+    desc: "High-energy, narrative-driven keynote that deconstructs stigma, bridges lived understanding with clinical rigor, and inspires collective action across large audiences.",
+    tag: "Conferences & Summits",
+    color: "#0E6B54"
+  },
+  {
+    num: "02",
+    title: "Conference Session",
+    subtitle: "Breakout & Deep Dive · 60–90 Minutes",
+    desc: "Targeted educational breakout tailored to specific clinical tracks, prevention disciplines, or community health strategies with interactive Q&A.",
+    tag: "Professional Tracks",
+    color: "#D9A23A"
+  },
+  {
+    num: "03",
+    title: "Panel",
+    subtitle: "Panelist or Moderator · 45–75 Minutes",
+    desc: "Dynamic panelist or skilled moderator bringing frontline specificity, health equity lens, and collaborative dialogue to complex behavioral health issues.",
+    tag: "Expert Commentary",
+    color: "#C15427"
+  },
+  {
+    num: "04",
+    title: "School & University",
+    subtitle: "Campus-Wide · Half-Day / Full-Day",
+    desc: "Two-part structured delivery: student-focused awareness session addressing sports-betting apps and digital gaming, followed by a faculty and counselor workshop.",
+    tag: "Students & Educators",
+    color: "#6C2D5A"
+  },
+  {
+    num: "05",
+    title: "Workshops & Training",
+    subtitle: "Clinical & Frontline · Half-Day to Multi-Day",
+    desc: "Hands-on intensive for healthcare providers, counselors, and ROSC staff covering screening protocols (NODS-CLiP), brief intervention, and linkage to care.",
+    tag: "Clinical Teams & ROSC",
+    color: "#0E6B54"
+  },
+  {
+    num: "06",
+    title: "Strategic Advisory",
+    subtitle: "Executive Consulting · Multi-Session",
+    desc: "Bespoke consulting for organizations and public agencies: prevention curriculum design, community campaign architecture, and coalition alignment.",
+    tag: "Executive Leadership",
+    color: "#D9A23A"
+  }
+];
 ---
 
-<SpeakingSection {...props} />
+<section class="ways-to-work-section theme-ink relative overflow-hidden" id="ways-to-work">
+  <Waveform opacity={0.03} variant="A" />
+  
+  <div class="container relative z-10" style="max-width: 1240px; margin: 0 auto;">
+    
+    <!-- Section Header -->
+    <div class="ways-header reveal-up text-center">
+      {eyebrow && <Eyebrow className="justify-center">{eyebrow}</Eyebrow>}
+      {headline && <h2 class="section-title" set:html={headline}></h2>}
+      {subtitle && <p class="ways-subtitle">{subtitle}</p>}
+    </div>
+
+    <!-- 6 Formats Grid -->
+    <div class="formats-grid stagger-group">
+      {formats.map((fmt) => (
+        <div class="format-card ultra-glass-card stagger-item">
+          <div class="format-card-inner">
+            <div class="format-top">
+              <span class="format-num" style={`color: ${fmt.color};`}>{fmt.num}</span>
+              <span class="format-tag">{fmt.tag}</span>
+            </div>
+            
+            <div class="format-body">
+              <h3 class="format-title">{fmt.title}</h3>
+              <p class="format-length">{fmt.subtitle}</p>
+              <p class="format-desc">{fmt.desc}</p>
+            </div>
+
+            <div class="format-footer">
+              <a href={`/work-with-tiffany?format=${encodeURIComponent(fmt.title)}`} class="format-link">
+                Inquire for {fmt.title} &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Bottom Action -->
+    <div class="ways-bottom-cta reveal-up mt-12 text-center">
+      <Button href="/work-with-tiffany" variant="primary" className="magnetic-btn">
+        SCHEDULE AN ALIGNMENT CALL &rarr;
+      </Button>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  .ways-to-work-section {
+    padding: 7rem 1.5rem;
+    position: relative;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .ways-header {
+    max-width: 800px;
+    margin: 0 auto 4rem auto;
+  }
+
+  .ways-subtitle {
+    font-size: 1.15rem;
+    color: rgba(251, 246, 234, 0.85);
+    line-height: 1.6;
+    margin-top: 1rem;
+  }
+
+  .formats-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+  }
+
+  @media (min-width: 640px) {
+    .formats-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .formats-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .format-card {
+    background: rgba(20, 18, 14, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 2rem;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }
+
+  .format-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(217, 162, 58, 0.35);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), 0 0 25px rgba(217, 162, 58, 0.08);
+  }
+
+  .format-card-inner {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-between;
+  }
+
+  .format-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .format-num {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  .format-tag {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: rgba(251, 246, 234, 0.75);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .format-title {
+    font-family: var(--font-serif);
+    font-size: 1.45rem;
+    color: var(--color-ivory, #FBF6EA);
+    margin: 0 0 0.35rem 0;
+    line-height: 1.2;
+  }
+
+  .format-length {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-gold, #D9A23A);
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 0.85rem;
+  }
+
+  .format-desc {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: rgba(251, 246, 234, 0.8);
+    margin: 0 0 1.5rem 0;
+  }
+
+  .format-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1rem;
+    margin-top: auto;
+  }
+
+  .format-link {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-gold, #D9A23A);
+    text-decoration: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .format-link:hover {
+    opacity: 0.85;
+    transform: translateX(3px);
+  }
+</style>
