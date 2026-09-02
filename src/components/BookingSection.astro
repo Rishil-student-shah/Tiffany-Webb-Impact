@@ -8,7 +8,7 @@ interface Props {
 }
 
 const { hideJourney = false, content = {} } = Astro.props;
-const eyebrow = content.eyebrow || "WORK WITH TIFFANY";
+const eyebrow = content.eyebrow || "START A CONVERSATION";
 let rawHeading = content.heading || "Let's create impact together.";
 let heading = rawHeading.includes('<span')
   ? rawHeading

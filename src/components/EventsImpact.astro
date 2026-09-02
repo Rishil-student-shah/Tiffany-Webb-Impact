@@ -12,7 +12,7 @@ let rawHeadline = content.headline || "Where the work has taken me.";
 let headline = rawHeadline.includes('<span')
   ? rawHeadline
   : rawHeadline.replace(/has taken me\.?/i, '<span class="italic-accent">has taken me.</span>');
-const btnText = content.btn_text ?? "WORK WITH TIFFANY";
+const btnText = content.btn_text ?? "START A CONVERSATION";
 const btnLink = content.btn_link ?? "/work-with-tiffany";
 const emptyText = content.empty_text ?? "Next dates announced soon.";
 const emptyBtn = content.empty_btn ?? "Book Tiffany";
