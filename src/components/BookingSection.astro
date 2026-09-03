@@ -241,11 +241,14 @@ const subtext = content.subtext || "Tell me about your organization and what you
 
     // Auto-populate from URL query params
     const urlParams = new URLSearchParams(window.location.search);
+    const sourceSection = urlParams.get('ref_section') || (document.getElementById('home-booking-form') ? 'Homepage - Inline Form' : 'Dedicated Booking Page');
+    const sourceCard = urlParams.get('ref_card') || 'Direct Visit';
     const topicParam = urlParams.get('topic');
     const trackParam = urlParams.get('track');
     const audienceParam = urlParams.get('audience');
     const formatParam = urlParams.get('format');
     const typeParam = urlParams.get('type');
+    const budgetParam = urlParams.get('budget');
 
     const homeDetails = document.getElementById('home-details');
     const homeEventTypeSelect = document.getElementById('home-event_type_select');
@@ -294,12 +297,16 @@ const subtext = content.subtext || "Tell me about your organization and what you
             email: formData.get('email'),
             country_code: formData.get('country_code'),
             phone: formData.get('phone'),
-            event_type: formData.get('event_type'),
+            event_type: formData.get('event_type') || (homeEventTypeSelect ? homeEventTypeSelect.value : null),
             event_date: formData.get('date'),
             event_location: formData.get('location'),
             estimated_audience_size: formData.get('size'),
-            message: formData.get('details'),
-            source: 'website_form'
+            budget_range: formData.get('budget') || budgetParam || null,
+            topic_interest: topicParam || formData.get('topic') || null,
+            source: 'website_form',
+            source_section: sourceSection,
+            source_card: sourceCard,
+            message: formData.get('details') || formData.get('message')
           };
 
           const response = await fetch('http://localhost:3000/api/leads', {

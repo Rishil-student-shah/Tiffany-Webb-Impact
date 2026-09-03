@@ -183,7 +183,7 @@ const getTrackKey = (trackId) => {
 
                         <!-- Card Footer Action -->
                         <div class="topic-footer">
-                          <a href={`/work-with-tiffany?topic=${encodeURIComponent(topic.title)}&track=${encodeURIComponent(topic.track_name)}&audience=${encodeURIComponent(topic.target_audience || '')}`} class="book-topic-btn">
+                          <a href={`/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+${numStr}:+${encodeURIComponent(topic.title)}&topic=${encodeURIComponent(topic.title)}&track=${encodeURIComponent(topic.track_name)}&audience=${encodeURIComponent(topic.target_audience || '')}`} class="book-topic-btn">
                             Book This Topic &rarr;
                           </a>
                         </div>
@@ -203,7 +203,7 @@ const getTrackKey = (trackId) => {
           <h3 class="cta-title">Need a customized keynote or specific training format?</h3>
           <p class="cta-subtitle">Tiffany works directly with executive committees and conference chairs to tailor sessions to your specific objectives.</p>
           <div class="mt-6">
-            <Button href="/work-with-tiffany" variant="primary" className="magnetic-btn">START A CONVERSATION &rarr;</Button>
+            <Button href="/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Bottom+CTA+Customize+Keynote" variant="primary" className="magnetic-btn">START A CONVERSATION &rarr;</Button>
           </div>
         </div>
 

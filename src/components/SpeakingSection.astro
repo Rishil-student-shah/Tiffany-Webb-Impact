@@ -24,7 +24,7 @@ const fallbackTracks = [
     matrixFormat: "Keynote / Breakout",
     matrixTopic: "From Fun to Crisis: Gambling Prevention & Education",
     catalogLink: "/services/speaking-topics?track=prevention",
-    ctaLink: "/work-with-tiffany?topic=From+Fun+to+Crisis&track=Prevention%2C+Gambling+%26+Emerging+Risk&audience=Healthcare+Systems"
+    ctaLink: "/work-with-tiffany?ref_section=Homepage+-+Speaking+Tracks&ref_card=Track+01:+Prevention&topic=From+Fun+to+Crisis&format=Keynote&audience=Healthcare+Systems"
   },
   {
     num: "02",
@@ -41,7 +41,7 @@ const fallbackTracks = [
     matrixFormat: "Strategy Workshop",
     matrixTopic: "The 8 Touchpoints to Engagement",
     catalogLink: "/services/speaking-topics?track=outreach",
-    ctaLink: "/work-with-tiffany?topic=The+8+Touchpoints+to+Engagement&track=Community+Engagement+%26+Outreach&audience=ROSC+%26+Coalitions"
+    ctaLink: "/work-with-tiffany?ref_section=Homepage+-+Speaking+Tracks&ref_card=Track+02:+Outreach&topic=The+8+Touchpoints&format=Workshop&audience=ROSC"
   },
   {
     num: "03",
@@ -58,7 +58,7 @@ const fallbackTracks = [
     matrixFormat: "Advisory",
     matrixTopic: "The G.E.A.R. Model: From Awareness to Referral",
     catalogLink: "/services/speaking-topics?track=systems",
-    ctaLink: "/work-with-tiffany?topic=The+GEAR+Model&track=Human-Centered+Systems+%26+Services&audience=System+Architects"
+    ctaLink: "/work-with-tiffany?ref_section=Homepage+-+Speaking+Tracks&ref_card=Track+03:+Systems&topic=The+GEAR+Model&format=Advisory&audience=System+Architects"
   },
   {
     num: "04",
@@ -75,15 +75,15 @@ const fallbackTracks = [
     matrixFormat: "Youth Program / Workshop",
     matrixTopic: "Healthy Gaming & Sports: Play Without the Bet",
     catalogLink: "/services/speaking-topics?track=youth",
-    ctaLink: "/work-with-tiffany?topic=healthy-gaming-sports&track=Purpose%2C+Leadership+%26+Youth+Impact&audience=Schools+%26+Youth+Organizations"
+    ctaLink: "/work-with-tiffany?ref_section=Homepage+-+Speaking+Tracks&ref_card=Track+04:+Youth&topic=Healthy+Gaming&format=Youth+Program&audience=Schools"
   }
 ];
 
 const trackVisuals = [
-  { id: "prevention-risk", trackParam: "prevention", color: "#0E6B54", borderColor: "rgba(14, 107, 84, 0.45)", bgGlow: "rgba(14, 107, 84, 0.15)", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`, matrixAudience: "Healthcare Systems", matrixFormat: "Keynote / Breakout", matrixTopic: "From Fun to Crisis: Gambling Prevention & Education", ctaLink: "/work-with-tiffany?topic=From+Fun+to+Crisis&track=Prevention%2C+Gambling+%26+Emerging+Risk&audience=Healthcare+Systems" },
-  { id: "community-outreach", trackParam: "outreach", color: "#D9A23A", borderColor: "rgba(217, 162, 58, 0.45)", bgGlow: "rgba(217, 162, 58, 0.15)", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`, matrixAudience: "ROSC & Coalitions", matrixFormat: "Strategy Workshop", matrixTopic: "The 8 Touchpoints to Engagement", ctaLink: "/work-with-tiffany?topic=The+8+Touchpoints+to+Engagement&track=Community+Engagement+%26+Outreach&audience=ROSC+%26+Coalitions" },
-  { id: "human-systems", trackParam: "systems", color: "#C15427", borderColor: "rgba(193, 84, 39, 0.45)", bgGlow: "rgba(193, 84, 39, 0.15)", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>`, matrixAudience: "System Architects", matrixFormat: "Advisory", matrixTopic: "The G.E.A.R. Model: From Awareness to Referral", ctaLink: "/work-with-tiffany?topic=The+GEAR+Model&track=Human-Centered+Systems+%26+Services&audience=System+Architects" },
-  { id: "youth-leadership", trackParam: "youth", color: "#6C2D5A", borderColor: "rgba(108, 45, 90, 0.5)", bgGlow: "rgba(108, 45, 90, 0.18)", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`, matrixAudience: "Schools & Youth Organizations", matrixFormat: "Youth Program / Workshop", matrixTopic: "Healthy Gaming & Sports: Play Without the Bet", ctaLink: "/work-with-tiffany?topic=healthy-gaming-sports&track=Purpose%2C+Leadership+%26+Youth+Impact&audience=Schools+%26+Youth+Organizations" }
+  { id: "prevention-risk", trackParam: "prevention", color: "#0E6B54", borderColor: "rgba(14, 107, 84, 0.45)", bgGlow: "rgba(14, 107, 84, 0.15)", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>`, matrixAudience: "Healthcare Systems", matrixFormat: "Keynote / Breakout", matrixTopic: "From Fun to Crisis: Gambling Prevention & Education", ctaLink: "/work-with-tiffany?ref_section=Homepage+-+Speaking+Tracks&ref_card=Track+01:+Prevention&topic=From+Fun+to+Crisis&format=Keynote&audience=Healthcare+Systems" },
+  { id: "community-outreach", trackParam: "outreach", color: "#D9A23A", borderColor: "rgba(217, 162, 58, 0.45)", bgGlow: "rgba(217, 162, 58, 0.15)", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>`, matrixAudience: "ROSC & Coalitions", matrixFormat: "Strategy Workshop", matrixTopic: "The 8 Touchpoints to Engagement", ctaLink: "/work-with-tiffany?ref_section=Homepage+-+Speaking+Tracks&ref_card=Track+02:+Outreach&topic=The+8+Touchpoints&format=Workshop&audience=ROSC" },
+  { id: "human-systems", trackParam: "systems", color: "#C15427", borderColor: "rgba(193, 84, 39, 0.45)", bgGlow: "rgba(193, 84, 39, 0.15)", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"></path></svg>`, matrixAudience: "System Architects", matrixFormat: "Advisory", matrixTopic: "The G.E.A.R. Model: From Awareness to Referral", ctaLink: "/work-with-tiffany?ref_section=Homepage+-+Speaking+Tracks&ref_card=Track+03:+Systems&topic=The+GEAR+Model&format=Advisory&audience=System+Architects" },
+  { id: "youth-leadership", trackParam: "youth", color: "#6C2D5A", borderColor: "rgba(108, 45, 90, 0.5)", bgGlow: "rgba(108, 45, 90, 0.18)", icon: `<svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`, matrixAudience: "Schools & Youth Organizations", matrixFormat: "Youth Program / Workshop", matrixTopic: "Healthy Gaming & Sports: Play Without the Bet", ctaLink: "/work-with-tiffany?ref_section=Homepage+-+Speaking+Tracks&ref_card=Track+04:+Youth&topic=Healthy+Gaming&format=Youth+Program&audience=Schools" }
 ];
 
 const tracks = (collections.speaking && collections.speaking.length > 0)
@@ -97,6 +97,7 @@ const tracks = (collections.speaking && collections.speaking.length > 0)
         tag: c.subtitle || "Signature Track",
         desc: c.content_html || c.description || c.content_value || visual.desc,
         catalogLink: c.link_url || `/services/speaking-topics?track=${visual.trackParam}`,
+        ctaLink: c.cta_url || visual.ctaLink,
         ...visual
       };
     })

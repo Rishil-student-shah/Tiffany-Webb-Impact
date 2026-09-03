@@ -372,19 +372,23 @@ import PageNavigation from '../components/PageNavigation.astro';
 
     initCCPicker('book-cc-btn', 'book-cc-dropdown', 'book-cc-search', 'book-cc-list', 'country_code', 'phone');
 
-    // Auto-populate from URL query params (topic, track, audience, format, type)
+    // Auto-populate from URL query params (topic, track, audience, format, type, ref_section, ref_card)
     const urlParams = new URLSearchParams(window.location.search);
+    const sourceSection = urlParams.get('ref_section') || (document.getElementById('home-booking-form') ? 'Homepage - Inline Form' : 'Dedicated Booking Page');
+    const sourceCard = urlParams.get('ref_card') || 'Direct Visit';
     const topicParam = urlParams.get('topic');
     const trackParam = urlParams.get('track');
     const audienceParam = urlParams.get('audience');
     const formatParam = urlParams.get('format');
     const typeParam = urlParams.get('type');
+    const budgetParam = urlParams.get('budget');
 
     const topicSelect = document.getElementById('topic');
     const messageInput = document.getElementById('message');
     const eventTypeSelect = document.getElementById('event_type_select');
     const customEventWrapper = document.getElementById('custom_event_wrapper');
     const eventTypeInput = document.getElementById('event_type');
+    const budgetSelect = document.getElementById('budget');
 
     if (topicParam) {
       if (topicSelect) {
@@ -406,6 +410,14 @@ import PageNavigation from '../components/PageNavigation.astro';
         if (audienceParam) note += `\nTarget Audience: ${audienceParam}`;
         messageInput.value = note;
       }
+    }
+
+    if (budgetParam && budgetSelect) {
+      Array.from(budgetSelect.options).forEach(opt => {
+        if (opt.value.toLowerCase().includes(budgetParam.toLowerCase())) {
+          opt.selected = true;
+        }
+      });
     }
 
     if (formatParam || typeParam) {
@@ -445,11 +457,16 @@ import PageNavigation from '../components/PageNavigation.astro';
             email: formData.get('email'),
             country_code: formData.get('country_code'),
             phone: formData.get('phone'),
-            event_type: formData.get('event_type'),
+            event_type: formData.get('event_type') || (eventTypeSelect ? eventTypeSelect.value : null),
             event_date: formData.get('date'),
             event_location: formData.get('location'),
             estimated_audience_size: formData.get('size'),
-            message: formData.get('message')
+            budget_range: formData.get('budget') || budgetParam || null,
+            topic_interest: topicParam || formData.get('topic') || null,
+            source: 'website_form',
+            source_section: sourceSection,
+            source_card: sourceCard,
+            message: formData.get('message') || formData.get('details')
           };
 
           const response = await fetch('http://localhost:3000/api/leads', {

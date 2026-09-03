@@ -406,7 +406,7 @@ export const FALLBACK_DATA = {
           badge: '#0E6B54',
           category: 'Prevention & Awareness',
           audience: 'General Public, Community Organizations, Prevention Specialists',
-          link_url: '/work-with-tiffany?topic=Gambling+Prevention+and+Community+Awareness',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+01:+Gambling+Prevention+and+Community+Awareness&topic=Gambling+Prevention+and+Community+Awareness',
           content_html: '<strong>Audience:</strong> General public, community organizations, prevention specialists<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Introduction to how gambling harm develops, risk factors, and proactive steps before crisis. Ready-to-use community intervention tools.',
           sort_order: 1
         },
@@ -417,7 +417,7 @@ export const FALLBACK_DATA = {
           badge: '#0E6B54',
           category: 'Prevention & Awareness',
           audience: 'Youth & Students, Educators, Parents',
-          link_url: '/work-with-tiffany?topic=Don%27t+Bet+on+Your+Future+%28Youth+Focus%29',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+02:+Don%27t+Bet+on+Your+Future&topic=Don%27t+Bet+on+Your+Future+%28Youth+Focus%29',
           content_html: "<strong>Audience:</strong> Students, youth groups, educators, parents<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Tackles sports-betting apps, gaming-to-gambling crossover, and peer dynamics without lecturing. Meets youth where they are.",
           sort_order: 2
         },
@@ -428,7 +428,7 @@ export const FALLBACK_DATA = {
           badge: '#0E6B54',
           category: 'Prevention & Awareness',
           audience: 'General Public, Policy & Government, Community Stakeholders',
-          link_url: '/work-with-tiffany?topic=Problem+Gambling+Awareness+Month+%28March%29',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+03:+Problem+Gambling+Awareness+Month&topic=Problem+Gambling+Awareness+Month+%28March%29',
           content_html: '<strong>Audience:</strong> General public, community stakeholders, advocacy groups<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Ready-to-deliver signature session for PGAM campaigns and community awareness moments. Shifts community perspective.',
           sort_order: 3
         },
@@ -439,7 +439,7 @@ export const FALLBACK_DATA = {
           badge: '#0E6B54',
           category: 'Prevention & Awareness',
           audience: 'Clinicians & Providers, Prevention Coalitions, Public Health',
-          link_url: '/work-with-tiffany?topic=National+Screening+Day',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+04:+National+Screening+Day&topic=National+Screening+Day',
           content_html: '<strong>Audience:</strong> Health centers, prevention coalitions, public health<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> How screening works and how to integrate it into health settings without stigmatizing patients. Practical assessment tools.',
           sort_order: 4
         },
@@ -450,7 +450,7 @@ export const FALLBACK_DATA = {
           badge: '#0E6B54',
           category: 'Prevention & Awareness',
           audience: 'Policy & Government, Advocates, Civic Leaders',
-          link_url: '/work-with-tiffany?topic=Outreach%3A+Engaging+Elected+Officials+%26+Resolutions',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+05:+Outreach+Engaging+Elected+Officials&topic=Outreach%3A+Engaging+Elected+Officials+%26+Resolutions',
           content_html: '<strong>Audience:</strong> Policy makers, government officials, advocates<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Moving prevention into policy attention, drafting resolutions, and engaging civic leaders to secure community resources.',
           sort_order: 5
         },
@@ -463,7 +463,7 @@ export const FALLBACK_DATA = {
           badge: '#C8A24C',
           category: 'Treatment & Recovery',
           audience: 'Clinicians & Providers, HR & Employers, Behavioral Health',
-          link_url: '/work-with-tiffany?topic=Gambling+%26+Co-Occurring+Disorders%3A+SUD+%26+Workplace',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+06:+Co-Occurring+Disorders&topic=Gambling+%26+Co-Occurring+Disorders%3A+SUD+%26+Workplace',
           content_html: '<strong>Audience:</strong> Behavioral health professionals, HR, EAPs<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> The overlap of gambling with substance use and how it presents in workplace/EAP settings. Early identification protocols.',
           sort_order: 6
         },
@@ -474,7 +474,7 @@ export const FALLBACK_DATA = {
           badge: '#C8A24C',
           category: 'Treatment & Recovery',
           audience: 'Clinicians & Providers, Community Leaders, Advocates',
-          link_url: '/work-with-tiffany?topic=The+Changing+Face+of+Gambling+Addiction',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+07:+Changing+Face+of+Gambling+Addiction&topic=The+Changing+Face+of+Gambling+Addiction',
           content_html: '<strong>Audience:</strong> Treatment providers, community leaders, advocates<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> How mobile apps and digital sports betting transformed addiction demographics and speed of onset across demographics.',
           sort_order: 7
         },
@@ -485,7 +485,7 @@ export const FALLBACK_DATA = {
           badge: '#C8A24C',
           category: 'Treatment & Recovery',
           audience: 'Clinicians & Providers, Crisis Intervention Workers',
-          link_url: '/work-with-tiffany?topic=Gambling+and+Suicide',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+08:+Gambling+and+Suicide&topic=Gambling+and+Suicide',
           content_html: '<strong>Audience:</strong> Mental health clinicians, crisis intervention workers<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Clinically grounded guidance on the high co-occurring suicide risks of gambling disorder and critical crisis intervention points.',
           sort_order: 8
         },
@@ -496,7 +496,7 @@ export const FALLBACK_DATA = {
           badge: '#C8A24C',
           category: 'Treatment & Recovery',
           audience: 'Clinicians & Providers, Prevention Specialists, Agencies',
-          link_url: '/work-with-tiffany?topic=Resources%3A+Self-Exclusion',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+09:+Resources+Self-Exclusion&topic=Resources%3A+Self-Exclusion',
           content_html: '<strong>Audience:</strong> Treatment providers, prevention specialists, agencies<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> How self-exclusion programs work, their limitations, and how to integrate them into wider recovery planning and family support.',
           sort_order: 9
         },
@@ -507,7 +507,7 @@ export const FALLBACK_DATA = {
           badge: '#C8A24C',
           category: 'Treatment & Recovery',
           audience: 'Clinicians & Providers, Harm Reduction Advocates',
-          link_url: '/work-with-tiffany?topic=Harm+Reduction+Strategies+for+Problem+Gambling',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+10:+Harm+Reduction+Strategies&topic=Harm+Reduction+Strategies+for+Problem+Gambling',
           content_html: '<strong>Audience:</strong> Treatment providers, harm reduction advocates<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Meeting individuals where they are who are not yet ready for total abstinence. Pragmatic steps to reduce immediate financial and emotional harm.',
           sort_order: 10
         },
@@ -518,7 +518,7 @@ export const FALLBACK_DATA = {
           badge: '#C8A24C',
           category: 'Treatment & Recovery',
           audience: 'Clinicians & Providers, Counselors, Peer Specialists',
-          link_url: '/work-with-tiffany?topic=Motivational+Interviewing+Tools',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+11:+Motivational+Interviewing&topic=Motivational+Interviewing+Tools',
           content_html: '<strong>Audience:</strong> Counselors, peer specialists, social workers<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Hands-on skills practice applying motivational interviewing techniques to gambling disclosures and resistance.',
           sort_order: 11
         },
@@ -529,7 +529,7 @@ export const FALLBACK_DATA = {
           badge: '#C8A24C',
           category: 'Treatment & Recovery',
           audience: 'Clinicians & Providers, Primary Care, Social Services',
-          link_url: '/work-with-tiffany?topic=Screening+and+Prevention+in+Healthcare',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+12:+Screening+in+Healthcare&topic=Screening+and+Prevention+in+Healthcare',
           content_html: '<strong>Audience:</strong> Primary care providers, social service agencies<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Practical toolkits for embedding gambling screening into routine health assessments and electronic medical records.',
           sort_order: 12
         },
@@ -540,7 +540,7 @@ export const FALLBACK_DATA = {
           badge: '#C8A24C',
           category: 'Treatment & Recovery',
           audience: 'Clinicians & Providers, Behavioral Health Staff, Recovery Coaches',
-          link_url: '/work-with-tiffany?topic=Guidelines+for+Gambling+Treatment+%26+Linkage',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+13:+Treatment+and+Linkage&topic=Guidelines+for+Gambling+Treatment+%26+Linkage',
           content_html: '<strong>Audience:</strong> Behavioral health staff, recovery coaches<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Building warm-handoff referral pathways that patients actually follow through on. Overcoming stigma and systemic barriers.',
           sort_order: 13
         },
@@ -553,7 +553,7 @@ export const FALLBACK_DATA = {
           badge: '#C15427',
           category: 'Family & Community',
           audience: 'Families, Peer Support Groups, Counselors',
-          link_url: '/work-with-tiffany?topic=Gambling%2C+Significant+Others%2C+and+Impact',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+14:+Significant+Others+and+Impact&topic=Gambling%2C+Significant+Others%2C+and+Impact',
           content_html: '<strong>Audience:</strong> Families, peer support groups, counselors<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Addressing the financial, emotional, and relational trauma experienced by partners and immediate loved ones.',
           sort_order: 14
         },
@@ -564,7 +564,7 @@ export const FALLBACK_DATA = {
           badge: '#C15427',
           category: 'Family & Community',
           audience: 'Families, Clinicians & Providers, DV Advocates, Social Workers',
-          link_url: '/work-with-tiffany?topic=The+Link+Between+Gambling%2C+Domestic+Violence+%26+Trauma',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+15:+Domestic+Violence+and+Trauma&topic=The+Link+Between+Gambling%2C+Domestic+Violence+%26+Trauma',
           content_html: '<strong>Audience:</strong> DV advocates, trauma specialists, social workers<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Evidence-informed exploration of intimate partner violence, chronic stress, and trauma intersections in problem gambling families.',
           sort_order: 15
         },
@@ -575,7 +575,7 @@ export const FALLBACK_DATA = {
           badge: '#C15427',
           category: 'Family & Community',
           audience: 'Families, Therapists, Support Networks',
-          link_url: '/work-with-tiffany?topic=Families+Living+with+Problem+Gambling%3A+Coping+%26+Help',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+16:+Families+Living+with+Problem+Gambling&topic=Families+Living+with+Problem+Gambling%3A+Coping+%26+Help',
           content_html: '<strong>Audience:</strong> Family members, therapists, support networks<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Practical guidance: asset protection, boundary setting, and initiating healthy, constructive help-seeking conversations.',
           sort_order: 16
         },
@@ -586,7 +586,7 @@ export const FALLBACK_DATA = {
           badge: '#C15427',
           category: 'Family & Community',
           audience: 'Families, Clinicians & Providers, Marriage & Family Therapists',
-          link_url: '/work-with-tiffany?topic=Gambling+Harm+in+Family+Systems',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+17:+Family+Systems&topic=Gambling+Harm+in+Family+Systems',
           content_html: '<strong>Audience:</strong> Marriage & family therapists, social workers<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Systems-level look at how addiction alters family communication, financial stability, and long-term child development.',
           sort_order: 17
         },
@@ -599,7 +599,7 @@ export const FALLBACK_DATA = {
           badge: '#4A3B69',
           category: 'Creative Engagement',
           audience: 'Youth & Students, Schools, Art Programs, Youth Organizations',
-          link_url: '/work-with-tiffany?topic=Promotion%3A+Youth+Art+Competition',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+18:+Youth+Art+Competition&topic=Promotion%3A+Youth+Art+Competition',
           content_html: '<strong>Audience:</strong> Schools, art programs, youth organizations<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Using creative arts contests to engage youth in prevention without standard lectures. Fostering authentic youth voice.',
           sort_order: 18
         },
@@ -610,7 +610,7 @@ export const FALLBACK_DATA = {
           badge: '#4A3B69',
           category: 'Creative Engagement',
           audience: 'Families, General Public, Parents, Educators, Retailers',
-          link_url: '/work-with-tiffany?topic=Promotion%3A+Responsible+Gifting',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+19:+Responsible+Gifting&topic=Promotion%3A+Responsible+Gifting',
           content_html: '<strong>Audience:</strong> Parents, educators, community retailers<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Non-judgmental education on preventing lottery tickets and scratch-offs as gifts to minors during holiday seasons.',
           sort_order: 19
         },
@@ -621,7 +621,7 @@ export const FALLBACK_DATA = {
           badge: '#4A3B69',
           category: 'Creative Engagement',
           audience: 'Policy & Government, Clinicians & Providers, ROSC Members, Coalitions',
-          link_url: '/work-with-tiffany?topic=Gambling+Prevention+%26+ROSC+Council+Engagement',
+          link_url: '/work-with-tiffany?ref_section=Speaking+Catalog+20+Topics&ref_card=Topic+20:+ROSC+Council+Engagement&topic=Gambling+Prevention+%26+ROSC+Council+Engagement',
           content_html: '<strong>Audience:</strong> ROSC members, recovery coalition directors<br/><strong>Session Length:</strong> [CONTENT-PENDING]<br/><strong>Summary:</strong> Integrating gambling prevention directly into Recovery Oriented Systems of Care. Expanding coalition capacity.',
           sort_order: 20
         }

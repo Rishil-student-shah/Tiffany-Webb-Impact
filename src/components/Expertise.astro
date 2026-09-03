@@ -15,7 +15,7 @@ const fallbackFormats = [
     title: "Keynote Speaking",
     subtitle: "Main Stage · 45–60 Minutes",
     desc: "High-energy, narrative-driven keynote that deconstructs stigma, bridges lived understanding with clinical rigor, and inspires collective action across large audiences.",
-    link: "/work-with-tiffany?format=Keynote+Speaking",
+    link: "/work-with-tiffany?ref_section=Homepage+-+Ways+to+Work&ref_card=Keynote+Speaking&format=Keynote+Speaking",
     color: "#10B981", // 01: Emerald Green
     iconBg: "rgba(16, 185, 129, 0.18)",
     iconBorder: "rgba(16, 185, 129, 0.45)",
@@ -26,7 +26,7 @@ const fallbackFormats = [
     title: "Conference & Breakout Sessions",
     subtitle: "Breakout & Deep Dive · 60–90 Minutes",
     desc: "Targeted educational breakout tailored to specific clinical tracks, prevention disciplines, or community health strategies with interactive Q&A.",
-    link: "/work-with-tiffany?format=Conference+%26+Breakout+Sessions",
+    link: "/work-with-tiffany?ref_section=Homepage+-+Ways+to+Work&ref_card=Conference+Sessions&format=Conference+%26+Breakout+Sessions",
     color: "#D9A23A", // 02: Signature Gold
     iconBg: "rgba(217, 162, 58, 0.18)",
     iconBorder: "rgba(217, 162, 58, 0.45)",
@@ -37,7 +37,7 @@ const fallbackFormats = [
     title: "Interactive Workshops",
     subtitle: "Hands-on Cohort · Half-Day to Full-Day",
     desc: "Interactive, skills-focused workshop built for frontline workers, healthcare teams, and community leaders with scenario practice and screening tools.",
-    link: "/work-with-tiffany?format=Interactive+Workshops",
+    link: "/work-with-tiffany?ref_section=Homepage+-+Ways+to+Work&ref_card=Interactive+Workshops&format=Interactive+Workshops",
     color: "#C15427", // 03: Burnt Terracotta
     iconBg: "rgba(193, 84, 39, 0.18)",
     iconBorder: "rgba(193, 84, 39, 0.45)",
@@ -48,7 +48,7 @@ const fallbackFormats = [
     title: "Professional Training",
     subtitle: "Clinical & Frontline · Multi-Session",
     desc: "In-depth professional development for clinicians, counselors, and social workers covering evidence-based screening protocols (NODS-CLiP), motivational interviewing, and linkage to care.",
-    link: "/work-with-tiffany?format=Professional+Training",
+    link: "/work-with-tiffany?ref_section=Homepage+-+Ways+to+Work&ref_card=Professional+Training&format=Professional+Training",
     color: "#A855F7", // 04: Purple / Plum
     iconBg: "rgba(168, 85, 247, 0.18)",
     iconBorder: "rgba(168, 85, 247, 0.45)",
@@ -59,7 +59,7 @@ const fallbackFormats = [
     title: "School, University & Youth Programs",
     subtitle: "Campus-Wide · Half-Day / Full-Day",
     desc: "Two-part structured delivery: student-focused awareness session addressing sports-betting apps and digital gaming risk, followed by a faculty and counselor workshop.",
-    link: "/work-with-tiffany?format=School%2C+University+%26+Youth+Programs",
+    link: "/work-with-tiffany?ref_section=Homepage+-+Ways+to+Work&ref_card=Youth+Programs&format=School%2C+University+%26+Youth+Programs",
     color: "#06B6D4", // 05: Ocean Cyan / Sky Blue (Completely distinct from Green & Gold)
     iconBg: "rgba(6, 182, 212, 0.18)",
     iconBorder: "rgba(6, 182, 212, 0.45)",
@@ -70,7 +70,7 @@ const fallbackFormats = [
     title: "Panels & Moderated Conversations",
     subtitle: "Panelist or Moderator · 45–75 Minutes",
     desc: "Dynamic panelist or skilled moderator bringing frontline specificity, health equity lens, and collaborative dialogue to complex behavioral health and civic issues.",
-    link: "/work-with-tiffany?format=Panels+%26+Moderated+Conversations",
+    link: "/work-with-tiffany?ref_section=Homepage+-+Ways+to+Work&ref_card=Panels+%26+Conversations&format=Panels+%26+Moderated+Conversations",
     color: "#000000", // 06: Obsidian Black
     iconBg: "rgba(0, 0, 0, 0.75)",
     iconBorder: "rgba(255, 255, 255, 0.35)",
@@ -90,7 +90,7 @@ const items = (collections.expertise && collections.expertise.length > 0)
       title: c.title,
       subtitle: c.subtitle || "45–60 Minutes",
       desc: c.content_html || c.content_value || c.description || "",
-      link: c.link_url || `/work-with-tiffany?format=${encodeURIComponent(c.title)}`,
+      link: c.link_url || `/work-with-tiffany?ref_section=Homepage+-+Ways+to+Work&ref_card=${encodeURIComponent(c.title)}&format=${encodeURIComponent(c.title)}`,
       color: colorsList[idx % 6],
       iconBg: iconBgList[idx % 6],
       iconBorder: iconBorderList[idx % 6],
@@ -149,7 +149,7 @@ const items = (collections.expertise && collections.expertise.length > 0)
 
     <!-- Bottom Action CTA (Folder 0.5 Standard) -->
     <div class="ways-bottom-cta reveal-up" style="display: flex; justify-content: center; align-items: center; width: 100%; margin: 3.5rem auto 0 auto; text-align: center;">
-      <Button href="/work-with-tiffany" variant="primary" className="magnetic-btn">
+      <Button href="/work-with-tiffany?ref_section=Homepage+-+Ways+to+Work&ref_card=Start+a+Conversation" variant="primary" className="magnetic-btn">
         START A CONVERSATION &rarr;
       </Button>
     </div>

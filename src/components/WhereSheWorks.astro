@@ -10,78 +10,83 @@ const fallbackAudiences = [
     title: "Conferences & Professional Associations", 
     desc: "Keynotes, breakout sessions, and expert panels for national summits, annual conferences, and professional associations.",
     badge: "01 // CONFERENCES",
-    link: "/work-with-tiffany?audience=Conferences"
+    link: "/work-with-tiffany?ref_section=Homepage+-+Audience+Groups&ref_card=Conferences+%26+Professional+Associations&audience=Conferences+%26+Professional+Associations"
   },
   { 
     num: "02", 
     title: "Schools & Youth Organizations", 
     desc: "Age-appropriate youth prevention, interactive workshops, and family engagement around digital risk and healthy choices.",
     badge: "02 // YOUTH & SCHOOLS",
-    link: "/work-with-tiffany?audience=Schools"
+    link: "/work-with-tiffany?ref_section=Homepage+-+Audience+Groups&ref_card=Schools+%26+Youth+Organizations&audience=Schools+%26+Youth+Organizations"
   },
   { 
     num: "03", 
     title: "Colleges & Universities", 
     desc: "Campus-wide wellness activations, athletic department sessions, student affairs programming, and Greek life dialogues.",
     badge: "03 // HIGHER ED",
-    link: "/work-with-tiffany?audience=Colleges"
+    link: "/work-with-tiffany?ref_section=Homepage+-+Audience+Groups&ref_card=Colleges+%26+Universities&audience=Colleges+%26+Universities"
   },
   { 
     num: "04", 
     title: "Healthcare & Hospital Systems", 
     desc: "Hospitals, primary care networks, clinical teams, and health systems integrating validated gambling screening protocols.",
     badge: "04 // HEALTHCARE",
-    link: "/work-with-tiffany?audience=Healthcare"
+    link: "/work-with-tiffany?ref_section=Homepage+-+Audience+Groups&ref_card=Healthcare+%26+Hospital+Systems&audience=Healthcare+%26+Hospital+Systems"
   },
   { 
     num: "05", 
     title: "Government & Public Health", 
     desc: "Municipal health agencies, public health departments, county boards, and prevention policy task forces.",
     badge: "05 // PUBLIC HEALTH",
-    link: "/work-with-tiffany?audience=Government"
+    link: "/work-with-tiffany?ref_section=Homepage+-+Audience+Groups&ref_card=Government+%26+Public+Health&audience=Government+%26+Public+Health"
   },
   { 
     num: "06", 
     title: "Behavioral Health Providers", 
     desc: "Clinicians, addiction counselors, social workers, and mental health frontline teams managing co-occurring risks.",
     badge: "06 // CLINICIANS",
-    link: "/work-with-tiffany?audience=Behavioral+Health"
+    link: "/work-with-tiffany?ref_section=Homepage+-+Audience+Groups&ref_card=Behavioral+Health+Providers&audience=Behavioral+Health+Providers"
   },
   { 
     num: "07", 
     title: "Recovery Networks", 
     desc: "Peer-support organizations, recovery community organizations (RCOs), and grassroots harm-reduction initiatives.",
     badge: "07 // RECOVERY",
-    link: "/work-with-tiffany?audience=Recovery+Networks"
+    link: "/work-with-tiffany?ref_section=Homepage+-+Audience+Groups&ref_card=Recovery+Networks&audience=Recovery+Networks"
   },
   { 
     num: "08", 
     title: "Community Coalitions & ROSC Councils", 
     desc: "Recovery Oriented Systems of Care (ROSC) councils, prevention coalitions, and regional cross-sector partnerships.",
     badge: "08 // COALITIONS",
-    link: "/work-with-tiffany?audience=ROSC+Councils"
+    link: "/work-with-tiffany?ref_section=Homepage+-+Audience+Groups&ref_card=Community+Coalitions+%26+ROSC+Councils&audience=Community+Coalitions+%26+ROSC+Councils"
   },
   { 
     num: "09", 
     title: "Community Organizations & Nonprofits", 
     desc: "Mission-driven neighborhood groups, civic organizations, and community health centers serving local families.",
     badge: "09 // NONPROFITS",
-    link: "/work-with-tiffany?audience=Community+Nonprofits"
+    link: "/work-with-tiffany?ref_section=Homepage+-+Audience+Groups&ref_card=Community+Organizations+%26+Nonprofits&audience=Community+Organizations+%26+Nonprofits"
   },
   { 
     num: "10", 
     title: "Faith Communities", 
     desc: "Churches, ministries, faith networks, and faith-based community outreach programs offering compassionate support.",
     badge: "10 // FAITH",
-    link: "/work-with-tiffany?audience=Faith+Communities"
+    link: "/work-with-tiffany?ref_section=Homepage+-+Audience+Groups&ref_card=Faith+Communities&audience=Faith+Communities"
   }
 ];
 
-const audiences = (collections.who_can_benefit && collections.who_can_benefit.length > 0)
+const rawAudiences = (collections.who_can_benefit && collections.who_can_benefit.length > 0)
   ? collections.who_can_benefit
   : (collections.where_she_works && collections.where_she_works.length > 0)
     ? collections.where_she_works
     : fallbackAudiences;
+
+const audiences = rawAudiences.map((c) => ({
+  ...c,
+  link: c.link_url || `/work-with-tiffany?ref_section=Homepage+-+Audience+Groups&ref_card=${encodeURIComponent(c.title)}&audience=${encodeURIComponent(c.title)}`
+}));
 
 const eyebrow = content.eyebrow ?? "WHO CAN BENEFIT FROM TIFFANY'S WORK?";
 let headline = content.headline ?? "For leaders ready to <span class=\"italic-accent\">rethink what's possible.</span>";
@@ -124,10 +129,10 @@ const p2 = content.body_2 ?? "";
         {audiences.map((aud, index) => {
           const num = (index + 1).toString().padStart(2, '0');
           return (
-            <div class="audience-item">
+            <a href={aud.link} class="audience-item" style="text-decoration: none;">
               <div class="audience-num">{num} <span class="num-slash">//</span></div>
               <div class="audience-title">{aud.title}</div>
-            </div>
+            </a>
           );
         })}
       </div>
