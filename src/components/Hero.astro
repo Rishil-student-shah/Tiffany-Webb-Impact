@@ -256,9 +256,52 @@ const showReel = content.show_reel_btn !== "0" && content.show_reel_btn !== 0 &&
 
   .hero-ctas {
     display: flex;
-    gap: var(--sp-4);
-    margin-bottom: var(--sp-8);
+    gap: var(--sp-4, 1.25rem);
+    margin-bottom: var(--sp-8, 2rem);
     flex-wrap: wrap;
+    align-items: center;
+  }
+
+  /* Golden Hover Effects for Hero CTAs */
+  .hero-ctas :global(.btn) {
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    font-size: 0.88rem;
+    padding: 0.85rem 1.85rem;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Primary Button: START A CONVERSATION */
+  .hero-ctas :global(.btn-primary) {
+    background: rgba(217, 162, 58, 0.18);
+    border: 1.5px solid #D9A23A;
+    color: #FBF6EA;
+    box-shadow: 0 4px 15px rgba(217, 162, 58, 0.15);
+  }
+
+  .hero-ctas :global(.btn-primary:hover) {
+    background: #D9A23A !important;
+    border-color: #D9A23A !important;
+    color: #0D0C08 !important;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(217, 162, 58, 0.45), 0 0 20px rgba(217, 162, 58, 0.3) !important;
+  }
+
+  /* Secondary Button: WATCH THE REEL */
+  .hero-ctas :global(.btn-secondary) {
+    background: transparent;
+    border: 1.5px solid rgba(217, 162, 58, 0.6);
+    color: #D9A23A;
+  }
+
+  .hero-ctas :global(.btn-secondary:hover) {
+    background: #D9A23A !important;
+    border-color: #D9A23A !important;
+    color: #0D0C08 !important;
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 10px 30px rgba(217, 162, 58, 0.45), 0 0 20px rgba(217, 162, 58, 0.3) !important;
   }
 
   .hero-capability-strip {

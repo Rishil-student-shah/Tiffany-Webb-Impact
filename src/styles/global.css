@@ -212,6 +212,60 @@ button {
   stroke: #FFFFFF !important;
 }
 
+/* Universal Magnetic & CTA Button Golden Hover Effects */
+.btn,
+.magnetic-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-family: var(--font-mono, 'Space Mono', monospace) !important;
+  font-size: 0.88rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.08em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  cursor: pointer !important;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-primary,
+.hero-ctas .btn-primary {
+  background: rgba(217, 162, 58, 0.18) !important;
+  border: 1.5px solid #D9A23A !important;
+  color: #FBF6EA !important;
+  box-shadow: 0 4px 15px rgba(217, 162, 58, 0.15) !important;
+}
+
+.btn-primary:hover,
+.hero-ctas .btn-primary:hover {
+  background: #D9A23A !important;
+  border-color: #D9A23A !important;
+  color: #0D0C08 !important;
+  font-weight: 800 !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 10px 30px rgba(217, 162, 58, 0.5), 0 0 20px rgba(217, 162, 58, 0.3) !important;
+}
+
+.btn-secondary,
+.hero-ctas .btn-secondary {
+  background: transparent !important;
+  border: 1.5px solid rgba(217, 162, 58, 0.6) !important;
+  color: #D9A23A !important;
+}
+
+.btn-secondary:hover,
+.hero-ctas .btn-secondary:hover {
+  background: #D9A23A !important;
+  border-color: #D9A23A !important;
+  color: #0D0C08 !important;
+  font-weight: 800 !important;
+  transform: translateY(-3px) scale(1.02) !important;
+  box-shadow: 0 10px 30px rgba(217, 162, 58, 0.5), 0 0 20px rgba(217, 162, 58, 0.3) !important;
+}
+
 /* Typography Utilities */
 .section-title {
   font-family: var(--font-serif);

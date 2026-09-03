@@ -5,14 +5,76 @@ import Eyebrow from './Eyebrow.astro';
 const { content = {}, collections = {} } = Astro.props;
 
 const fallbackAudiences = [
-  { title: "Healthcare Leaders & Clinical Networks" },
-  { title: "Municipal Agencies & Public Health Departments" },
-  { title: "ROSC Councils & Recovery Coalitions" },
-  { title: "Colleges, Universities & Athletic Programs" },
-  { title: "Faith-Based Networks & Community Nonprofits" },
-  { title: "Corporate HR & Employee Assistance Programs (EAPs)" },
-  { title: "Youth Organizations, Schools & District Leadership" },
-  { title: "Policy Makers & Prevention Coalitions" }
+  { 
+    num: "01", 
+    title: "Conferences & Professional Associations", 
+    desc: "Keynotes, breakout sessions, and expert panels for national summits, annual conferences, and professional associations.",
+    badge: "01 // CONFERENCES",
+    link: "/work-with-tiffany?audience=Conferences"
+  },
+  { 
+    num: "02", 
+    title: "Schools & Youth Organizations", 
+    desc: "Age-appropriate youth prevention, interactive workshops, and family engagement around digital risk and healthy choices.",
+    badge: "02 // YOUTH & SCHOOLS",
+    link: "/work-with-tiffany?audience=Schools"
+  },
+  { 
+    num: "03", 
+    title: "Colleges & Universities", 
+    desc: "Campus-wide wellness activations, athletic department sessions, student affairs programming, and Greek life dialogues.",
+    badge: "03 // HIGHER ED",
+    link: "/work-with-tiffany?audience=Colleges"
+  },
+  { 
+    num: "04", 
+    title: "Healthcare & Hospital Systems", 
+    desc: "Hospitals, primary care networks, clinical teams, and health systems integrating validated gambling screening protocols.",
+    badge: "04 // HEALTHCARE",
+    link: "/work-with-tiffany?audience=Healthcare"
+  },
+  { 
+    num: "05", 
+    title: "Government & Public Health", 
+    desc: "Municipal health agencies, public health departments, county boards, and prevention policy task forces.",
+    badge: "05 // PUBLIC HEALTH",
+    link: "/work-with-tiffany?audience=Government"
+  },
+  { 
+    num: "06", 
+    title: "Behavioral Health Providers", 
+    desc: "Clinicians, addiction counselors, social workers, and mental health frontline teams managing co-occurring risks.",
+    badge: "06 // CLINICIANS",
+    link: "/work-with-tiffany?audience=Behavioral+Health"
+  },
+  { 
+    num: "07", 
+    title: "Recovery Networks", 
+    desc: "Peer-support organizations, recovery community organizations (RCOs), and grassroots harm-reduction initiatives.",
+    badge: "07 // RECOVERY",
+    link: "/work-with-tiffany?audience=Recovery+Networks"
+  },
+  { 
+    num: "08", 
+    title: "Community Coalitions & ROSC Councils", 
+    desc: "Recovery Oriented Systems of Care (ROSC) councils, prevention coalitions, and regional cross-sector partnerships.",
+    badge: "08 // COALITIONS",
+    link: "/work-with-tiffany?audience=ROSC+Councils"
+  },
+  { 
+    num: "09", 
+    title: "Community Organizations & Nonprofits", 
+    desc: "Mission-driven neighborhood groups, civic organizations, and community health centers serving local families.",
+    badge: "09 // NONPROFITS",
+    link: "/work-with-tiffany?audience=Community+Nonprofits"
+  },
+  { 
+    num: "10", 
+    title: "Faith Communities", 
+    desc: "Churches, ministries, faith networks, and faith-based community outreach programs offering compassionate support.",
+    badge: "10 // FAITH",
+    link: "/work-with-tiffany?audience=Faith+Communities"
+  }
 ];
 
 const audiences = (collections.who_can_benefit && collections.who_can_benefit.length > 0)
@@ -34,7 +96,7 @@ if (headline && !headline.includes('<span')) {
     }
   }
 }
-const p1 = content.body_1 ?? "Tiffany works with leaders and organizations navigating growth, change, engagement, and community impact. She brings a human-centered perspective to complex challenges—helping organizations understand the people they serve, rethink familiar approaches, and build strategies designed for meaningful, sustainable impact.";
+const p1 = content.body_1 ?? "Communities most affected by gambling harm can also be among the hardest for traditional prevention efforts to reach. Tiffany's work is built to help close that gap — with cultural fluency, frontline experience, creativity, and evidence-informed strategies that make prevention easier to understand, access, and act on.";
 const p2 = content.body_2 ?? "";
 ---
 
@@ -56,7 +118,7 @@ const p2 = content.body_2 ?? "";
       {p2 && <p class="works-subtitle text-center mx-auto mt-3">{p2}</p>}
     </div>
     
-    <!-- 8 Audiences 2-Column Balanced Grid -->
+    <!-- 10 Audiences 2-Column Balanced Grid -->
     <div class="works-audiences reveal-up" style="transition-delay: 0.1s; margin-top: 4rem;">
       <div class="audience-list">
         {audiences.map((aud, index) => {
