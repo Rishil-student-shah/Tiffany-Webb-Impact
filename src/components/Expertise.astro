@@ -15,56 +15,74 @@ const fallbackFormats = [
     title: "Keynote Speaking",
     subtitle: "Main Stage · 45–60 Minutes",
     desc: "High-energy, narrative-driven keynote that deconstructs stigma, bridges lived understanding with clinical rigor, and inspires collective action across large audiences.",
-    tag: "01 // KEYNOTE",
     link: "/work-with-tiffany?format=Keynote+Speaking",
-    color: "#0E6B54"
+    color: "#10B981", // 01: Emerald Green
+    iconBg: "rgba(16, 185, 129, 0.18)",
+    iconBorder: "rgba(16, 185, 129, 0.45)",
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line><line x1="8" y1="22" x2="16" y2="22"></line></svg>`
   },
   {
     num: "02",
     title: "Conference & Breakout Sessions",
     subtitle: "Breakout & Deep Dive · 60–90 Minutes",
     desc: "Targeted educational breakout tailored to specific clinical tracks, prevention disciplines, or community health strategies with interactive Q&A.",
-    tag: "02 // BREAKOUT",
     link: "/work-with-tiffany?format=Conference+%26+Breakout+Sessions",
-    color: "#D9A23A"
+    color: "#D9A23A", // 02: Signature Gold
+    iconBg: "rgba(217, 162, 58, 0.18)",
+    iconBorder: "rgba(217, 162, 58, 0.45)",
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="14" x="3" y="3" rx="2"></rect><path d="M8 21h8"></path><path d="M12 17v4"></path><path d="m9 8 2 2 4-4"></path></svg>`
   },
   {
     num: "03",
     title: "Interactive Workshops",
     subtitle: "Hands-on Cohort · Half-Day to Full-Day",
     desc: "Interactive, skills-focused workshop built for frontline workers, healthcare teams, and community leaders with scenario practice and screening tools.",
-    tag: "03 // WORKSHOP",
     link: "/work-with-tiffany?format=Interactive+Workshops",
-    color: "#C15427"
+    color: "#C15427", // 03: Burnt Terracotta
+    iconBg: "rgba(193, 84, 39, 0.18)",
+    iconBorder: "rgba(193, 84, 39, 0.45)",
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"></path><path d="M9 18h6"></path><path d="M10 22h4"></path></svg>`
   },
   {
     num: "04",
     title: "Professional Training",
     subtitle: "Clinical & Frontline · Multi-Session",
     desc: "In-depth professional development for clinicians, counselors, and social workers covering evidence-based screening protocols (NODS-CLiP), motivational interviewing, and linkage to care.",
-    tag: "04 // TRAINING",
     link: "/work-with-tiffany?format=Professional+Training",
-    color: "#6C2D5A"
+    color: "#A855F7", // 04: Purple / Plum
+    iconBg: "rgba(168, 85, 247, 0.18)",
+    iconBorder: "rgba(168, 85, 247, 0.45)",
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path><path d="m9 12 2 2 4-4"></path></svg>`
   },
   {
     num: "05",
     title: "School, University & Youth Programs",
     subtitle: "Campus-Wide · Half-Day / Full-Day",
     desc: "Two-part structured delivery: student-focused awareness session addressing sports-betting apps and digital gaming risk, followed by a faculty and counselor workshop.",
-    tag: "05 // YOUTH & CAMPUS",
     link: "/work-with-tiffany?format=School%2C+University+%26+Youth+Programs",
-    color: "#0E6B54"
+    color: "#06B6D4", // 05: Ocean Cyan / Sky Blue (Completely distinct from Green & Gold)
+    iconBg: "rgba(6, 182, 212, 0.18)",
+    iconBorder: "rgba(6, 182, 212, 0.45)",
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"></path><path d="M6 12v5c3 3 9 3 12 0v-5"></path></svg>`
   },
   {
     num: "06",
     title: "Panels & Moderated Conversations",
     subtitle: "Panelist or Moderator · 45–75 Minutes",
     desc: "Dynamic panelist or skilled moderator bringing frontline specificity, health equity lens, and collaborative dialogue to complex behavioral health and civic issues.",
-    tag: "06 // DIALOGUE",
     link: "/work-with-tiffany?format=Panels+%26+Moderated+Conversations",
-    color: "#D9A23A"
+    color: "#000000", // 06: Obsidian Black
+    iconBg: "rgba(0, 0, 0, 0.75)",
+    iconBorder: "rgba(255, 255, 255, 0.35)",
+    iconColor: "#FFFFFF",
+    iconSvg: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>`
   }
 ];
+
+const colorsList = ['#10B981', '#D9A23A', '#C15427', '#8B5CF6', '#06B6D4', '#000000'];
+const iconBgList = ['rgba(16, 185, 129, 0.18)', 'rgba(217, 162, 58, 0.18)', 'rgba(193, 84, 39, 0.18)', 'rgba(139, 92, 246, 0.18)', 'rgba(6, 182, 212, 0.18)', 'rgba(0, 0, 0, 0.75)'];
+const iconBorderList = ['rgba(16, 185, 129, 0.45)', 'rgba(217, 162, 58, 0.45)', 'rgba(193, 84, 39, 0.45)', 'rgba(139, 92, 246, 0.45)', 'rgba(6, 182, 212, 0.45)', 'rgba(255, 255, 255, 0.35)'];
+const defaultIcons = fallbackFormats.map(f => f.iconSvg);
 
 const items = (collections.expertise && collections.expertise.length > 0)
   ? collections.expertise.map((c, idx) => ({
@@ -72,9 +90,11 @@ const items = (collections.expertise && collections.expertise.length > 0)
       title: c.title,
       subtitle: c.subtitle || "45–60 Minutes",
       desc: c.content_html || c.content_value || c.description || "",
-      tag: c.badge || ("0" + (idx + 1) + " // FORMAT"),
       link: c.link_url || `/work-with-tiffany?format=${encodeURIComponent(c.title)}`,
-      color: ['#0E6B54', '#D9A23A', '#C15427', '#6C2D5A', '#0E6B54', '#D9A23A'][idx % 6]
+      color: colorsList[idx % 6],
+      iconBg: iconBgList[idx % 6],
+      iconBorder: iconBorderList[idx % 6],
+      iconSvg: c.icon_svg || defaultIcons[idx % 6]
     }))
   : fallbackFormats;
 ---
@@ -97,8 +117,10 @@ const items = (collections.expertise && collections.expertise.length > 0)
         <div class="format-card ultra-glass-card stagger-item">
           <div class="format-card-inner">
             <div class="format-top">
-              <span class="format-num" style={`color: ${fmt.color};`}>{fmt.num}</span>
-              <span class="format-tag">{fmt.tag}</span>
+              <span class="format-num" style={`background: ${fmt.iconBg}; border: 1px solid ${fmt.iconBorder}; color: ${fmt.color === '#000000' ? '#FFFFFF' : fmt.color};`}>
+                {fmt.num}
+              </span>
+              <div class="format-icon-badge" style={`background: ${fmt.iconBg}; border: 1px solid ${fmt.iconBorder}; color: ${fmt.color === '#000000' ? '#FFFFFF' : fmt.color};`} set:html={fmt.iconSvg}></div>
             </div>
             
             <div class="format-body">
@@ -126,7 +148,7 @@ const items = (collections.expertise && collections.expertise.length > 0)
     </div>
 
     <!-- Bottom Action CTA (Folder 0.5 Standard) -->
-    <div class="ways-bottom-cta reveal-up mt-10 text-center">
+    <div class="ways-bottom-cta reveal-up" style="display: flex; justify-content: center; align-items: center; width: 100%; margin: 3.5rem auto 0 auto; text-align: center;">
       <Button href="/work-with-tiffany" variant="primary" className="magnetic-btn">
         START A CONVERSATION &rarr;
       </Button>
@@ -206,16 +228,36 @@ const items = (collections.expertise && collections.expertise.length > 0)
 
   .format-num {
     font-family: var(--font-mono);
-    font-size: 1.1rem;
-    font-weight: 700;
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.75rem;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
   }
 
-  .format-tag {
-    font-family: var(--font-mono);
-    font-size: 0.72rem;
-    color: rgba(251, 246, 234, 0.5);
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
+  .format-card:hover .format-num {
+    transform: scale(1.08);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
+  }
+
+  .format-icon-badge {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  }
+
+  .format-card:hover .format-icon-badge {
+    transform: scale(1.1) rotate(3deg);
   }
 
   .format-body {
@@ -265,5 +307,14 @@ const items = (collections.expertise && collections.expertise.length > 0)
   .format-link:hover {
     color: #FFFFFF;
     padding-left: 4px;
+  }
+
+  .ways-bottom-cta {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+    margin: 3.5rem auto 0 auto !important;
+    text-align: center !important;
   }
 </style>
