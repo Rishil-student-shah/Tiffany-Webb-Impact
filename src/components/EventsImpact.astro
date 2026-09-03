@@ -34,7 +34,6 @@ const gridClass = events.length === 1 ? 'grid-1' : events.length === 2 ? 'grid-2
       /* EMPTY STATE */
       <div class="events-empty-state reveal-up">
         {emptyText && <p class="empty-text">{emptyText}</p>}
-        <a href="/work-with-tiffany" class="btn btn-outline-ivory mt-4" id="empty-state-btn">{emptyBtn}</a>
       </div>
     ) : (
       /* POPULATED RESPONSIVE GRID (1, 2, or 3 cards perfectly centered and symmetrical) */
@@ -299,20 +298,50 @@ const gridClass = events.length === 1 ? 'grid-1' : events.length === 2 ? 'grid-2
   }
 
   .text-link {
-    color: var(--color-ivory);
+    color: var(--color-ivory, #FBF6EA);
     font-family: var(--font-mono);
-    font-size: 0.85rem;
+    font-size: 0.88rem;
+    font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
     gap: 0.75rem;
-    transition: opacity 0.2s;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.3s cubic-bezier(0.16, 1, 0.3, 1), text-shadow 0.3s ease;
+  }
+
+  .text-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0%;
+    height: 1.5px;
+    background: var(--color-gold, #D9A23A);
+    box-shadow: 0 0 8px rgba(217, 162, 58, 0.6);
+    transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .text-link .arrow {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
   }
 
   .text-link:hover {
-    opacity: 0.7;
+    color: var(--color-gold, #D9A23A) !important;
+    text-shadow: 0 0 12px rgba(217, 162, 58, 0.4);
+  }
+
+  .text-link:hover::after {
+    width: 100%;
+  }
+
+  .text-link:hover .arrow {
+    transform: translateX(6px);
+    color: var(--color-gold, #D9A23A);
   }
 
   .btn-gold-action {
